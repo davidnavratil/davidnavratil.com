@@ -1,0 +1,32 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="/" class="logo">David Navrátil</a>
+    <ThemeToggle />
+  </div>
+</header>
+
+<style>
+  .header {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+  }
+  .logo:hover {
+    color: var(--color-accent);
+  }
+</style>

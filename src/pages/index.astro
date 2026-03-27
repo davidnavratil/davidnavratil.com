@@ -1,0 +1,143 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="David Navrátil — ekonom, analytik, interaktivní analýzy">
+  <section class="hero container">
+    <h1>David Navrátil</h1>
+    <p class="tagline">Ekonom. Analytik. Autor interaktivních analýz.</p>
+  </section>
+
+  <section class="about container">
+    <p>
+      Dlouhodobě se věnuji analýze makroekonomických trendů, geopolitických rizik
+      a propojování ekonomie, technologií a společnosti. Věřím, že dobré otázky jsou
+      cennější než rychlé odpovědi&nbsp;— a&nbsp;že data mají smysl jen tehdy, když vedou
+      k&nbsp;porozumění.
+    </p>
+  </section>
+
+  <section class="pillars container">
+    <h2>Co dělám</h2>
+    <div class="pillar-grid">
+      <div class="pillar">
+        <h3>Interaktivní analýzy</h3>
+        <p>
+          Datové nástroje, které pomáhají složité problémy nejen pochopit,
+          ale i&nbsp;prozkoumat. Simulátory, vizualizace, mapy rizik.
+        </p>
+      </div>
+      <div class="pillar">
+        <h3>Newsletter</h3>
+        <p>
+          <a href="https://davidnavratil.substack.com" target="_blank" rel="noopener">Peníze, procenta a&nbsp;prosperita</a>
+          — pro ty, kdo chtějí chápat hlubší souvislosti mezi ekonomikou,
+          technologiemi a&nbsp;společností.
+        </p>
+      </div>
+      <div class="pillar">
+        <h3>Přednášky</h3>
+        <p>
+          Makroekonomické trendy, AI, geopolitika a&nbsp;budoucnost práce.
+          Konferenční formáty i&nbsp;firemní workshopy.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="analyses container" id="analyzy">
+    <h2>Analýzy a simulátory</h2>
+    <p class="coming-soon">Interaktivní analytické nástroje budou brzy dostupné na této stránce.</p>
+  </section>
+
+  <section class="contact container" id="kontakt">
+    <h2>Kontakt</h2>
+    <ul class="contact-links">
+      <li>
+        <a href="https://davidnavratil.substack.com" target="_blank" rel="noopener">Substack</a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/david-navratil/" target="_blank" rel="noopener">LinkedIn</a>
+      </li>
+    </ul>
+  </section>
+</Base>
+
+<style>
+  /* Hero */
+  .hero {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-lg);
+  }
+  .hero h1 {
+    margin-bottom: var(--space-xs);
+  }
+  .tagline {
+    font-size: 1.15rem;
+    color: var(--color-text-secondary);
+  }
+
+  /* About */
+  .about {
+    padding-bottom: var(--space-xl);
+  }
+  .about p {
+    font-size: 1.05rem;
+    max-width: 600px;
+  }
+
+  /* Pillars */
+  .pillars {
+    padding-bottom: var(--space-xl);
+  }
+  .pillars h2 {
+    margin-bottom: var(--space-lg);
+  }
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .pillar h3 {
+    margin-bottom: var(--space-xs);
+    color: var(--color-accent);
+  }
+  .pillar p {
+    font-size: 0.95rem;
+  }
+
+  /* Analyses */
+  .analyses {
+    padding-bottom: var(--space-xl);
+  }
+  .analyses h2 {
+    margin-bottom: var(--space-sm);
+  }
+  .coming-soon {
+    font-style: italic;
+    color: var(--color-muted);
+  }
+
+  /* Contact */
+  .contact {
+    padding-bottom: var(--space-xl);
+  }
+  .contact h2 {
+    margin-bottom: var(--space-sm);
+  }
+  .contact-links {
+    list-style: none;
+    display: flex;
+    gap: var(--space-md);
+  }
+  .contact-links a {
+    font-size: 1rem;
+  }
+
+  /* Responsive: 2-col pillars on wider screens */
+  @media (min-width: 640px) {
+    .pillar-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>
