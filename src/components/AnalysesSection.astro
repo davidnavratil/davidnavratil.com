@@ -1,0 +1,288 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+const locale = Astro.currentLocale ?? 'cs';
+
+const analyses = [
+  {
+    key: 'hormuz' as const,
+    href: locale === 'en' ? '/en/hormuz/' : '/hormuz/',
+    image: '/images/preview-hormuz.png',
+    tags: ['tag.geopolitics', 'tag.energy', 'tag.supply'] as const,
+    live: true,
+  },
+  {
+    key: 'ree' as const,
+    href: locale === 'en' ? '/en/ree-dashboard/' : '/ree-dashboard/',
+    image: '/images/preview-ree.png',
+    tags: ['tag.minerals', 'tag.china', 'tag.tech'] as const,
+    live: false,
+  },
+  {
+    key: 'chokepoints' as const,
+    href: locale === 'en' ? '/en/chokepoints/' : '/chokepoints/',
+    image: '/images/preview-chokepoints.png',
+    tags: ['tag.maps', 'tag.trade', 'tag.risks'] as const,
+    live: false,
+  },
+];
+---
+
+<section class="analyses container" id="analyzy">
+  <div class="section-header reveal">
+    <div class="section-tag">{t('nav.analyses')}</div>
+    <h2>{t('analyses.title')}</h2>
+    <p class="section-lead">{t('analyses.subtitle')}</p>
+  </div>
+
+  <div class="analyses-stack">
+    {analyses.map((analysis, i) => (
+      <a
+        href={analysis.href}
+        class={`analysis-card reveal${i > 0 ? ` reveal-delay-${i}` : ''}`}
+      >
+        <div class="card-image">
+          <img
+            src={analysis.image}
+            alt={t(`analyses.${analysis.key}.title`)}
+            loading="lazy"
+            width="800"
+            height="500"
+          />
+        </div>
+        <div class="card-content">
+          <div class="card-meta">
+            <div class="card-tags">
+              {analysis.tags.map((tag) => (
+                <span>{t(tag)}</span>
+              ))}
+            </div>
+            {analysis.live && (
+              <div class="card-badge">{t('card.badge.live')}</div>
+            )}
+          </div>
+          <h3>{t(`analyses.${analysis.key}.title`)}</h3>
+          <p class="card-desc" set:html={t(`analyses.${analysis.key}.desc`)} />
+          <p class="card-why">{t(`analyses.${analysis.key}.why`)}</p>
+          <span class="card-cta">
+            {t(`analyses.${analysis.key}.cta`)}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  /* Section header */
+  .section-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-section-tag);
+    margin-bottom: var(--space-sm);
+  }
+
+  .section-header {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-header h2 {
+    font-family: var(--font-serif);
+    max-width: 700px;
+  }
+
+  .section-lead {
+    max-width: 600px;
+    color: var(--color-muted);
+    margin-top: var(--space-xs);
+    line-height: 1.6;
+  }
+
+  .analyses {
+    margin-bottom: var(--space-2xl);
+  }
+
+  /* Card stack */
+  .analyses-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  /* Card */
+  .analysis-card {
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .analysis-card:hover {
+    color: var(--color-text);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+  }
+
+  /* Card image */
+  .card-image {
+    position: relative;
+    min-height: 260px;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      var(--color-surface-elevated) 0%,
+      color-mix(in srgb, var(--color-accent) 6%, var(--color-surface)) 100%
+    );
+  }
+
+  .card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .analysis-card:hover .card-image img {
+    transform: scale(1.03);
+  }
+
+  /* Card content */
+  .card-content {
+    padding: var(--space-lg) var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .card-tags span {
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--color-border) 60%, transparent);
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .card-badge {
+    display: inline-block;
+    padding: 0.2rem 0.7rem;
+    border-radius: 100px;
+    background: var(--gradient-accent);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+
+  .card-content h3 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: var(--space-xs);
+    line-height: 1.3;
+  }
+
+  .card-desc {
+    font-family: var(--font-sans);
+    line-height: 1.6;
+    margin-bottom: var(--space-xs);
+  }
+
+  .card-why {
+    font-family: var(--font-sans);
+    font-style: italic;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: var(--space-md);
+  }
+
+  .card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.2rem;
+    border-radius: 8px;
+    background: var(--color-accent);
+    color: white;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    width: fit-content;
+    transition: gap 0.2s ease, background 0.2s ease;
+  }
+
+  .analysis-card:hover .card-cta {
+    gap: 0.8rem;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .analysis-card {
+      grid-template-columns: 1fr;
+    }
+
+    .card-image {
+      min-height: 200px;
+      max-height: 240px;
+    }
+
+    .card-content {
+      padding: var(--space-md);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .card-image {
+      min-height: 160px;
+      max-height: 200px;
+    }
+
+    .card-content {
+      padding: var(--space-sm);
+    }
+
+    .card-content h3 {
+      font-size: 1.2rem;
+    }
+
+    .card-cta {
+      padding: 0.65rem 1.2rem;
+      min-height: 44px;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .card-image {
+      min-height: 140px;
+      max-height: 180px;
+    }
+  }
+</style>

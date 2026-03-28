@@ -1,0 +1,304 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<section class="hero">
+  <div class="hero-bg">
+    <div class="grid-pattern"></div>
+    <div class="hero-glow"></div>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="hero-eyebrow">{t('hero.eyebrow')}</span>
+        <h1 class="hero-title">{t('hero.title')}</h1>
+        <p class="hero-sub">{t('hero.sub')}</p>
+        <div class="hero-cta">
+          <a href="#analyzy" class="btn-primary">
+            {t('hero.cta.primary')}
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#newsletter" class="btn-secondary">
+            {t('hero.cta.secondary')}
+          </a>
+        </div>
+        <p class="hero-microcopy">{t('hero.microcopy')}</p>
+      </div>
+      <div class="hero-preview">
+        <img
+          src="/images/preview-hormuz.png"
+          alt="Analysis preview — Strait of Hormuz simulator"
+          width="560"
+          height="380"
+          loading="eager"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--gradient-hero);
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding: 6rem 0 4rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .grid-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 70%);
+  }
+
+  .hero-glow {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 500px;
+    background: radial-gradient(ellipse, rgba(212, 135, 74, 0.10) 0%, transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(212, 135, 74, 0.08), transparent 40%);
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .hero:hover::after {
+    opacity: 1;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg, 2rem);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    gap: var(--space-xl, 3rem);
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 600px;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: var(--space-md, 1.5rem);
+  }
+
+  .hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #ffffff;
+    margin-bottom: var(--space-md, 1.5rem);
+  }
+
+  .hero-sub {
+    font-family: var(--font-sans);
+    font-size: clamp(1rem, 1.4vw, 1.15rem);
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 520px;
+    margin-bottom: var(--space-lg, 2rem);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: var(--space-sm, 0.75rem);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-sm, 0.75rem);
+  }
+
+  .hero-microcopy {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.55);
+    max-width: 440px;
+  }
+
+  /* Preview image */
+  .hero-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-preview img {
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    object-position: top left;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35), 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Buttons */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    background: var(--gradient-accent);
+    color: white;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(160, 90, 44, 0.3);
+    text-decoration: none;
+  }
+  .btn-primary:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(160, 90, 44, 0.4);
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.9);
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, background 0.2s;
+    text-decoration: none;
+  }
+  .btn-secondary:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  /* Mobile */
+  @media (max-width: 900px) {
+    .hero {
+      min-height: auto;
+      padding: 5rem 0 3rem;
+    }
+    .hero-grid {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .hero-content {
+      max-width: 100%;
+    }
+    .hero-eyebrow {
+      margin-inline: auto;
+    }
+    .hero-sub {
+      margin-inline: auto;
+    }
+    .hero-cta {
+      justify-content: center;
+    }
+    .hero-microcopy {
+      margin-inline: auto;
+    }
+    .hero-preview {
+      margin-top: var(--space-md, 1.5rem);
+    }
+    .hero-preview img {
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 4rem 0 2.5rem;
+    }
+    .hero-inner {
+      padding: 0 var(--space-sm, 1rem);
+    }
+    .hero-title {
+      font-size: clamp(1.6rem, 6vw, 2rem);
+    }
+    .btn-primary,
+    .btn-secondary {
+      min-height: 44px;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .hero {
+      padding: 3.5rem 0 2rem;
+    }
+    .hero-cta {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .btn-primary,
+    .btn-secondary {
+      justify-content: center;
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+
+<script is:inline>
+  // Mouse-tracking glow on hero
+  (function() {
+    var hero = document.querySelector('.hero');
+    if (!hero || window.matchMedia('(pointer: coarse)').matches) return;
+    hero.addEventListener('mousemove', function(e) {
+      var rect = hero.getBoundingClientRect();
+      var x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1);
+      var y = ((e.clientY - rect.top) / rect.height * 100).toFixed(1);
+      hero.style.setProperty('--mouse-x', x + '%');
+      hero.style.setProperty('--mouse-y', y + '%');
+    });
+  })();
+</script>

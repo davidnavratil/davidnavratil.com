@@ -3,6 +3,9 @@ name: Deploy to production
 on:
   push:
     branches: [main]
+  schedule:
+    # Automatic daily rebuild at 6:00 UTC (8:00 CET) to fetch latest Substack articles
+    - cron: '0 6 * * *'
 
 jobs:
   deploy:

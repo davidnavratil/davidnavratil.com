@@ -14,11 +14,14 @@ const switchHref = getAlternatePath(locale, '/');
       <span class="logo-text">David Navrátil</span>
     </a>
     <nav class="nav">
-      <a href="#analyzy" class="nav-link">{t('nav.analyses')}</a>
+      <a href="#analyses" class="nav-link">{t('nav.analyses')}</a>
+      <a href="#newsletter" class="nav-link">{t('nav.newsletter')}</a>
+      <a href="#speaking" class="nav-link">{t('nav.speaking')}</a>
       <a href="#about" class="nav-link">{t('nav.about')}</a>
-      <a href="#kontakt" class="nav-link">{t('nav.contact')}</a>
+      <a href="#contact" class="nav-link">{t('nav.contact')}</a>
       <a href={switchHref} class="lang-switch">{t('lang.code')}</a>
       <ThemeToggle />
+      <a href="#newsletter" class="nav-cta-btn">{t('nav.subscribe')}</a>
     </nav>
 
     <!-- Mobile menu button -->
@@ -33,13 +36,16 @@ const switchHref = getAlternatePath(locale, '/');
 
   <!-- Mobile nav -->
   <div class="mobile-nav" id="mobile-nav">
-    <a href="#analyzy" class="mobile-link">{t('nav.analyses')}</a>
+    <a href="#analyses" class="mobile-link">{t('nav.analyses')}</a>
+    <a href="#newsletter" class="mobile-link">{t('nav.newsletter')}</a>
+    <a href="#speaking" class="mobile-link">{t('nav.speaking')}</a>
     <a href="#about" class="mobile-link">{t('nav.about')}</a>
-    <a href="#kontakt" class="mobile-link">{t('nav.contact')}</a>
+    <a href="#contact" class="mobile-link">{t('nav.contact')}</a>
     <div class="mobile-bottom">
       <a href={switchHref} class="lang-switch">{t('lang.code')}</a>
       <ThemeToggle />
     </div>
+    <a href="#newsletter" class="mobile-cta-btn">{t('nav.subscribe')}</a>
   </div>
 </header>
 
@@ -118,6 +124,25 @@ const switchHref = getAlternatePath(locale, '/');
     border-color: var(--color-accent);
     color: var(--color-text);
   }
+  .nav-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.4rem 1rem;
+    border-radius: 8px;
+    background: var(--gradient-accent);
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 8px var(--color-accent-glow);
+    white-space: nowrap;
+  }
+  .nav-cta-btn:hover {
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px var(--color-accent-glow);
+  }
 
   .menu-toggle {
     display: none;
@@ -125,7 +150,11 @@ const switchHref = getAlternatePath(locale, '/');
     border: none;
     color: var(--color-text);
     cursor: pointer;
-    padding: 0.25rem;
+    padding: 0.5rem;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
   }
   .mobile-nav {
     display: none;
@@ -138,17 +167,18 @@ const switchHref = getAlternatePath(locale, '/');
     visibility: hidden;
   }
   .mobile-nav.open {
-    max-height: 300px;
+    max-height: 400px;
     padding-bottom: var(--space-md);
     visibility: visible;
   }
   .mobile-link {
     display: block;
-    padding: 0.6rem 0;
+    padding: 0.75rem 0;
     font-size: 1rem;
     color: var(--color-text-secondary);
     border-bottom: 1px solid var(--color-border);
     text-decoration: none;
+    min-height: 44px;
   }
   .mobile-bottom {
     display: flex;
@@ -156,8 +186,27 @@ const switchHref = getAlternatePath(locale, '/');
     gap: var(--space-sm);
     padding-top: var(--space-sm);
   }
+  .mobile-cta-btn {
+    display: block;
+    margin-top: var(--space-sm);
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    background: var(--gradient-accent);
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 2px 8px var(--color-accent-glow);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .mobile-cta-btn:hover {
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px var(--color-accent-glow);
+  }
 
-  @media (max-width: 640px) {
+  @media (max-width: 900px) {
     .nav { display: none; }
     .menu-toggle { display: flex; }
     .mobile-nav { display: flex; }
@@ -173,7 +222,7 @@ const switchHref = getAlternatePath(locale, '/');
       var open = nav.classList.toggle('open');
       btn.setAttribute('aria-expanded', String(open));
     });
-    nav.querySelectorAll('.mobile-link').forEach(function(link) {
+    nav.querySelectorAll('.mobile-link, .mobile-cta-btn').forEach(function(link) {
       link.addEventListener('click', function() {
         nav.classList.remove('open');
         btn.setAttribute('aria-expanded', 'false');

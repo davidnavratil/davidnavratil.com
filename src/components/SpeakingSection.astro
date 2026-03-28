@@ -1,0 +1,233 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<section class="speaking band" id="speaking">
+  <div class="container">
+  <div class="speaking-layout reveal">
+    <div class="speaking-content">
+      <div class="section-tag">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        {t('nav.speaking')}
+      </div>
+      <h2 set:html={t('speaking.title')} />
+      <p class="speaking-lead" set:html={t('speaking.desc')} />
+      <div class="speaking-tags" set:html={t('speaking.tags')} />
+      <div class="speaking-cases">
+        <div class="case-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span>{t('speaking.case1')}</span>
+        </div>
+        <div class="case-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span>{t('speaking.case2')}</span>
+        </div>
+        <div class="case-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span>{t('speaking.case3')}</span>
+        </div>
+      </div>
+      <div class="speaking-stats">
+        <div class="speaking-stat">
+          <span class="stat-value">{t('speaking.stat1.value')}</span>
+          <span class="stat-label">{t('speaking.stat1.label')}</span>
+        </div>
+        <div class="speaking-stat">
+          <span class="stat-value">{t('speaking.stat2.value')}</span>
+          <span class="stat-label">{t('speaking.stat2.label')}</span>
+        </div>
+      </div>
+      <a href="#kontakt" class="btn-primary">
+        {t('speaking.cta')}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="speaking-gallery">
+      <div class="gallery-item gallery-large">
+        <img src="/images/david-keynote.jpg" alt="David Navrátil přednáší v Parlamentu ČR s grafem HDP" loading="lazy" width="600" height="400" />
+      </div>
+      <div class="gallery-item gallery-small-top">
+        <img src="/images/david-data.jpg" alt="David Navrátil přednáší o ekonomických datech před publikem" loading="lazy" width="400" height="300" />
+      </div>
+      <div class="gallery-item gallery-small-bottom">
+        <img src="/images/david-speaking.jpg" alt="David Navrátil — close-up na konferenčním pódiu" loading="lazy" width="400" height="300" />
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<style>
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-section-tag);
+    margin-bottom: var(--space-sm);
+  }
+
+  .speaking {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+  }
+  .speaking-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  .speaking-content h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    margin-bottom: var(--space-sm);
+    line-height: 1.3;
+    color: var(--color-text);
+  }
+  .speaking-lead {
+    color: var(--color-muted);
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+  .speaking-tags {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    margin-bottom: var(--space-md);
+    letter-spacing: 0.02em;
+  }
+  .speaking-cases {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: var(--space-lg);
+  }
+  .case-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+  }
+  .case-item svg {
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+  .speaking-stats {
+    display: flex;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-lg);
+  }
+  .speaking-stat {}
+  .stat-value {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    background: var(--gradient-accent);
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px var(--color-accent-glow);
+    text-decoration: none;
+  }
+  .btn-primary:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--color-accent-glow);
+  }
+
+  /* Gallery */
+  .speaking-gallery {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: var(--space-sm);
+    height: 420px;
+  }
+  .gallery-item {
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--color-surface-elevated) 0%, color-mix(in srgb, var(--color-accent) 8%, var(--color-surface)) 100%);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .gallery-item:hover img {
+    transform: scale(1.04);
+  }
+  .gallery-large {
+    grid-row: 1 / 3;
+  }
+  .gallery-small-top {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .gallery-small-bottom {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  @media (max-width: 900px) {
+    .speaking-layout { grid-template-columns: 1fr; }
+    .speaking-gallery { height: 300px; }
+  }
+
+  @media (max-width: 640px) {
+    .speaking {
+      padding-top: var(--space-lg);
+      padding-bottom: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+    .speaking-gallery {
+      grid-template-columns: 1fr 1fr;
+      height: 220px;
+    }
+    .gallery-large {
+      grid-row: auto;
+    }
+    .btn-primary {
+      min-height: 44px;
+    }
+    .speaking-stats {
+      gap: var(--space-lg);
+    }
+    .stat-value {
+      font-size: 1.6rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .speaking-gallery {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+    .gallery-item {
+      height: 160px;
+    }
+  }
+</style>

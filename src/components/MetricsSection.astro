@@ -1,0 +1,103 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<section class="metrics reveal band">
+  <div class="container">
+  <div class="metrics-grid">
+    <div class="metric">
+      <span class="metric-value" data-count="15">15+</span>
+      <span class="metric-label">{t('metrics.years.label')}</span>
+    </div>
+    <div class="metric-divider"></div>
+    <div class="metric">
+      <span class="metric-value">6</span>
+      <span class="metric-label">{t('metrics.analyses.label')}</span>
+    </div>
+    <div class="metric-divider"></div>
+    <div class="metric">
+      <span class="metric-value" data-count="700">700+</span>
+      <span class="metric-label">{t('metrics.articles.label')}</span>
+    </div>
+  </div>
+  </div>
+</section>
+
+<style>
+  .metrics {
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-lg);
+    margin-bottom: var(--space-2xl);
+  }
+  .metrics-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-xl);
+    padding: var(--space-lg) var(--space-xl);
+    border-radius: var(--radius-lg);
+    background: var(--gradient-hero);
+    box-shadow: 0 8px 30px rgba(22, 58, 95, 0.15);
+  }
+  .metric {
+    text-align: center;
+  }
+  .metric-value {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+  .metric-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .metric-divider {
+    width: 1px;
+    height: 3rem;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  @media (max-width: 640px) {
+    .metrics-grid {
+      flex-direction: column;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+    }
+    .metric-divider { width: 3rem; height: 1px; }
+  }
+</style>
+
+<script is:inline>
+  // Animated counters on scroll
+  (function() {
+    var counters = document.querySelectorAll('[data-count]');
+    if (!counters.length) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        var suffix = el.textContent.replace(/[0-9]/g, '');
+        var duration = 1200;
+        var start = performance.now();
+        function step(now) {
+          var t = Math.min((now - start) / duration, 1);
+          var ease = 1 - Math.pow(1 - t, 3);
+          var val = Math.round(ease * target);
+          el.textContent = val + suffix;
+          if (t < 1) requestAnimationFrame(step);
+        }
+        el.textContent = '0' + suffix;
+        requestAnimationFrame(step);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function(el) { observer.observe(el); });
+  })();
+</script>

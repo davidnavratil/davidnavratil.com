@@ -1,0 +1,228 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+
+// Fetch RSS at build time
+interface Article {
+  title: string;
+  link: string;
+  date: string;
+  description: string;
+  image: string;
+}
+
+let articles: Article[] = [];
+
+try {
+  const res = await fetch('https://davidnavratil.substack.com/feed');
+  const xml = await res.text();
+
+  // Simple XML parsing without dependencies
+  const items = xml.split('<item>').slice(1, 7); // max 6 articles (2 rows of 3)
+
+  articles = items.map((item) => {
+    const getTag = (tag: string) => {
+      const match = item.match(new RegExp(`<${tag}><!\\[CDATA\\[([\\s\\S]*?)\\]\\]></${tag}>`))
+        || item.match(new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`));
+      return match ? match[1].trim() : '';
+    };
+
+    const rawDesc = getTag('description');
+    // Decode HTML entities and strip tags
+    const cleanDesc = rawDesc
+      .replace(/&#(\d+);/g, (_: string, n: string) => String.fromCharCode(parseInt(n)))
+      .replace(/<[^>]+>/g, '')
+      .slice(0, 160)
+      .trim();
+
+    const pubDate = getTag('pubDate');
+    let formattedDate = '';
+    if (pubDate) {
+      const d = new Date(pubDate);
+      formattedDate = d.toLocaleDateString(Astro.currentLocale === 'en' ? 'en-US' : 'cs-CZ', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric',
+      });
+    }
+
+    // Extract cover image from enclosure
+    const encMatch = item.match(/<enclosure[^>]+url="([^"]+)"/);
+    let image = encMatch ? encMatch[1] : '';
+    // Resize via Substack CDN — request 400px wide for thumbnails
+    if (image && image.includes('substackcdn.com')) {
+      image = image.replace(/,f_auto/, ',w_400,h_220,c_fill,f_auto');
+    }
+
+    return {
+      title: getTag('title'),
+      link: getTag('link'),
+      date: formattedDate,
+      description: cleanDesc + (cleanDesc.length >= 157 ? '…' : ''),
+      image,
+    };
+  });
+} catch (e) {
+  // Silently fail — section won't render if feed is unavailable
+}
+---
+
+{articles.length > 0 && (
+  <section class="latest-articles container" id="articles">
+    <div class="articles-header reveal">
+      <div class="section-tag">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        {t('articles.subtitle')}
+      </div>
+      <h2>{t('articles.title')}</h2>
+    </div>
+    <div class="articles-grid reveal">
+      {articles.map((article) => (
+        <a href={article.link} target="_blank" rel="noopener" class="article-card">
+          {article.image && (
+            <div class="article-image">
+              <img src={article.image} alt="" loading="lazy" width="400" height="220" />
+            </div>
+          )}
+          <div class="article-body">
+          <time class="article-date">{article.date}</time>
+          <h3 class="article-title">{article.title}</h3>
+          <p class="article-desc">{article.description}</p>
+          <span class="article-link">
+            Číst na Substacku
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+          </span>
+          </div>
+        </a>
+      ))}
+    </div>
+    <div class="articles-footer reveal">
+      <a href="https://davidnavratil.substack.com" target="_blank" rel="noopener" class="articles-all">
+        {t('articles.cta')}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+)}
+
+<style>
+  .latest-articles {
+    margin-bottom: var(--space-2xl);
+  }
+  .articles-header {
+    margin-bottom: var(--space-lg);
+  }
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-section-tag);
+    margin-bottom: var(--space-xs);
+  }
+  .articles-header h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    color: var(--color-text);
+    line-height: 1.3;
+  }
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+  .article-card {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    text-decoration: none;
+    overflow: hidden;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .article-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  }
+  .article-image {
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    background: var(--color-band);
+  }
+  .article-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+  .article-card:hover .article-image img {
+    transform: scale(1.03);
+  }
+  .article-body {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .article-date {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    margin-bottom: 0.4rem;
+  }
+  .article-title {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.4;
+    margin-bottom: 0.5rem;
+  }
+  .article-desc {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary);
+    line-height: 1.55;
+    flex-grow: 1;
+    margin-bottom: 0.75rem;
+  }
+  .article-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+  .articles-footer {
+    text-align: center;
+  }
+  .articles-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .articles-all:hover {
+    color: var(--color-accent-hover);
+  }
+
+  @media (max-width: 640px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+    .article-card {
+      padding: var(--space-sm);
+    }
+  }
+</style>

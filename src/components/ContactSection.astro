@@ -1,0 +1,203 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<section class="contact container" id="contact">
+  <div class="contact-card reveal">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>{t('contact.title')}</h2>
+        <p>{t('contact.desc')}</p>
+        <div class="contact-links">
+          <a href="mailto:davidxnavratil@gmail.com" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            {t('contact.email')}
+          </a>
+          <a href="https://davidnavratil.substack.com" target="_blank" rel="noopener" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+            {t('contact.newsletter')}
+          </a>
+          <a href="https://www.linkedin.com/in/david-navratil/" target="_blank" rel="noopener" class="contact-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            {t('contact.linkedin')}
+          </a>
+        </div>
+      </div>
+      <form action="https://formspree.io/f/xwvwvrqy" method="POST" class="contact-form">
+        <div class="form-row">
+          <label>
+            <span>{t('form.name')}</span>
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            <span>{t('form.email')}</span>
+            <input type="email" name="email" required />
+          </label>
+        </div>
+        <label>
+          <span>{t('form.company')}</span>
+          <input type="text" name="company" />
+        </label>
+        <label>
+          <span>{t('form.message')}</span>
+          <textarea name="message" rows="4" required></textarea>
+        </label>
+        <button type="submit" class="form-submit">
+          {t('form.submit')}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    margin-bottom: var(--space-lg);
+  }
+  .contact-card {
+    position: relative;
+    padding: var(--space-2xl);
+    border-radius: var(--radius-lg);
+    background: var(--gradient-hero);
+    overflow: hidden;
+  }
+  .contact-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, var(--color-accent-glow), transparent 70%);
+  }
+  .contact-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  .contact-info h2 {
+    color: #F0EDE6;
+    margin-bottom: var(--space-sm);
+  }
+  .contact-info > p {
+    color: #B5B1A9;
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+  }
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #F0EDE6;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: border-color 0.2s, background 0.2s;
+    width: fit-content;
+    text-decoration: none;
+  }
+  .contact-link:hover {
+    color: #F0EDE6;
+    border-color: var(--color-accent);
+    background: rgba(255,255,255,0.05);
+  }
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  .contact-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .contact-form label span {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: #B5B1A9;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.6rem 0.85rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.05);
+    color: #F0EDE6;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    resize: vertical;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+  }
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: #5C5850;
+  }
+  .form-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    border: none;
+    background: var(--gradient-accent);
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px var(--color-accent-glow);
+    width: fit-content;
+  }
+  .form-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--color-accent-glow);
+  }
+
+  @media (max-width: 900px) {
+    .contact-card { padding: var(--space-xl); }
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .contact-card { padding: var(--space-lg) var(--space-sm); }
+    .contact-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .form-submit {
+      width: 100%;
+      min-height: 44px;
+      justify-content: center;
+    }
+    .contact-link {
+      min-height: 44px;
+      padding: 0.6rem 1rem;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      padding: 0.75rem 0.85rem;
+      font-size: 1rem;
+    }
+  }
+</style>

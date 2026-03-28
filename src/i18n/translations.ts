@@ -2,22 +2,28 @@ export const translations = {
   cs: {
     // Nav
     'nav.analyses': 'Analýzy',
+    'nav.newsletter': 'Newsletter',
+    'nav.speaking': 'Přednášky',
     'nav.about': 'O mně',
     'nav.contact': 'Kontakt',
+    'nav.subscribe': 'Odebírat',
     'lang.switch': 'English',
     'lang.code': 'EN',
 
     // Hero
     'hero.greeting': 'David Navrátil',
     'hero.role': 'Hlavní ekonom \u00b7 Analytik \u00b7 Speaker',
+    'hero.eyebrow': 'Interaktivní analýzy geopolitiky, ekonomiky a\u00a0technologických rizik',
+    'hero.title': 'Mapa světa, který přestal být přehledný',
     'hero.title.1': 'Rozumět světu,',
     'hero.title.2': 'který se mění.',
-    'hero.sub': 'Makroekonomické trendy, geopolitická rizika a\u00a0dodavatelské řetězce\u00a0— převedené do interaktivních analýz pro rozhodování.',
+    'hero.sub': 'V\u00a0chaosu polykrize hledám strukturu. Tvořím interaktivní analýzy na průsečíku megatrendů, geopolitických rizik a\u00a0úzkých hrdel globální ekonomiky\u00a0— od AI přes dodavatelské řetězce po budoucnost Evropy. Ne proto, aby svět vypadal jednodušeji. Ale aby se v\u00a0něm dalo rozhodovat.',
     'hero.cta.primary': 'Prozkoumat analýzy',
     'hero.cta.secondary': 'Odebírat newsletter',
+    'hero.microcopy': 'Nové analýzy, komentáře a\u00a0souvislosti. Pro lidi, kteří nechtějí jen sledovat titulky, ale chápat, co z\u00a0nich plyne.',
 
     // Trust bar
-    'trust.label': 'Pravidelně komentuje v',
+    'trust.label': 'Komentáře a\u00a0analýzy pro publikum, které rozhoduje',
 
     // Metrics
     'metrics.years.value': '15+',
@@ -28,14 +34,20 @@ export const translations = {
     'metrics.articles.label': 'článků a\u00a0analýz',
 
     // Analyses section
-    'analyses.title': 'Interaktivní analýzy',
-    'analyses.subtitle': 'Nástroje pro pochopení komplexních globálních rizik',
-    'analyses.hormuz.title': 'Hormuzský průliv',
-    'analyses.hormuz.desc': 'Simulátor dopadu uzavření průlivu na globální trhy s\u00a0ropou a\u00a0plynem. Kaskádové efekty na českou ekonomiku.',
+    'analyses.title': 'Analýzy, ke\u00a0kterým se nechodí pro názor, ale pro orientaci',
+    'analyses.subtitle': 'Každá analýza spojuje data, scénáře a\u00a0vizuální logiku. Ne proto, aby ohromovala. Ale aby se v\u00a0ní dalo myslet.',
+    'analyses.hormuz.title': 'Když se zavře brána',
+    'analyses.hormuz.desc': 'Simulátor, který ukazuje, co udělá blokáda Hormuzského průlivu s\u00a0ropou, plynem, inflací a\u00a0českou ekonomikou.',
+    'analyses.hormuz.why': 'Nejde jen o\u00a0cenu ropy. Jde o\u00a0řetězec druhotných dopadů.',
+    'analyses.hormuz.cta': 'Otevřít simulátor',
     'analyses.ree.title': 'Vzácné zeminy',
-    'analyses.ree.desc': 'Dashboard dodavatelských řetězců kritických minerálů. Sankey diagramy, geopolitické závislosti.',
+    'analyses.ree.desc': 'Interaktivní mapa trhu, závislostí a\u00a0scénářů, které rozhodují o\u00a0budoucnosti elektromobility, obrany i\u00a0technologické výroby.',
+    'analyses.ree.why': 'Hlavní problém není cena. Hlavní problém je dostupnost.',
+    'analyses.ree.cta': 'Prozkoumat řetězec',
     'analyses.chokepoints.title': 'Úzká hrdla světa',
-    'analyses.chokepoints.desc': 'Interaktivní mapa globálních chokepoints\u00a0— průlivy, kanály a\u00a0trasy, na kterých závisí světový obchod.',
+    'analyses.chokepoints.desc': 'Atlas míst, na kterých stojí globální obchod\u00a0— a\u00a0která mohou během dnů změnit ceny, výrobu i\u00a0politiku.',
+    'analyses.chokepoints.why': 'Efektivita systému je často jen jiný název pro jeho křehkost.',
+    'analyses.chokepoints.cta': 'Zobrazit atlas',
     'analyses.explore': 'Prozkoumat',
     'card.badge.live': 'Live',
     'tag.geopolitics': 'Geopolitika',
@@ -48,19 +60,34 @@ export const translations = {
     'tag.trade': 'Obchod',
     'tag.risks': 'Rizika',
 
+    // Why people return
+    'return.title': 'Ne další komentář. Nástroj, ke\u00a0kterému se vrátíte i\u00a0za\u00a0měsíc.',
+    'return.item1.title': 'Scénáře místo dojmu',
+    'return.item1.desc': 'Neříkám jen, co se stalo. Ukazuji, co se může stát dál.',
+    'return.item2.title': 'Data, která mají strukturu',
+    'return.item2.desc': 'Grafy a\u00a0mapy nejsou dekorace. Jsou to argumenty v\u00a0prostorové podobě.',
+    'return.item3.title': 'Dopady na praxi',
+    'return.item3.desc': 'Od geopolitiky přes supply chain až po českou ekonomiku a\u00a0rozhodování firem.',
+
     // Speaking section
-    'speaking.title': 'Přednášky a\u00a0média',
-    'speaking.desc': 'Makroekonomické trendy, geopolitika, AI a\u00a0budoucnost. Keynotes, panelové diskuze, firemní workshopy.',
+    'speaking.title': 'Přednášky, které neshrnují titulky, ale skládají obraz',
+    'speaking.desc': 'Pro firmy, konference a\u00a0leadership týmy připravuji keynote, diskuse i\u00a0workshopy o\u00a0makroekonomice, geopolitice, AI a\u00a0budoucnosti byznysu.',
     'speaking.cta': 'Domluvit přednášku',
     'speaking.stat1.value': '50+',
     'speaking.stat1.label': 'přednášek ročně',
     'speaking.stat2.value': '15+',
     'speaking.stat2.label': 'let v\u00a0médiích',
+    'speaking.tags': 'Makroekonomika \u00b7 Geopolitika \u00b7 AI \u00b7 Dodavatelské řetězce \u00b7 Budoucnost Evropy',
+    'speaking.case1': 'Geopolitická rizika pro firmy',
+    'speaking.case2': 'AI a\u00a0budoucnost práce',
+    'speaking.case3': 'Co znamená rozpad levné globalizace pro Evropu',
 
     // About
     'about.title': 'O\u00a0mně',
-    'about.lead': 'Hlavní ekonom České spořitelny (Erste Group) a\u00a0vedoucí týmu Strategic Research\u00a0&\u00a0Insight.',
-    'about.text': 'Věřím, že dobré otázky jsou cennější než rychlé odpovědi\u00a0— a\u00a0že data mají smysl jen tehdy, když vedou k\u00a0porozumění. Proto tvořím interaktivní analytické nástroje, ke\u00a0kterým se lidé vracejí.',
+    'about.lead': 'Hlavní ekonom České spořitelny (Erste Group) a\u00a0vedoucí týmu Ekonomické a\u00a0strategické analýzy.',
+    'about.text': 'Jsem hlavní ekonom České spořitelny a\u00a0vedu tým Ekonomické a\u00a0strategické analýzy. Dlouhodobě se věnuji tomu, jak se ekonomika mění pod tlakem technologií, geopolitiky, demografie a\u00a0institucí.',
+    'about.text2': 'Nepíšu proto, abych přidal další názor do oběhu. Zajímá mě, kde se láme realita: v\u00a0dodavatelských řetězcích, v\u00a0cenách energie, v\u00a0psychologii investorů, v\u00a0tom, jak státy a\u00a0firmy reagují na nejistotu.',
+    'about.text3': 'Proto kromě textů stavím i\u00a0interaktivní analýzy. Některé věci se dají pochopit až ve\u00a0chvíli, kdy si s\u00a0nimi čtenář může sám pohnout.',
     'about.pillar1.title': 'Interaktivní analýzy',
     'about.pillar1.desc': 'Simulátory, vizualizace a\u00a0mapy rizik, které pomáhají složité problémy prozkoumat.',
     'about.pillar2.title': 'Newsletter',
@@ -70,17 +97,29 @@ export const translations = {
     'about.pillar3.title': 'Přednášky',
     'about.pillar3.desc': 'Makroekonomické trendy, AI, geopolitika. Konference i\u00a0firemní workshopy.',
     'about.credentials.role': 'Hlavní ekonom České spořitelny (Erste Group)',
-    'about.credentials.team': 'Vedoucí týmu Strategic Research &\u00a0Insight',
+    'about.credentials.team': 'Vedoucí týmu Ekonomické a\u00a0strategické analýzy',
     'about.credentials.media': 'Pravidelný komentátor v\u00a0médiích (ČT, CNN Prima, HN)',
     'about.credentials.speaking': 'Přednášky pro korporátní klienty a\u00a0konference',
 
     // Newsletter CTA
-    'newsletter.title': 'Buďte v\u00a0obraze',
-    'newsletter.desc': 'Nové analýzy, makroekonomické komentáře a\u00a0geopolitické přehledy. Jednou za\u00a01–2\u00a0týdny, bez spamu.',
-    'newsletter.cta': 'Odebírat newsletter',
+    'newsletter.title': 'Newsletter pro lidi, kteří chtějí chápat souvislosti dřív, než se z\u00a0nich stanou titulky',
+    'newsletter.desc': 'Makroekonomika, geopolitika, technologie a\u00a0společenské trendy\u00a0— propojené tak, aby z\u00a0nich nevznikl další šum, ale jasnější obraz světa.',
+    'newsletter.value1': 'nové analýzy a\u00a0scénáře',
+    'newsletter.value2': 'širší kontext k\u00a0aktuálním událostem',
+    'newsletter.value3': 'interpretace, ne přepis agenturních zpráv',
+    'newsletter.value4': 'identifikace signálů v\u00a0chaosu',
+    'newsletter.value5': 'eseje',
+    'newsletter.cta': 'Přihlásit se zdarma',
     'newsletter.placeholder': 'Váš email',
     'newsletter.subscribe': 'Odebírat',
-    'newsletter.note': 'Připojte se k\u00a0odběratelům na Substacku. Odhlášení kdykoliv.',
+    'newsletter.note': 'Nejdřív zdarma. Pak se ukáže, jestli je to přesně ten typ myšlení, ke\u00a0kterému se chcete vracet.',
+    'newsletter.bridge.title': 'Tohle je veřejná část práce. Hlubší vrstvy chodí do e-mailu.',
+    'newsletter.bridge.text': 'Na web dávám nástroje a\u00a0vybrané analýzy. Do newsletteru chodí širší souvislosti, interpretace a\u00a0texty, které se nedají zkrátit do jedné věty na sociálních sítích.',
+
+    // Latest articles
+    'articles.title': 'Z\u00a0posledních vydání',
+    'articles.subtitle': 'Co nedávno odešlo do e-mailu',
+    'articles.cta': 'Všechny články na Substacku',
 
     // Contact
     'contact.title': 'Pojďme spolupracovat',
@@ -96,30 +135,39 @@ export const translations = {
 
     // Footer
     'footer.copy': '© {year} David Navrátil',
+    'footer.cta.title': 'Nechcete jen sledovat svět. Chcete mu rozumět.',
+    'footer.cta.desc': 'Začněte newsletterem. Interaktivní analýzy a\u00a0eseje pak zapadnou do jednoho celku.',
+    'footer.cta.button': 'Odebírat newsletter',
 
     // Meta
-    'meta.title': 'David Navrátil — ekonom, analytik, interaktivní analýzy',
-    'meta.description': 'Hlavní ekonom České spořitelny. Interaktivní analýzy makroekonomických trendů, geopolitických rizik a dodavatelských řetězců.',
+    'meta.title': 'David Navrátil — interaktivní analýzy geopolitiky a\u00a0ekonomiky',
+    'meta.description': 'Interaktivní analýzy, které převádějí makroekonomický chaos, geopolitická rizika a úzká hrdla globální ekonomiky do srozumitelných scénářů.',
   },
   en: {
     // Nav
     'nav.analyses': 'Analyses',
+    'nav.newsletter': 'Newsletter',
+    'nav.speaking': 'Speaking',
     'nav.about': 'About',
     'nav.contact': 'Contact',
+    'nav.subscribe': 'Subscribe',
     'lang.switch': 'Čeština',
     'lang.code': 'CZ',
 
     // Hero
     'hero.greeting': 'David Navrátil',
     'hero.role': 'Chief Economist \u00b7 Analyst \u00b7 Speaker',
+    'hero.eyebrow': 'Interactive analyses of geopolitics, economics, and technology risks',
+    'hero.title': 'A map for a world that stopped making sense',
     'hero.title.1': 'Understanding a world',
     'hero.title.2': 'that is changing.',
-    'hero.sub': 'Macroeconomic trends, geopolitical risks, and supply chains\u00a0— transformed into interactive analyses for decision-making.',
+    'hero.sub': 'I look for structure in the chaos of polycrisis. I build interactive analyses at the intersection of megatrends, geopolitical risks, and global bottlenecks\u00a0— from AI to supply chains to the future of Europe. Not to make the world look simpler. But to make it possible to decide.',
     'hero.cta.primary': 'Explore analyses',
     'hero.cta.secondary': 'Subscribe to newsletter',
+    'hero.microcopy': 'New analyses, commentary, and context. For people who don\'t just want to follow headlines, but understand what they mean.',
 
     // Trust bar
-    'trust.label': 'Regularly featured in',
+    'trust.label': 'Commentary and analyses for decision-makers',
 
     // Metrics
     'metrics.years.value': '15+',
@@ -130,14 +178,20 @@ export const translations = {
     'metrics.articles.label': 'articles &\u00a0analyses',
 
     // Analyses section
-    'analyses.title': 'Interactive Analyses',
-    'analyses.subtitle': 'Tools for understanding complex global risks',
-    'analyses.hormuz.title': 'Strait of Hormuz',
-    'analyses.hormuz.desc': 'Simulator of the impact of strait closure on global oil and gas markets. Cascading effects on the Czech economy.',
+    'analyses.title': 'Not opinions. Orientation.',
+    'analyses.subtitle': 'Each analysis connects data, scenarios, and visual logic. Not to impress. But to think with.',
+    'analyses.hormuz.title': 'When the gate closes',
+    'analyses.hormuz.desc': 'A simulator showing what a blockade of the Strait of Hormuz would do to oil, gas, inflation, and the Czech economy.',
+    'analyses.hormuz.why': 'It\'s not just about oil prices. It\'s about the chain of secondary impacts.',
+    'analyses.hormuz.cta': 'Open simulator',
     'analyses.ree.title': 'Rare Earth Elements',
-    'analyses.ree.desc': 'Critical minerals supply chain dashboard. Sankey diagrams, geopolitical dependencies.',
+    'analyses.ree.desc': 'An interactive map of markets, dependencies, and scenarios shaping the future of EVs, defense, and tech manufacturing.',
+    'analyses.ree.why': 'The main problem isn\'t price. The main problem is availability.',
+    'analyses.ree.cta': 'Explore supply chain',
     'analyses.chokepoints.title': 'Global Chokepoints',
-    'analyses.chokepoints.desc': 'Interactive map of global chokepoints\u00a0— straits, canals, and routes the world trade depends on.',
+    'analyses.chokepoints.desc': 'An atlas of locations that global trade depends on\u00a0— and that can change prices, production, and policy within days.',
+    'analyses.chokepoints.why': 'System efficiency is often just another name for fragility.',
+    'analyses.chokepoints.cta': 'View atlas',
     'analyses.explore': 'Explore',
     'card.badge.live': 'Live',
     'tag.geopolitics': 'Geopolitics',
@@ -150,19 +204,34 @@ export const translations = {
     'tag.trade': 'Trade',
     'tag.risks': 'Risks',
 
+    // Why people return
+    'return.title': 'Not another commentary. A tool you\'ll come back to in a month.',
+    'return.item1.title': 'Scenarios, not impressions',
+    'return.item1.desc': 'I don\'t just tell you what happened. I show what could happen next.',
+    'return.item2.title': 'Data with structure',
+    'return.item2.desc': 'Charts and maps aren\'t decoration. They\'re arguments you can see.',
+    'return.item3.title': 'Real-world impact',
+    'return.item3.desc': 'From geopolitics through supply chains to the Czech economy and corporate decision-making.',
+
     // Speaking section
-    'speaking.title': 'Speaking & Media',
-    'speaking.desc': 'Macroeconomic trends, geopolitics, AI and the future. Keynotes, panel discussions, corporate workshops.',
+    'speaking.title': 'Talks that build the picture, not summarize the headlines',
+    'speaking.desc': 'For companies, conferences, and leadership teams, I prepare keynotes, discussions, and workshops on macroeconomics, geopolitics, AI, and the future of business.',
     'speaking.cta': 'Book a talk',
     'speaking.stat1.value': '50+',
     'speaking.stat1.label': 'talks per year',
     'speaking.stat2.value': '15+',
     'speaking.stat2.label': 'years in media',
+    'speaking.tags': 'Macroeconomics \u00b7 Geopolitics \u00b7 AI \u00b7 Supply Chains \u00b7 Future of Europe',
+    'speaking.case1': 'Geopolitical risks for businesses',
+    'speaking.case2': 'AI and the future of work',
+    'speaking.case3': 'What the end of cheap globalization means for Europe',
 
     // About
     'about.title': 'About me',
     'about.lead': 'Chief Economist at Ceska sporitelna (Erste Group) and Head of Strategic Research\u00a0&\u00a0Insight.',
-    'about.text': 'I believe good questions are more valuable than quick answers\u00a0— and that data only matters when it leads to understanding. That\'s why I build interactive analytical tools people keep coming back to.',
+    'about.text': 'I\'m Chief Economist at Ceska sporitelna and lead the Strategic Research\u00a0&\u00a0Insight team. I focus on how the economy changes under pressure from technology, geopolitics, demographics, and institutions.',
+    'about.text2': 'I don\'t write to add another opinion to the cycle. I\'m interested in where reality breaks: in supply chains, energy prices, investor psychology, and how states and companies respond to uncertainty.',
+    'about.text3': 'That\'s why, beyond writing, I build interactive analyses. Some things can only be understood when you can move the pieces yourself.',
     'about.pillar1.title': 'Interactive analyses',
     'about.pillar1.desc': 'Simulators, visualizations, and risk maps that help explore complex problems.',
     'about.pillar2.title': 'Newsletter',
@@ -177,12 +246,24 @@ export const translations = {
     'about.credentials.speaking': 'Corporate keynotes and conference speaking',
 
     // Newsletter CTA
-    'newsletter.title': 'Stay informed',
-    'newsletter.desc': 'New analyses, macro commentary, and geopolitical overviews. Every 1\u20132\u00a0weeks, no spam.',
-    'newsletter.cta': 'Subscribe to newsletter',
+    'newsletter.title': 'A newsletter for people who want to connect the dots before they become headlines',
+    'newsletter.desc': 'Macroeconomics, geopolitics, technology, and social trends\u00a0— connected so they create clarity, not more noise.',
+    'newsletter.value1': 'new analyses and scenarios',
+    'newsletter.value2': 'broader context for current events',
+    'newsletter.value3': 'interpretation, not wire service rewrites',
+    'newsletter.value4': 'spotting signals in the noise',
+    'newsletter.value5': 'essays',
+    'newsletter.cta': 'Subscribe for free',
     'newsletter.placeholder': 'Your email',
     'newsletter.subscribe': 'Subscribe',
-    'newsletter.note': 'Join subscribers on Substack. Unsubscribe anytime.',
+    'newsletter.note': 'Free to start. Then you\'ll know if it\'s worth coming back to.',
+    'newsletter.bridge.title': 'This is the public layer. The deeper work goes to your inbox.',
+    'newsletter.bridge.text': 'The website hosts tools and selected analyses. The newsletter delivers broader context, interpretation, and writing that can\'t be compressed into a social media post.',
+
+    // Latest articles
+    'articles.title': 'From recent issues',
+    'articles.subtitle': 'What recently went out to subscribers',
+    'articles.cta': 'All articles on Substack',
 
     // Contact
     'contact.title': 'Let\'s collaborate',
@@ -198,10 +279,13 @@ export const translations = {
 
     // Footer
     'footer.copy': '© {year} David Navrátil',
+    'footer.cta.title': 'You don\'t just want to watch the world. You want to understand it.',
+    'footer.cta.desc': 'Start with the newsletter. The analyses and essays will make more sense from there.',
+    'footer.cta.button': 'Subscribe to newsletter',
 
     // Meta
-    'meta.title': 'David Navrátil — economist, analyst, interactive analyses',
-    'meta.description': 'Chief Economist at Ceska sporitelna. Interactive analyses of macroeconomic trends, geopolitical risks, and supply chains.',
+    'meta.title': 'David Navrátil — interactive analyses of geopolitics and economics',
+    'meta.description': 'Interactive analyses turning macroeconomic chaos, geopolitical risks, and global bottlenecks into clear scenarios and better decisions.',
   },
 } as const;
 

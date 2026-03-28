@@ -1,0 +1,132 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<section class="about" id="about">
+  <div class="container">
+  <div class="about-grid reveal">
+    <div class="about-photo-col">
+      <div class="about-photo">
+        <img src="/images/david-about.jpg" alt="David Navrátil — hlavní ekonom České spořitelny" loading="lazy" width="600" height="800" />
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-tag">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        {t('about.title')}
+      </div>
+      <h2 class="about-heading" set:html={t('about.lead')} />
+      <p class="about-text" set:html={t('about.text')} />
+      <p class="about-text" set:html={t('about.text2')} />
+      <p class="about-text about-text-last" set:html={t('about.text3')} />
+      <div class="about-credentials">
+        <span class="credential">{t('about.credentials.role')}</span>
+        <span class="credential-sep">·</span>
+        <span class="credential">{t('about.credentials.media')}</span>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<style>
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-section-tag);
+    margin-bottom: var(--space-md);
+  }
+
+  .about {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    margin-bottom: var(--space-2xl);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 0.7fr 1fr;
+    gap: var(--space-2xl);
+    align-items: center;
+  }
+  .about-photo-col {}
+  .about-photo {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    filter: grayscale(0.15) contrast(1.02);
+  }
+  .about-photo img {
+    width: 100%;
+    display: block;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+  }
+  .about-heading {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+    line-height: 1.4;
+    color: var(--color-text);
+    margin-bottom: var(--space-md);
+  }
+  .about-text {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text-secondary);
+  }
+  .about-text-last {
+    margin-bottom: var(--space-lg);
+  }
+  .about-credentials {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+  .credential-sep {
+    color: var(--color-border);
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+    .about-photo-col {
+      max-width: 400px;
+      margin-inline: auto;
+    }
+    .about-photo img { aspect-ratio: 4/3; }
+  }
+
+  @media (max-width: 640px) {
+    .about {
+      padding-top: var(--space-lg);
+      padding-bottom: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+    .about-photo-col {
+      max-width: 300px;
+    }
+    .about-text {
+      font-size: 0.95rem;
+    }
+    .about-text:first-of-type {
+      font-size: 1.05rem;
+    }
+    .about-credentials {
+      font-size: 0.82rem;
+    }
+  }
+</style>

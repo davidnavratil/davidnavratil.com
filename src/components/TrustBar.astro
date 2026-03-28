@@ -1,0 +1,104 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+
+const media = [
+  'Bloomberg',
+  'Financial Times',
+  'Reuters',
+  'ČT24',
+  'HN',
+  'Seznam Zprávy',
+  'Český rozhlas',
+  'CzechCrunch',
+  'Euromoney',
+];
+---
+
+<section class="trust-bar reveal">
+  <div class="container">
+    <p class="trust-label" set:html={t('trust.label')} />
+    <div class="trust-logos">
+      {media.map((name, i) => (
+        <>
+          {i > 0 && <span class="trust-sep" aria-hidden="true">·</span>}
+          <span class="trust-logo">{name}</span>
+        </>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    padding: var(--space-lg) 0;
+    margin-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .trust-label {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    margin-bottom: var(--space-md);
+  }
+  .trust-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    row-gap: var(--space-xs);
+  }
+  .trust-logo {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: var(--color-text);
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+    padding: 0.25rem 0;
+    white-space: nowrap;
+    cursor: default;
+  }
+  .trust-logo:hover {
+    opacity: 0.65;
+  }
+  .trust-sep {
+    color: var(--color-muted);
+    opacity: 0.25;
+    margin: 0 0.75rem;
+    font-size: 1.1rem;
+    line-height: 1;
+    user-select: none;
+  }
+
+  @media (max-width: 640px) {
+    .trust-logos {
+      gap: 0.25rem 0;
+    }
+    .trust-logo {
+      font-size: 0.8rem;
+    }
+    .trust-sep {
+      margin: 0 0.5rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .trust-logo {
+      font-size: 0.72rem;
+    }
+    .trust-sep {
+      margin: 0 0.35rem;
+      font-size: 0.9rem;
+    }
+    .trust-label {
+      font-size: 0.7rem;
+    }
+  }
+</style>
