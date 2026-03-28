@@ -106,6 +106,23 @@ Profesionální platforma hlavního ekonoma České spořitelny. Interaktivní a
 - **Formspree kontaktní formulář** (endpoint `xwvwvrqy`) — jméno, email, firma (volitelné), zpráva
 - **About sekce** rozšířena o 3 pilíře s ikonami
 
+### Fáze 3 — Visual Refresh (28. 3. 2026)
+
+**Cíl:** Profesionálnější vizuál, lepší barevná paleta, opravy bugů.
+
+**Co se udělalo:**
+
+- **Slate paleta (Variant B)** — dark mode migrován ze stone na slate tóny pro "finance authority" look
+- **Navy metrics karta** — gradient `#0F172A → #1E293B` s amber hodnotami (`#F59E0B`) a slate popisky
+- **Střídající se band pozadí** — sekce trust+metrics, speaking, about mají `--color-band` (#F1F5F9 light / #1E293B dark)
+- **Section tagy v navy** — `--color-section-tag: #1E3A5F` (light) / `#F59E0B` (dark)
+- **Animace counterů** — scroll-triggered postupné napočítání (15+, 6, 700+), cubic ease-out, 1200ms
+- **Hero role badge** — změna na "Hlavní ekonom · Analytik · Speaker"
+- **Metrics label** — změna z "komentářů" na "článků a analýz"
+- **Fix theme toggle** — bug s duplicitním `is:inline` scriptem (komponenta renderována 2× v desktop+mobile nav). Oprava: class selector + `window.__themeToggleInit` guard
+- **Fix preview screenshotů** — `object-position: top left` pro lepší crop analýzových obrázků
+- **Zmenšení mezer** — `--space-2xl: 4.5rem`, `--space-3xl: 5.5rem` (z původních 6rem/8rem)
+
 ---
 
 ## Architektura
@@ -153,14 +170,30 @@ davidnavratil.com/
 ### Deploy pipeline
 
 ```bash
-# Lokální build + rsync na server
+# Automatický deploy: push na main → GitHub Actions build + rsync
+# Manuální deploy landing page:
 bash scripts/deploy.sh
 
-# Analýzy se deployují samostatně (excluded z rsync):
+# Deploy všeho (landing + analýzy):
+bash scripts/deploy-all.sh
+
+# Deploy konkrétní části:
+bash scripts/deploy-all.sh --landing
+bash scripts/deploy-all.sh --hormuz
+bash scripts/deploy-all.sh --ree
+bash scripts/deploy-all.sh --uzka-hrdla
+
+# Analýzy na serveru:
 # /var/www/davidnavratil.com/analyses/hormuz/
 # /var/www/davidnavratil.com/analyses/ree-dashboard/
 # /var/www/davidnavratil.com/analyses/uzka-hrdla/
 ```
+
+### SSL
+
+- Let's Encrypt certifikát pro `davidnavratil.com` + `www.davidnavratil.com`
+- Certbot auto-renewal: systemd timer (`certbot.timer`) aktivní, kontrola 2× denně
+- Expirace: ověřit přes `ssh root@77.42.84.152 'certbot certificates'`
 
 ### Služby třetích stran
 
@@ -198,10 +231,6 @@ bash scripts/deploy.sh
 - [x] REE Dashboard: kompletní CZ+EN překlad
 
 ### Zbývá dokončit
-
-**Landing page (rozpracované z poslední session):**
-- [ ] **Zmenšit mezery mezi sekcemi** — momentálně `--space-2xl` (6rem = 96px) a `--space-3xl` (8rem = 128px), stránka je zbytečně dlouhá
-- [ ] **Animace counterů** v metrikách — `data-count` atributy jsou připravené (15+, 6, 700+), ale JS animace chybí (scroll-triggered postupné napočítání)
 
 **Analýzy:**
 - [ ] **REE Dashboard — zbytková čeština** — `cost_breakdown.json` (názvy fází), `cost_passthrough` (produkty), aplikace prvků stále obsahují české texty
