@@ -7,21 +7,21 @@ const locale = Astro.currentLocale ?? 'cs';
 const analyses = [
   {
     key: 'hormuz' as const,
-    href: locale === 'en' ? '/en/hormuz/' : '/hormuz/',
+    href: locale === 'en' ? '/analyses/hormuz/' : '/analyses/hormuz/',
     image: '/images/preview-hormuz.png',
     tags: ['tag.geopolitics', 'tag.energy', 'tag.supply'] as const,
     live: true,
   },
   {
     key: 'ree' as const,
-    href: locale === 'en' ? '/en/ree-dashboard/' : '/ree-dashboard/',
+    href: locale === 'en' ? '/analyses/ree-dashboard/' : '/analyses/ree-dashboard/',
     image: '/images/preview-ree.png',
     tags: ['tag.minerals', 'tag.china', 'tag.tech'] as const,
     live: false,
   },
   {
     key: 'chokepoints' as const,
-    href: locale === 'en' ? '/en/chokepoints/' : '/chokepoints/',
+    href: locale === 'en' ? '/analyses/uzka-hrdla/' : '/analyses/uzka-hrdla/',
     image: '/images/preview-chokepoints.png',
     tags: ['tag.maps', 'tag.trade', 'tag.risks'] as const,
     live: false,
