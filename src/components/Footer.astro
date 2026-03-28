@@ -4,21 +4,65 @@ const year = new Date().getFullYear();
 
 <footer class="footer">
   <div class="container footer-inner">
-    <p>&copy; {year} David Navrátil</p>
+    <div class="footer-left">
+      <span class="footer-mark">DN</span>
+      <p>&copy; {year} David Navrátil</p>
+    </div>
+    <div class="footer-links">
+      <a href="https://davidnavratil.substack.com" target="_blank" rel="noopener">Substack</a>
+      <a href="https://www.linkedin.com/in/david-navratil/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    padding: var(--space-md) 0;
+    padding: var(--space-lg) 0;
     border-top: 1px solid var(--color-border);
-    margin-top: var(--space-xl);
+    margin-top: var(--space-3xl);
   }
   .footer-inner {
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .footer-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .footer-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 6px;
+    background: var(--color-border);
+    color: var(--color-muted);
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
   }
   p {
     font-size: 0.85rem;
     color: var(--color-muted);
+  }
+  .footer-links {
+    display: flex;
+    gap: var(--space-md);
+  }
+  .footer-links a {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    transition: color 0.2s;
+  }
+  .footer-links a:hover {
+    color: var(--color-accent);
+  }
+
+  @media (max-width: 480px) {
+    .footer-inner { flex-direction: column; gap: var(--space-sm); }
   }
 </style>

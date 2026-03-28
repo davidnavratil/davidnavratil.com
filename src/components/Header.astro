@@ -1,18 +1,61 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
+import { useTranslations, getAlternatePath } from '../i18n/utils';
+
+const locale = Astro.currentLocale;
+const t = useTranslations(locale);
+const switchHref = getAlternatePath(locale, '/');
 ---
 
 <header class="header">
   <div class="container header-inner">
-    <a href="/" class="logo">David Navrátil</a>
-    <ThemeToggle />
+    <a href={locale === 'en' ? '/en/' : '/'} class="logo">
+      <span class="logo-mark">DN</span>
+      <span class="logo-text">David Navrátil</span>
+    </a>
+    <nav class="nav">
+      <a href="#analyzy" class="nav-link">{t('nav.analyses')}</a>
+      <a href="#about" class="nav-link">{t('nav.about')}</a>
+      <a href="#kontakt" class="nav-link">{t('nav.contact')}</a>
+      <a href={switchHref} class="lang-switch">{t('lang.code')}</a>
+      <ThemeToggle />
+    </nav>
+
+    <!-- Mobile menu button -->
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+      <svg class="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6" class="line-top"/>
+        <line x1="3" y1="12" x2="21" y2="12" class="line-mid"/>
+        <line x1="3" y1="18" x2="21" y2="18" class="line-bot"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile nav -->
+  <div class="mobile-nav" id="mobile-nav">
+    <a href="#analyzy" class="mobile-link">{t('nav.analyses')}</a>
+    <a href="#about" class="mobile-link">{t('nav.about')}</a>
+    <a href="#kontakt" class="mobile-link">{t('nav.contact')}</a>
+    <div class="mobile-bottom">
+      <a href={switchHref} class="lang-switch">{t('lang.code')}</a>
+      <ThemeToggle />
+    </div>
   </div>
 </header>
 
 <style>
   .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
     padding: var(--space-sm) 0;
-    border-bottom: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+    transition: background 0.3s ease;
   }
   .header-inner {
     display: flex;
@@ -20,13 +63,121 @@ import ThemeToggle from './ThemeToggle.astro';
     justify-content: space-between;
   }
   .logo {
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     color: var(--color-text);
     text-decoration: none;
+    transition: opacity 0.2s;
   }
-  .logo:hover {
-    color: var(--color-accent);
+  .logo:hover { opacity: 0.8; color: var(--color-text); }
+  .logo-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 8px;
+    background: var(--gradient-accent);
+    color: white;
+    font-family: var(--font-serif);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+  }
+  .logo-text {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  .nav-link {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    transition: color 0.2s;
+  }
+  .nav-link:hover {
+    color: var(--color-text);
+  }
+  .lang-switch {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .lang-switch:hover {
+    border-color: var(--color-accent);
+    color: var(--color-text);
+  }
+
+  .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 0.25rem;
+  }
+  .mobile-nav {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    padding: 0 var(--space-md);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    visibility: hidden;
+  }
+  .mobile-nav.open {
+    max-height: 300px;
+    padding-bottom: var(--space-md);
+    visibility: visible;
+  }
+  .mobile-link {
+    display: block;
+    padding: 0.6rem 0;
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+    border-bottom: 1px solid var(--color-border);
+    text-decoration: none;
+  }
+  .mobile-bottom {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding-top: var(--space-sm);
+  }
+
+  @media (max-width: 640px) {
+    .nav { display: none; }
+    .menu-toggle { display: flex; }
+    .mobile-nav { display: flex; }
   }
 </style>
+
+<script is:inline>
+  (function() {
+    var btn = document.querySelector('.menu-toggle');
+    var nav = document.getElementById('mobile-nav');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function() {
+      var open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    nav.querySelectorAll('.mobile-link').forEach(function(link) {
+      link.addEventListener('click', function() {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  })();
+</script>

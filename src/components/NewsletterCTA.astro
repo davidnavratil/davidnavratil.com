@@ -1,0 +1,100 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+---
+
+<section class="newsletter container reveal">
+  <div class="newsletter-card">
+    <div class="newsletter-glow"></div>
+    <div class="newsletter-content">
+      <div class="newsletter-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </div>
+      <h2>{t('newsletter.title')}</h2>
+      <p>{t('newsletter.desc')}</p>
+      <div class="newsletter-form-wrap">
+        <a href="https://davidnavratil.substack.com/subscribe" target="_blank" rel="noopener" class="newsletter-btn">
+          {t('newsletter.cta')}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <p class="newsletter-note">{t('newsletter.note')}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter {
+    margin-bottom: var(--space-3xl);
+  }
+  .newsletter-card {
+    position: relative;
+    text-align: center;
+    padding: var(--space-2xl) var(--space-lg);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 25%, var(--color-border));
+    overflow: hidden;
+  }
+  .newsletter-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, var(--color-accent-glow), transparent 70%);
+    pointer-events: none;
+  }
+  .newsletter-content {
+    position: relative;
+  }
+  .newsletter-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 14px;
+    background: var(--color-accent-glow);
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+  }
+  .newsletter-card h2 {
+    font-size: 1.8rem;
+    margin-bottom: var(--space-xs);
+  }
+  .newsletter-card > .newsletter-content > p {
+    color: var(--color-muted);
+    max-width: 440px;
+    margin-inline: auto;
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+  }
+  .newsletter-form-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--space-sm);
+  }
+  .newsletter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.85rem 2rem;
+    border-radius: 10px;
+    background: var(--gradient-accent);
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px var(--color-accent-glow);
+    text-decoration: none;
+  }
+  .newsletter-btn:hover {
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px var(--color-accent-glow);
+  }
+  .newsletter-note {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin-top: var(--space-sm);
+  }
+</style>

@@ -16,6 +16,6 @@ echo "Building..."
 npm run build
 
 echo "Deploying to $SERVER..."
-rsync -avz --delete dist/ "${SSH_USER}@${SERVER}:${REMOTE_DIR}/"
+rsync -avz --delete --exclude='analyses/' dist/ "${SSH_USER}@${SERVER}:${REMOTE_DIR}/"
 
 echo "Done. https://davidnavratil.com"
