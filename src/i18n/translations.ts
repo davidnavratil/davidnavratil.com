@@ -9,7 +9,7 @@ export const translations = {
 
     // Hero
     'hero.greeting': 'David Navrátil',
-    'hero.role': 'Hlavní ekonom \u00b7 Analytik \u00b7 Autor',
+    'hero.role': 'Hlavní ekonom \u00b7 Analytik \u00b7 Speaker',
     'hero.title.1': 'Rozumět světu,',
     'hero.title.2': 'který se mění.',
     'hero.sub': 'Makroekonomické trendy, geopolitická rizika a\u00a0dodavatelské řetězce\u00a0— převedené do interaktivních analýz pro rozhodování.',
@@ -25,7 +25,7 @@ export const translations = {
     'metrics.analyses.value': '6',
     'metrics.analyses.label': 'interaktivních analýz',
     'metrics.articles.value': '700+',
-    'metrics.articles.label': 'publikovaných komentářů',
+    'metrics.articles.label': 'článků a\u00a0analýz',
 
     // Analyses section
     'analyses.title': 'Interaktivní analýzy',
@@ -111,7 +111,7 @@ export const translations = {
 
     // Hero
     'hero.greeting': 'David Navrátil',
-    'hero.role': 'Chief Economist \u00b7 Analyst \u00b7 Author',
+    'hero.role': 'Chief Economist \u00b7 Analyst \u00b7 Speaker',
     'hero.title.1': 'Understanding a world',
     'hero.title.2': 'that is changing.',
     'hero.sub': 'Macroeconomic trends, geopolitical risks, and supply chains\u00a0— transformed into interactive analyses for decision-making.',
@@ -127,7 +127,7 @@ export const translations = {
     'metrics.analyses.value': '6',
     'metrics.analyses.label': 'interactive analyses',
     'metrics.articles.value': '700+',
-    'metrics.articles.label': 'published commentaries',
+    'metrics.articles.label': 'articles &\u00a0analyses',
 
     // Analyses section
     'analyses.title': 'Interactive Analyses',

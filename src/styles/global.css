@@ -9,19 +9,22 @@
 :root {
   --color-bg: #FAFAF9;
   --color-surface: #FFFFFF;
-  --color-surface-elevated: #FFFFFF;
-  --color-text: #1C1917;
-  --color-text-secondary: #57534E;
+  --color-surface-elevated: #F8FAFC;
+  --color-text: #0F172A;
+  --color-text-secondary: #475569;
   --color-accent: #B45309;
   --color-accent-hover: #92400E;
-  --color-accent-glow: rgba(180, 83, 9, 0.15);
-  --color-border: #E7E5E4;
-  --color-muted: #A8A29E;
+  --color-accent-glow: rgba(180, 83, 9, 0.12);
+  --color-border: #E2E8F0;
+  --color-muted: #94A3B8;
+  --color-navy: #1E3A5F;
+  --color-section-tag: #1E3A5F;
+  --color-band: #F1F5F9;
 
-  --gradient-hero: linear-gradient(135deg, #1C1917 0%, #292524 50%, #1C1917 100%);
+  --gradient-hero: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
   --gradient-accent: linear-gradient(135deg, #B45309, #D97706, #F59E0B);
-  --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.8), rgba(255,255,255,0.4));
-  --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(180,83,9,0.06), transparent 40%);
+  --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(248,250,252,0.5));
+  --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(180,83,9,0.05), transparent 40%);
 
   --font-serif: 'Georgia', 'Cambria', 'Times New Roman', serif;
   --font-sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
@@ -33,27 +36,30 @@
   --space-md: 1.5rem;
   --space-lg: 2.5rem;
   --space-xl: 4rem;
-  --space-2xl: 6rem;
-  --space-3xl: 8rem;
+  --space-2xl: 4.5rem;
+  --space-3xl: 5.5rem;
 
   --radius: 12px;
   --radius-lg: 20px;
 }
 
 [data-theme="dark"] {
-  --color-bg: #0C0A09;
-  --color-surface: #1C1917;
-  --color-surface-elevated: #292524;
-  --color-text: #E7E5E4;
-  --color-text-secondary: #A8A29E;
+  --color-bg: #0F172A;
+  --color-surface: #1E293B;
+  --color-surface-elevated: #334155;
+  --color-text: #F1F5F9;
+  --color-text-secondary: #94A3B8;
   --color-accent: #F59E0B;
   --color-accent-hover: #FBBF24;
-  --color-accent-glow: rgba(245, 158, 11, 0.12);
-  --color-border: #292524;
-  --color-muted: #78716C;
+  --color-accent-glow: rgba(245, 158, 11, 0.10);
+  --color-border: #334155;
+  --color-muted: #64748B;
 
-  --gradient-hero: linear-gradient(135deg, #0C0A09 0%, #1C1917 50%, #0C0A09 100%);
-  --gradient-card: linear-gradient(145deg, rgba(41,37,36,0.8), rgba(28,25,23,0.4));
+  --color-section-tag: #F59E0B;
+  --color-band: #1E293B;
+
+  --gradient-hero: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%);
+  --gradient-card: linear-gradient(145deg, rgba(30,41,59,0.8), rgba(15,23,42,0.4));
   --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(245,158,11,0.04), transparent 40%);
 }
 

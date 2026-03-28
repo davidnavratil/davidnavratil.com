@@ -47,7 +47,7 @@ const locale = Astro.currentLocale ?? 'cs';
   </section>
 
   <!-- ========== TRUST BAR ========== -->
-  <section class="trust-bar reveal">
+  <section class="trust-bar reveal band">
     <div class="container">
       <p class="trust-label">{t('trust.label')}</p>
       <div class="trust-logos">
@@ -73,7 +73,8 @@ const locale = Astro.currentLocale ?? 'cs';
   </section>
 
   <!-- ========== METRICS ========== -->
-  <section class="metrics container reveal">
+  <section class="metrics reveal band">
+    <div class="container">
     <div class="metrics-grid">
       <div class="metric">
         <span class="metric-value" data-count="15">15+</span>
@@ -89,6 +90,7 @@ const locale = Astro.currentLocale ?? 'cs';
         <span class="metric-value" data-count="700">700+</span>
         <span class="metric-label">{t('metrics.articles.label')}</span>
       </div>
+    </div>
     </div>
   </section>
 
@@ -168,7 +170,8 @@ const locale = Astro.currentLocale ?? 'cs';
   </section>
 
   <!-- ========== SPEAKING & MEDIA ========== -->
-  <section class="speaking container" id="speaking">
+  <section class="speaking band" id="speaking">
+    <div class="container">
     <div class="speaking-layout reveal">
       <div class="speaking-content">
         <div class="section-tag">
@@ -203,13 +206,15 @@ const locale = Astro.currentLocale ?? 'cs';
         </div>
       </div>
     </div>
+    </div>
   </section>
 
   <!-- ========== NEWSLETTER CTA ========== -->
   <NewsletterCTA />
 
   <!-- ========== ABOUT ========== -->
-  <section class="about container" id="about">
+  <section class="about band" id="about">
+    <div class="container">
     <div class="about-grid reveal">
       <div class="about-photo-col">
         <div class="about-photo">
@@ -253,6 +258,7 @@ const locale = Astro.currentLocale ?? 'cs';
           </div>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
@@ -484,9 +490,14 @@ const locale = Astro.currentLocale ?? 'cs';
     background: var(--color-surface-elevated);
   }
 
+  /* ===== BAND (alternating bg) ===== */
+  .band {
+    background: var(--color-band);
+  }
+
   /* ===== TRUST BAR ===== */
   .trust-bar {
-    padding: var(--space-lg) 0 var(--space-md);
+    padding: var(--space-lg) 0 0;
   }
   .trust-label {
     text-align: center;
@@ -530,6 +541,8 @@ const locale = Astro.currentLocale ?? 'cs';
 
   /* ===== METRICS ===== */
   .metrics {
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-lg);
     margin-bottom: var(--space-2xl);
   }
   .metrics-grid {
@@ -539,9 +552,8 @@ const locale = Astro.currentLocale ?? 'cs';
     gap: var(--space-xl);
     padding: var(--space-lg) var(--space-xl);
     border-radius: var(--radius-lg);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    box-shadow: 0 8px 30px rgba(15,23,42,0.15);
   }
   .metric {
     text-align: center;
@@ -551,18 +563,18 @@ const locale = Astro.currentLocale ?? 'cs';
     font-family: var(--font-serif);
     font-size: 2.5rem;
     font-weight: 700;
-    color: var(--color-text);
+    color: #F59E0B;
     line-height: 1;
     margin-bottom: 0.25rem;
   }
   .metric-label {
     font-size: 0.85rem;
-    color: var(--color-muted);
+    color: #94A3B8;
   }
   .metric-divider {
     width: 1px;
     height: 3rem;
-    background: var(--color-border);
+    background: #334155;
   }
 
   /* ===== SECTION COMMON ===== */
@@ -574,7 +586,7 @@ const locale = Astro.currentLocale ?? 'cs';
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-accent);
+    color: var(--color-section-tag);
     margin-bottom: var(--space-sm);
   }
   .section-header {
@@ -622,6 +634,7 @@ const locale = Astro.currentLocale ?? 'cs';
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top left;
     display: block;
   }
   .featured-screenshot img[src=""],
@@ -725,6 +738,7 @@ const locale = Astro.currentLocale ?? 'cs';
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: top left;
     display: block;
     transition: transform 0.4s ease;
   }
@@ -746,6 +760,8 @@ const locale = Astro.currentLocale ?? 'cs';
 
   /* ===== SPEAKING ===== */
   .speaking {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
     margin-bottom: var(--space-2xl);
   }
   .speaking-layout {
@@ -816,6 +832,8 @@ const locale = Astro.currentLocale ?? 'cs';
 
   /* ===== ABOUT ===== */
   .about {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
     margin-bottom: var(--space-2xl);
   }
   .about-grid {
@@ -903,11 +921,11 @@ const locale = Astro.currentLocale ?? 'cs';
     align-items: start;
   }
   .contact-info h2 {
-    color: #E7E5E4;
+    color: #F1F5F9;
     margin-bottom: var(--space-sm);
   }
   .contact-info > p {
-    color: #A8A29E;
+    color: #94A3B8;
     margin-bottom: var(--space-lg);
     line-height: 1.6;
   }
@@ -922,8 +940,8 @@ const locale = Astro.currentLocale ?? 'cs';
     gap: 0.5rem;
     padding: 0.65rem 1.25rem;
     border-radius: 10px;
-    border: 1px solid #44403C;
-    color: #E7E5E4;
+    border: 1px solid #334155;
+    color: #F1F5F9;
     font-size: 0.9rem;
     font-weight: 500;
     transition: border-color 0.2s, background 0.2s;
@@ -931,7 +949,7 @@ const locale = Astro.currentLocale ?? 'cs';
     text-decoration: none;
   }
   .contact-link:hover {
-    color: #E7E5E4;
+    color: #F1F5F9;
     border-color: var(--color-accent);
     background: rgba(255,255,255,0.05);
   }
@@ -953,15 +971,15 @@ const locale = Astro.currentLocale ?? 'cs';
   .contact-form label span {
     font-size: 0.8rem;
     font-weight: 500;
-    color: #A8A29E;
+    color: #94A3B8;
   }
   .contact-form input,
   .contact-form textarea {
     padding: 0.6rem 0.85rem;
     border-radius: 8px;
-    border: 1px solid #44403C;
+    border: 1px solid #334155;
     background: rgba(255,255,255,0.05);
-    color: #E7E5E4;
+    color: #F1F5F9;
     font-size: 0.9rem;
     font-family: inherit;
     transition: border-color 0.2s;
@@ -974,7 +992,7 @@ const locale = Astro.currentLocale ?? 'cs';
   }
   .contact-form input::placeholder,
   .contact-form textarea::placeholder {
-    color: #57534E;
+    color: #475569;
   }
   .form-submit {
     display: inline-flex;
@@ -1082,5 +1100,32 @@ const locale = Astro.currentLocale ?? 'cs';
       hero.style.setProperty('--mouse-x', x + '%');
       hero.style.setProperty('--mouse-y', y + '%');
     });
+  })();
+
+  // Animated counters on scroll
+  (function() {
+    var counters = document.querySelectorAll('[data-count]');
+    if (!counters.length) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (!e.isIntersecting) return;
+        var el = e.target;
+        var target = parseInt(el.getAttribute('data-count'), 10);
+        var suffix = el.textContent.replace(/[0-9]/g, '');
+        var duration = 1200;
+        var start = performance.now();
+        function step(now) {
+          var t = Math.min((now - start) / duration, 1);
+          var ease = 1 - Math.pow(1 - t, 3);
+          var val = Math.round(ease * target);
+          el.textContent = val + suffix;
+          if (t < 1) requestAnimationFrame(step);
+        }
+        el.textContent = '0' + suffix;
+        requestAnimationFrame(step);
+        observer.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(function(el) { observer.observe(el); });
   })();
 </script>
