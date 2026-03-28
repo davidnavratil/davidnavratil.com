@@ -19,12 +19,18 @@ jobs:
 
       - run: npm run build
 
-      - name: Deploy via rsync
+      - name: Setup SSH
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: |
           mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H 77.42.84.152 >> ~/.ssh/known_hosts
-          rsync -avz --delete --exclude='analyses/' dist/ root@77.42.84.152:/var/www/davidnavratil.com/
+          ssh-keyscan -H 77.42.84.152 >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Deploy via rsync
+        run: |
+          rsync -avz --delete \
+            -e "ssh -o StrictHostKeyChecking=no" \
+            --exclude='analyses/' \
+            dist/ root@77.42.84.152:/var/www/davidnavratil.com/
