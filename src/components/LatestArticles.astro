@@ -1,9 +1,19 @@
 ---
 import { useTranslations } from '../i18n/utils';
+import fs from 'node:fs';
+import path from 'node:path';
 
 const t = useTranslations(Astro.currentLocale);
 
-// Fetch RSS at build time
+// Fetch RSS at build time with fallback to cached data
+interface RawArticle {
+  title: string;
+  link: string;
+  pubDate: string;
+  description: string;
+  image: string;
+}
+
 interface Article {
   title: string;
   link: string;
@@ -12,39 +22,11 @@ interface Article {
   image: string;
 }
 
-let articles: Article[] = [];
+const CACHE_PATH = path.join(process.cwd(), 'src', 'data', 'articles-cache.json');
 
-async function fetchWithRetry(url: string, retries = 2, delayMs = 2000): Promise<string> {
-  for (let attempt = 0; attempt <= retries; attempt++) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 10000);
-    try {
-      const res = await fetch(url, {
-        signal: controller.signal,
-        headers: { 'User-Agent': 'Mozilla/5.0 (davidnavratil.com; RSS reader)' },
-      });
-      clearTimeout(timeout);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.text();
-    } catch (e) {
-      clearTimeout(timeout);
-      if (attempt < retries) {
-        await new Promise(r => setTimeout(r, delayMs));
-      } else {
-        throw e;
-      }
-    }
-  }
-  throw new Error('Unreachable');
-}
-
-try {
-  const xml = await fetchWithRetry('https://davidnavratil.substack.com/feed');
-
-  // Simple XML parsing without dependencies
-  const items = xml.split('<item>').slice(1, 7); // max 6 articles (2 rows of 3)
-
-  articles = items.map((item) => {
+function parseRSS(xml: string): RawArticle[] {
+  const items = xml.split('<item>').slice(1, 7);
+  return items.map((item) => {
     const getTag = (tag: string) => {
       const match = item.match(new RegExp(`<${tag}><!\\[CDATA\\[([\\s\\S]*?)\\]\\]></${tag}>`))
         || item.match(new RegExp(`<${tag}>([\\s\\S]*?)</${tag}>`));
@@ -52,28 +34,14 @@ try {
     };
 
     const rawDesc = getTag('description');
-    // Decode HTML entities and strip tags
     const cleanDesc = rawDesc
       .replace(/&#(\d+);/g, (_: string, n: string) => String.fromCharCode(parseInt(n)))
       .replace(/<[^>]+>/g, '')
       .slice(0, 160)
       .trim();
 
-    const pubDate = getTag('pubDate');
-    let formattedDate = '';
-    if (pubDate) {
-      const d = new Date(pubDate);
-      formattedDate = d.toLocaleDateString(Astro.currentLocale === 'en' ? 'en-US' : 'cs-CZ', {
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric',
-      });
-    }
-
-    // Extract cover image from enclosure
     const encMatch = item.match(/<enclosure[^>]+url="([^"]+)"/);
     let image = encMatch ? encMatch[1] : '';
-    // Resize via Substack CDN — request 400px wide for thumbnails
     if (image && image.includes('substackcdn.com')) {
       image = image.replace(/,f_auto/, ',w_400,h_220,c_fill,f_auto');
     }
@@ -81,14 +49,55 @@ try {
     return {
       title: getTag('title'),
       link: getTag('link'),
-      date: formattedDate,
+      pubDate: getTag('pubDate'),
       description: cleanDesc + (cleanDesc.length >= 157 ? '…' : ''),
       image,
     };
   });
-} catch (e) {
-  // Silently fail — section won't render if feed is unavailable
 }
+
+function formatArticles(raw: RawArticle[], locale: string | undefined): Article[] {
+  return raw.map(a => ({
+    ...a,
+    date: a.pubDate ? new Date(a.pubDate).toLocaleDateString(
+      locale === 'en' ? 'en-US' : 'cs-CZ',
+      { day: 'numeric', month: 'long', year: 'numeric' }
+    ) : '',
+  }));
+}
+
+let articles: Article[] = [];
+
+// Try live fetch first
+let rawArticles: RawArticle[] = [];
+try {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  const res = await fetch('https://davidnavratil.substack.com/feed', {
+    signal: controller.signal,
+    headers: { 'User-Agent': 'Mozilla/5.0 (davidnavratil.com; RSS reader)' },
+  });
+  clearTimeout(timeout);
+  if (res.ok) {
+    rawArticles = parseRSS(await res.text());
+    // Save cache for future builds where fetch might fail
+    try {
+      fs.mkdirSync(path.dirname(CACHE_PATH), { recursive: true });
+      fs.writeFileSync(CACHE_PATH, JSON.stringify(rawArticles, null, 2));
+    } catch { /* cache write is best-effort */ }
+  }
+} catch {
+  // Fetch failed — try cached data
+}
+
+// Fallback to cache if fetch failed
+if (rawArticles.length === 0) {
+  try {
+    rawArticles = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf-8'));
+  } catch { /* no cache available */ }
+}
+
+articles = formatArticles(rawArticles, Astro.currentLocale);
 ---
 
 {articles.length > 0 && (
