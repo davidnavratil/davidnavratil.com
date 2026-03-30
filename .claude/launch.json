@@ -2,9 +2,9 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "landing",
+      "name": "astro-dev",
       "runtimeExecutable": "/Users/davidnavratil/local/node/bin/npx",
-      "runtimeArgs": ["astro", "dev", "--port", "4321"],
+      "runtimeArgs": ["astro", "dev"],
       "port": 4321
     }
   ]

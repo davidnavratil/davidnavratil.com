@@ -36,6 +36,10 @@ export const translations = {
     // Analyses section
     'analyses.title': 'Analýzy, ke\u00a0kterým se nechodí pro názor, ale pro orientaci',
     'analyses.subtitle': 'Každá analýza spojuje data, scénáře a\u00a0vizuální logiku. Ne proto, aby ohromovala. Ale aby se v\u00a0ní dalo myslet.',
+    'analyses.qatar.title': 'Proč oprava Kataru potrvá roky',
+    'analyses.qatar.desc': 'Íránské rakety nezasáhly jen budovy\u00a0— zničily kryogenní stroje, které vyrábí pět firem na\u00a0světě. Analýza tří úzkých míst, kaskádových dopadů na\u00a0helium a\u00a0polovodiče a\u00a0scénářů obnovy.',
+    'analyses.qatar.why': 'Trhy ocenily energetický šok. Neoceňují šok strojírenský.',
+    'analyses.qatar.cta': 'Otevřít analýzu',
     'analyses.hormuz.title': 'Když se zavře brána',
     'analyses.hormuz.desc': 'Simulátor, který ukazuje, co udělá blokáda Hormuzského průlivu s\u00a0ropou, plynem, inflací a\u00a0českou ekonomikou.',
     'analyses.hormuz.why': 'Nejde jen o\u00a0cenu ropy. Jde o\u00a0řetězec druhotných dopadů.',
@@ -120,6 +124,7 @@ export const translations = {
     'articles.title': 'Z\u00a0posledních vydání',
     'articles.subtitle': 'Co nedávno odešlo do e-mailu',
     'articles.cta': 'Všechny články na Substacku',
+    'articles.read': 'Číst na Substacku',
 
     // Contact
     'contact.title': 'Pojďme spolupracovat',
@@ -138,6 +143,17 @@ export const translations = {
     'footer.cta.title': 'Nechcete jen sledovat svět. Chcete mu rozumět.',
     'footer.cta.desc': 'Začněte newsletterem. Interaktivní analýzy a\u00a0eseje pak zapadnou do jednoho celku.',
     'footer.cta.button': 'Odebírat newsletter',
+
+    // Archive page
+    'archive.title': 'Interaktivní analýzy',
+    'archive.subtitle': 'Každá analýza je samostatný interaktivní nástroj. Tvrdá data, žádné zjednodušování.',
+    'archive.back': 'Zpět na hlavní stránku',
+    'archive.status.live': 'Živá analýza',
+    'archive.status.coming': 'Připravujeme',
+    'archive.explore': 'Prozkoumat analýzu',
+    'archive.explore.all': 'Zobrazit všechny analýzy',
+    'archive.newsletter.title': 'Nechcete zmeškat další analýzu?',
+    'archive.newsletter.cta': 'Odebírat newsletter',
 
     // Meta
     'meta.title': 'David Navrátil — interaktivní analýzy geopolitiky a\u00a0ekonomiky',
@@ -180,6 +196,10 @@ export const translations = {
     // Analyses section
     'analyses.title': 'Not opinions. Orientation.',
     'analyses.subtitle': 'Each analysis connects data, scenarios, and visual logic. Not to impress. But to think with.',
+    'analyses.qatar.title': 'Why repairing Qatar will take years',
+    'analyses.qatar.desc': 'Iranian missiles didn\'t just hit buildings\u00a0— they destroyed cryogenic machines made by only five companies on\u00a0earth. An analysis of three bottlenecks, cascading impacts on\u00a0helium and\u00a0semiconductors, and repair scenarios.',
+    'analyses.qatar.why': 'Markets priced the energy shock. They haven\'t priced the engineering shock.',
+    'analyses.qatar.cta': 'Open analysis',
     'analyses.hormuz.title': 'When the gate closes',
     'analyses.hormuz.desc': 'A simulator showing what a blockade of the Strait of Hormuz would do to oil, gas, inflation, and the Czech economy.',
     'analyses.hormuz.why': 'It\'s not just about oil prices. It\'s about the chain of secondary impacts.',
@@ -264,6 +284,7 @@ export const translations = {
     'articles.title': 'From recent issues',
     'articles.subtitle': 'What recently went out to subscribers',
     'articles.cta': 'All articles on Substack',
+    'articles.read': 'Read on Substack',
 
     // Contact
     'contact.title': 'Let\'s collaborate',
@@ -282,6 +303,17 @@ export const translations = {
     'footer.cta.title': 'You don\'t just want to watch the world. You want to understand it.',
     'footer.cta.desc': 'Start with the newsletter. The analyses and essays will make more sense from there.',
     'footer.cta.button': 'Subscribe to newsletter',
+
+    // Archive page
+    'archive.title': 'Interactive Analyses',
+    'archive.subtitle': 'Each analysis is a standalone interactive tool. Hard data, no oversimplification.',
+    'archive.back': 'Back to homepage',
+    'archive.status.live': 'Live analysis',
+    'archive.status.coming': 'Coming soon',
+    'archive.explore': 'Explore analysis',
+    'archive.explore.all': 'View all analyses',
+    'archive.newsletter.title': "Don't want to miss the next analysis?",
+    'archive.newsletter.cta': 'Subscribe to newsletter',
 
     // Meta
     'meta.title': 'David Navrátil — interactive analyses of geopolitics and economics',

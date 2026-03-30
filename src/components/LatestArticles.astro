@@ -14,9 +14,29 @@ interface Article {
 
 let articles: Article[] = [];
 
+async function fetchWithRetry(url: string, retries = 2, delayMs = 2000): Promise<string> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+    try {
+      const res = await fetch(url, { signal: controller.signal });
+      clearTimeout(timeout);
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      return await res.text();
+    } catch (e) {
+      clearTimeout(timeout);
+      if (attempt < retries) {
+        await new Promise(r => setTimeout(r, delayMs));
+      } else {
+        throw e;
+      }
+    }
+  }
+  throw new Error('Unreachable');
+}
+
 try {
-  const res = await fetch('https://davidnavratil.substack.com/feed');
-  const xml = await res.text();
+  const xml = await fetchWithRetry('https://davidnavratil.substack.com/feed');
 
   // Simple XML parsing without dependencies
   const items = xml.split('<item>').slice(1, 7); // max 6 articles (2 rows of 3)
@@ -90,7 +110,7 @@ try {
           <h3 class="article-title">{article.title}</h3>
           <p class="article-desc">{article.description}</p>
           <span class="article-link">
-            Číst na Substacku
+            {t('articles.read')}
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
           </span>
           </div>

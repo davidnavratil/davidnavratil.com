@@ -35,5 +35,7 @@ jobs:
         run: |
           rsync -avz --delete \
             -e "ssh -o StrictHostKeyChecking=no" \
-            --exclude='analyses/' \
+            --exclude='analyses/hormuz/' \
+            --exclude='analyses/ree-dashboard/' \
+            --exclude='analyses/uzka-hrdla/' \
             dist/ root@77.42.84.152:/var/www/davidnavratil.com/

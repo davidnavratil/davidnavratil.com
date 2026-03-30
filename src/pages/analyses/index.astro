@@ -1,0 +1,551 @@
+---
+/**
+ * DEPLOYMENT NOTE: The /analyses/ directory on the server already contains
+ * subdirectories (hormuz/, ree-dashboard/, uzka-hrdla/) served by nginx.
+ * The current rsync EXCLUDES /analyses/, so this file needs special
+ * deployment handling — deploy analyses/index.html separately or update
+ * the rsync rule to include it while preserving existing subdirectories.
+ */
+import Base from '../../layouts/Base.astro';
+import { useTranslations } from '../../i18n/utils';
+
+const t = useTranslations(Astro.currentLocale);
+const locale = Astro.currentLocale ?? 'cs';
+
+const analyses = [
+  {
+    key: 'qatar' as const,
+    href: '/analyses/qatar-infrastructure/',
+    image: '/images/preview-qatar.png',
+    tags: ['tag.geopolitics', 'tag.energy', 'tag.tech'] as const,
+    live: true,
+    date: '2026-03',
+  },
+  {
+    key: 'hormuz' as const,
+    href: '/analyses/hormuz/',
+    image: '/images/preview-hormuz.webp',
+    tags: ['tag.geopolitics', 'tag.energy', 'tag.supply'] as const,
+    live: true,
+    date: '2026-03',
+  },
+  {
+    key: 'ree' as const,
+    href: '/analyses/ree-dashboard/',
+    image: '/images/preview-ree.webp',
+    tags: ['tag.minerals', 'tag.china', 'tag.tech'] as const,
+    live: false,
+    date: '2026-03',
+  },
+  {
+    key: 'chokepoints' as const,
+    href: '/analyses/uzka-hrdla/',
+    image: '/images/preview-chokepoints.webp',
+    tags: ['tag.maps', 'tag.trade', 'tag.risks'] as const,
+    live: false,
+    date: '2026-03',
+  },
+];
+
+const allTags = [...new Set(analyses.flatMap((a) => a.tags))];
+---
+
+<Base
+  title={`${t('archive.title')} — David Navrátil`}
+  description={t('archive.subtitle')}
+>
+  <!-- Back link -->
+  <section class="archive-back container">
+    <a href={locale === 'en' ? '/en/' : '/'} class="back-link">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      {t('archive.back')}
+    </a>
+  </section>
+
+  <!-- Hero header -->
+  <section class="archive-hero container">
+    <div class="archive-hero-inner">
+      <div class="section-tag">{t('nav.analyses')}</div>
+      <h1>{t('archive.title')}</h1>
+      <p class="archive-lead">{t('archive.subtitle')}</p>
+    </div>
+  </section>
+
+  <!-- Tag filter -->
+  <section class="archive-filters container">
+    <div class="filter-bar">
+      <button class="filter-tag active" data-tag="all">
+        {locale === 'cs' ? 'Vše' : 'All'}
+      </button>
+      {allTags.map((tag) => (
+        <button class="filter-tag" data-tag={tag}>
+          {t(tag)}
+        </button>
+      ))}
+    </div>
+  </section>
+
+  <!-- Analysis cards grid -->
+  <section class="archive-grid container">
+    {analyses.map((analysis) => (
+      <article
+        class="archive-card"
+        data-tags={analysis.tags.join(',')}
+        data-live={analysis.live ? 'true' : 'false'}
+      >
+        <div class="archive-card-image">
+          <img
+            src={analysis.image}
+            alt={t(`analyses.${analysis.key}.title`)}
+            loading="lazy"
+            width="800"
+            height="500"
+          />
+          <div class="archive-card-badge">
+            {analysis.live ? (
+              <span class="badge badge-live">
+                <span class="badge-dot"></span>
+                {t('archive.status.live')}
+              </span>
+            ) : (
+              <span class="badge badge-coming">
+                {t('archive.status.coming')}
+              </span>
+            )}
+          </div>
+        </div>
+        <div class="archive-card-body">
+          <div class="archive-card-meta">
+            <time>{analysis.date}</time>
+            <div class="archive-card-tags">
+              {analysis.tags.map((tag) => (
+                <span>{t(tag)}</span>
+              ))}
+            </div>
+          </div>
+          <h2>{t(`analyses.${analysis.key}.title`)}</h2>
+          <p class="archive-card-desc" set:html={t(`analyses.${analysis.key}.desc`)} />
+          <blockquote class="archive-card-why">
+            {t(`analyses.${analysis.key}.why`)}
+          </blockquote>
+          {analysis.live ? (
+            <a href={analysis.href} class="archive-card-cta">
+              {t(`analyses.${analysis.key}.cta`)}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          ) : (
+            <span class="archive-card-cta archive-card-cta--disabled">
+              {t('archive.status.coming')}
+            </span>
+          )}
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <!-- Newsletter CTA -->
+  <section class="archive-newsletter container">
+    <div class="archive-newsletter-inner">
+      <h2>{t('archive.newsletter.title')}</h2>
+      <p>{t('newsletter.desc')}</p>
+      <a
+        href="https://davidnavratil.substack.com"
+        target="_blank"
+        rel="noopener"
+        class="archive-newsletter-btn"
+      >
+        {t('archive.newsletter.cta')}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ===== Back link ===== */
+  .archive-back {
+    padding-top: calc(80px + var(--space-lg));
+    padding-bottom: 0;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .back-link:hover {
+    color: var(--color-accent);
+  }
+
+  /* ===== Hero header ===== */
+  .archive-hero {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+  }
+  .archive-hero-inner {
+    max-width: 720px;
+  }
+  .section-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-section-tag);
+    margin-bottom: var(--space-sm);
+  }
+  .archive-hero h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-sm);
+  }
+  .archive-lead {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+    max-width: 600px;
+  }
+
+  /* ===== Tag filter ===== */
+  .archive-filters {
+    padding-bottom: var(--space-lg);
+  }
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .filter-tag {
+    padding: 0.35rem 0.9rem;
+    border-radius: 100px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-muted);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-tag:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+  .filter-tag.active {
+    background: var(--gradient-accent);
+    border-color: transparent;
+    color: white;
+  }
+
+  /* ===== Card grid ===== */
+  .archive-grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xl);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .archive-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    animation: fadeUp 0.5s ease-out both;
+  }
+  .archive-card:nth-child(2) { animation-delay: 0.1s; }
+  .archive-card:nth-child(3) { animation-delay: 0.2s; }
+
+  .archive-card.hidden {
+    display: none;
+  }
+
+  .archive-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+    border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
+  }
+
+  /* Card image */
+  .archive-card-image {
+    position: relative;
+    min-height: 320px;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      var(--color-surface-elevated) 0%,
+      color-mix(in srgb, var(--color-accent) 6%, var(--color-surface)) 100%
+    );
+  }
+  .archive-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .archive-card:hover .archive-card-image img {
+    transform: scale(1.04);
+  }
+
+  /* Badge */
+  .archive-card-badge {
+    position: absolute;
+    top: var(--space-sm);
+    right: var(--space-sm);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: 100px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    backdrop-filter: blur(8px);
+  }
+  .badge-live {
+    background: linear-gradient(135deg, rgba(34, 139, 34, 0.9), rgba(46, 160, 46, 0.9));
+    color: white;
+  }
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+    animation: pulse-glow 2s infinite;
+  }
+  .badge-coming {
+    background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    color: var(--color-muted);
+    border: 1px solid var(--color-border);
+  }
+
+  /* Card body */
+  .archive-card-body {
+    padding: var(--space-xl);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .archive-card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-sm);
+    flex-wrap: wrap;
+  }
+  .archive-card-meta time {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .archive-card-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+  .archive-card-tags span {
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--color-border) 60%, transparent);
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .archive-card-body h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: var(--space-sm);
+    color: var(--color-text);
+  }
+
+  .archive-card-desc {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .archive-card-why {
+    font-style: italic;
+    color: var(--color-muted);
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-bottom: var(--space-lg);
+    padding-left: var(--space-sm);
+    border-left: 3px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+  }
+
+  /* CTA button */
+  .archive-card-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: 10px;
+    background: var(--gradient-accent);
+    color: white;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    width: fit-content;
+    text-decoration: none;
+    transition: gap 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px var(--color-accent-glow);
+  }
+  .archive-card-cta:hover {
+    color: white;
+    gap: 0.8rem;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px var(--color-accent-glow);
+  }
+  .archive-card-cta--disabled {
+    background: var(--color-band);
+    color: var(--color-muted);
+    box-shadow: none;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  /* ===== Newsletter CTA ===== */
+  .archive-newsletter {
+    padding-bottom: var(--space-3xl);
+  }
+  .archive-newsletter-inner {
+    text-align: center;
+    padding: var(--space-xl) var(--space-lg);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+  }
+  .archive-newsletter-inner h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+    margin-bottom: var(--space-xs);
+  }
+  .archive-newsletter-inner p {
+    color: var(--color-muted);
+    max-width: 520px;
+    margin-inline: auto;
+    margin-bottom: var(--space-lg);
+    line-height: 1.6;
+  }
+  .archive-newsletter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: 10px;
+    background: var(--gradient-accent);
+    color: white;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: gap 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 8px var(--color-accent-glow);
+  }
+  .archive-newsletter-btn:hover {
+    color: white;
+    gap: 0.8rem;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px var(--color-accent-glow);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 900px) {
+    .archive-card {
+      grid-template-columns: 1fr;
+    }
+    .archive-card-image {
+      min-height: 220px;
+      max-height: 280px;
+    }
+    .archive-card-body {
+      padding: var(--space-lg);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .archive-hero {
+      padding-top: var(--space-md);
+      padding-bottom: var(--space-lg);
+    }
+    .archive-card-image {
+      min-height: 180px;
+      max-height: 240px;
+    }
+    .archive-card-body {
+      padding: var(--space-md);
+    }
+    .archive-card-body h2 {
+      font-size: 1.25rem;
+    }
+    .archive-card-cta {
+      padding: 0.65rem 1.2rem;
+      min-height: 44px;
+    }
+    .archive-newsletter-inner {
+      padding: var(--space-lg) var(--space-md);
+    }
+  }
+
+  @media (max-width: 400px) {
+    .archive-card-image {
+      min-height: 150px;
+      max-height: 200px;
+    }
+  }
+
+  /* Animation keyframes (used if not already in global) */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script is:inline>
+  (function() {
+    var buttons = document.querySelectorAll('.filter-tag');
+    var cards = document.querySelectorAll('.archive-card');
+
+    buttons.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var tag = btn.getAttribute('data-tag');
+
+        // Update active state
+        buttons.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+
+        // Filter cards
+        cards.forEach(function(card) {
+          if (tag === 'all') {
+            card.classList.remove('hidden');
+          } else {
+            var cardTags = card.getAttribute('data-tags') || '';
+            if (cardTags.indexOf(tag) !== -1) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          }
+        });
+      });
+    });
+  })();
+</script>

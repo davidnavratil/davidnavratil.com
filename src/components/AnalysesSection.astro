@@ -4,29 +4,41 @@ import { useTranslations } from '../i18n/utils';
 const t = useTranslations(Astro.currentLocale);
 const locale = Astro.currentLocale ?? 'cs';
 
-const analyses = [
+/** Max number of analyses shown on landing page. Rest lives in /analyses/ archive. */
+const MAX_FEATURED = 3;
+
+const allAnalyses = [
+  {
+    key: 'qatar' as const,
+    href: locale === 'en' ? '/analyses/qatar-infrastructure/' : '/analyses/qatar-infrastructure/',
+    image: '/images/preview-qatar.png',
+    tags: ['tag.geopolitics', 'tag.energy', 'tag.tech'] as const,
+    live: true,
+  },
   {
     key: 'hormuz' as const,
-    href: locale === 'en' ? '/analyses/hormuz/' : '/analyses/hormuz/',
-    image: '/images/preview-hormuz.png',
+    href: locale === 'en' ? '/analyses/hormuz/en/' : '/analyses/hormuz/',
+    image: '/images/preview-hormuz.webp',
     tags: ['tag.geopolitics', 'tag.energy', 'tag.supply'] as const,
     live: true,
   },
   {
     key: 'ree' as const,
-    href: locale === 'en' ? '/analyses/ree-dashboard/' : '/analyses/ree-dashboard/',
-    image: '/images/preview-ree.png',
+    href: locale === 'en' ? '/analyses/ree-dashboard/en/' : '/analyses/ree-dashboard/',
+    image: '/images/preview-ree.webp',
     tags: ['tag.minerals', 'tag.china', 'tag.tech'] as const,
     live: false,
   },
   {
     key: 'chokepoints' as const,
-    href: locale === 'en' ? '/analyses/uzka-hrdla/' : '/analyses/uzka-hrdla/',
-    image: '/images/preview-chokepoints.png',
+    href: locale === 'en' ? '/analyses/uzka-hrdla/?lang=en' : '/analyses/uzka-hrdla/',
+    image: '/images/preview-chokepoints.webp',
     tags: ['tag.maps', 'tag.trade', 'tag.risks'] as const,
     live: false,
   },
 ];
+
+const analyses = allAnalyses.slice(0, MAX_FEATURED);
 ---
 
 <section class="analyses container" id="analyzy">
@@ -72,6 +84,13 @@ const analyses = [
         </div>
       </a>
     ))}
+  </div>
+
+  <div class="analyses-footer reveal">
+    <a href={locale === 'en' ? '/en/analyses/' : '/analyses/'} class="analyses-all">
+      {t('archive.explore.all')}
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
   </div>
 </section>
 
@@ -239,6 +258,26 @@ const analyses = [
   }
 
   .analysis-card:hover .card-cta {
+    gap: 0.8rem;
+  }
+
+  /* Footer link */
+  .analyses-footer {
+    text-align: center;
+    margin-top: var(--space-lg);
+  }
+  .analyses-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.2s, gap 0.2s;
+  }
+  .analyses-all:hover {
+    color: var(--color-accent-hover);
     gap: 0.8rem;
   }
 

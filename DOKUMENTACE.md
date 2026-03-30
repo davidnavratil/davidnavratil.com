@@ -2,126 +2,14 @@
 
 ## Přehled
 
-Profesionální platforma hlavního ekonoma České spořitelny. Interaktivní analýzy jako produkty, veřejné analýzy jako discovery engine pro B2B monetizaci.
+Editorská analytická platforma hlavního ekonoma České spořitelny. Interaktivní analýzy jako produkty, Substack newsletter jako discovery engine, veřejné analýzy pro B2B monetizaci.
 
 - **URL:** https://davidnavratil.com
 - **Framework:** Astro 6.1.1 (statický export)
 - **Server:** Mozek (77.42.84.152), nginx 1.24, Ubuntu
 - **GitHub:** `davidnavratil/davidnavratil.com`
-- **Deploy:** `scripts/deploy.sh` (astro build + rsync)
-
----
-
-## Chronologie vývoje
-
-### Fáze 0 — Základ (27. 3. 2026)
-
-**Cíl:** Postavit Astro site, landing page v češtině, SSL, nginx, deploy pipeline.
-
-**Co se udělalo:**
-- Inicializace Astro 6.1.1 projektu s TypeScript
-- Základní landing page (`src/pages/index.astro`) s jednosloupcovým layoutem
-- Dark/light mode přes CSS custom properties (`data-theme`) s localStorage persistencí a flash prevention
-- SSL certifikát přes Let's Encrypt + certbot
-- Nginx konfigurace se security headers, gzip kompresí a cache pro `/_astro/`
-- Deploy script (`scripts/deploy.sh`) — build + rsync na server
-- DNS migrace z Websupport NS na Cloudflare (gene/todd), DNS only režim
-
-**Klíčové rozhodnutí:** Uživatel po první verzi řekl "Současný vizuál nemá žádný wow efekt, tohle není, co dokáže škálovat" — následoval kompletní redesign.
-
-### Redesign landing page (27.–28. 3. 2026)
-
-**Cíl:** "Top wow landing page" s osobními fotografiemi a profesionálním vizuálem.
-
-**Research:** Analýza best practices moderních landing pages — asymetrické gridy, trust bary, gradient efekty, scroll animace.
-
-**Co se udělalo:**
-- Kompletní přepis `HomePage.astro` (1050+ řádků) s 8 sekcemi:
-  1. **Hero** — dvousloupcový grid (text + foto), role badge se zeleným dotem, gradient text, dva CTA buttony, grid pattern pozadí, mouse-tracking glow efekt
-  2. **Trust bar** — textová loga médií (Bloomberg, FT, Reuters, ČT24, ČRo, HN, Seznam Zprávy, CzechCrunch, Euromoney) s tečkovými separátory
-  3. **Metriky** — 15+ let / 6 analýz / 700+ článků v kartě s dividers
-  4. **Analýzy** — featured karta Hormuz (dvousloupcová s preview obrázkem) + 2-sloupcový grid pro REE a Úzká Hrdla se screenshoty
-  5. **Speaking & Media** — dvousloupcový layout (statistiky + CTA vlevo, asymetrická foto galerie vpravo)
-  6. **Newsletter CTA** — karta s glow efektem, ikona, popis, Substack odkaz
-  7. **About** — dvousloupcový (foto vlevo, 3 pilíře vpravo: analýzy, newsletter, speaking)
-  8. **Kontakt** — tmavá gradient karta s Formspree formulářem + kontaktní odkazy
-
-- Mobilní hamburger menu v `Header.astro` s CSS transition (max-height + visibility)
-- Scroll reveal animace přes IntersectionObserver (`.reveal` → `.in-view`)
-- Hero entrance animace (staggered fadeUp)
-- Kompletní responsive breakpoints (900px, 640px)
-- 8 fotografií zpracováno a umístěno do `public/images/`
-
-**Fotografie (5× osobní + 3× preview analýz):**
-- `david-portrait.jpg` — headshot pro hero
-- `david-keynote.jpg` — stage s publikem pro galerii (velká)
-- `david-data.jpg` — prezentace v Parlamentu pro galerii (malá)
-- `david-speaking.jpg` — panel diskuze pro galerii (malá)
-- `david-panel.jpg` — panel pro about sekci
-- `preview-hormuz.png/.jpg` — screenshot Hormuz analýzy
-- `preview-ree.png/.jpg` — screenshot REE dashboardu
-- `preview-chokepoints.png/.jpg` — screenshot Úzkých hrdel
-
-### Fáze 1 — Migrace analýz & i18n (28. 3. 2026)
-
-**Cíl:** Přenést 3 analýzy pod doménu, přidat CZ/EN, SEO základ.
-
-**Co se udělalo:**
-
-**i18n systém:**
-- Astro native i18n: `defaultLocale: 'cs'`, `prefixDefaultLocale: false` (CZ na `/`, EN na `/en/`)
-- `src/i18n/translations.ts` — ~100 klíčů v CZ+EN, typovaný (`Locale`, `TranslationKey`)
-- `src/i18n/utils.ts` — `useTranslations(locale)`, `getAlternatePath()`
-- `src/pages/en/index.astro` — anglická verze
-
-**Migrace analýz:**
-- Hormuz (vanilla JS) → `/var/www/davidnavratil.com/analyses/hormuz/`
-- REE Dashboard (Next.js 16, static export) → `/analyses/ree-dashboard/`
-- Úzká Hrdla (Next.js 15, static export) → `/analyses/uzka-hrdla/`
-- Každá analýza má vlastní deploy script, basePath nakonfigurovaný
-- Back-to-landing linky na všech analýzách (`← davidnavratil.com`)
-
-**SEO:**
-- `@astrojs/sitemap` s customPages pro 3 analýzy
-- hreflang tagy (cs, en, x-default) v `Base.astro`
-- JSON-LD structured data (WebSite + Person schema)
-- `robots.txt` s odkazem na sitemap
-- OG image (1200×630 PNG) pro landing page
-
-**Překlad analýz:**
-- Hormuz: kompletní CZ+EN přes `translations.js`, URL-based detection (`/en/`)
-- REE Dashboard: kompletní CZ+EN přes `[lang]` segment, 725+ řádků dictionary
-- Úzká Hrdla: CZ only (EN překlad dosud neproveden)
-
-### Fáze 2 — Konverze & Discovery (28. 3. 2026)
-
-**Cíl:** Plausible analytics, newsletter CTA, OG images, kontaktní formulář.
-
-**Co se udělalo:**
-
-- **Plausible analytics** na landing page (`pa-MLceY4sQroqGo9vckgP7U`) — původně plánovaný GoatCounter nahrazen Plausible na žádost uživatele
-- **Newsletter CTA** — `NewsletterCTA.astro` komponenta s glow efektem, odkaz na Substack subscribe
-- **Newsletter CTA na analýzách** — banner nad footer v Hormuz, REE, Uzka-Hrdla
-- **OG images** PNG pro REE Dashboard a Úzká Hrdla (1200×630, generovány přes sharp)
-- **Formspree kontaktní formulář** (endpoint `xwvwvrqy`) — jméno, email, firma (volitelné), zpráva
-- **About sekce** rozšířena o 3 pilíře s ikonami
-
-### Fáze 3 — Visual Refresh (28. 3. 2026)
-
-**Cíl:** Profesionálnější vizuál, lepší barevná paleta, opravy bugů.
-
-**Co se udělalo:**
-
-- **Slate paleta (Variant B)** — dark mode migrován ze stone na slate tóny pro "finance authority" look
-- **Navy metrics karta** — gradient `#0F172A → #1E293B` s amber hodnotami (`#F59E0B`) a slate popisky
-- **Střídající se band pozadí** — sekce trust+metrics, speaking, about mají `--color-band` (#F1F5F9 light / #1E293B dark)
-- **Section tagy v navy** — `--color-section-tag: #1E3A5F` (light) / `#F59E0B` (dark)
-- **Animace counterů** — scroll-triggered postupné napočítání (15+, 6, 700+), cubic ease-out, 1200ms
-- **Hero role badge** — změna na "Hlavní ekonom · Analytik · Speaker"
-- **Metrics label** — změna z "komentářů" na "článků a analýz"
-- **Fix theme toggle** — bug s duplicitním `is:inline` scriptem (komponenta renderována 2× v desktop+mobile nav). Oprava: class selector + `window.__themeToggleInit` guard
-- **Fix preview screenshotů** — `object-position: top left` pro lepší crop analýzových obrázků
-- **Zmenšení mezer** — `--space-2xl: 4.5rem`, `--space-3xl: 5.5rem` (z původních 6rem/8rem)
+- **Deploy:** GitHub Actions (push na main) + manuální `scripts/deploy.sh`
+- **Auto-rebuild:** denně v 6:00 UTC (8:00 CET) — GitHub Actions cron pro aktualizaci Substack článků
 
 ---
 
@@ -131,69 +19,165 @@ Profesionální platforma hlavního ekonoma České spořitelny. Interaktivní a
 
 ```
 davidnavratil.com/
-├── astro.config.mjs      # Astro config, i18n, sitemap
-├── package.json           # Astro 6.1.1 + @astrojs/sitemap
-├── scripts/deploy.sh      # Build + rsync na server
+├── astro.config.mjs          # Astro config, i18n, sitemap (26 URL)
+├── package.json               # Astro 6.1.1, @astrojs/sitemap, @fontsource/*
+├── scripts/deploy.sh          # Manuální build + rsync na server
+├── .github/workflows/
+│   └── deploy.yml             # GitHub Actions: push deploy + daily cron rebuild
 ├── public/
-│   ├── images/            # Fotografie a preview screenshoty
-│   ├── og-image.png       # OG image 1200×630
+│   ├── images/                # Fotografie, preview screenshoty analýz (WebP)
+│   ├── shared/brand.css       # Sdílený brand layer pro všechny analýzy
+│   ├── og-image.png           # OG image 1200×630
 │   ├── favicon.svg/.ico
-│   └── robots.txt
+│   ├── robots.txt
+│   ├── googleb937edf397b551b4.html     # Google Search Console verifikace
+│   └── seznam-wmt-*.txt                # Seznam Webmaster verifikace
 ├── src/
-│   ├── components/
-│   │   ├── Header.astro   # Fixed header, nav, language switch, hamburger
-│   │   ├── Footer.astro   # Copyright, Substack, LinkedIn
-│   │   ├── HomePage.astro # Hlavní obsah (8 sekcí, 1050+ řádků)
-│   │   └── NewsletterCTA.astro
+│   ├── components/            # 10 dekomponovaných sekcí
+│   │   ├── HomePage.astro     # Orchestrátor — importuje všechny sekce
+│   │   ├── HeroSection.astro  # Hero: split layout, gradient bg, screenshot
+│   │   ├── TrustBar.astro     # Mediální loga (Bloomberg, FT, Reuters…)
+│   │   ├── AnalysesSection.astro  # 3 karty analýz
+│   │   ├── WhyPeopleReturn.astro  # 3 hodnotové propozice
+│   │   ├── NewsletterCTA.astro    # Newsletter konverze s 5 value points
+│   │   ├── LatestArticles.astro   # RSS feed ze Substacku (6 článků)
+│   │   ├── AboutSection.astro     # O autorovi s editoriální fotkou
+│   │   ├── SpeakingSection.astro  # Přednášky, mini-cases, galerie
+│   │   ├── ContactSection.astro   # Formspree formulář
+│   │   ├── Header.astro           # Fixed nav, 5 položek, newsletter CTA
+│   │   └── Footer.astro           # Copyright footer
 │   ├── i18n/
-│   │   ├── translations.ts # ~100 klíčů CZ+EN
-│   │   └── utils.ts        # useTranslations(), getAlternatePath()
+│   │   ├── translations.ts    # ~150 klíčů v CZ+EN
+│   │   └── utils.ts           # useTranslations(), getAlternatePath()
 │   ├── layouts/
-│   │   └── Base.astro      # HTML shell, SEO, Plausible, theme, JSON-LD
+│   │   └── Base.astro         # HTML shell, SEO, fonty, Plausible, JSON-LD
 │   ├── pages/
-│   │   ├── index.astro     # CZ landing (importuje HomePage)
-│   │   └── en/index.astro  # EN landing
+│   │   ├── index.astro        # CZ landing
+│   │   ├── en/index.astro     # EN landing
+│   │   ├── analyses/index.astro     # CZ archív analýz
+│   │   └── en/analyses/index.astro  # EN archív analýz
 │   └── styles/
-│       └── global.css      # Design system, theme tokens, animace
-└── fotky/                  # Zdrojové fotografie (gitignored)
+│       └── global.css         # Design system, theme tokens
+├── fotky/                     # Zdrojové fotografie (gitignored)
+└── DOKUMENTACE.md
 ```
+
+### Komponentová architektura
+
+HomePage.astro je tenký orchestrátor, který importuje 10 sekcí v pořadí:
+
+1. **HeroSection** — dvousloupcový split (55% text + 45% screenshot Hormuz analýzy), tmavý gradient pozadí, eyebrow, serif H1, polycrisis subheadline, dva CTA (Analýzy + Newsletter), mouse-tracking glow
+2. **TrustBar** — horizontální pás mediálních wordmarků (serif font, nízká opacity 0.3 → 0.65 hover)
+3. **AnalysesSection** — 3 horizontální karty (screenshot vlevo, obsah vpravo: tagy, titulek, popis, "proč je to důležité", specifické CTA)
+4. **WhyPeopleReturn** — 3-sloupcový grid hodnotových propozic s SVG ikonami, band pozadí
+5. **NewsletterCTA** — konverzní karta s 5 hodnotovými body (✓ check SVG), accent pozadí
+6. **LatestArticles** — build-time RSS fetch ze Substacku (6 článků, 2×3 grid), cover obrázky z CDN
+7. **AboutSection** — editoriální foto + 3 odstavce o autorovi, credentials footer
+8. **SpeakingSection** — nadpis, popis, 3 mini-case příklady, foto galerie
+9. **ContactSection** — Formspree formulář v tmavé kartě
 
 ### Design systém
 
-- **Světlý režim:** teplé neutrály (#FAFAF9 bg, #1C1917 text, #B45309 accent)
-- **Tmavý režim:** studené šedé (#0C0A09 bg, #E7E5E4 text, #F59E0B accent)
-- **Typografie:** Georgia/Cambria (nadpisy), system-ui (tělo), SF Mono (kód)
-- **Spacing:** xs (0.5rem) → 3xl (8rem), max-width 1080px
-- **Border radius:** 12px (standard), 20px (velké karty)
-- **Animace:** fadeUp, fadeIn, shimmer, pulse-glow, float + scroll reveal (IntersectionObserver)
+**Petrolejová editoriální paleta (Teal Editorial):**
+
+| Token | Light | Dark |
+|-------|-------|------|
+| `--color-bg` | #F5F1E8 (paper) | #1C1B18 (warm charcoal) |
+| `--color-surface` | #FFFFFF | #2A2824 |
+| `--color-text` | #111111 | #F0EDE6 |
+| `--color-accent` | #1B7D8A (teal) | #5B9EAD (muted teal) |
+| `--color-accent-hover` | #156A75 | #7AB4C0 |
+| `--color-muted` | #736D64 | #A09C94 |
+| `--color-navy` | #163A5F | #4A8BC2 |
+| `--color-band` | #EDE9E0 | #2A2824 |
+
+**Brand barvy analýz (identitní):**
+| Analýza | Barva | Hex |
+|---------|-------|-----|
+| Hormuz | oranžová | #B45309 |
+| REE Dashboard | teal | #0E7490 |
+| Úzká Hrdla | navy | #1B2A4A |
+
+**Typografie:**
+- **Nadpisy:** Fraunces (serif) — self-hosted přes @fontsource (400, 600, 700)
+- **Tělo:** Inter (sans) — self-hosted přes @fontsource (400, 500, 600)
+- **Čísla/kód:** JetBrains Mono (mono) — v analýzách
+- **Fallback:** Georgia → Times New Roman (serif), system-ui → -apple-system (sans)
+
+**WCAG AA compliance:**
+- `--color-muted` light #736D64 splňuje 4.5:1 na #F5F1E8
+- `--color-muted` dark #A09C94 splňuje 4.5:1 na #1C1B18
+- `--color-accent` dark #5B9EAD splňuje 6.2:1 na #1C1B18 (WCAG AAA)
+
+**Spacing:** xs (0.5rem) → 3xl (5.5rem), container max-width 1080px
+**Border radius:** 12px (standard), 20px (velké karty)
+**Animace:** scroll reveal (IntersectionObserver, `.reveal` → `.in-view`), staggered delays (0.1s, 0.2s)
+**Mobile:** breakpoints 900px, 640px, 400px; min touch targets 44px
+
+### LatestArticles — RSS integrace
+
+- Build-time fetch z `https://davidnavratil.substack.com/feed`
+- Parsování XML bez externích závislostí (regex split na `<item>`)
+- Extrakce: title, link, pubDate, description (strip HTML, 160 znaků), cover image (enclosure URL)
+- Cover obrázky zmenšeny přes Substack CDN parametry (`w_400,h_220,c_fill`)
+- Graceful degradation — pokud feed není dostupný, sekce se nevyrenderuje
+- **Auto-refresh:** GitHub Actions cron `0 6 * * *` spouští denní rebuild
 
 ### Deploy pipeline
 
 ```bash
 # Automatický deploy: push na main → GitHub Actions build + rsync
+# Denní auto-rebuild: cron 6:00 UTC pro aktualizaci Substack článků
+
 # Manuální deploy landing page:
 bash scripts/deploy.sh
 
-# Deploy všeho (landing + analýzy):
-bash scripts/deploy-all.sh
+# Analýzy mají vlastní deploy scripty:
+cd ree-dashboard && bash scripts/deploy.sh
+cd uzka-hrdla/uzka-hrdla && bash scripts/deploy.sh
+cd hormuz && bash scripts/deploy.sh
 
-# Deploy konkrétní části:
-bash scripts/deploy-all.sh --landing
-bash scripts/deploy-all.sh --hormuz
-bash scripts/deploy-all.sh --ree
-bash scripts/deploy-all.sh --uzka-hrdla
-
-# Analýzy na serveru:
+# Analýzy na serveru (MIMO rsync landing page):
 # /var/www/davidnavratil.com/analyses/hormuz/
 # /var/www/davidnavratil.com/analyses/ree-dashboard/
 # /var/www/davidnavratil.com/analyses/uzka-hrdla/
 ```
 
-### SSL
+**Důležité:** rsync deploy.yml obsahuje per-analysis excludes (`--exclude='analyses/hormuz/'` atd.) — analýzy se deployují separátně a landing page deploy je nepřepisuje.
+
+### i18n
+
+**Landing page:**
+- **Strategie:** Astro native i18n — CZ na `/`, EN na `/en/`
+- **Config:** `defaultLocale: 'cs'`, `prefixDefaultLocale: false`
+- **Klíče:** ~150 v každém jazyce (translations.ts)
+- **Utility:** `useTranslations(locale)` vrací typovanou `t()` funkci
+- **Alternáty:** `getAlternatePath()` pro language switcher + hreflang tagy
+
+**Analýzy — i18n strategie:**
+| Analýza | Strategie | EN URL |
+|---------|-----------|--------|
+| Hormuz | Duplicitní HTML + translations.js | `/analyses/hormuz/en/` |
+| REE Dashboard | Next.js `[lang]` segment | `/analyses/ree-dashboard/en/` |
+| Úzká Hrdla | Client-side context + `?lang=en` | `/analyses/uzka-hrdla/?lang=en` |
+
+### SEO
+
+- **Google Search Console:** ověřeno (googleb937edf397b551b4.html)
+- **Seznam Webmaster:** ověřeno (seznam-wmt-*.txt)
+- **Sitemap:** 26 URL (4 landing pages + 22 analysis pages) — `sitemap-index.xml`
+- **Hreflang:** všechny stránky (Astro native + Next.js alternates)
+- **JSON-LD:** WebSite + Person schema na landing page, WebApplication na REE Dashboard, WebSite na Úzká Hrdla + Hormuz
+- **Canonical URL:** na všech stránkách
+- **OG + Twitter Cards:** na všech stránkách s obrázky 1200×630
+- **robots.txt:** Allow all, odkaz na sitemap
+
+### SSL & Server
 
 - Let's Encrypt certifikát pro `davidnavratil.com` + `www.davidnavratil.com`
-- Certbot auto-renewal: systemd timer (`certbot.timer`) aktivní, kontrola 2× denně
-- Expirace: ověřit přes `ssh root@77.42.84.152 'certbot certificates'`
+- Certbot auto-renewal: systemd timer (`certbot.timer`), kontrola 2× denně
+- Nginx s security headers, gzip kompresí a cache pro `/_astro/`
+- DNS: Cloudflare (NS: gene/todd), DNS only režim
 
 ### Služby třetích stran
 
@@ -201,9 +185,123 @@ bash scripts/deploy-all.sh --uzka-hrdla
 |--------|------|----------------|
 | Plausible | Analytics | `pa-MLceY4sQroqGo9vckgP7U` |
 | Formspree | Kontaktní formulář | `xwvwvrqy` |
-| Substack | Newsletter | `davidnavratil.substack.com` |
+| Substack | Newsletter + RSS feed | `davidnavratil.substack.com` |
 | Cloudflare | DNS | NS: gene/todd, DNS only |
 | Let's Encrypt | SSL | certbot auto-renewal |
+| GitHub Actions | CI/CD + daily cron | `.github/workflows/deploy.yml` |
+| Google Search Console | SEO monitoring | ověřeno |
+| Seznam Webmaster | SEO monitoring (CZ) | ověřeno |
+
+### Sdílený brand layer
+
+`/public/shared/brand.css` — jeden CSS soubor načítaný všemi analýzami:
+- Brand tokeny (barvy, fonty, border-radius, max-width)
+- Sticky header se zpětným odkazem na davidnavratil.com
+- Footer s newsletter CTA, cross-navigation mezi analýzami
+- Accent barva `#1B7D8A` (petrolejová) — sjednocená napříč platformou
+
+### Starter template
+
+`/Users/davidnavratil/pracovni/analysis-starter-template/` — šablona pro nové analýzy:
+- `CONFIG.ts` jako single source of truth (slug, titulky, barvy, autor)
+- Next.js 15 + React 19 + Tailwind 4
+- Brand fonty (Fraunces + Inter), BrandFooter, Header
+- CZ/EN i18n (client-side context)
+- Deploy script čte slug z CONFIG.ts
+- **Slash příkaz:** `/new-analysis` v Claude Code automatizuje scaffolding
+
+---
+
+## Chronologie vývoje
+
+### Fáze 0 — Základ (27. 3. 2026)
+
+Inicializace Astro projektu, SSL, nginx, deploy pipeline, první verze landing page.
+
+### Fáze 1 — Migrace analýz & i18n (28. 3. 2026)
+
+- i18n systém (CZ/EN)
+- Migrace 3 analýz pod doménu (Hormuz, REE Dashboard, Úzká Hrdla)
+- SEO základ (sitemap, hreflang, JSON-LD, OG images)
+- Překlad Hormuz (CZ+EN) a REE Dashboard (CZ+EN)
+
+### Fáze 2 — Konverze & Discovery (28. 3. 2026)
+
+- Plausible analytics
+- Newsletter CTA komponenta + CTA na analýzách
+- Formspree kontaktní formulář
+- OG images pro analýzy
+
+### Fáze 3 — Visual Refresh (28. 3. 2026)
+
+- Slate paleta, navy metriky, band pozadí
+- Counter animace, hero entrance animace
+
+### Fáze 4 — Editorial Redesign (28. 3. 2026)
+
+**Kompletní přestavba landing page z "osobního profilu" na "editorský analytický magazín":**
+
+- Dekompozice monolitického HomePage.astro (1050+ řádků) do 10 samostatných komponent
+- Nová teplá editoriální paleta (paper #F5F1E8 / warm charcoal #1C1B18)
+- Self-hosted fonty Fraunces (serif) + Inter (sans) přes @fontsource
+- Redesign hero: split layout s screenshot Hormuz analýzy, polycrisis subheadline
+- Nové sekce: WhyPeopleReturn, LatestArticles (RSS ze Substacku)
+- Newsletter konverze: 5 hodnotových bodů (footer funnel CTA odstraněn — duplicitní)
+- Výměna fotografií za editoriální (panel, parlament, stage, lecture)
+- Vylepšená angličtina ("Not opinions. Orientation.", "to think with", "arguments you can see")
+- WCAG AA contrast compliance
+- 44px min touch targets pro mobile
+- GitHub Actions daily cron pro auto-refresh Substack článků
+- ~150 i18n klíčů na jazyk (z původních ~100)
+
+### Fáze 5 — Brand Unification & Archive (28. 3. 2026)
+
+**Sladění vizuální identity napříč analýzami + archívní stránka:**
+
+- **Sdílený brand layer** (`/shared/brand.css`) — společné design tokeny, header/footer styly
+- **Hormuz:** brand header/footer (CZ+EN), Fraunces+Inter (Google Fonts CDN), warm paper pozadí
+- **REE Dashboard:** Fraunces místo Playfair Display, warm paleta, brand footer, navbar sladění, JSON-LD schema
+- **Úzká Hrdla:** Fraunces headings, warm paper pozadí, brand footer, header sladění, hreflang
+- **Archívní stránka** `/analyses/` (CZ) + `/en/analyses/` (EN) — grid karet s tag filtrováním
+- **Deploy workflow fix** — rsync exclude per-analysis subdirectories
+- **PNG → WebP konverze** — všechny obrázky (~67% úspora)
+
+### Fáze 6 — Překlady, SEO & Color Refresh (29. 3. 2026)
+
+**Kompletní EN překlad Úzká Hrdla + SEO hardening + změna accent barvy:**
+
+- **Úzká Hrdla EN překlad** — 34 UI komponent přeloženo do EN, `localizedField()` helper pro data, client-side `?lang=en` URL parametr
+- **JSON data překlad** — všech 36 chokepoints, cz-exposure (14 expozic), stats (8 kategorií), timeline-and-cases (32 událostí + 20 case studies), connections (40 uzlů + 50 hran), diversification (20 iniciativ), scenarios (7 scénářů) — přidány `*En` sibling pole
+- **REE Dashboard EN cleanup** — opraveny zbylé hardcoded české stringy
+- **Hormuz EN** — doplněn chybějící brand header/footer, fonty, warm paleta
+- **Code audit** — opraveny hardcoded ternáry (`'GDP'/'HDP'`, `'to'/'až'`) → `t()` klíče, odstraněny `as any` z localizedField callů, opravena LatestArticles hardcoded čeština v EN
+- **BrandFooter** — language-aware navigation linky (EN → `/en/`, `?lang=en`)
+- **SEO:**
+  - Google Search Console + Seznam Webmaster ověřeno
+  - Sitemap rozšířen ze 7 na 26 URL (všechny subpages + EN verze)
+  - JSON-LD WebApplication schema přidáno do REE Dashboard
+  - Hreflang přidán do Úzká Hrdla (cs + en alternates)
+- **Color refresh:** accent barva změněna z karamelové `#A05A2C` na petrolejovou `#1B7D8A`
+  - Light mode: `#1B7D8A` (accent), `#156A75` (hover)
+  - Dark mode: `#5B9EAD` (tlumená), `#7AB4C0` (hover)
+  - Aktualizováno v: global.css, brand.css, BrandFooter (3 analýzy + starter template)
+
+---
+
+## Fotografie
+
+Všechny obrázky ve formátu WebP (konvertováno z PNG/JPG, ~67% úspora). Originální PNG/JPG zachovány jako fallback.
+
+| Soubor | Popis | Použití |
+|--------|-------|---------|
+| `david-portrait.webp` | Headshot | Hero sekce |
+| `david-about.webp` | Panel s mikrofonem (editoriální) | About sekce |
+| `david-keynote.webp` | Parlament s GDP grafem | Speaking galerie |
+| `david-data.webp` | Přednáška s publikem | Speaking galerie |
+| `david-speaking.webp` | Close-up na pódiu | Speaking galerie |
+| `preview-hormuz.webp` | Screenshot Hormuz analýzy | Hero + karta analýzy |
+| `preview-ree.webp` | Screenshot REE dashboardu | Karta analýzy |
+| `preview-chokepoints.webp` | Screenshot Úzkých hrdel | Karta analýzy |
 
 ---
 
@@ -211,33 +309,44 @@ bash scripts/deploy-all.sh --uzka-hrdla
 
 ### Hotové (deployed na produkci)
 
-- [x] Astro site s kompletním redesignem (wow faktor)
-- [x] CZ/EN i18n s URL routingem
-- [x] 3 analýzy migrované pod doménu s back-linky
+- [x] Kompletní editorial redesign landing page (10 komponent)
+- [x] Petrolejová editoriální paleta s WCAG AA/AAA compliance
+- [x] Self-hosted Fraunces + Inter fonty
+- [x] CZ/EN i18n (~150 klíčů)
+- [x] 3 analýzy migrované pod doménu
 - [x] Dark/light mode s persisted preferencí
-- [x] Responsive layout (desktop, tablet, mobil)
-- [x] Scroll reveal animace
-- [x] Mouse-tracking glow na hero
-- [x] Hero entrance staggered animace
-- [x] Trust bar s logy médií
-- [x] Speaking & media sekce s foto galerií
-- [x] Newsletter CTA (landing + analýzy)
+- [x] Responsive layout (900px, 640px, 400px breakpoints)
+- [x] 44px min touch targets mobile
+- [x] Scroll reveal animace + mouse-tracking glow
+- [x] Trust bar s mediálními wordmarky
+- [x] 3 karty analýz s preview screenshoty (WebP)
+- [x] WhyPeopleReturn hodnotové propozice
+- [x] Newsletter CTA s 5 value points
+- [x] LatestArticles — 6 článků ze Substack RSS (2×3 grid, cover obrázky)
+- [x] About sekce (editoriální foto, 3 odstavce)
+- [x] Speaking sekce (mini-cases, foto galerie)
 - [x] Kontaktní formulář (Formspree)
 - [x] Plausible analytics
-- [x] SEO (sitemap, hreflang, JSON-LD, OG images)
+- [x] SEO (sitemap 26 URL, hreflang, JSON-LD, OG images, Google SC, Seznam WM)
 - [x] SSL + nginx security headers
-- [x] Deploy pipeline
-- [x] Hormuz: kompletní CZ+EN překlad
-- [x] REE Dashboard: kompletní CZ+EN překlad
+- [x] GitHub Actions deploy + daily cron rebuild
+- [x] Hormuz: kompletní CZ+EN překlad + brand
+- [x] REE Dashboard: kompletní CZ+EN překlad + brand + JSON-LD
+- [x] Úzká Hrdla: kompletní CZ+EN překlad (UI + JSON data) + brand + hreflang
+- [x] Brand unification — sdílený header/footer/fonty/paleta na všech analýzách
+- [x] Archívní stránka `/analyses/` (CZ+EN) s tag filtrováním
+- [x] PNG → WebP konverze (~67% úspora)
+- [x] Deploy workflow — per-analysis excludes (archív se deployuje)
+- [x] Starter template + `/new-analysis` slash příkaz
+- [x] Color refresh — petrolejová paleta (#1B7D8A)
 
 ### Zbývá dokončit
 
-**Analýzy:**
-- [ ] **REE Dashboard — zbytková čeština** — `cost_breakdown.json` (názvy fází), `cost_passthrough` (produkty), aplikace prvků stále obsahují české texty
-- [ ] **Úzká Hrdla — EN překlad** — celá analýza je jen česky
-- [ ] **Rebuild a redeploy** všech 3 analýz po opravách
+**Optimalizace (navrhované):**
+- [ ] Preconnect hints pro Substack CDN (`substackcdn.com`)
+- [ ] Performance monitoring (Core Web Vitals)
 
-**Budoucí fáze (navrhované):**
+**Budoucí fáze:**
+- [ ] Shared component library — extrakce sdílených komponent (npm balíček)
 - [ ] Migrace dalších analýz (sector-intelligence, cnb-taylor-rule, hypoteka, czech-macro-model)
-- [ ] Blog / propojení se Substackem
-- [ ] Performance optimalizace (image formats, lazy loading audit)
+- [ ] Embedded newsletter formulář (custom form + Substack proxy)
