@@ -19,7 +19,10 @@ async function fetchWithRetry(url: string, retries = 2, delayMs = 2000): Promise
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
     try {
-      const res = await fetch(url, { signal: controller.signal });
+      const res = await fetch(url, {
+        signal: controller.signal,
+        headers: { 'User-Agent': 'Mozilla/5.0 (davidnavratil.com; RSS reader)' },
+      });
       clearTimeout(timeout);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       return await res.text();
