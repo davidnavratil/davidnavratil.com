@@ -54,6 +54,9 @@ jobs:
           rsync -avz --delete \
             -e "ssh -o StrictHostKeyChecking=no" \
             --exclude='analyses/hormuz/' \
+            --exclude='analyses/hormuz-energy-simulator/' \
+            --exclude='analyses/qatar-infrastructure/' \
             --exclude='analyses/ree-dashboard/' \
             --exclude='analyses/uzka-hrdla/' \
+            --exclude='analyses/energy-shock-2022-vs-2026/' \
             dist/ root@77.42.84.152:/var/www/davidnavratil.com/
