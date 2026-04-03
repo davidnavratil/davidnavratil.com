@@ -18,8 +18,13 @@ interface Props {
 const { title, description = 'David Navrátil — ekonom, analytik, autor interaktivních analýz' } = Astro.props;
 const locale = Astro.currentLocale ?? 'cs';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const csURL = new URL('/', Astro.site);
-const enURL = new URL('/en/', Astro.site);
+// Compute hreflang alternates based on current path
+const pathname = Astro.url.pathname;
+const isEn = pathname.startsWith('/en/') || pathname === '/en';
+const csPath = isEn ? pathname.replace(/^\/en(\/|$)/, '/') || '/' : pathname;
+const enPath = isEn ? pathname : `/en${pathname}`;
+const csURL = new URL(csPath, Astro.site);
+const enURL = new URL(enPath, Astro.site);
 const ogLocale = locale === 'en' ? 'en_US' : 'cs_CZ';
 ---
 
@@ -54,6 +59,7 @@ const ogLocale = locale === 'en' ? 'en_US' : 'cs_CZ';
     <meta name="twitter:image" content={new URL('/og-image.png', Astro.site)} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" as="image" type="image/webp" href="/images/preview-hormuz.webp" />
 
     <!-- Structured data -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -82,8 +88,9 @@ const ogLocale = locale === 'en' ? 'en_US' : 'cs_CZ';
       })();
     </script>
 
-    <!-- Plausible analytics -->
-    <script async src="https://plausible.io/js/pa-MLceY4sQroqGo9vckgP7U.js"></script>
+    <!-- Plausible analytics (self-hosted, API calls go to plausible.io) -->
+    <link rel="preconnect" href="https://plausible.io" />
+    <script async src="/js/plausible.js"></script>
     <script is:inline>
       window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)};plausible.init=plausible.init||function(i){plausible.o=i||{}};
       plausible.init();

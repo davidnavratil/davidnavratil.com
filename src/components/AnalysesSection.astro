@@ -1,49 +1,12 @@
 ---
 import { useTranslations } from '../i18n/utils';
+import { analyses as allAnalyses, getHref } from '../data/analyses';
 
 const t = useTranslations(Astro.currentLocale);
 const locale = Astro.currentLocale ?? 'cs';
 
 /** Max number of analyses shown on landing page. Rest lives in /analyses/ archive. */
 const MAX_FEATURED = 4;
-
-const allAnalyses = [
-  {
-    key: 'hormuz-simulator' as const,
-    href: '/analyses/hormuz-energy-simulator/',
-    image: '/images/preview-hormuz-simulator.png',
-    tags: ['tag.energy', 'tag.geopolitics', 'tag.supply'] as const,
-    live: true,
-  },
-  {
-    key: 'qatar' as const,
-    href: locale === 'en' ? '/analyses/qatar-infrastructure/' : '/analyses/qatar-infrastructure/',
-    image: '/images/preview-qatar.png',
-    tags: ['tag.geopolitics', 'tag.energy', 'tag.tech'] as const,
-    live: true,
-  },
-  {
-    key: 'hormuz' as const,
-    href: locale === 'en' ? '/analyses/hormuz/en/' : '/analyses/hormuz/',
-    image: '/images/preview-hormuz.webp',
-    tags: ['tag.geopolitics', 'tag.energy', 'tag.supply'] as const,
-    live: true,
-  },
-  {
-    key: 'ree' as const,
-    href: locale === 'en' ? '/analyses/ree-dashboard/en/' : '/analyses/ree-dashboard/',
-    image: '/images/preview-ree.webp',
-    tags: ['tag.minerals', 'tag.china', 'tag.tech'] as const,
-    live: false,
-  },
-  {
-    key: 'chokepoints' as const,
-    href: locale === 'en' ? '/analyses/uzka-hrdla/?lang=en' : '/analyses/uzka-hrdla/',
-    image: '/images/preview-chokepoints.webp',
-    tags: ['tag.maps', 'tag.trade', 'tag.risks'] as const,
-    live: false,
-  },
-];
 
 /** Live analyses always shown first; within each group, original array order is preserved. */
 const analyses = [...allAnalyses]
@@ -61,7 +24,7 @@ const analyses = [...allAnalyses]
   <div class="analyses-stack">
     {analyses.map((analysis, i) => (
       <a
-        href={analysis.href}
+        href={getHref(analysis, locale)}
         class={`analysis-card reveal${i > 0 ? ` reveal-delay-${i}` : ''}`}
       >
         <div class="card-image">

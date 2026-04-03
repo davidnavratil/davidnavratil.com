@@ -15,11 +15,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
@@ -51,12 +51,14 @@ jobs:
 
       - name: Deploy via rsync
         run: |
+          # Dynamically exclude all analysis subdirectories on the server
+          EXCLUDES=$(ssh root@77.42.84.152 "ls -1 /var/www/davidnavratil.com/analyses/ 2>/dev/null" \
+            | while read -r dir; do [ -n "$dir" ] && echo "--exclude=analyses/${dir}/"; done)
+          echo "Auto-excluded: $EXCLUDES"
           rsync -avz --delete \
-            -e "ssh -o StrictHostKeyChecking=no" \
-            --exclude='analyses/hormuz/' \
-            --exclude='analyses/hormuz-energy-simulator/' \
-            --exclude='analyses/qatar-infrastructure/' \
-            --exclude='analyses/ree-dashboard/' \
-            --exclude='analyses/uzka-hrdla/' \
-            --exclude='analyses/energy-shock-2022-vs-2026/' \
+            -e ssh \
+            $EXCLUDES \
             dist/ root@77.42.84.152:/var/www/davidnavratil.com/
+
+      - name: Update CSP hashes in nginx
+        run: node scripts/update-csp-hashes.mjs

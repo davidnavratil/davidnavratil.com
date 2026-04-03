@@ -8,52 +8,10 @@
  */
 import Base from '../../layouts/Base.astro';
 import { useTranslations } from '../../i18n/utils';
+import { analyses, getHref } from '../../data/analyses';
 
 const t = useTranslations(Astro.currentLocale);
 const locale = Astro.currentLocale ?? 'cs';
-
-const analyses = [
-  {
-    key: 'hormuz-simulator' as const,
-    href: '/analyses/hormuz-energy-simulator/',
-    image: '/images/preview-hormuz-simulator.png',
-    tags: ['tag.energy', 'tag.geopolitics', 'tag.supply'] as const,
-    live: true,
-    date: '2026-04',
-  },
-  {
-    key: 'qatar' as const,
-    href: '/analyses/qatar-infrastructure/',
-    image: '/images/preview-qatar.png',
-    tags: ['tag.geopolitics', 'tag.energy', 'tag.tech'] as const,
-    live: true,
-    date: '2026-03',
-  },
-  {
-    key: 'hormuz' as const,
-    href: '/analyses/hormuz/',
-    image: '/images/preview-hormuz.webp',
-    tags: ['tag.geopolitics', 'tag.energy', 'tag.supply'] as const,
-    live: true,
-    date: '2026-03',
-  },
-  {
-    key: 'ree' as const,
-    href: '/analyses/ree-dashboard/',
-    image: '/images/preview-ree.webp',
-    tags: ['tag.minerals', 'tag.china', 'tag.tech'] as const,
-    live: false,
-    date: '2026-03',
-  },
-  {
-    key: 'chokepoints' as const,
-    href: '/analyses/uzka-hrdla/',
-    image: '/images/preview-chokepoints.webp',
-    tags: ['tag.maps', 'tag.trade', 'tag.risks'] as const,
-    live: false,
-    date: '2026-03',
-  },
-];
 
 const allTags = [...new Set(analyses.flatMap((a) => a.tags))];
 ---
@@ -137,7 +95,7 @@ const allTags = [...new Set(analyses.flatMap((a) => a.tags))];
             {t(`analyses.${analysis.key}.why`)}
           </blockquote>
           {analysis.live ? (
-            <a href={analysis.href} class="archive-card-cta">
+            <a href={getHref(analysis, locale)} class="archive-card-cta">
               {t(`analyses.${analysis.key}.cta`)}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>

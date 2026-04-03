@@ -5,6 +5,9 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://davidnavratil.com',
   output: 'static',
+  build: {
+    inlineStylesheets: 'always',
+  },
   integrations: [
     sitemap({
       customPages: [
