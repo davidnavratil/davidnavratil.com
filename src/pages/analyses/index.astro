@@ -14,6 +14,14 @@ const locale = Astro.currentLocale ?? 'cs';
 
 const analyses = [
   {
+    key: 'hormuz-simulator' as const,
+    href: '/analyses/hormuz-energy-simulator/',
+    image: '/images/preview-hormuz-simulator.png',
+    tags: ['tag.energy', 'tag.geopolitics', 'tag.supply'] as const,
+    live: true,
+    date: '2026-04',
+  },
+  {
     key: 'qatar' as const,
     href: '/analyses/qatar-infrastructure/',
     image: '/images/preview-qatar.png',

@@ -5,9 +5,16 @@ const t = useTranslations(Astro.currentLocale);
 const locale = Astro.currentLocale ?? 'cs';
 
 /** Max number of analyses shown on landing page. Rest lives in /analyses/ archive. */
-const MAX_FEATURED = 3;
+const MAX_FEATURED = 4;
 
 const allAnalyses = [
+  {
+    key: 'hormuz-simulator' as const,
+    href: locale === 'en' ? '/analyses/hormuz-energy-simulator/en/' : '/analyses/hormuz-energy-simulator/',
+    image: '/images/preview-hormuz-simulator.png',
+    tags: ['tag.energy', 'tag.geopolitics', 'tag.supply'] as const,
+    live: true,
+  },
   {
     key: 'qatar' as const,
     href: locale === 'en' ? '/analyses/qatar-infrastructure/' : '/analyses/qatar-infrastructure/',
@@ -38,7 +45,10 @@ const allAnalyses = [
   },
 ];
 
-const analyses = allAnalyses.slice(0, MAX_FEATURED);
+/** Live analyses always shown first; within each group, original array order is preserved. */
+const analyses = [...allAnalyses]
+  .sort((a, b) => (a.live === b.live ? 0 : a.live ? -1 : 1))
+  .slice(0, MAX_FEATURED);
 ---
 
 <section class="analyses container" id="analyzy">
