@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Index silnějších regionů | David Navrátil</title>
+<meta name="description" content="206 měst, jedno číslo nestačí. Interaktivní analýza prosperity českých regionů.">
+
+<!-- Fonts (same as main site) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Plotly -->
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+
+<style>
+/* ===== Reset + Tokens (from davidnavratil.com) ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --color-bg: #F5F1E8;
+  --color-surface: #FFFFFF;
+  --color-text: #111111;
+  --color-text-secondary: #4B4B4B;
+  --color-accent: #1B7D8A;
+  --color-accent-hover: #156A75;
+  --color-border: #E0DCD4;
+  --color-muted: #736D64;
+  --color-navy: #163A5F;
+  --color-band: #EDE9E0;
+  --radius: 12px;
+  --max-width: 1080px;
+  /* Cluster colors */
+  --cluster-prosper: #2ca02c;
+  --cluster-urban: #1B7D8A;
+  --cluster-weak: #d62728;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1C1B18;
+    --color-surface: #2A2824;
+    --color-text: #F0EDE6;
+    --color-text-secondary: #A8A49C;
+    --color-accent: #5B9EAD;
+    --color-accent-hover: #7AB4C0;
+    --color-border: #3D3B36;
+    --color-muted: #A09C94;
+    --color-navy: #4A8BC2;
+    --color-band: #2A2824;
+  }
+}
+
+html {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--color-text);
+  background: var(--color-bg);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Layout ===== */
+.back-link {
+  position: fixed; top: 1rem; left: 1rem; z-index: 100;
+  font-size: 0.85rem; color: var(--color-muted);
+  text-decoration: none; opacity: 0.7; transition: opacity 0.2s;
+}
+.back-link:hover { opacity: 1; color: var(--color-accent); }
+
+/* Hero */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #163A5F 0%, #1E3A5F 50%, #0F2A4A 100%);
+  color: #F0EDE6;
+}
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.hero .subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  color: rgba(240,237,230,0.7);
+  max-width: 600px;
+  margin-bottom: 2.5rem;
+}
+.hero-stats {
+  display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;
+}
+.hero-stat { text-align: center; }
+.hero-stat .number {
+  font-family: var(--font-serif);
+  font-size: 3rem; font-weight: 700;
+  color: var(--color-accent);
+  display: block;
+}
+.hero-stat .label {
+  font-size: 0.85rem;
+  color: rgba(240,237,230,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.scroll-hint {
+  margin-top: 3rem;
+  font-size: 0.8rem;
+  color: rgba(240,237,230,0.4);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
+
+/* Scrollytelling sections */
+.scroll-section {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+}
+@media (max-width: 900px) {
+  .scroll-section { grid-template-columns: 1fr; }
+  .viz-sticky { position: relative !important; top: auto !important; height: 50vh; }
+}
+
+.steps {
+  padding: 2rem;
+  padding-top: 40vh;
+}
+.step {
+  min-height: 70vh;
+  padding: 2rem;
+  opacity: 0.2;
+  transition: opacity 0.5s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.step.active { opacity: 1; }
+.step h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-navy);
+}
+.step h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-accent);
+}
+.step p {
+  color: var(--color-text-secondary);
+  margin-bottom: 0.75rem;
+  max-width: 480px;
+}
+.step .highlight {
+  display: inline-block;
+  background: var(--color-accent);
+  color: white;
+  padding: 0.15em 0.5em;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.step .stat-box {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin: 1rem 0;
+  max-width: 420px;
+}
+.step .stat-row {
+  display: flex; justify-content: space-between;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+.step .stat-row:last-child { border: none; }
+.step .stat-label { color: var(--color-muted); font-size: 0.9rem; }
+.step .stat-value { font-weight: 600; }
+.step .stat-value.good { color: var(--cluster-prosper); }
+.step .stat-value.bad { color: var(--cluster-weak); }
+
+.viz-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.viz-container {
+  width: 100%;
+  height: 80vh;
+  max-height: 700px;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+/* Interlude (full-width text bands) */
+.interlude {
+  background: var(--color-band);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+.interlude .inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.interlude h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-navy);
+}
+.interlude p {
+  color: var(--color-text-secondary);
+  font-size: 1.1rem;
+}
+.interlude .big-number {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  display: block;
+  margin: 1rem 0;
+}
+
+/* Conclusion */
+.conclusion {
+  padding: 4rem 2rem 6rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.conclusion h2 {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--color-navy);
+}
+.takeaway {
+  background: var(--color-surface);
+  border-left: 4px solid var(--color-accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.takeaway h3 {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--color-accent);
+  margin-bottom: 0.5rem;
+}
+.takeaway p { color: var(--color-text-secondary); }
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  border-top: 1px solid var(--color-border);
+}
+.footer a { color: var(--color-accent); }
+
+/* Progress bar */
+.progress-bar {
+  position: fixed; top: 0; left: 0;
+  height: 3px; background: var(--color-accent);
+  z-index: 200; width: 0%;
+  transition: width 0.1s linear;
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress-bar" id="progress"></div>
+<a href="/" class="back-link">← davidnavratil.com</a>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <h1>Index silnějších regionů</h1>
+  <p class="subtitle">206 měst. 49 ukazatelů. Jedno číslo nestačí.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <span class="number" data-count="206">0</span>
+      <span class="label">ORP v analýze</span>
+    </div>
+    <div class="hero-stat">
+      <span class="number" data-count="49">0</span>
+      <span class="label">ukazatelů</span>
+    </div>
+    <div class="hero-stat">
+      <span class="number" data-count="37">0</span>
+      <span class="label">bodů rozdíl 1. vs. 206.</span>
+    </div>
+  </div>
+  <p class="scroll-hint">↓ Scrollujte dolů</p>
+</section>
+
+<!-- ===== SECTION 1: Žebříček ===== -->
+<section class="scroll-section" id="sec-ranking">
+  <div class="steps">
+    <div class="step" data-viz="ranking-top">
+      <h2>Kdo je nahoře?</h2>
+      <p>Na prvním místě je <strong>Turnov</strong> — malé město v Českém ráji, 30 tisíc obyvatel. Ne Praha, ne Brno.</p>
+      <p>Praha je na <span class="highlight">9. místě</span>. Exceluje v infrastruktuře a ekonomice, ale ve zdravotnictví a prostředí zaostává.</p>
+    </div>
+    <div class="step" data-viz="ranking-bottom">
+      <h2>Kdo je dole?</h2>
+      <p>Na posledním místě je <strong>Horšovský Týn</strong>. Ale důležitější je, co ukazuje zbytek tabulky: slabé regiony nejsou jen „Ústecko".</p>
+      <p>Žádné ORP není beznadějné. A žádné exceluje ve všem.</p>
+    </div>
+  </div>
+  <div class="viz-sticky">
+    <div class="viz-container" id="viz-ranking"></div>
+  </div>
+</section>
+
+<!-- ===== INTERLUDE: Čtyři pohledy ===== -->
+<section class="interlude">
+  <div class="inner">
+    <h2>Jedno číslo nestačí</h2>
+    <p>Celkové skóre skrývá zásadní rozdíly. Proto jsme ho rozložili na čtyři pohledy: městskost, kvalitu místa, sociální zdraví — a celkovou prosperitu.</p>
+    <p>Zjistili jsme, že <strong>městskost a prosperita spolu téměř nesouvisí</strong>.</p>
+    <span class="big-number">0,11</span>
+    <p>Korelace městskosti s celkovou prosperitou. Prakticky nula.</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 2: Čtyři pohledy ===== -->
+<section class="scroll-section" id="sec-indexes">
+  <div class="steps">
+    <div class="step" data-viz="scatter-i1-i2">
+      <h2>Městskost jde proti kvalitě místa</h2>
+      <p>Osa X = městskost (infrastruktura, internet, vysokoškoláci). Osa Y = kvalita místa (krajina, kultura, turismus).</p>
+      <p>Korelace <span class="highlight">−0,65</span>. Kdo má jedno, nemá druhé. Kladno je 10. v městskosti a poslední v kvalitě místa. Dačice naopak.</p>
+    </div>
+    <div class="step" data-viz="scatter-i0-i3">
+      <h2>Sociální zdraví je klíčové</h2>
+      <p>Osa X = celková prosperita. Osa Y = sociální zdraví (exekuce, kriminalita, vzdělání, naděje dožití).</p>
+      <p>Korelace <span class="highlight">0,75</span>. Sociální zdraví vysvětluje tři čtvrtiny rozdílů. To je nejsilnější signál v celém datasetu.</p>
+    </div>
+  </div>
+  <div class="viz-sticky">
+    <div class="viz-container" id="viz-indexes"></div>
+  </div>
+</section>
+
+<!-- ===== INTERLUDE: Tři typy ===== -->
+<section class="interlude">
+  <div class="inner">
+    <h2>Tři typy regionů</h2>
+    <p>Statistická analýza přirozeně rozdělila ORP do tří skupin. Podívejte se, jak se rozkládají po mapě.</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 3: Mapa clusterů ===== -->
+<section class="scroll-section" id="sec-clusters">
+  <div class="steps">
+    <div class="step" data-viz="map-all">
+      <h2>Mapa prosperity</h2>
+      <p><span style="color:var(--cluster-prosper)">●</span> <strong>Prosperující regiony</strong> — od Prahy po malá města. Spojuje je silná ekonomika a sociální zdraví.</p>
+      <p><span style="color:var(--cluster-weak)">●</span> <strong>Města v sociálním napětí</strong> — Ostrava, Kladno, Teplice. Infrastruktura je, ale exekuce a nezaměstnanost zůstávají.</p>
+      <p><span style="color:var(--cluster-urban)">●</span> <strong>Vnitřní periferie</strong> — daleko od center, slabá ekonomika, ale překvapivě dobrá kvalita místa.</p>
+      <div class="stat-box">
+        <div class="stat-row"><span class="stat-label">Prosperující regiony</span><span class="stat-value good">6,4 mil. (58 %)</span></div>
+        <div class="stat-row"><span class="stat-label">Města v sociálním napětí</span><span class="stat-value bad">2,2 mil. (21 %)</span></div>
+        <div class="stat-row"><span class="stat-label">Vnitřní periferie</span><span class="stat-value">2,3 mil. (21 %)</span></div>
+      </div>
+      <p>Každý pátý Čech žije v regionu pod sociálním napětím.</p>
+    </div>
+    <div class="step" data-viz="map-ustecky">
+      <h3>Ústecký kraj</h3>
+      <p>Jediný kraj, kde není <strong>ani jedno ORP</strong> v prosperující kategorii. 10 z 16 ORP je v sociálním napětí, zbylých 6 jsou vnitřní periferie.</p>
+    </div>
+    <div class="step" data-viz="map-vysocina">
+      <h3>Vysočina</h3>
+      <p>Opačný extrém: <strong>žádné město v sociálním napětí</strong>. 10 z 15 ORP prosperuje. Ale jak uvidíme, překvapivě ztrácí tempo.</p>
+    </div>
+  </div>
+  <div class="viz-sticky">
+    <div class="viz-container" id="viz-clusters"></div>
+  </div>
+</section>
+
+<!-- ===== INTERLUDE: Paradoxy ===== -->
+<section class="interlude">
+  <div class="inner">
+    <h2>Paradox blízkosti</h2>
+    <p>62 % sousedních ORP patří do jiného typu. Města vzdálená 13 kilometrů od sebe mohou mít propastné rozdíly v kvalitě života.</p>
+  </div>
+</section>
+
+<!-- ===== SECTION 4: Paradoxy sousedů ===== -->
+<section class="scroll-section" id="sec-pairs">
+  <div class="steps">
+    <div class="step" data-viz="pair-0">
+      <h2>Hlučín × Ostrava</h2>
+      <p><strong>13 km od sebe.</strong> Krajské město je na tom hůř než jeho satelit.</p>
+      <div class="stat-box">
+        <div class="stat-row">
+          <span class="stat-label">Sociální zdraví Hlučín</span>
+          <span class="stat-value good">75 / 100</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Sociální zdraví Ostrava</span>
+          <span class="stat-value bad">19 / 100</span>
+        </div>
+      </div>
+      <p>Hlučínsko si historicky udrželo silné rodinné vazby. Ostrava nese celou tíhu útlumu těžkého průmyslu.</p>
+    </div>
+    <div class="step" data-viz="pair-1">
+      <h2>Jilemnice × Tanvald</h2>
+      <p><strong>18 km, stejná krajina, stejná velikost.</strong></p>
+      <div class="stat-box">
+        <div class="stat-row">
+          <span class="stat-label">Exekuce Jilemnice</span>
+          <span class="stat-value good">3,7 %</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Exekuce Tanvald</span>
+          <span class="stat-value bad">10,7 %</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Rozdíl v naději dožití</span>
+          <span class="stat-value bad">2 roky</span>
+        </div>
+      </div>
+    </div>
+    <div class="step" data-viz="pair-2">
+      <h2>Český Krumlov</h2>
+      <p><strong>UNESCO klenot v sociálním napětí.</strong></p>
+      <p>Turismus přináší tržby, ale ne stabilní zaměstnání ani dostupné bydlení. Monokultura cestovního ruchu eroduje sociální tkáň stálých obyvatel.</p>
+    </div>
+    <div class="step" data-viz="pair-3">
+      <h2>Uničov × Rýmařov</h2>
+      <p><strong>19 km. Krása krajiny ≠ kvalita života.</strong></p>
+      <div class="stat-box">
+        <div class="stat-row">
+          <span class="stat-label">Sebevraždy Uničov</span>
+          <span class="stat-value good">0,22 / 10 tis.</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Sebevraždy Rýmařov</span>
+          <span class="stat-value bad">1,10 / 10 tis.</span>
+        </div>
+      </div>
+      <p>Rýmařov má krásnou krajinu a turistiku. Ale nikdo tam nestaví a populace stárne.</p>
+    </div>
+  </div>
+  <div class="viz-sticky">
+    <div class="viz-container" id="viz-pairs"></div>
+  </div>
+</section>
+
+<!-- ===== SECTION 5: Dynamika ===== -->
+<section class="scroll-section" id="sec-momentum">
+  <div class="steps">
+    <div class="step" data-viz="momentum-all">
+      <h2>Kdo roste, kdo padá?</h2>
+      <p>Horizontální osa = současná úroveň prosperity. Vertikální osa = tempo změny (roční momentum).</p>
+      <p>Čtyři kvadranty: lídři, stagnující lídři, dohánějící, propadající.</p>
+    </div>
+    <div class="step" data-viz="momentum-vysocina">
+      <h3>Vysočina překvapivě klesá</h3>
+      <p>Čtyři z patnácti nejrychleji padajících ORP jsou z Vysočiny — Pelhřimov, Havlíčkův Brod, Telč, Nové Město na Moravě.</p>
+      <p>Staticky zdravý kraj, dynamicky erodující.</p>
+    </div>
+    <div class="step" data-viz="momentum-leaders">
+      <h3>Kdo roste, kdo stagnuje?</h3>
+      <p>Turnov (1. celkově) má mírně záporné momentum — udržet špičku je těžké. Naopak Podbořany — jedno z nejslabších ORP — rostou pátým nejrychlejším tempem. Odraz ode dna?</p>
+    </div>
+  </div>
+  <div class="viz-sticky">
+    <div class="viz-container" id="viz-momentum"></div>
+  </div>
+</section>
+
+<!-- ===== CONCLUSION ===== -->
+<section class="conclusion">
+  <h2>Co z toho plyne</h2>
+
+  <div class="takeaway">
+    <h3>Sociální zdraví je klíčové</h3>
+    <p>Exekuce, vzdělávání a naděje dožití vysvětlují většinu rozdílů. Infrastruktura sama o sobě nestačí — městskost a prosperita spolu téměř nesouvisí.</p>
+  </div>
+
+  <div class="takeaway">
+    <h3>Různé problémy vyžadují různá řešení</h3>
+    <p>Oslabená městská ORP mají infrastrukturu — potřebují sociální práci. Vnitřní periferie potřebují napojení na centra. Turistické monokultury potřebují diverzifikaci.</p>
+  </div>
+
+  <div class="takeaway">
+    <h3>Venkov s kvalitou místa potřebuje ochranu</h3>
+    <p>Padá nejrychleji ze všech typů regionů. Jakmile odejde doktor a zavře se škola, je pozdě.</p>
+  </div>
+
+  <div class="takeaway">
+    <h3>Jedno číslo nestačí</h3>
+    <p>Žebříček 1–206 je orientační mapa. Pro rozhodování potřebujete profil ORP ve čtyřech pohledech — a vědomí, že přeházení dvou ukazatelů změní top-10 z třetiny.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>Data: Index prosperity regionů, ročník 2026 (49 indikátorů, 206 ORP).<br>
+  Analýza: David Navrátil. Metodická oponentura: nezávislý AI review.<br>
+  <a href="/">davidnavratil.com</a></p>
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+(function() {
+  'use strict';
+
+  const DATA_BASE = './data/';
+  let DATA = {};
+
+  // Colors matching design tokens
+  const COLORS = {
+    accent: '#1B7D8A',
+    navy: '#163A5F',
+    prosper: '#2ca02c',
+    urban: '#1B7D8A',
+    weak: '#d62728',
+    muted: '#736D64',
+    bg: '#F5F1E8',
+    surface: '#FFFFFF',
+  };
+
+  const CLUSTER_COLOR_MAP = {
+    'Prosperující regiony': COLORS.prosper,
+    'Města v sociálním napětí': COLORS.weak,
+    'Vnitřní periferie': COLORS.urban,
+  };
+
+  const PLOTLY_LAYOUT = {
+    paper_bgcolor: 'rgba(0,0,0,0)',
+    plot_bgcolor: 'rgba(0,0,0,0)',
+    font: { family: 'Inter, system-ui, sans-serif', color: '#4B4B4B' },
+    margin: { t: 40, r: 20, b: 50, l: 60 },
+    hoverlabel: { bgcolor: '#fff', bordercolor: '#E0DCD4', font: { family: 'Inter', size: 13 } },
+  };
+
+  const PLOTLY_CONFIG = { displayModeBar: false, responsive: true };
+
+  // ===== Data loading =====
+  async function loadData() {
+    const files = ['ranking', 'indexes', 'clusters', 'pairs', 'momentum'];
+    const results = await Promise.all(
+      files.map(f => fetch(DATA_BASE + f + '.json').then(r => r.json()))
+    );
+    files.forEach((f, i) => DATA[f] = results[i]);
+  }
+
+  // ===== Hero counter animation =====
+  function animateCounters() {
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = parseInt(el.dataset.count);
+      const duration = 1200;
+      const start = performance.now();
+      function tick(now) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(target * ease);
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  // ===== Viz renderers =====
+  function renderRanking(which) {
+    const isBottom = which === 'ranking-bottom';
+    const items = isBottom ? [...DATA.ranking.bottom].reverse() : DATA.ranking.top;
+    const colors = items.map(d => d.celkem >= 50 ? COLORS.prosper : d.celkem >= 25 ? COLORS.accent : COLORS.weak);
+    const vals = items.map(d => d.celkem);
+    const xMax = Math.ceil(Math.max(...vals) / 10) * 10 + 5;
+    Plotly.react('viz-ranking', [{
+      type: 'bar',
+      orientation: 'h',
+      x: vals,
+      y: items.map(d => `#${d.rank} ${d['ORP+Praha']}`),
+      text: items.map(d => d.celkem.toFixed(1)),
+      textposition: 'outside',
+      marker: { color: colors, line: { width: 0 } },
+      hovertemplate: '<b>%{y}</b><br>Skóre: %{x:.1f}<extra></extra>',
+    }], {
+      ...PLOTLY_LAYOUT,
+      title: { text: isBottom ? 'Bottom 15 ORP' : 'Top 15 ORP', font: { size: 16 } },
+      xaxis: { range: [0, xMax], title: 'Celkové skóre prosperity' },
+      yaxis: { autorange: 'reversed' },
+      margin: { t: 40, r: 50, b: 50, l: 200 },
+      height: 600,
+    }, PLOTLY_CONFIG);
+  }
+
+  function renderScatter(which) {
+    const orp = DATA.indexes.orp;
+    const isI1I2 = which === 'scatter-i1-i2';
+    const xKey = isI1I2 ? 'i1' : 'i0';
+    const yKey = isI1I2 ? 'i2' : 'i3';
+    const xLabel = isI1I2 ? 'Městskost (I1)' : 'Celková prosperita (I0)';
+    const yLabel = isI1I2 ? 'Kvalita místa (I2)' : 'Sociální zdraví (I3)';
+
+    // Color by i3 for i0xi3, by i1 for i1xi2
+    const colorVals = orp.map(d => isI1I2 ? d.i1 : d.i3);
+
+    Plotly.react('viz-indexes', [{
+      type: 'scatter',
+      mode: 'markers',
+      x: orp.map(d => d[xKey]),
+      y: orp.map(d => d[yKey]),
+      text: orp.map(d => d.name),
+      marker: {
+        size: orp.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2)),
+        color: colorVals,
+        colorscale: 'RdYlGn',
+        showscale: false,
+        line: { width: 0.5, color: 'white' },
+      },
+      hovertemplate: '<b>%{text}</b><br>' + xLabel + ': %{x:.1f}<br>' + yLabel + ': %{y:.1f}<extra></extra>',
+    }], {
+      ...PLOTLY_LAYOUT,
+      title: { text: isI1I2 ? 'Městskost vs. kvalita místa (r = −0,65)' : 'Prosperita vs. sociální zdraví (r = 0,75)', font: { size: 15 } },
+      xaxis: { title: xLabel, range: [10, 95] },
+      yaxis: { title: yLabel, range: [5, 100] },
+      height: 600,
+    }, PLOTLY_CONFIG);
+  }
+
+  function renderClusters(highlight) {
+    const orp = DATA.clusters.orp;
+    const clusterNames = [...new Set(orp.map(d => d.cluster))];
+
+    const traces = clusterNames.map(cl => {
+      const sub = orp.filter(d => d.cluster === cl);
+      let opacity = 0.85;
+      if (highlight === 'map-ustecky') opacity = sub.map(d => d.kraj === 'Ústecký kraj' ? 1 : 0.15);
+      if (highlight === 'map-vysocina') opacity = sub.map(d => d.kraj === 'Kraj Vysočina' ? 1 : 0.15);
+
+      return {
+        type: 'scattermap',
+        lat: sub.map(d => d.lat),
+        lon: sub.map(d => d.lon),
+        text: sub.map(d => `${d.name} (${d.kraj})<br>I0: ${d.i0}, I3: ${d.i3}`),
+        marker: {
+          size: sub.map(d => Math.max(8, Math.sqrt(d.pop / 1000) * 2.5)),
+          color: CLUSTER_COLOR_MAP[cl] || COLORS.muted,
+          opacity: opacity,
+        },
+        name: cl,
+        hovertemplate: '<b>%{text}</b><extra></extra>',
+      };
+    });
+
+    Plotly.react('viz-clusters', traces, {
+      ...PLOTLY_LAYOUT,
+      map: { style: 'open-street-map', zoom: 6.5, center: { lat: 49.8, lon: 15.5 } },
+      height: 650,
+      margin: { t: 10, r: 0, b: 0, l: 0 },
+      showlegend: true,
+      legend: { x: 0.01, y: 0.99, bgcolor: 'rgba(255,255,255,0.85)', bordercolor: '#E0DCD4', borderwidth: 1 },
+    }, PLOTLY_CONFIG);
+  }
+
+  function renderPairs(idx) {
+    const pair = DATA.pairs[idx];
+    if (!pair || !pair.pair || !pair.pair.a) return;
+    const a = pair.pair.a;
+    const b = pair.pair.b;
+    const orp = DATA.clusters.orp;
+
+    // Background: all ORP as gray dots
+    const traces = [{
+      type: 'scattermap',
+      lat: orp.map(d => d.lat),
+      lon: orp.map(d => d.lon),
+      marker: { size: 5, color: '#ccc', opacity: 0.3 },
+      hoverinfo: 'skip',
+      showlegend: false,
+    }];
+
+    // Line between pair
+    traces.push({
+      type: 'scattermap',
+      lat: [a.lat, b.lat],
+      lon: [a.lon, b.lon],
+      mode: 'lines+markers+text',
+      line: { width: 3, color: COLORS.weak },
+      marker: { size: 14, color: [COLORS.prosper, COLORS.weak] },
+      text: [a.name, b.name],
+      textposition: 'top center',
+      textfont: { size: 14, family: 'Inter', color: COLORS.navy },
+      showlegend: false,
+      hovertemplate: '<b>%{text}</b><extra></extra>',
+    });
+
+    const centerLat = (a.lat + b.lat) / 2;
+    const centerLon = (a.lon + b.lon) / 2;
+
+    Plotly.react('viz-pairs', traces, {
+      ...PLOTLY_LAYOUT,
+      map: { style: 'open-street-map', zoom: 9, center: { lat: centerLat, lon: centerLon } },
+      height: 650,
+      margin: { t: 10, r: 0, b: 0, l: 0 },
+    }, PLOTLY_CONFIG);
+  }
+
+  function renderMomentum(highlight) {
+    const orp = DATA.momentum.orp;
+    const medI0 = 50;
+    const medMom = 0;
+
+    let colors, sizes;
+    if (highlight === 'momentum-vysocina') {
+      colors = orp.map(d => d.kraj === 'Kraj Vysočina' ? COLORS.weak : '#ddd');
+      sizes = orp.map(d => d.kraj === 'Kraj Vysočina' ? 12 : 5);
+    } else if (highlight === 'momentum-leaders') {
+      const leaders = new Set(['Turnov', 'Podbořany', 'Uničov']);
+      colors = orp.map(d => leaders.has(d.name) ? COLORS.accent : '#ddd');
+      sizes = orp.map(d => leaders.has(d.name) ? 14 : 5);
+    } else {
+      colors = orp.map(d => d.momentum > 0 ? COLORS.prosper : COLORS.weak);
+      sizes = orp.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2));
+    }
+
+    Plotly.react('viz-momentum', [
+      {
+        type: 'scatter', mode: 'markers',
+        x: orp.map(d => d.i0), y: orp.map(d => d.momentum),
+        text: orp.map(d => d.name),
+        marker: { size: sizes, color: colors, line: { width: 0.5, color: 'white' } },
+        hovertemplate: '<b>%{text}</b><br>I0: %{x:.1f}<br>Momentum: %{y:+.2f}<extra></extra>',
+      }
+    ], {
+      ...PLOTLY_LAYOUT,
+      title: { text: 'Úroveň vs. momentum', font: { size: 15 } },
+      xaxis: { title: 'Celková prosperita (I0)', range: [28, 75] },
+      yaxis: { title: 'Roční momentum (annualizovaný)', zeroline: true, zerolinecolor: '#ccc' },
+      shapes: [
+        { type: 'line', x0: medI0, x1: medI0, y0: -12, y1: 12, line: { dash: 'dash', color: '#ccc' } },
+        { type: 'line', x0: 28, x1: 75, y0: medMom, y1: medMom, line: { dash: 'dash', color: '#ccc' } },
+      ],
+      annotations: [
+        { x: 72, y: 10, text: 'Lídři', showarrow: false, font: { color: '#999', size: 11 } },
+        { x: 32, y: 10, text: 'Dohánějící', showarrow: false, font: { color: '#999', size: 11 } },
+        { x: 72, y: -10, text: 'Stagnující', showarrow: false, font: { color: '#999', size: 11 } },
+        { x: 32, y: -10, text: 'Propadající', showarrow: false, font: { color: '#999', size: 11 } },
+      ],
+      height: 600,
+    }, PLOTLY_CONFIG);
+  }
+
+  // ===== Viz dispatch =====
+  const VIZ_MAP = {
+    'ranking-top': () => renderRanking('ranking-top'),
+    'ranking-bottom': () => renderRanking('ranking-bottom'),
+    'scatter-i1-i2': () => renderScatter('scatter-i1-i2'),
+    'scatter-i0-i3': () => renderScatter('scatter-i0-i3'),
+    'map-all': () => renderClusters('map-all'),
+    'map-ustecky': () => renderClusters('map-ustecky'),
+    'map-vysocina': () => renderClusters('map-vysocina'),
+    'pair-0': () => renderPairs(0),
+    'pair-1': () => renderPairs(1),
+    'pair-2': () => renderPairs(2),
+    'pair-3': () => renderPairs(3),
+    'momentum-all': () => renderMomentum('momentum-all'),
+    'momentum-vysocina': () => renderMomentum('momentum-vysocina'),
+    'momentum-leaders': () => renderMomentum('momentum-leaders'),
+  };
+
+  let currentViz = null;
+
+  // ===== IntersectionObserver for scroll steps =====
+  function setupObservers() {
+    const steps = document.querySelectorAll('.step');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Activate step
+          steps.forEach(s => s.classList.remove('active'));
+          entry.target.classList.add('active');
+
+          // Trigger viz
+          const vizKey = entry.target.dataset.viz;
+          if (vizKey && vizKey !== currentViz && VIZ_MAP[vizKey]) {
+            currentViz = vizKey;
+            try { VIZ_MAP[vizKey](); } catch(e) { console.warn('Viz error:', vizKey, e); }
+          }
+        }
+      });
+    }, { threshold: 0.5 });
+
+    steps.forEach(s => observer.observe(s));
+  }
+
+  // ===== Progress bar =====
+  function setupProgress() {
+    const bar = document.getElementById('progress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (window.scrollY / h * 100) + '%';
+    }, { passive: true });
+  }
+
+  // ===== Hero observer for counter animation =====
+  function setupHero() {
+    const hero = document.querySelector('.hero');
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        animateCounters();
+        obs.disconnect();
+      }
+    }, { threshold: 0.3 });
+    obs.observe(hero);
+  }
+
+  // ===== Init =====
+  async function init() {
+    await loadData();
+    setupHero();
+    setupObservers();
+    setupProgress();
+    // Render initial viz for first visible section
+    renderRanking('ranking-top');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
+</body>
+</html>

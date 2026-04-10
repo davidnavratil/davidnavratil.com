@@ -25,6 +25,22 @@ export interface Analysis {
 
 export const analyses: Analysis[] = [
   {
+    key: 'cesta-nafty',
+    href: { cs: '/analyses/cesta-nafty/', en: '/analyses/cesta-nafty/?lang=en' },
+    image: '/images/preview-cesta-nafty.webp',
+    tags: ['tag.energy', 'tag.supply', 'tag.geopolitics'],
+    live: true,
+    date: '2026-04',
+  },
+  {
+    key: 'fertilizer-crisis',
+    href: '/analyses/fertilizer-crisis/',
+    image: '/images/preview-fertilizer.webp',
+    tags: ['tag.geopolitics', 'tag.supply', 'tag.food'],
+    live: false,
+    date: '2026-04',
+  },
+  {
     key: 'hormuz-simulator',
     href: '/analyses/hormuz-energy-simulator/',
     image: '/images/preview-hormuz-simulator.webp',

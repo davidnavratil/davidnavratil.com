@@ -28,7 +28,7 @@ export const translations = {
     // Metrics
     'metrics.years.value': '15+',
     'metrics.years.label': 'let v\u00a0makroekonomii',
-    'metrics.analyses.value': '6',
+    'metrics.analyses.value': '7',
     'metrics.analyses.label': 'interaktivních analýz',
     'metrics.articles.value': '700+',
     'metrics.articles.label': 'článků a\u00a0analýz',
@@ -52,6 +52,14 @@ export const translations = {
     'analyses.chokepoints.desc': 'Atlas míst, na kterých stojí globální obchod\u00a0— a\u00a0která mohou během dnů změnit ceny, výrobu i\u00a0politiku.',
     'analyses.chokepoints.why': 'Efektivita systému je často jen jiný název pro jeho křehkost.',
     'analyses.chokepoints.cta': 'Zobrazit atlas',
+    'analyses.cesta-nafty.title': 'Cesta nafty: od\u00a0vrtu k\u00a0pumpě',
+    'analyses.cesta-nafty.desc': 'Interaktivní anatomie české ceny nafty v\u00a0době hormuzské krize. Od těžby přes rafinaci a\u00a0marže až po\u00a0vládní opatření\u00a0— kolik z\u00a0každé koruny jde kam a\u00a0proč.',
+    'analyses.cesta-nafty.why': 'Cena na\u00a0pumpě není číslo. Je to příběh o\u00a0ropě, rafinériích a\u00a0politických rozhodnutích.',
+    'analyses.cesta-nafty.cta': 'Otevřít analýzu',
+    'analyses.fertilizer-crisis.title': 'Od ptačího trusu k\u00a0Hormuzu: jak svět přišel o\u00a0hnojiva',
+    'analyses.fertilizer-crisis.desc': 'Encyklopedie hnojiv, mapa závislostí a\u00a0simulátor krizí\u00a0— od Haber-Bosche přes Hormuz až po budoucnost výživy čtyř miliard lidí.',
+    'analyses.fertilizer-crisis.why': 'Systém, na kterém závisí polovina lidstva, nemá plán\u00a0B.',
+    'analyses.fertilizer-crisis.cta': 'Otevřít analýzu',
     'analyses.hormuz-simulator.title': 'Odhad destrukce poptávky díky zavření Hormuzu',
     'analyses.hormuz-simulator.desc': 'Interaktivní simulátor, který krok za\u00a0krokem ukazuje, kolik energie by svět ztratil při blokádě Hormuzského průlivu\u00a0— a\u00a0kolik zachrání záchranné brzdy.',
     'analyses.hormuz-simulator.why': 'I\u00a0po aktivaci všech zmírnění je dopad větší než ropné šoky sedmdesátých let.',
@@ -71,6 +79,7 @@ export const translations = {
     'tag.maps': 'Mapy',
     'tag.trade': 'Obchod',
     'tag.risks': 'Rizika',
+    'tag.food': 'Potraviny',
 
     // Why people return
     'return.title': 'Ne další komentář. Nástroj, ke\u00a0kterému se vrátíte i\u00a0za\u00a0měsíc.',
@@ -196,7 +205,7 @@ export const translations = {
     // Metrics
     'metrics.years.value': '15+',
     'metrics.years.label': 'years in macroeconomics',
-    'metrics.analyses.value': '6',
+    'metrics.analyses.value': '7',
     'metrics.analyses.label': 'interactive analyses',
     'metrics.articles.value': '700+',
     'metrics.articles.label': 'articles &\u00a0analyses',
@@ -220,6 +229,14 @@ export const translations = {
     'analyses.chokepoints.desc': 'An atlas of locations that global trade depends on\u00a0— and that can change prices, production, and policy within days.',
     'analyses.chokepoints.why': 'System efficiency is often just another name for fragility.',
     'analyses.chokepoints.cta': 'View atlas',
+    'analyses.cesta-nafty.title': 'Journey of Diesel: From Well to\u00a0Pump',
+    'analyses.cesta-nafty.desc': 'Interactive anatomy of Czech diesel prices during the Hormuz crisis. From extraction through refining and margins to\u00a0government measures\u00a0— how much of each crown goes where and\u00a0why.',
+    'analyses.cesta-nafty.why': 'The price at the pump isn\'t just a number. It\'s a story of oil, refineries, and political decisions.',
+    'analyses.cesta-nafty.cta': 'Open analysis',
+    'analyses.fertilizer-crisis.title': 'From Bird Droppings to\u00a0Hormuz: How the World Lost Its Fertilizers',
+    'analyses.fertilizer-crisis.desc': 'A fertilizer encyclopedia, dependency map, and crisis simulator\u00a0— from Haber-Bosch through Hormuz to the future of feeding four billion people.',
+    'analyses.fertilizer-crisis.why': 'The system half of humanity depends on has no plan\u00a0B.',
+    'analyses.fertilizer-crisis.cta': 'Open analysis',
     'analyses.hormuz-simulator.title': 'Hormuz demand destruction estimate',
     'analyses.hormuz-simulator.desc': 'An interactive simulator that walks you step by\u00a0step through how much energy the world would lose if the Strait of\u00a0Hormuz were blocked\u00a0— and how much the safety nets would save.',
     'analyses.hormuz-simulator.why': 'Even after all mitigations, the impact exceeds the oil shocks of the 1970s.',
@@ -239,6 +256,7 @@ export const translations = {
     'tag.maps': 'Maps',
     'tag.trade': 'Trade',
     'tag.risks': 'Risks',
+    'tag.food': 'Food',
 
     // Why people return
     'return.title': 'Not another commentary. A tool you\'ll come back to in a month.',
