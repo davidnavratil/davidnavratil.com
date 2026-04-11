@@ -1192,8 +1192,8 @@ html {
 
   function getColors() { return isDark() ? COLORS_DARK : COLORS_LIGHT; }
 
-  // Convenience alias — always current palette
-  const COLORS = new Proxy({}, { get: (_, prop) => getColors()[prop] });
+  // Convenience alias — called at render time so dark/light is always current
+  const C = () => getColors();
 
   const CLUSTER_COLOR_MAP_FN = () => ({
     'Prosperující regiony': getColors().prosper,
@@ -1212,8 +1212,7 @@ html {
     };
   }
 
-  // Keep PLOTLY_LAYOUT as getter for backward compat in spreads
-  const PLOTLY_LAYOUT = new Proxy({}, { get: (_, prop) => getPlotlyLayout()[prop] });
+  // PLOTLY_LAYOUT removed — use ...getPlotlyLayout() directly
 
   const PLOTLY_CONFIG = { displayModeBar: false, responsive: true };
 
@@ -1364,12 +1363,12 @@ html {
       },
       text: avgScores.map(v => v.toFixed(1)),
       textposition: 'outside',
-      textfont: { size: 12, color: COLORS.navy },
+      textfont: { size: 12, color: C().navy },
       hovertemplate: '<b>%{y}</b><br>Celkové skóre: %{x:.1f}<extra></extra>',
       showlegend: false,
     }], {
       ...getPlotlyLayout(),
-      title: { text: isBottom ? 'Bottom 15' : 'Top 15', font: { size: 15, color: COLORS.navy } },
+      title: { text: isBottom ? 'Bottom 15' : 'Top 15', font: { size: 15, color: C().navy } },
       xaxis: { range: [0, isBottom ? 55 : 80], title: 'Průměr 7 pilířů (0–100)', gridcolor: getColors().grid },
       yaxis: { categoryorder: 'array', categoryarray: [...yLabels].reverse() },
       margin: { t: 40, r: 50, b: 50, l: 200 },
@@ -1435,7 +1434,7 @@ html {
 
     Plotly.newPlot('viz-indexes', traces, {
       ...getPlotlyLayout(),
-      title: { text: isI1I3 ? 'Infrastruktura vs. atraktivita<br><span style="font-size:13px;color:#888">Dva nezávislé rozměry prosperity</span>' : 'Sociální odolnost je klíčová<br><span style="font-size:13px;color:#888">Celková prosperita × sociální odolnost  ·  r = 0,65</span>', font: { size: 15, color: COLORS.navy } },
+      title: { text: isI1I3 ? 'Infrastruktura vs. atraktivita<br><span style="font-size:13px;color:#888">Dva nezávislé rozměry prosperity</span>' : 'Sociální odolnost je klíčová<br><span style="font-size:13px;color:#888">Celková prosperita × sociální odolnost  ·  r = 0,65</span>', font: { size: 15, color: C().navy } },
       xaxis: { title: xLabel },
       yaxis: { title: yLabel },
       height: 600,
@@ -1459,7 +1458,7 @@ html {
         text: sub.map(d => `${d.name} (${d.kraj})<br>I0: ${d.i0}, I3: ${d.i3}`),
         marker: {
           size: sub.map(d => Math.max(8, Math.sqrt(d.pop / 1000) * 2.5)),
-          color: CLUSTER_COLOR_MAP_FN()[cl] || COLORS.muted,
+          color: CLUSTER_COLOR_MAP_FN()[cl] || C().muted,
           opacity: opacity,
         },
         name: cl,
@@ -1513,9 +1512,9 @@ html {
         type: 'scattermap',
         lat: [a.lat], lon: [a.lon],
         mode: 'markers+text',
-        marker: { size: 14, color: COLORS.prosper },
+        marker: { size: 14, color: C().prosper },
         text: [a.name], textposition: 'top center',
-        textfont: { size: 13, family: 'Inter', color: COLORS.navy, weight: 600 },
+        textfont: { size: 13, family: 'Inter', color: C().navy, weight: 600 },
         showlegend: false,
         hovertemplate: `<b>${a.name}</b><br>#${a.rank}<extra></extra>`,
       },
@@ -1523,9 +1522,9 @@ html {
         type: 'scattermap',
         lat: [b.lat], lon: [b.lon],
         mode: 'markers+text',
-        marker: { size: 14, color: COLORS.weak },
+        marker: { size: 14, color: C().weak },
         text: [b.name], textposition: 'bottom center',
-        textfont: { size: 13, family: 'Inter', color: COLORS.navy, weight: 600 },
+        textfont: { size: 13, family: 'Inter', color: C().navy, weight: 600 },
         showlegend: false,
         hovertemplate: `<b>${b.name}</b><br>#${b.rank}<extra></extra>`,
       },
@@ -1571,14 +1570,14 @@ html {
         type: 'scatter', mode: 'markers',
         x: aVals, y: yLabels,
         name: `#${a.rank} ${a.name}`,
-        marker: { size: dims.map((_, i) => i === 0 ? 15 : 11), color: COLORS.prosper, line: { width: 2, color: 'white' } },
+        marker: { size: dims.map((_, i) => i === 0 ? 15 : 11), color: C().prosper, line: { width: 2, color: 'white' } },
         hovertemplate: dims.map(d => `<b>${a.name}</b><br>${d.label}: %{x:.1f}<extra></extra>`),
       },
       {
         type: 'scatter', mode: 'markers',
         x: bVals, y: yLabels,
         name: `#${b.rank} ${b.name}`,
-        marker: { size: dims.map((_, i) => i === 0 ? 15 : 11), color: COLORS.weak, line: { width: 2, color: 'white' } },
+        marker: { size: dims.map((_, i) => i === 0 ? 15 : 11), color: C().weak, line: { width: 2, color: 'white' } },
         hovertemplate: dims.map(d => `<b>${b.name}</b><br>${d.label}: %{x:.1f}<extra></extra>`),
       },
     ], {
@@ -1647,7 +1646,7 @@ html {
       }
     ], {
       ...getPlotlyLayout(),
-      title: { text: `${title}<br><span style="font-size:14px;color:#888">${xName} × ${yName}  ·  r = ${rFormatted}</span>`, font: { size: 16, color: COLORS.navy } },
+      title: { text: `${title}<br><span style="font-size:14px;color:#888">${xName} × ${yName}  ·  r = ${rFormatted}</span>`, font: { size: 16, color: C().navy } },
       xaxis: { title: xName, range: [0, 210], gridcolor: getColors().grid },
       yaxis: { title: yName, range: [0, 210], gridcolor: getColors().grid },
       height: 580,
@@ -1662,14 +1661,14 @@ html {
 
     let colors, sizes;
     if (highlight === 'momentum-vysocina') {
-      colors = orp.map(d => d.kraj === 'Kraj Vysočina' ? COLORS.weak : (isDark() ? '#555' : '#ddd'));
+      colors = orp.map(d => d.kraj === 'Kraj Vysočina' ? C().weak : (isDark() ? '#555' : '#ddd'));
       sizes = orp.map(d => d.kraj === 'Kraj Vysočina' ? 12 : 5);
     } else if (highlight === 'momentum-leaders') {
       const leaders = new Set(['Turnov', 'Podbořany']);
-      colors = orp.map(d => leaders.has(d.name) ? COLORS.accent : (isDark() ? '#555' : '#ddd'));
+      colors = orp.map(d => leaders.has(d.name) ? C().accent : (isDark() ? '#555' : '#ddd'));
       sizes = orp.map(d => leaders.has(d.name) ? 14 : 5);
     } else {
-      colors = orp.map(d => d.momentum > 0 ? COLORS.prosper : COLORS.weak);
+      colors = orp.map(d => d.momentum > 0 ? C().prosper : C().weak);
       sizes = orp.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2));
     }
 
@@ -1691,7 +1690,7 @@ html {
         showarrow: true,
         arrowhead: 0, arrowcolor: '#bbb', arrowwidth: 1,
         ax: labelPositions[d.name].ax, ay: labelPositions[d.name].ay,
-        font: { size: 11, color: COLORS.navy, family: 'Inter' },
+        font: { size: 11, color: C().navy, family: 'Inter' },
         bgcolor: 'rgba(255,255,255,0.8)',
         borderpad: 2,
       }));
@@ -1706,7 +1705,7 @@ html {
       }
     ], {
       ...getPlotlyLayout(),
-      title: { text: 'Kdo roste, kdo padá<br><span style="font-size:13px;color:#888">Celková prosperita × roční momentum (2021–2026)</span>', font: { size: 15, color: COLORS.navy } },
+      title: { text: 'Kdo roste, kdo padá<br><span style="font-size:13px;color:#888">Celková prosperita × roční momentum (2021–2026)</span>', font: { size: 15, color: C().navy } },
       xaxis: { title: 'Celková prosperita (4F skóre)', range: [14, 82] },
       yaxis: { title: 'Roční momentum (annualizovaný)', zeroline: true, zerolinecolor: '#ccc', range: [-10, 10] },
       shapes: [
@@ -1738,7 +1737,7 @@ html {
         text: sub.map(d => `${d.name}<br>Účast: ${d.ucast25}%<br>I3: ${d.i3}`),
         marker: {
           size: sub.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2)),
-          color: CLUSTER_COLOR_MAP_FN()[cl] || COLORS.muted,
+          color: CLUSTER_COLOR_MAP_FN()[cl] || C().muted,
           line: { width: 0.5, color: 'white' },
         },
         name: cl,
@@ -1748,7 +1747,7 @@ html {
 
     Plotly.react('viz-elections', traces, {
       ...getPlotlyLayout(),
-      title: { text: 'Kde je sociální odolnost, chodí se k volbám<br><span style="font-size:13px;color:#888">Sociální odolnost × volební účast 2025  ·  r = 0,88</span>', font: { size: 15, color: COLORS.navy } },
+      title: { text: 'Kde je sociální odolnost, chodí se k volbám<br><span style="font-size:13px;color:#888">Sociální odolnost × volební účast 2025  ·  r = 0,88</span>', font: { size: 15, color: C().navy } },
       xaxis: { title: 'Sociální odolnost (0–100)', range: [5, 100], gridcolor: getColors().grid },
       yaxis: { title: 'Volební účast 2025 (%)', range: [52, 78] },
       height: 600,
@@ -1777,7 +1776,7 @@ html {
       hovertemplate: '<b>%{text}</b><br>Prosperita: %{x:.0f}<br>ANO: %{y:.1f}%<extra></extra>',
     }], {
       ...getPlotlyLayout(),
-      title: { text: 'Jedna strana, jedna dělicí čára<br><span style="font-size:13px;color:#888">Celková prosperita × podíl ANO  ·  r = −0,68  ·  barva = sociální odolnost</span>', font: { size: 15, color: COLORS.navy } },
+      title: { text: 'Jedna strana, jedna dělicí čára<br><span style="font-size:13px;color:#888">Celková prosperita × podíl ANO  ·  r = −0,68  ·  barva = sociální odolnost</span>', font: { size: 15, color: C().navy } },
       xaxis: { title: 'Celková prosperita (0–100)', gridcolor: getColors().grid },
       yaxis: { title: 'Podíl hlasů ANO (%)', gridcolor: getColors().grid },
       margin: { t: 70, r: 20, b: 50, l: 60 },
@@ -1799,7 +1798,7 @@ html {
         text: sub.map(d => `${d.name}<br>Δ účast: +${d.d_ucast.toFixed(1)} p.b.<br>Účast 2025: ${d.ucast25}%<br>Soc. odolnost: ${d.i2}`),
         marker: {
           size: sub.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2)),
-          color: CLUSTER_COLOR_MAP_FN()[cl] || COLORS.muted,
+          color: CLUSTER_COLOR_MAP_FN()[cl] || C().muted,
           line: { width: 0.5, color: 'white' },
         },
         name: cl,
@@ -1809,7 +1808,7 @@ html {
 
     Plotly.react('viz-elections', traces, {
       ...getPlotlyLayout(),
-      title: { text: 'Sociální odolnost vs. změna volební účasti<br><span style="font-size:13px;color:#888">2021 → 2025  ·  r = −0,58</span>', font: { size: 15, color: COLORS.navy } },
+      title: { text: 'Sociální odolnost vs. změna volební účasti<br><span style="font-size:13px;color:#888">2021 → 2025  ·  r = −0,58</span>', font: { size: 15, color: C().navy } },
       xaxis: { title: 'Sociální odolnost (0–100)', gridcolor: getColors().grid },
       yaxis: { title: 'Změna volební účasti (p.b.)', zeroline: true, zerolinecolor: '#ccc', gridcolor: getColors().grid },
       height: 600,
@@ -1833,7 +1832,7 @@ html {
         text: sub.map(d => `${d.name}<br>ANO+SPD+Mot.+Stač.: ${(d.populist25 || d.ano25).toFixed(1)}%<br>ANO: ${d.ano25}%<br>Soc. odolnost: ${d.i2}`),
         marker: {
           size: sub.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2)),
-          color: CLUSTER_COLOR_MAP_FN()[cl] || COLORS.muted,
+          color: CLUSTER_COLOR_MAP_FN()[cl] || C().muted,
           line: { width: 0.5, color: 'white' },
         },
         name: cl,
@@ -1843,7 +1842,7 @@ html {
 
     Plotly.react('viz-elections', traces, {
       ...getPlotlyLayout(),
-      title: { text: 'Sociální odolnost vs. strany slibující změnu<br><span style="font-size:13px;color:#888">ANO + SPD + Motoristé + Stačilo!  ·  r = −0,73</span>', font: { size: 15, color: COLORS.navy } },
+      title: { text: 'Sociální odolnost vs. strany slibující změnu<br><span style="font-size:13px;color:#888">ANO + SPD + Motoristé + Stačilo!  ·  r = −0,73</span>', font: { size: 15, color: C().navy } },
       xaxis: { title: 'Sociální odolnost (0–100)', gridcolor: getColors().grid },
       yaxis: { title: 'ANO + SPD + Motoristé + Stačilo! (%)', gridcolor: getColors().grid },
       height: 600,
@@ -2036,9 +2035,9 @@ html {
       sugBox.classList.remove('visible');
 
       const dims = [
-        { key: 'i1', label: 'Infrastruktura', color: COLORS.accent },
-        { key: 'i2', label: 'Sociální odolnost', color: COLORS.navy },
-        { key: 'i3', label: 'Atraktivita', color: COLORS.prosper },
+        { key: 'i1', label: 'Infrastruktura', color: C().accent },
+        { key: 'i2', label: 'Sociální odolnost', color: C().navy },
+        { key: 'i3', label: 'Atraktivita', color: C().prosper },
         { key: 'i4', label: 'Demografie', color: '#c08020' },
       ];
 
