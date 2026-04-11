@@ -7,9 +7,13 @@
 <meta name="description" content="V Orlové má exekuci každý osmý. 37 km odsud, ve Frýdlantu, čtyřikrát méně. 49 ukazatelů, 206 regionů. Interaktivní analýza prosperity českých měst.">
 <meta name="author" content="David Navrátil">
 
-<!-- Hreflang -->
+<!-- Canonical + Hreflang -->
+<link rel="canonical" href="https://davidnavratil.com/analyses/index-silnejsich-regionu/" />
 <link rel="alternate" hreflang="cs" href="https://davidnavratil.com/analyses/index-silnejsich-regionu/" />
 <link rel="alternate" hreflang="x-default" href="https://davidnavratil.com/analyses/index-silnejsich-regionu/" />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 <!-- Open Graph -->
 <meta property="og:title" content="Index silnějších regionů · Příběh za prosperitou českých měst">
@@ -41,8 +45,24 @@
 <!-- Shared brand layer -->
 <link rel="stylesheet" href="https://davidnavratil.com/shared/brand.css">
 
-<!-- Plotly -->
-<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<!-- JSON-LD structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Index silnějších regionů — Příběh za prosperitou českých měst",
+  "description": "49 ukazatelů, 206 regionů. Interaktivní analýza prosperity českých měst: co rozhoduje o kvalitě života a jak se promítá do voleb.",
+  "author": { "@type": "Person", "name": "David Navrátil", "url": "https://davidnavratil.com" },
+  "publisher": { "@type": "Person", "name": "David Navrátil" },
+  "datePublished": "2026-04-12",
+  "image": "https://davidnavratil.com/analyses/index-silnejsich-regionu/og-image.png",
+  "url": "https://davidnavratil.com/analyses/index-silnejsich-regionu/",
+  "inLanguage": "cs"
+}
+</script>
+
+<!-- Plotly (deferred to avoid blocking first paint) -->
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8" defer></script>
 
 <style>
 /* ===== Reset + Tokens (from davidnavratil.com) ===== */
@@ -69,23 +89,21 @@
   --cluster-weak: #d62728;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #1C1B18;
-    --color-surface: #2A2824;
-    --color-text: #F0EDE6;
-    --color-text-secondary: #A8A49C;
-    --color-accent: #5B9EAD;
-    --color-accent-hover: #7AB4C0;
-    --color-border: #3D3B36;
-    --color-muted: #A09C94;
-    --color-navy: #4A8BC2;
-    --color-band: #2A2824;
-    /* Cluster colors — lighter for dark bg contrast */
-    --cluster-prosper: #4cca4c;
-    --cluster-urban: #5B9EAD;
-    --cluster-weak: #ef5350;
-  }
+/* Dark mode — toggled via .dark class on <html> */
+html.dark {
+  --color-bg: #1C1B18;
+  --color-surface: #2A2824;
+  --color-text: #F0EDE6;
+  --color-text-secondary: #A8A49C;
+  --color-accent: #5B9EAD;
+  --color-accent-hover: #7AB4C0;
+  --color-border: #3D3B36;
+  --color-muted: #A09C94;
+  --color-navy: #4A8BC2;
+  --color-band: #2A2824;
+  --cluster-prosper: #4cca4c;
+  --cluster-urban: #5B9EAD;
+  --cluster-weak: #ef5350;
 }
 
 html {
@@ -96,6 +114,58 @@ html {
   background: var(--color-bg);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ===== Skip link ===== */
+.skip-link {
+  position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  background: var(--color-accent); color: #fff; padding: 0.5rem 1.5rem;
+  border-radius: 0 0 8px 8px; z-index: 1000; font-size: 0.85rem;
+  text-decoration: none; transition: top 0.2s;
+}
+.skip-link:focus { top: 0; }
+
+/* ===== Analysis header ===== */
+.analysis-header .brand-header-inner {
+  display: flex; align-items: center; gap: 0.5rem; flex-wrap: nowrap;
+  max-width: 1400px; margin: 0 auto; padding: 0 1rem;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.analysis-header .brand-header-inner::-webkit-scrollbar { display: none; }
+.header-title {
+  font-family: var(--font-serif); font-size: 0.85rem; font-weight: 700;
+  color: var(--color-navy); white-space: nowrap;
+}
+.header-chapters {
+  display: flex; align-items: center; gap: 0.15rem; margin-left: 0.25rem;
+}
+.chapter-link {
+  font-size: 0.78rem; font-weight: 500; color: var(--color-muted);
+  text-decoration: none; padding: 0.25rem 0.5rem; border-radius: 6px;
+  white-space: nowrap; transition: color 0.15s, background 0.15s;
+}
+.chapter-link:hover { color: var(--color-accent); background: var(--color-band); }
+.chapter-link.active { color: var(--color-accent); background: var(--color-band); font-weight: 600; }
+.back-label { white-space: nowrap; }
+
+.header-actions {
+  margin-left: auto; display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0;
+}
+.theme-toggle {
+  background: none; border: 1px solid var(--color-border); border-radius: 8px;
+  cursor: pointer; padding: 0.35rem; display: flex; align-items: center;
+  color: var(--color-muted); transition: color 0.15s, border-color 0.15s;
+}
+.theme-toggle:hover { color: var(--color-accent); border-color: var(--color-accent); }
+.theme-toggle .icon-moon { display: none; }
+html.dark .theme-toggle .icon-sun { display: none; }
+html.dark .theme-toggle .icon-moon { display: block; }
+html.dark .analysis-header { background: rgba(28,27,24,0.95); }
+
+@media (max-width: 900px) {
+  .header-chapters { display: none; }
+  .header-title { font-size: 0.8rem; }
 }
 
 /* ===== Layout ===== */
@@ -680,17 +750,35 @@ html {
 
 <body>
 
-<header class="brand-header">
+<a href="#main-content" class="skip-link">Přeskočit na obsah</a>
+
+<header class="brand-header analysis-header" id="analysis-header">
   <div class="brand-header-inner">
     <a href="https://davidnavratil.com/" class="brand-back-link">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      davidnavratil.com
+      <span class="back-label">davidnavratil.com</span>
     </a>
     <div class="brand-header-divider"></div>
+    <span class="header-title">Index silnějších regionů</span>
+    <nav class="header-chapters" aria-label="Kapitoly">
+      <a href="#sec-data" class="chapter-link" data-section="sec-data">Data</a>
+      <a href="#sec-indexes" class="chapter-link" data-section="sec-indexes">Indexy</a>
+      <a href="#sec-correlations" class="chapter-link" data-section="sec-correlations">Korelace</a>
+      <a href="#sec-clusters" class="chapter-link" data-section="sec-clusters">Mapa</a>
+      <a href="#sec-pairs" class="chapter-link" data-section="sec-pairs">Sousedé</a>
+      <a href="#sec-momentum" class="chapter-link" data-section="sec-momentum">Dynamika</a>
+      <a href="#sec-elections" class="chapter-link" data-section="sec-elections">Volby</a>
+    </nav>
+    <div class="header-actions">
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Přepnout tmavý/světlý režim" title="Tmavý režim">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      </button>
+    </div>
   </div>
 </header>
 
-<main>
+<main id="main-content">
 <div class="progress-bar" id="progress"></div>
 
 <!-- ===== HOOK: Orlová × Frýdlant nad Ostravicí ===== -->
@@ -1090,9 +1178,9 @@ html {
     <div class="cta-share">
       <p><strong>Sdílejte analýzu</strong></p>
       <div class="cta-buttons">
-        <button type="button" class="cta-btn" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent('V Orlové má exekuci každý osmý. 37 km odsud, čtyřikrát méně. Interaktivní analýza 206 regionů Česka.'),'_blank','width=600,height=400')">𝕏 / Twitter</button>
-        <button type="button" class="cta-btn" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank','width=600,height=400')">LinkedIn</button>
-        <button type="button" class="cta-btn" onclick="navigator.clipboard.writeText(location.href).then(()=>{this.textContent='Zkopírováno ✓';setTimeout(()=>{this.textContent='Kopírovat odkaz'},2000)})">Kopírovat odkaz</button>
+        <button type="button" class="cta-btn" aria-label="Sdílet na X / Twitter" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent('V Orlové má exekuci každý osmý. 37 km odsud, čtyřikrát méně. Interaktivní analýza 206 regionů Česka.'),'_blank','width=600,height=400')">𝕏 / Twitter</button>
+        <button type="button" class="cta-btn" aria-label="Sdílet na LinkedIn" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank','width=600,height=400')">LinkedIn</button>
+        <button type="button" class="cta-btn" aria-label="Kopírovat odkaz do schránky" onclick="navigator.clipboard.writeText(location.href).then(()=>{this.textContent='Zkopírováno ✓';setTimeout(()=>{this.textContent='Kopírovat odkaz'},2000)})">Kopírovat odkaz</button>
       </div>
     </div>
     <div class="cta-links">
@@ -1174,8 +1262,8 @@ html {
   const DATA_BASE = './data/';
   let DATA = {};
 
-  // Colors matching design tokens — dark mode aware
-  const isDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+  // Colors matching design tokens — dark mode via .dark class on <html>
+  const isDark = () => document.documentElement.classList.contains('dark');
 
   const COLORS_LIGHT = {
     accent: '#1B7D8A', navy: '#163A5F',
@@ -2073,7 +2161,63 @@ html {
   }
 
   // ===== Init =====
+  // ===== Dark mode toggle =====
+  function setupDarkMode() {
+    // Respect saved preference, then system preference
+    const saved = localStorage.getItem('theme');
+    if (saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const dark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+      // Re-render active visualization
+      const active = document.querySelector('.step.active');
+      if (active) {
+        const vizKey = active.dataset.viz;
+        if (vizKey && VIZ_MAP[vizKey]) VIZ_MAP[vizKey]();
+      }
+      // Re-render data wall if visible
+      const dataWallEl = document.querySelector('#viz-data');
+      if (dataWallEl && dataWallEl.children.length > 0) renderDataWall();
+    });
+
+    // Also respect system changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        document.documentElement.classList.toggle('dark', e.matches);
+        const active = document.querySelector('.step.active');
+        if (active) {
+          const vizKey = active.dataset.viz;
+          if (vizKey && VIZ_MAP[vizKey]) VIZ_MAP[vizKey]();
+        }
+      }
+    });
+  }
+
+  // ===== Chapter nav highlighting =====
+  function setupChapterNav() {
+    const links = document.querySelectorAll('.chapter-link');
+    const sections = [...document.querySelectorAll('.scroll-section')];
+    if (!links.length || !sections.length) return;
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY + window.innerHeight / 3;
+      let currentId = '';
+      for (const sec of sections) {
+        if (sec.offsetTop <= scrollY) currentId = sec.id;
+      }
+      links.forEach(link => {
+        link.classList.toggle('active', link.dataset.section === currentId);
+      });
+    }, { passive: true });
+  }
+
   async function init() {
+    setupDarkMode();
     try {
       await loadData();
     } catch (err) {
@@ -2086,16 +2230,8 @@ html {
     setupProgress();
     setupScrollHints();
     setupSearch();
+    setupChapterNav();
     renderDataWall();
-
-    // Re-render active viz on dark mode toggle
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-      const active = document.querySelector('.step.active');
-      if (active) {
-        const vizKey = active.dataset.viz;
-        if (vizKey && VIZ_MAP[vizKey]) VIZ_MAP[vizKey]();
-      }
-    });
   }
 
   if (document.readyState === 'loading') {
