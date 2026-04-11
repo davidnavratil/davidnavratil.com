@@ -36,6 +36,10 @@ export const translations = {
     // Analyses section
     'analyses.title': 'Analýzy, ke\u00a0kterým se nechodí pro názor, ale pro orientaci',
     'analyses.subtitle': 'Každá analýza spojuje data, scénáře a\u00a0vizuální logiku. Ne proto, aby ohromovala. Ale aby se v\u00a0ní dalo myslet.',
+    'analyses.index-regionu.title': 'Index silnějších regionů',
+    'analyses.index-regionu.desc': '49\u00a0ukazatelů, 206\u00a0regionů. Interaktivní analýza: co\u00a0rozhoduje o\u00a0kvalitě života v\u00a0českých městech a\u00a0jak se to promítá do\u00a0voleb.',
+    'analyses.index-regionu.why': 'V\u00a0Orlové má exekuci každý osmý. 37\u00a0km odsud čtyřikrát méně.',
+    'analyses.index-regionu.cta': 'Otevřít analýzu',
     'analyses.qatar.title': 'Proč oprava Kataru potrvá roky',
     'analyses.qatar.desc': 'Íránské rakety nezasáhly jen budovy\u00a0— zničily kryogenní stroje, které vyrábí pět firem na\u00a0světě. Analýza tří úzkých míst, kaskádových dopadů na\u00a0helium a\u00a0polovodiče a\u00a0scénářů obnovy.',
     'analyses.qatar.why': 'Trhy ocenily energetický šok. Neoceňují šok strojírenský.',
@@ -80,6 +84,9 @@ export const translations = {
     'tag.trade': 'Obchod',
     'tag.risks': 'Rizika',
     'tag.food': 'Potraviny',
+    'tag.data': 'Data',
+    'tag.czech': 'Česko',
+    'tag.elections': 'Volby',
 
     // Why people return
     'return.title': 'Ne další komentář. Nástroj, ke\u00a0kterému se vrátíte i\u00a0za\u00a0měsíc.',
@@ -213,6 +220,10 @@ export const translations = {
     // Analyses section
     'analyses.title': 'Not opinions. Orientation.',
     'analyses.subtitle': 'Each analysis connects data, scenarios, and visual logic. Not to impress. But to think with.',
+    'analyses.index-regionu.title': 'Czech Regional Prosperity Index',
+    'analyses.index-regionu.desc': '49\u00a0indicators, 206\u00a0regions. Interactive analysis: what drives quality of life in Czech cities and how it shapes elections.',
+    'analyses.index-regionu.why': 'In Orlová, one in eight faces foreclosure. 37\u00a0km away, four times fewer.',
+    'analyses.index-regionu.cta': 'Open analysis',
     'analyses.qatar.title': 'Why repairing Qatar will take years',
     'analyses.qatar.desc': 'Iranian missiles didn\'t just hit buildings\u00a0— they destroyed cryogenic machines made by only five companies on\u00a0earth. An analysis of three bottlenecks, cascading impacts on\u00a0helium and\u00a0semiconductors, and repair scenarios.',
     'analyses.qatar.why': 'Markets priced the energy shock. They haven\'t priced the engineering shock.',
@@ -257,6 +268,9 @@ export const translations = {
     'tag.trade': 'Trade',
     'tag.risks': 'Risks',
     'tag.food': 'Food',
+    'tag.data': 'Data',
+    'tag.czech': 'Czechia',
+    'tag.elections': 'Elections',
 
     // Why people return
     'return.title': 'Not another commentary. A tool you\'ll come back to in a month.',

@@ -25,6 +25,14 @@ export interface Analysis {
 
 export const analyses: Analysis[] = [
   {
+    key: 'index-regionu',
+    href: '/analyses/index-silnejsich-regionu/',
+    image: '/images/preview-index-regionu.webp',
+    tags: ['tag.data', 'tag.czech', 'tag.elections'],
+    live: true,
+    date: '2026-04',
+  },
+  {
     key: 'cesta-nafty',
     href: { cs: '/analyses/cesta-nafty/', en: '/analyses/cesta-nafty/?lang=en' },
     image: '/images/preview-cesta-nafty.webp',

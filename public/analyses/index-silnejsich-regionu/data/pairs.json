@@ -1,1 +1,118 @@
-[{"pair": {"a": {"name": "Hlučín", "lat": 49.9245, "lon": 18.1938, "i0": 40.5, "i3": 74.8}, "b": {"name": "Ostrava", "lat": 49.8059, "lon": 18.2281, "i0": 38.5, "i3": 18.5}, "km": 13.0}, "headline": "Hlučín × Ostrava", "km": 13, "key_stat": "Sociální zdraví: 75 vs. 19", "insight": "Krajské město je na tom hůř než jeho satelit. Hlučínsko si historicky udrželo silné rodinné vazby, zatímco Ostrava nese celou tíhu útlumu těžkého průmyslu."}, {"pair": {"a": {"name": "Jilemnice", "lat": 50.6466, "lon": 15.5059, "i0": 98.0, "i3": 69.1}, "b": {"name": "Tanvald", "lat": 50.7683, "lon": 15.3394, "i0": 74.1, "i3": 14.4}, "km": 18.0}, "headline": "Jilemnice × Tanvald", "km": 18, "key_stat": "Exekuce: 3,7 % vs. 10,7 %", "insight": "Stejná krajina, stejná velikost, 18 km. Vzdělávací úspěšnost: nejlepší v republice vs. dolní pětina. Rozdíl v naději dožití: 2 roky."}, {"pair": {"a": {"name": "České Budějovice", "lat": 49.0202, "lon": 14.4688, "i0": 84.9, "i3": 67.9}, "b": {"name": "Český Krumlov", "lat": 48.765, "lon": 14.1973, "i0": 42.9, "i3": 28.5}, "km": 35.0}, "headline": "České Budějovice × Český Krumlov", "km": 35, "key_stat": "UNESCO klenot v sociálním napětí", "insight": "Turismus přináší tržby, ale ne stabilní zaměstnání ani dostupné bydlení. Monokultura cestovního ruchu eroduje sociální tkáň."}, {"pair": {"a": {"name": "Uničov", "lat": 49.7962, "lon": 17.1261, "i0": 39.5, "i3": 62.5}, "b": {"name": "Rýmařov", "lat": 49.944, "lon": 17.2706, "i0": 18.0, "i3": 26.8}, "km": 19.0}, "headline": "Uničov × Rýmařov", "km": 19, "key_stat": "Sebevraždy: 5× víc v Rýmařově", "insight": "Rýmařov má krásnou krajinu a turistickou atraktivitu. Ale nikdo tam nestaví, ekonomika stagnuje, populace stárne. Krajina není lék na ekonomiku."}]
+[
+ {
+  "pair": {
+   "a": {
+    "name": "Olomouc",
+    "lat": 49.6141,
+    "lon": 17.3669,
+    "pop": 169437,
+    "rank": 4,
+    "skore": 72.9,
+    "i1": 83.7,
+    "i2": 83.8,
+    "i3": 61.0,
+    "i4": 49.1
+   },
+   "b": {
+    "name": "Vítkov",
+    "lat": 49.8005,
+    "lon": 17.7177,
+    "pop": 13105,
+    "rank": 186,
+    "skore": 28.2,
+    "i1": 5.3,
+    "i2": 19.8,
+    "i3": 42.5,
+    "i4": 66.4
+   }
+  },
+  "story": "Krajské město vs. periferie ve stejném kraji"
+ },
+ {
+  "pair": {
+   "a": {
+    "name": "Hradec Králové",
+    "lat": 50.2217,
+    "lon": 15.7482,
+    "pop": 150287,
+    "rank": 31,
+    "skore": 68.1,
+    "i1": 78.3,
+    "i2": 82.3,
+    "i3": 48.3,
+    "i4": 50.4
+   },
+   "b": {
+    "name": "Nový Bydžov",
+    "lat": 50.2523,
+    "lon": 15.494,
+    "pop": 18114,
+    "rank": 167,
+    "skore": 34.2,
+    "i1": 14.0,
+    "i2": 59.5,
+    "i3": 12.4,
+    "i4": 54.8
+   }
+  },
+  "story": "19 km — nejbližší extrém"
+ },
+ {
+  "pair": {
+   "a": {
+    "name": "České Budějovice",
+    "lat": 49.0202,
+    "lon": 14.4688,
+    "pop": 168393,
+    "rank": 32,
+    "skore": 67.8,
+    "i1": 80.7,
+    "i2": 77.5,
+    "i3": 63.0,
+    "i4": 31.5
+   },
+   "b": {
+    "name": "Český Krumlov",
+    "lat": 48.765,
+    "lon": 14.1973,
+    "pop": 41551,
+    "rank": 118,
+    "skore": 52.0,
+    "i1": 34.9,
+    "i2": 40.0,
+    "i3": 100.0,
+    "i4": 36.7
+   }
+  },
+  "story": "UNESCO klenot v sociálním napětí"
+ },
+ {
+  "pair": {
+   "a": {
+    "name": "Praha",
+    "lat": 50.0668,
+    "lon": 14.466,
+    "pop": 1397880,
+    "rank": 9,
+    "skore": 73.7,
+    "i1": 95.6,
+    "i2": 78.0,
+    "i3": 72.8,
+    "i4": 25.3
+   },
+   "b": {
+    "name": "Český Brod",
+    "lat": 50.0586,
+    "lon": 14.8568,
+    "pop": 21148,
+    "rank": 172,
+    "skore": 29.9,
+    "i1": 20.2,
+    "i2": 61.0,
+    "i3": 17.8,
+    "i4": 5.1
+   }
+  },
+  "story": "Metropole vs. zázemí kde se špatně žije"
+ }
+]
