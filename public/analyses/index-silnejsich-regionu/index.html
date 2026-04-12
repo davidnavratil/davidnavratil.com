@@ -26,6 +26,7 @@
 <meta property="og:locale" content="cs_CZ">
 <meta property="og:site_name" content="Peníze, procenta a prosperita">
 <meta property="article:author" content="David Navrátil">
+<meta property="article:published_time" content="2026-04-12">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
@@ -190,7 +191,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 }
 .hook-sub {
   font-size: clamp(1rem, 2vw, 1.25rem);
-  color: rgba(240,237,230,0.6);
+  color: rgba(240,237,230,0.78);
   margin-bottom: 2rem;
 }
 .hook-contrast {
@@ -205,7 +206,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
   .hook-contrast { grid-template-columns: 1fr; gap: 0.75rem; }
   .hook-vs { display: none; }
 }
-.hook-city h3 {
+.hook-city .hook-city-name {
   font-family: var(--font-serif);
   font-size: 1.1rem;
   font-weight: 700;
@@ -221,7 +222,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 }
 .hook-city .hook-label {
   font-size: 0.75rem;
-  color: rgba(240,237,230,0.5);
+  color: rgba(240,237,230,0.72);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -230,7 +231,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 .hook-vs {
   font-family: var(--font-serif);
   font-size: 1.5rem;
-  color: rgba(240,237,230,0.3);
+  color: rgba(240,237,230,0.5);
 }
 .hook-question {
   font-family: var(--font-serif);
@@ -241,7 +242,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 }
 .hook-answer {
   font-size: 1.05rem;
-  color: rgba(240,237,230,0.65);
+  color: rgba(240,237,230,0.8);
   max-width: 520px;
   margin: 0 auto;
   line-height: 1.7;
@@ -371,14 +372,14 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 }
 .hero-stat .label {
   font-size: 0.85rem;
-  color: rgba(240,237,230,0.6);
+  color: rgba(240,237,230,0.78);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 .scroll-hint {
   margin-top: 3rem;
   font-size: 0.8rem;
-  color: rgba(240,237,230,0.4);
+  color: rgba(240,237,230,0.65);
   animation: pulse 2s ease-in-out infinite;
 }
 @keyframes pulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.8; } }
@@ -509,6 +510,11 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
   display: block;
   margin: 1rem 0;
 }
+.factor-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem 2rem;
+  margin-top: 1.5rem; text-align: left; max-width: 38rem; margin-left: auto; margin-right: auto;
+}
+@media (max-width: 480px) { .factor-grid { grid-template-columns: 1fr; } }
 
 /* Conclusion */
 .conclusion {
@@ -598,7 +604,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
   outline: none;
   transition: border-color 0.2s;
 }
-.search-wrap input:focus { border-color: var(--color-accent); }
+.search-wrap input:focus { border-color: var(--color-accent); outline: 2px solid var(--color-accent); outline-offset: -2px; }
 .search-suggestions {
   position: absolute;
   top: 100%;
@@ -721,6 +727,32 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
   display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;
 }
 
+/* Substack article card */
+.substack-card {
+  margin: 2rem auto 1.5rem; max-width: 540px;
+}
+.substack-card-link {
+  display: flex; gap: 1rem; align-items: center;
+  text-decoration: none; color: var(--color-text);
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  border-radius: var(--radius); padding: 0.75rem; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.substack-card-link:hover { border-color: var(--color-accent); box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+.substack-card-img {
+  width: 120px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0;
+}
+.substack-card-body { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.substack-card-label {
+  font-size: 0.7rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;
+  color: var(--color-accent);
+}
+.substack-card-title { font-family: var(--font-serif); font-size: 0.95rem; line-height: 1.3; }
+.substack-card-desc { font-size: 0.8rem; color: var(--color-muted); line-height: 1.4; }
+@media (max-width: 480px) {
+  .substack-card-link { flex-direction: column; text-align: center; }
+  .substack-card-img { width: 100%; height: 140px; }
+}
+
 /* Chart source line */
 .viz-source {
   text-align: right;
@@ -789,14 +821,14 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 
     <div class="hook-contrast">
       <div class="hook-city weak">
-        <h3>Orlová</h3>
+        <span class="hook-city-name">Orlová</span>
         <span class="hook-number">12,2</span>
         <span class="hook-label">sociální odolnost</span>
         <span class="hook-label" style="margin-top:0.5rem;display:block">199. z 206 regionů</span>
       </div>
       <span class="hook-vs">×</span>
       <div class="hook-city strong">
-        <h3>Frýdlant n. O.</h3>
+        <span class="hook-city-name">Frýdlant n. O.</span>
         <span class="hook-number">72,7</span>
         <span class="hook-label">sociální odolnost</span>
         <span class="hook-label" style="margin-top:0.5rem;display:block">63. z 206 regionů</span>
@@ -866,7 +898,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
     <h2>Co se skrývá za jedním číslem?</h2>
     <span class="big-number">4</span>
     <p>Faktorovou analýzou jsme identifikovali čtyři nezávislé rozměry, podél kterých se regiony od sebe liší. Žádné dva spolu nekorelují. Každý vypráví jiný příběh.</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 2rem;margin-top:1.5rem;text-align:left;max-width:38rem;margin-left:auto;margin-right:auto">
+    <div class="factor-grid">
       <div><strong style="color:var(--color-accent)">Dostupnost a infrastruktura</strong><br><span style="font-size:0.92rem;opacity:0.75">Zastávky, obchody, internet, čerpací stanice, stomatologové</span></div>
       <div><strong style="color:var(--color-navy)">Sociální odolnost</strong><br><span style="font-size:0.92rem;opacity:0.75">Exekuce, kriminalita, naděje dožití, vzdělání, nezaměstnanost</span></div>
       <div><strong style="color:var(--cluster-prosper)">Atraktivita místa</strong><br><span style="font-size:0.92rem;opacity:0.75">Turismus, krajina, restaurace, muzea, sportoviště</span></div>
@@ -1183,6 +1215,16 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
         <button type="button" class="cta-btn" aria-label="Kopírovat odkaz do schránky" onclick="navigator.clipboard.writeText(location.href).then(()=>{this.textContent='Zkopírováno ✓';setTimeout(()=>{this.textContent='Kopírovat odkaz'},2000)})">Kopírovat odkaz</button>
       </div>
     </div>
+    <div class="substack-card">
+      <a href="https://davidnavratil.substack.com/p/co-rozhoduje-o-osudu-ceskych-regionu" target="_blank" rel="noopener" class="substack-card-link">
+        <img src="https://substackcdn.com/image/fetch/w_400,h_260,c_fill,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc4ba43b4-ddda-42ae-aec4-333adf1a9689_1024x1024.heic" alt="Co rozhoduje o osudu českých regionů" class="substack-card-img" loading="lazy" onerror="this.src='og-image.png'">
+        <div class="substack-card-body">
+          <span class="substack-card-label">Esej na Substacku</span>
+          <strong class="substack-card-title">Co rozhoduje o osudu českých regionů</strong>
+          <span class="substack-card-desc">Proč má Orlová pětkrát víc exekucí než Frýdlant, a co to znamená pro českou politiku.</span>
+        </div>
+      </a>
+    </div>
     <div class="cta-links">
       <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener" class="cta-btn cta-btn-outline">Kompletní žebříček na silnejsiregiony.cz</a>
       <a href="#metodologie" class="cta-btn cta-btn-outline">Metodologie</a>
@@ -1262,6 +1304,9 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
   const DATA_BASE = './data/';
   let DATA = {};
 
+  // Czech number formatting: 72.9 → "72,9"
+  const cz = (num, decimals = 1) => num.toFixed(decimals).replace('.', ',').replace('-', '−');
+
   // Colors matching design tokens — dark mode via .dark class on <html>
   const isDark = () => document.documentElement.classList.contains('dark');
 
@@ -1297,6 +1342,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
       font: { family: 'Inter, system-ui, sans-serif', color: c.text },
       margin: { t: 40, r: 20, b: 50, l: 60 },
       hoverlabel: { bgcolor: c.hover_bg, bordercolor: c.hover_border, font: { family: 'Inter', size: 13 } },
+      separators: ', ',
     };
   }
 
@@ -1449,7 +1495,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
         colorscale: isBottom ? [[0, '#e8a0a0'], [1, '#d66']] : [[0, '#8bc49e'], [1, '#2ca02c']],
         line: { width: 0 },
       },
-      text: avgScores.map(v => v.toFixed(1)),
+      text: avgScores.map(v => cz(v)),
       textposition: 'outside',
       textfont: { size: 12, color: C().navy },
       hovertemplate: '<b>%{y}</b><br>Celkové skóre: %{x:.1f}<extra></extra>',
@@ -1646,7 +1692,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
       const gap = Math.abs(a[d.key] - b[d.key]);
       return {
         x: (a[d.key] + b[d.key]) / 2, y: i,
-        text: gap >= 5 ? `<b>${gap.toFixed(0)}</b>` : '',
+        text: gap >= 5 ? `<b>${cz(gap, 0)}</b>` : '',
         showarrow: false,
         font: { size: 10, color: '#999', family: 'Inter' },
         yshift: 14,
@@ -1883,7 +1929,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
         type: 'scatter', mode: 'markers',
         x: sub.map(d => d.i2),
         y: sub.map(d => d.d_ucast),
-        text: sub.map(d => `${d.name}<br>Δ účast: +${d.d_ucast.toFixed(1)} p.b.<br>Účast 2025: ${d.ucast25}%<br>Soc. odolnost: ${d.i2}`),
+        text: sub.map(d => `${d.name}<br>Δ účast: +${cz(d.d_ucast)} p.b.<br>Účast 2025: ${d.ucast25}%<br>Soc. odolnost: ${d.i2}`),
         marker: {
           size: sub.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2)),
           color: CLUSTER_COLOR_MAP_FN()[cl] || C().muted,
@@ -1917,7 +1963,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
         type: 'scatter', mode: 'markers',
         x: sub.map(d => d.i2),
         y: sub.map(d => d.populist25 || d.ano25),
-        text: sub.map(d => `${d.name}<br>ANO+SPD+Mot.+Stač.: ${(d.populist25 || d.ano25).toFixed(1)}%<br>ANO: ${d.ano25}%<br>Soc. odolnost: ${d.i2}`),
+        text: sub.map(d => `${d.name}<br>ANO+SPD+Mot.+Stač.: ${cz(d.populist25 || d.ano25)}%<br>ANO: ${d.ano25}%<br>Soc. odolnost: ${d.i2}`),
         marker: {
           size: sub.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2)),
           color: CLUSTER_COLOR_MAP_FN()[cl] || C().muted,
@@ -2138,13 +2184,13 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
       html += `<div class="orp-meta">${[rankText, d.kraj, popText, clusterText].filter(Boolean).join(' · ')}</div>`;
       html += `<div class="orp-bar-row"><span class="orp-bar-label" style="font-weight:700">Celkové skóre</span>`;
       html += `<div class="orp-bar-track"><div class="orp-bar-fill" style="width:${d.skore}%;background:var(--color-navy)"></div></div>`;
-      html += `<span class="orp-bar-value">${d.skore.toFixed(1)}</span></div>`;
+      html += `<span class="orp-bar-value">${cz(d.skore)}</span></div>`;
 
       for (const dim of dims) {
         const val = d[dim.key];
         html += `<div class="orp-bar-row"><span class="orp-bar-label">${dim.label}</span>`;
         html += `<div class="orp-bar-track"><div class="orp-bar-fill" style="width:${val}%;background:${dim.color}"></div></div>`;
-        html += `<span class="orp-bar-value">${val.toFixed(1)}</span></div>`;
+        html += `<span class="orp-bar-value">${cz(val)}</span></div>`;
       }
       html += `</div>`;
       resultBox.innerHTML = html;
