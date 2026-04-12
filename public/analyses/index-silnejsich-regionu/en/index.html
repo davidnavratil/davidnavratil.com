@@ -1,37 +1,38 @@
 <!DOCTYPE html>
-<html lang="cs">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Index silnějších regionů | David Navrátil</title>
-<meta name="description" content="V Orlové má exekuci každý osmý. 37 km odsud, ve Frýdlantu, čtyřikrát méně. 49 ukazatelů, 206 regionů. Interaktivní analýza prosperity českých měst.">
+<title>Index of Stronger Regions | David Navrátil</title>
+<meta name="description" content="In Orlová, every eighth person faces foreclosure. 37 km away, in Frýdlant, four times fewer. 49 indicators, 206 regions. An interactive analysis of Czech regional prosperity.">
 <meta name="author" content="David Navrátil">
 
 <!-- Canonical + Hreflang -->
-<link rel="canonical" href="https://davidnavratil.com/analyses/index-silnejsich-regionu/" />
+<link rel="canonical" href="https://davidnavratil.com/analyses/index-silnejsich-regionu/en/" />
 <link rel="alternate" hreflang="cs" href="https://davidnavratil.com/analyses/index-silnejsich-regionu/" />
+<link rel="alternate" hreflang="en" href="https://davidnavratil.com/analyses/index-silnejsich-regionu/en/" />
 <link rel="alternate" hreflang="x-default" href="https://davidnavratil.com/analyses/index-silnejsich-regionu/" />
 
 <!-- Favicon -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
 <!-- Open Graph -->
-<meta property="og:title" content="Index silnějších regionů · Příběh za prosperitou českých měst">
-<meta property="og:description" content="49 ukazatelů, 206 regionů. Interaktivní analýza: co rozhoduje o kvalitě života a jak se promítá do voleb.">
+<meta property="og:title" content="Index of Stronger Regions · The Story Behind Czech Regional Prosperity">
+<meta property="og:description" content="49 indicators, 206 regions. An interactive analysis: what determines quality of life and how it shapes elections.">
 <meta property="og:type" content="article">
-<meta property="og:url" content="https://davidnavratil.com/analyses/index-silnejsich-regionu/">
+<meta property="og:url" content="https://davidnavratil.com/analyses/index-silnejsich-regionu/en/">
 <meta property="og:image" content="https://davidnavratil.com/analyses/index-silnejsich-regionu/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:locale" content="cs_CZ">
-<meta property="og:site_name" content="Peníze, procenta a prosperita">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="Money, Percentages, and Prosperity">
 <meta property="article:author" content="David Navrátil">
 <meta property="article:published_time" content="2026-04-12">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Index silnějších regionů · Příběh za prosperitou českých měst">
-<meta name="twitter:description" content="49 ukazatelů, 206 regionů. Co rozhoduje o kvalitě života a jak se promítá do voleb.">
+<meta name="twitter:title" content="Index of Stronger Regions · The Story Behind Czech Regional Prosperity">
+<meta name="twitter:description" content="49 indicators, 206 regions. What determines quality of life and how it shapes elections.">
 <meta name="twitter:image" content="https://davidnavratil.com/analyses/index-silnejsich-regionu/og-image.png">
 
 <!-- Plausible analytics -->
@@ -51,14 +52,14 @@
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "Index silnějších regionů — Příběh za prosperitou českých měst",
-  "description": "49 ukazatelů, 206 regionů. Interaktivní analýza prosperity českých měst: co rozhoduje o kvalitě života a jak se promítá do voleb.",
+  "headline": "Index of Stronger Regions — The Story Behind Czech Regional Prosperity",
+  "description": "49 indicators, 206 regions. An interactive analysis of Czech regional prosperity: what determines quality of life and how it shapes elections.",
   "author": { "@type": "Person", "name": "David Navrátil", "url": "https://davidnavratil.com" },
   "publisher": { "@type": "Person", "name": "David Navrátil" },
   "datePublished": "2026-04-12",
   "image": "https://davidnavratil.com/analyses/index-silnejsich-regionu/og-image.png",
-  "url": "https://davidnavratil.com/analyses/index-silnejsich-regionu/",
-  "inLanguage": "cs"
+  "url": "https://davidnavratil.com/analyses/index-silnejsich-regionu/en/",
+  "inLanguage": "en"
 }
 </script>
 
@@ -83,7 +84,6 @@
   --color-navy: #163A5F;
   --color-band: #EDE9E0;
   --radius: 12px;
-  /* --max-width removed — unused */
   /* Cluster colors */
   --cluster-prosper: #2ca02c;
   --cluster-urban: #1B7D8A;
@@ -788,28 +788,28 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 
 <body>
 
-<a href="#main-content" class="skip-link">Přeskočit na obsah</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <header class="brand-header analysis-header" id="analysis-header">
   <div class="brand-header-inner">
-    <a href="https://davidnavratil.com/" class="brand-back-link">
+    <a href="https://davidnavratil.com/en/" class="brand-back-link">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       <span class="back-label">davidnavratil.com</span>
     </a>
     <div class="brand-header-divider"></div>
-    <span class="header-title">Index silnějších regionů</span>
-    <nav class="header-chapters" aria-label="Kapitoly">
+    <span class="header-title">Index of Stronger Regions</span>
+    <nav class="header-chapters" aria-label="Chapters">
       <a href="#sec-data" class="chapter-link" data-section="sec-data">Data</a>
-      <a href="#sec-indexes" class="chapter-link" data-section="sec-indexes">Indexy</a>
-      <a href="#sec-correlations" class="chapter-link" data-section="sec-correlations">Korelace</a>
-      <a href="#sec-clusters" class="chapter-link" data-section="sec-clusters">Mapa</a>
-      <a href="#sec-pairs" class="chapter-link" data-section="sec-pairs">Sousedé</a>
-      <a href="#sec-momentum" class="chapter-link" data-section="sec-momentum">Dynamika</a>
-      <a href="#sec-elections" class="chapter-link" data-section="sec-elections">Volby</a>
+      <a href="#sec-indexes" class="chapter-link" data-section="sec-indexes">Indexes</a>
+      <a href="#sec-correlations" class="chapter-link" data-section="sec-correlations">Correlations</a>
+      <a href="#sec-clusters" class="chapter-link" data-section="sec-clusters">Map</a>
+      <a href="#sec-pairs" class="chapter-link" data-section="sec-pairs">Neighbors</a>
+      <a href="#sec-momentum" class="chapter-link" data-section="sec-momentum">Dynamics</a>
+      <a href="#sec-elections" class="chapter-link" data-section="sec-elections">Elections</a>
     </nav>
     <div class="header-actions">
-      <a href="./en/" class="lang-switch" title="English version">EN</a>
-      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Přepnout tmavý/světlý režim" title="Tmavý režim">
+      <a href="../" class="lang-switch" title="Czech version">CZ</a>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark/light mode" title="Dark mode">
         <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
       </button>
@@ -823,362 +823,362 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 <!-- ===== HOOK: Orlová × Frýdlant nad Ostravicí ===== -->
 <section class="hook">
   <div class="hook-inner">
-    <p class="hook-lead">V Orlové má exekuci každý osmý člověk.</p>
-    <p class="hook-sub">Ve Frýdlantu nad Ostravicí, 37 kilometrů odsud, čtyřikrát méně.</p>
+    <p class="hook-lead">In Orlová, every eighth person faces foreclosure.</p>
+    <p class="hook-sub">In Frýdlant nad Ostravicí, 37 kilometers away, four times fewer.</p>
 
     <div class="hook-contrast">
       <div class="hook-city weak">
         <span class="hook-city-name">Orlová</span>
-        <span class="hook-number">12,2</span>
-        <span class="hook-label">sociální odolnost</span>
-        <span class="hook-label" style="margin-top:0.5rem;display:block">199. z 206 regionů</span>
+        <span class="hook-number">12.2</span>
+        <span class="hook-label">social resilience</span>
+        <span class="hook-label" style="margin-top:0.5rem;display:block">199th of 206 regions</span>
       </div>
       <span class="hook-vs">×</span>
       <div class="hook-city strong">
         <span class="hook-city-name">Frýdlant n. O.</span>
-        <span class="hook-number">72,7</span>
-        <span class="hook-label">sociální odolnost</span>
-        <span class="hook-label" style="margin-top:0.5rem;display:block">63. z 206 regionů</span>
+        <span class="hook-number">72.7</span>
+        <span class="hook-label">social resilience</span>
+        <span class="hook-label" style="margin-top:0.5rem;display:block">63rd of 206 regions</span>
       </div>
     </div>
 
-    <p class="hook-question">Proč?</p>
-    <p class="hook-answer">Odpověď jsme hledali v datech projektu <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline"><strong>Index silnějších regionů</strong></a>, společného projektu <strong>České spořitelny</strong> a <strong>Evropy v datech</strong>. 49 ukazatelů kvality života pro každé ze 206 měst České republiky. Příběh, který z nich vypadl, je překvapivý.</p>
+    <p class="hook-question">Why?</p>
+    <p class="hook-answer">We looked for the answer in data from the <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener" style="color:var(--color-accent);text-decoration:underline"><strong>Index of Stronger Regions</strong></a>, a joint project of <strong>Česká spořitelna</strong> and <strong>Evropa v datech</strong>. 49 quality-of-life indicators for each of 206 cities in the Czech Republic. The story that emerged is surprising.</p>
   </div>
-  <p class="scroll-hint">↓ Scrollujte dolů</p>
+  <p class="scroll-hint">↓ Scroll down</p>
 </section>
 
 <!-- ===== HERO ===== -->
 <section class="hero">
-  <h1>Index silnějších regionů</h1>
-  <p class="subtitle">Společný projekt <strong>České spořitelny</strong> a <strong><a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener" style="color:var(--color-accent)">Evropy v datech</a></strong>, který měří kvalitu života v každém regionu Česka. Ne jedním číslem, ale 49 ukazateli od exekucí po rychlost internetu. Protože bez silnějších regionů nelze mít prosperující Česko.</p>
+  <h1>Index of Stronger Regions</h1>
+  <p class="subtitle">A joint project of <strong>Česká spořitelna</strong> and <strong><a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener" style="color:var(--color-accent)">Evropa v datech</a></strong> that measures quality of life in every Czech region. Not with a single number, but with 49 indicators from foreclosures to internet speed. Because without stronger regions, there can be no prosperous Czechia.</p>
   <div class="hero-stats">
     <div class="hero-stat">
       <span class="number" data-count="206">0</span>
-      <span class="label">regionů</span>
+      <span class="label">regions</span>
     </div>
     <div class="hero-stat">
       <span class="number" data-count="49">0</span>
-      <span class="label">ukazatelů</span>
+      <span class="label">indicators</span>
     </div>
     <div class="hero-stat">
       <span class="number" data-count="7">0</span>
-      <span class="label">pilířů kvality života</span>
+      <span class="label">quality-of-life pillars</span>
     </div>
   </div>
-  <p class="scroll-hint">↓ Scrollujte dolů</p>
+  <p class="scroll-hint">↓ Scroll down</p>
 </section>
 
-<!-- ===== SECTION: Data (49 → 7 pilířů) ===== -->
+<!-- ===== SECTION: Data (49 → 7 pillars) ===== -->
 <section class="scroll-section" id="sec-data">
   <div class="steps">
     <div class="step" data-viz="data-wall">
-      <h2>49 ukazatelů</h2>
-      <p>Každý region v Česku, 206 měst s rozšířenou působností, má profil sestavený ze 49 ukazatelů. Od naděje dožití po rychlost internetu. Od exekucí po počet knihoven.</p>
-      <p>Chtěli jsme z nich vyčíst příběh. Proto jsme začali hledat strukturu.</p>
+      <h2>49 indicators</h2>
+      <p>Every region in Czechia, 206 municipalities with extended powers (ORP), has a profile built from 49 indicators. From life expectancy to internet speed. From foreclosures to the number of libraries.</p>
+      <p>We wanted to read a story from the data. So we started looking for structure.</p>
     </div>
     <div class="step" data-viz="data-pillars">
-      <h2>Sedm pilířů projektu</h2>
-      <p>Autoři projektu, Česká spořitelna a Evropa v datech, rozdělili 49 ukazatelů do sedmi tematických pilířů, od demografie přes ekonomiku po volný čas. Každý ukazatel má skóre 0–100.</p>
-      <p>Jenže pilíře jsou šuplíky, ne vysvětlení. Exekuce jsou v „Ekonomice", ale korelují silněji se zdravím než s příjmy. Potřebovali jsme zjistit, co skutečně odlišuje regiony od sebe.</p>
+      <h2>Seven project pillars</h2>
+      <p>The project authors, Česká spořitelna and Evropa v datech, divided the 49 indicators into seven thematic pillars, from demographics through economics to leisure. Each indicator is scored 0–100.</p>
+      <p>But pillars are categories, not explanations. Foreclosures are in "Economics," yet they correlate more strongly with health than with income. We needed to find out what truly differentiates regions from one another.</p>
     </div>
     <div class="step" data-viz="ranking-top">
-      <h2>Kdo je nahoře?</h2>
-      <p>Kdybychom se zeptali na ulici, většina lidí by tipla Prahu. Nebo Brno. Ale na prvním místě celkového žebříčku stojí <strong>Turnov</strong>, město v Českém ráji s třiceti tisíci obyvateli.</p>
-      <p>Praha je na <span class="highlight">9. místě</span>. Exceluje v infrastruktuře a ekonomice, ale ve zdravotnictví a kvalitě prostředí zaostává za menšími městy.</p>
+      <h2>Who is at the top?</h2>
+      <p>If you asked people on the street, most would guess Prague. Or Brno. But at the top of the overall ranking stands <strong>Turnov</strong>, a town in the Bohemian Paradise with thirty thousand inhabitants.</p>
+      <p>Prague is in <span class="highlight">9th place</span>. It excels in infrastructure and economics, but lags behind smaller towns in healthcare and environmental quality.</p>
     </div>
     <div class="step" data-viz="ranking-bottom">
-      <h2>A kdo je dole?</h2>
-      <p>Na posledním místě je <strong>Horšovský Týn</strong>. Ale důležitější než jméno na konci tabulky je vzorec: slabé regiony nejsou jen „Ústecko". Najdete je v Plzeňském kraji, na Podkrušnohoří i na Jesenicku.</p>
-      <p>Žádné ORP není beznadějné. A žádné exceluje ve všem. Právě proto jedno číslo nestačí.</p>
+      <h2>And who is at the bottom?</h2>
+      <p>At the very bottom is <strong>Horšovský Týn</strong>. But more important than the name at the end of the table is the pattern: weak regions are not just "the Ústí region." You find them in the Plzeň Region, in the Ore Mountains foothills, and in the Jeseníky area.</p>
+      <p>No ORP is hopeless. And none excels in everything. That is precisely why a single number is not enough.</p>
     </div>
   </div>
   <div class="viz-sticky">
-    <div class="viz-container" id="viz-data" role="img" aria-label="Vizualizace dat o 49 ukazatelích"></div>
-    <div class="viz-source">Zdroj: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Silnější regiony</a> · Analýza: David Navrátil</div>
+    <div class="viz-container" id="viz-data" role="img" aria-label="Visualization of 49 quality-of-life indicators"></div>
+    <div class="viz-source">Source: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Stronger Regions</a> · Analysis: David Navrátil</div>
   </div>
 </section>
 
-<!-- ===== INTERLUDE: Co za žebříčkem ===== -->
+<!-- ===== INTERLUDE: What's behind the ranking ===== -->
 <section class="interlude">
   <div class="inner">
-    <h2>Co se skrývá za jedním číslem?</h2>
+    <h2>What hides behind a single number?</h2>
     <span class="big-number">4</span>
-    <p>Faktorovou analýzou jsme identifikovali čtyři nezávislé rozměry, podél kterých se regiony od sebe liší. Žádné dva spolu nekorelují. Každý vypráví jiný příběh.</p>
+    <p>Using factor analysis, we identified four independent dimensions along which regions differ from each other. No two correlate. Each tells a different story.</p>
     <div class="factor-grid">
-      <div><strong style="color:var(--color-accent)">Dostupnost a infrastruktura</strong><br><span style="font-size:0.92rem;opacity:0.75">Zastávky, obchody, internet, čerpací stanice, stomatologové</span></div>
-      <div><strong style="color:var(--color-navy)">Sociální odolnost</strong><br><span style="font-size:0.92rem;opacity:0.75">Exekuce, kriminalita, naděje dožití, vzdělání, nezaměstnanost</span></div>
-      <div><strong style="color:var(--cluster-prosper)">Atraktivita místa</strong><br><span style="font-size:0.92rem;opacity:0.75">Turismus, krajina, restaurace, muzea, sportoviště</span></div>
-      <div><strong style="color:#c08020">Demografie</strong><br><span style="font-size:0.92rem;opacity:0.75">Věkový průměr, migrace, lékárny, finance na žáka</span></div>
+      <div><strong style="color:var(--color-accent)">Accessibility and infrastructure</strong><br><span style="font-size:0.92rem;opacity:0.75">Transit stops, shops, internet, gas stations, dentists</span></div>
+      <div><strong style="color:var(--color-navy)">Social resilience</strong><br><span style="font-size:0.92rem;opacity:0.75">Foreclosures, crime, life expectancy, education, unemployment</span></div>
+      <div><strong style="color:var(--cluster-prosper)">Place attractiveness</strong><br><span style="font-size:0.92rem;opacity:0.75">Tourism, landscape, restaurants, museums, sports facilities</span></div>
+      <div><strong style="color:#c08020">Demographics</strong><br><span style="font-size:0.92rem;opacity:0.75">Average age, migration, pharmacies, funding per pupil</span></div>
     </div>
   </div>
 </section>
 
-<!-- ===== SECTION 1: Čtyři pohledy ===== -->
+<!-- ===== SECTION 1: Four views ===== -->
 <section class="scroll-section" id="sec-indexes">
   <div class="steps">
     <div class="step" data-viz="data-views">
-      <h2>Čtyři pohledy, které vysvětlují rozdíly</h2>
-      <p>Z 49 ukazatelů jich <strong>42 systematicky rozlišuje</strong> regiony a skládá se do čtyř pohledů.</p>
-      <p><strong>Dostupnost a infrastruktura</strong>: zastávky, obchody, internet, stomatologové. <strong>Sociální odolnost</strong>: exekuce, kriminalita, naděje dožití, vzdělání. <strong>Atraktivita místa</strong>: turismus, krajina, restaurace, muzea. <strong>Demografie</strong>: stárnutí, migrace, lékárny.</p>
-      <p>Zbylých 7 ukazatelů nerozlišuje regiony systematicky. Například <strong>pediatři a sociální služby</strong>: korelace s prosperitou jen 0,03–0,17. Chybějí v bohatých i chudých regionech. To není problém prosperity, je to problém systému.</p>
+      <h2>Four views that explain the differences</h2>
+      <p>Of the 49 indicators, <strong>42 systematically differentiate</strong> regions and compose into four views.</p>
+      <p><strong>Accessibility and infrastructure</strong>: transit stops, shops, internet, dentists. <strong>Social resilience</strong>: foreclosures, crime, life expectancy, education. <strong>Place attractiveness</strong>: tourism, landscape, restaurants, museums. <strong>Demographics</strong>: aging, migration, pharmacies.</p>
+      <p>The remaining 7 indicators do not systematically differentiate regions. For example, <strong>pediatricians and social services</strong>: correlation with prosperity only 0.03–0.17. They are missing in both rich and poor regions. That is not a prosperity problem; it is a systemic problem.</p>
     </div>
     <div class="step" data-viz="scatter-i1-i3">
-      <h2>Čtyři nezávislé osy</h2>
-      <p>Vynesli jsme dostupnost a infrastrukturu (zastávky MHD, obchody na km², internet) proti atraktivitě místa: turismus, krajina, muzea, ekologická stabilita.</p>
-      <p>Korelace <span class="highlight">nula</span>. Oba rozměry jsou na sobě zcela nezávislé. Město může mít výbornou infrastrukturu bez turistů, nebo naopak. Krkonoše a Šumava lákají, ale nemají čerpací stanice na každém rohu. Dva různé modely úspěchu.</p>
+      <h2>Four independent axes</h2>
+      <p>We plotted accessibility and infrastructure (transit stops, shops per km², internet) against place attractiveness: tourism, landscape, museums, ecological stability.</p>
+      <p>Correlation <span class="highlight">zero</span>. Both dimensions are completely independent of each other. A town can have excellent infrastructure without tourists, or the reverse. The Krkonoše and Šumava mountains attract visitors but do not have gas stations on every corner. Two different models of success.</p>
     </div>
     <div class="step" data-viz="scatter-i0-i2">
-      <h2>Sociální odolnost je klíčová</h2>
-      <p>A teď ten nejdůležitější graf celé analýzy. Celková prosperita na ose X, sociální odolnost (exekuce, kriminalita, naděje dožití, vzdělání) na ose Y.</p>
-      <p>Korelace <span class="highlight">0,65</span>, nejsilnější ze všech čtyř pohledů. Infrastruktura má 0,53, atraktivita 0,45, demografie 0,30. Sociální odolnost je tím, co nejvíc odlišuje prosperující region od zaostávajícího. Vrátíme se k ní ještě, protože se ukáže, že ovlivňuje i to, jak regiony volí.</p>
+      <h2>Social resilience is the key</h2>
+      <p>And now the most important chart of the entire analysis. Overall prosperity on the X-axis, social resilience (foreclosures, crime, life expectancy, education) on the Y-axis.</p>
+      <p>Correlation <span class="highlight">0.65</span>, the strongest of all four views. Infrastructure has 0.53, attractiveness 0.45, demographics 0.30. Social resilience is what most differentiates a prosperous region from a lagging one. We will return to it, because it turns out it also influences how regions vote.</p>
     </div>
   </div>
   <div class="viz-sticky">
-    <div class="viz-container" id="viz-indexes" role="img" aria-label="Čtyři pohledy na prosperitu regionů"></div>
-    <div class="viz-source">Zdroj: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Silnější regiony</a> · Analýza: David Navrátil</div>
+    <div class="viz-container" id="viz-indexes" role="img" aria-label="Four views of regional prosperity"></div>
+    <div class="viz-source">Source: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Stronger Regions</a> · Analysis: David Navrátil</div>
   </div>
 </section>
 
-<!-- ===== INTERLUDE: Překvapivé korelace ===== -->
+<!-- ===== INTERLUDE: Surprising correlations ===== -->
 <section class="interlude">
   <div class="inner">
-    <h2>Co data taky prozradí</h2>
-    <p>Některé vztahy mezi ukazateli potvrzují intuici. Jiné ji popírají. Prozkoumali jsme všech 1 176 párových korelací mezi 49 ukazateli a vybrali čtyři, které nejvíc překvapí.</p>
+    <h2>What the data also reveal</h2>
+    <p>Some relationships between indicators confirm intuition. Others defy it. We examined all 1,176 pairwise correlations among the 49 indicators and selected four that are most surprising.</p>
   </div>
 </section>
 
-<!-- ===== SECTION: Překvapivé korelace ===== -->
+<!-- ===== SECTION: Surprising correlations ===== -->
 <section class="scroll-section" id="sec-correlations">
   <div class="steps">
     <div class="step" data-viz="corr-vs-bydleni">
-      <h2>Vzdělání, nebo dostupné bydlení?</h2>
-      <p>Nejsilnější negativní korelace v celém datasetu: <span class="highlight">r = −0,64</span>. Regiony s vysokým podílem vysokoškoláků jsou systematicky dražší na bydlení.</p>
-      <p>Oba ukazatele patří do stejného faktoru (sociální odolnost), ale tahají proti sobě. Vzdělané regiony přitahují lidi, tlačí ceny nahoru a vytlačují ty, kteří si je nemohou dovolit. Dilema, které nemá snadné řešení.</p>
+      <h2>Education or affordable housing?</h2>
+      <p>The strongest negative correlation in the entire dataset: <span class="highlight">r = −0.64</span>. Regions with a high share of university graduates are systematically more expensive for housing.</p>
+      <p>Both indicators belong to the same factor (social resilience) but pull against each other. Educated regions attract people, push prices up, and displace those who cannot afford them. A dilemma with no easy solution.</p>
     </div>
     <div class="step" data-viz="corr-knihovny-cerpacky">
-      <h2>Dva světy české infrastruktury</h2>
-      <p>Knihovny a čerpací stanice patří do jednoho faktoru (infrastruktura). Ale korelace je <span class="highlight">r = −0,60</span>.</p>
-      <p>Knihovny jsou znakem kompaktního města s centrem, pěšími vzdálenostmi a občanskou vybaveností. Čerpací stanice značí rozptýlené osídlení závislé na autech. Oba vzorce mohou skórovat vysoko v infrastruktuře, jen zcela jiným způsobem.</p>
+      <h2>Two worlds of Czech infrastructure</h2>
+      <p>Libraries and gas stations belong to one factor (infrastructure). But the correlation is <span class="highlight">r = −0.60</span>.</p>
+      <p>Libraries are a sign of a compact town with a center, walking distances, and civic amenities. Gas stations indicate dispersed settlement dependent on cars. Both patterns can score high in infrastructure, just in entirely different ways.</p>
     </div>
     <div class="step" data-viz="corr-finance-vs">
-      <h2>Víc peněz na žáka ≠ víc vysokoškoláků</h2>
-      <p>Korelace <span class="highlight">r = −0,49</span>. Regiony, které nejvíc investují do základních škol, mají nejméně vysokoškoláků.</p>
-      <p>Paradox? Ne tak docela. Malé školy ve vylidňujících se regionech stojí víc na žáka (fixní náklady, málo dětí). Vysokoškoláci se koncentrují ve městech s velkými, efektivními školami. Peníze na žáka ZŠ neměří kvalitu vzdělání, ale náklady odlehlosti.</p>
+      <h2>More money per pupil ≠ more graduates</h2>
+      <p>Correlation <span class="highlight">r = −0.49</span>. Regions that invest the most in elementary schools have the fewest university graduates.</p>
+      <p>A paradox? Not quite. Small schools in depopulating regions cost more per pupil (fixed costs, few children). University graduates concentrate in cities with large, efficient schools. Funding per elementary school pupil does not measure education quality — it measures the cost of remoteness.</p>
     </div>
     <div class="step" data-viz="corr-doziti-podnikatele">
-      <h2>Kde se déle žije, tam se víc podniká</h2>
-      <p>Naděje dožití (F2) koreluje s počtem podnikatelů (F3) na úrovni <span class="highlight">r = +0,45</span>. Přitom patří do různých faktorů.</p>
-      <p>Oba ukazatele měří něco jako vitalitu místa. Regiony s aktivním podnikáním mají i zdravější populaci. Není to přímá příčina, ale společný kořen: fungující komunita, kde lidé chtějí žít a pracovat.</p>
+      <h2>Where people live longer, more people start businesses</h2>
+      <p>Life expectancy (F2) correlates with the number of entrepreneurs (F3) at <span class="highlight">r = +0.45</span>. Yet they belong to different factors.</p>
+      <p>Both indicators measure something like the vitality of a place. Regions with active entrepreneurship also have a healthier population. It is not direct causation, but a shared root: a functioning community where people want to live and work.</p>
     </div>
   </div>
   <div class="viz-sticky">
-    <div class="viz-container" id="viz-correlations" role="img" aria-label="Překvapivé korelace mezi ukazateli"></div>
-    <div class="viz-source">Zdroj: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Silnější regiony</a> · Analýza: David Navrátil</div>
+    <div class="viz-container" id="viz-correlations" role="img" aria-label="Surprising correlations between indicators"></div>
+    <div class="viz-source">Source: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Stronger Regions</a> · Analysis: David Navrátil</div>
   </div>
 </section>
 
-<!-- ===== INTERLUDE: Tři typy ===== -->
+<!-- ===== INTERLUDE: Three types ===== -->
 <section class="interlude">
   <div class="inner">
-    <h2>Tři typy regionů</h2>
-    <p>Když necháme algoritmus rozdělit 206 regionů do skupin podle podobnosti, nevznikne chaos. Vzniknou tři jasné typy. Jejich rozložení po mapě vypráví příběh o české geografii, který znáte z vlastní zkušenosti, jen jste ho dosud neviděli v číslech.</p>
+    <h2>Three types of regions</h2>
+    <p>When we let an algorithm divide 206 regions into groups by similarity, the result is not chaos. Three clear types emerge. Their distribution across the map tells a story about Czech geography that you know from personal experience — you just have not seen it in numbers before.</p>
   </div>
 </section>
 
-<!-- ===== SECTION 3: Mapa clusterů ===== -->
+<!-- ===== SECTION 3: Cluster map ===== -->
 <section class="scroll-section" id="sec-clusters">
   <div class="steps">
     <div class="step" data-viz="map-all">
-      <h2>Mapa prosperity</h2>
-      <p><span style="color:var(--cluster-prosper)">●</span> <strong>Prosperující regiony</strong>: od Prahy po malá města jako Zlín nebo Jilemnice. Spojuje je nadprůměrná sociální odolnost a infrastruktura. Ne nutně velká města. Spíš ta, kde fungují školy, doktoři a rodiny drží pohromadě.</p>
-      <p><span style="color:var(--cluster-weak)">●</span> <strong>Města v sociálním napětí</strong>: Most, Teplice, Karviná. Mají silnice, nemocnice a vlaky. Ale exekuce, kriminalita a nízká naděje dožití je drží v jiné lize.</p>
-      <p><span style="color:var(--cluster-urban)">●</span> <strong>Vnitřní periferie</strong>: daleko od center, slabá infrastruktura, ale překvapivě dobrá atraktivita místa. Tichá krajina, turismus a stárnoucí populace.</p>
+      <h2>Prosperity map</h2>
+      <p><span style="color:var(--cluster-prosper)">●</span> <strong>Prosperous regions</strong>: from Prague to small towns like Zlín or Jilemnice. What unites them is above-average social resilience and infrastructure. Not necessarily large cities. Rather those where schools, doctors, and families hold together.</p>
+      <p><span style="color:var(--cluster-weak)">●</span> <strong>Cities under social strain</strong>: Most, Teplice, Karviná. They have roads, hospitals, and trains. But foreclosures, crime, and low life expectancy keep them in a different league.</p>
+      <p><span style="color:var(--cluster-urban)">●</span> <strong>Inner periphery</strong>: far from centers, weak infrastructure, but surprisingly good place attractiveness. Quiet countryside, tourism, and an aging population.</p>
       <div class="stat-box">
-        <div class="stat-row"><span class="stat-label">Prosperující regiony</span><span class="stat-value good">6,4 mil. (58 %)</span></div>
-        <div class="stat-row"><span class="stat-label">Města v sociálním napětí</span><span class="stat-value bad">2,2 mil. (21 %)</span></div>
-        <div class="stat-row"><span class="stat-label">Vnitřní periferie</span><span class="stat-value">2,3 mil. (21 %)</span></div>
+        <div class="stat-row"><span class="stat-label">Prosperous regions</span><span class="stat-value good">6.4 mil. (58%)</span></div>
+        <div class="stat-row"><span class="stat-label">Cities under social strain</span><span class="stat-value bad">2.2 mil. (21%)</span></div>
+        <div class="stat-row"><span class="stat-label">Inner periphery</span><span class="stat-value">2.3 mil. (21%)</span></div>
       </div>
-      <p>Každý pátý Čech žije v regionu pod sociálním napětím. A každý pátý na vnitřní periferii.</p>
+      <p>Every fifth Czech lives in a region under social strain. And every fifth in the inner periphery.</p>
     </div>
     <div class="step" data-viz="map-ustecky">
-      <h3>Ústecký kraj: nula zelených teček</h3>
-      <p>Jediný kraj, kde není <strong>ani jedno ORP</strong> v prosperující kategorii. 10 z 16 ORP je v sociálním napětí, zbylých 6 jsou vnitřní periferie. Celý kraj je červený a modrý. Ani Ústí nad Labem, krajské město se 120 tisíci obyvateli, se nedostalo do zelené kategorie.</p>
+      <h3>Ústí Region: zero green dots</h3>
+      <p>The only region where <strong>not a single ORP</strong> falls in the prosperous category. 10 of 16 ORP are under social strain, the remaining 6 are inner periphery. The entire region is red and blue. Not even Ústí nad Labem, a regional capital with 120,000 inhabitants, made it into the green category.</p>
     </div>
     <div class="step" data-viz="map-vysocina">
-      <h3>Vysočina: zrcadlový obraz</h3>
-      <p>Opačný extrém: <strong>žádné město v sociálním napětí</strong>. 10 z 15 ORP prosperuje. Nízké exekuce, stabilní rodiny, funkční školy. Ale jak uvidíme za chvíli, je to kraj, který překvapivě ztrácí tempo. Staticky zdravý, dynamicky erodující.</p>
+      <h3>Vysočina: the mirror image</h3>
+      <p>The opposite extreme: <strong>no city under social strain</strong>. 10 of 15 ORP are prosperous. Low foreclosures, stable families, functioning schools. But as we will see shortly, this is a region that is surprisingly losing momentum. Statically healthy, dynamically eroding.</p>
     </div>
   </div>
   <div class="viz-sticky">
-    <div class="viz-container" id="viz-clusters" role="img" aria-label="Mapa tří typů regionů"></div>
-    <div class="viz-source">Zdroj: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Silnější regiony</a> · Analýza: David Navrátil</div>
+    <div class="viz-container" id="viz-clusters" role="img" aria-label="Map of three types of regions"></div>
+    <div class="viz-source">Source: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Stronger Regions</a> · Analysis: David Navrátil</div>
   </div>
 </section>
 
-<!-- ===== INTERLUDE: Paradoxy ===== -->
+<!-- ===== INTERLUDE: Paradoxes ===== -->
 <section class="interlude">
   <div class="inner">
-    <h2>Paradox blízkosti</h2>
-    <p>62 % sousedních ORP patří do jiného typu. Města, mezi kterými dojíždíte patnáct minut autem, se liší v naději dožití, exekucích nebo přístupu k lékaři tak dramaticky, jako by ležela v jiných zemích. Čtyři příklady.</p>
+    <h2>The proximity paradox</h2>
+    <p>62% of neighboring ORP belong to different types. Towns between which you drive fifteen minutes differ in life expectancy, foreclosures, or access to a doctor as dramatically as if they were in different countries. Four examples.</p>
   </div>
 </section>
 
-<!-- ===== SECTION 4: Paradoxy sousedů ===== -->
+<!-- ===== SECTION 4: Neighbor paradoxes ===== -->
 <section class="scroll-section" id="sec-pairs">
   <div class="steps">
     <div class="step" data-viz="pair-0">
       <h2>Olomouc × Vítkov</h2>
-      <p><strong>33 km od sebe. Stejný kraj, jiný svět.</strong> Olomouc je čtvrtá v celkovém žebříčku, Vítkov na 186. místě z 206.</p>
+      <p><strong>33 km apart. Same region, different world.</strong> Olomouc is fourth in the overall ranking, Vítkov at 186th out of 206.</p>
       <div class="stat-box">
         <div class="stat-row">
-          <span class="stat-label">Celkové skóre Olomouc</span>
-          <span class="stat-value good">72,9 / 100</span>
+          <span class="stat-label">Overall score Olomouc</span>
+          <span class="stat-value good">72.9 / 100</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label">Celkové skóre Vítkov</span>
-          <span class="stat-value bad">28,2 / 100</span>
+          <span class="stat-label">Overall score Vítkov</span>
+          <span class="stat-value bad">28.2 / 100</span>
         </div>
       </div>
-      <p>Olomouc je univerzitní město s plnou infrastrukturou (I = 84) a silnou sociální odolností (S = 84). Vítkov má infrastrukturu na 5 bodech ze 100. Sociální odolnost na 20. Mladí odcházejí, služby mizí. Krajský úřad je přitom na dohled.</p>
+      <p>Olomouc is a university city with full infrastructure (I = 84) and strong social resilience (S = 84). Vítkov has infrastructure at 5 out of 100. Social resilience at 20. Young people leave, services disappear. Yet the regional authority is within sight.</p>
     </div>
     <div class="step" data-viz="pair-1">
       <h2>Hradec Králové × Nový Bydžov</h2>
-      <p><strong>19 km. Nejbližší extrém v Česku.</strong> Krajské město na 31. místě a region na 167. místě dělí pouhých 19 kilometrů.</p>
+      <p><strong>19 km. The closest extreme in Czechia.</strong> A regional capital at 31st place and a region at 167th place are separated by just 19 kilometers.</p>
       <div class="stat-box">
         <div class="stat-row">
-          <span class="stat-label">Infrastruktura Hradec</span>
+          <span class="stat-label">Infrastructure Hradec</span>
           <span class="stat-value good">78 / 100</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label">Infrastruktura Nový Bydžov</span>
+          <span class="stat-label">Infrastructure Nový Bydžov</span>
           <span class="stat-value bad">14 / 100</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label">Atraktivita Nový Bydžov</span>
+          <span class="stat-label">Attractiveness Nový Bydžov</span>
           <span class="stat-value bad">12 / 100</span>
         </div>
       </div>
-      <p>Nový Bydžov nemá ani infrastrukturu, ani turismus, ani demografickou dynamiku. Přitom leží uprostřed Královéhradeckého kraje. Prosperita se nešíří jako vlna. Zastavuje se na hranici ORP.</p>
+      <p>Nový Bydžov has neither infrastructure, nor tourism, nor demographic dynamism. Yet it lies in the middle of the Hradec Králové Region. Prosperity does not spread like a wave. It stops at the ORP boundary.</p>
     </div>
     <div class="step" data-viz="pair-2">
       <h2>České Budějovice × Český Krumlov</h2>
-      <p><strong>UNESCO klenot se sociálními problémy.</strong> Krumlov má nejvyšší atraktivitu v celém Česku (100 bodů ze 100). Ale sociální odolnost pouhých 40.</p>
+      <p><strong>A UNESCO jewel with social problems.</strong> Krumlov has the highest attractiveness in all of Czechia (100 out of 100). But social resilience of only 40.</p>
       <div class="stat-box">
-        <div class="stat-row"><span class="stat-label">Atraktivita Krumlov</span><span class="stat-value good">100 / 100</span></div>
-        <div class="stat-row"><span class="stat-label">Soc. odolnost Krumlov</span><span class="stat-value bad">40 / 100</span></div>
-        <div class="stat-row"><span class="stat-label">Soc. odolnost Budějovice</span><span class="stat-value good">78 / 100</span></div>
+        <div class="stat-row"><span class="stat-label">Attractiveness Krumlov</span><span class="stat-value good">100 / 100</span></div>
+        <div class="stat-row"><span class="stat-label">Social resilience Krumlov</span><span class="stat-value bad">40 / 100</span></div>
+        <div class="stat-row"><span class="stat-label">Social resilience Budějovice</span><span class="stat-value good">78 / 100</span></div>
       </div>
-      <p>Turismus přináší tržby, ale ne stabilní zaměstnání ani dostupné bydlení. Sezónní práce nedává jistotu. Monokultura cestovního ruchu eroduje sociální tkáň stálých obyvatel.</p>
+      <p>Tourism brings revenue but not stable employment or affordable housing. Seasonal work offers no security. A tourism monoculture erodes the social fabric of permanent residents.</p>
     </div>
     <div class="step" data-viz="pair-3">
-      <h2>Praha × Český Brod</h2>
-      <p><strong>28 km od centra. Na 172. místě.</strong> Praha je devátá v Česku: excelentní infrastruktura, silná sociální odolnost, turistická atraktivita. Ale za hranicí města začíná jiný svět.</p>
+      <h2>Prague × Český Brod</h2>
+      <p><strong>28 km from the center. At 172nd place.</strong> Prague is ninth in Czechia: excellent infrastructure, strong social resilience, tourist attractiveness. But beyond the city boundary, a different world begins.</p>
       <div class="stat-box">
         <div class="stat-row">
-          <span class="stat-label">Demografie Praha</span>
+          <span class="stat-label">Demographics Prague</span>
           <span class="stat-value bad">25 / 100</span>
         </div>
         <div class="stat-row">
-          <span class="stat-label">Demografie Český Brod</span>
+          <span class="stat-label">Demographics Český Brod</span>
           <span class="stat-value bad">5 / 100</span>
         </div>
       </div>
-      <p>Český Brod má nejnižší demografické skóre v celé zemi. Mladé rodiny odtud odcházejí za lepším zázemím, služby mizí, průměrný věk roste. A Praha samotná na tom demograficky není o moc lépe: 25 bodů, nejslabší v celé první desítce. Úspěch metropole nepřetéká přes její hranici.</p>
+      <p>Český Brod has the lowest demographic score in the entire country. Young families leave for better amenities, services disappear, the average age rises. And Prague itself is not much better demographically: 25 points, the weakest in the entire top ten. The metropolis's success does not spill over its boundary.</p>
     </div>
   </div>
   <div class="viz-sticky">
-    <div class="viz-container" id="viz-pairs" role="img" aria-label="Srovnání kontrastních párů regionů"></div>
-    <div class="viz-source">Zdroj: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Silnější regiony</a> · Analýza: David Navrátil</div>
+    <div class="viz-container" id="viz-pairs" role="img" aria-label="Comparison of contrasting regional pairs"></div>
+    <div class="viz-source">Source: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Stronger Regions</a> · Analysis: David Navrátil</div>
   </div>
 </section>
 
-<!-- ===== SECTION 5: Dynamika ===== -->
+<!-- ===== SECTION 5: Dynamics ===== -->
 <section class="scroll-section" id="sec-momentum">
   <div class="steps">
     <div class="step" data-viz="momentum-all">
-      <h2>Kdo roste, kdo padá?</h2>
-      <p>Statický obrázek nestačí. Tento graf ukazuje dvě věci najednou: kde je region dnes (osa X) a jakým směrem se pohybuje (osa Y). Vznikají čtyři kvadranty, a ten nejnebezpečnější je vpravo dole: regiony, které jsou zatím prosperující, ale ztrácejí tempo.</p>
-      <p>Vlevo nahoře najdete naději: slabší regiony, které se zvedají. Vpravo nahoře lídry, kteří drží krok.</p>
+      <h2>Who is rising, who is falling?</h2>
+      <p>A static picture is not enough. This chart shows two things at once: where a region stands today (X-axis) and which direction it is moving (Y-axis). Four quadrants emerge, and the most dangerous is the bottom right: regions that are still prosperous but losing momentum.</p>
+      <p>In the top left, you find hope: weaker regions on the rise. In the top right, leaders keeping pace.</p>
     </div>
     <div class="step" data-viz="momentum-vysocina">
-      <h3>Vysočina překvapivě klesá</h3>
-      <p>Pamatujete ten kraj bez jediného červeného bodu na mapě? Vysočina, staticky nejzdravější kraj v Česku, padá. Tři z patnácti nejrychleji klesajících ORP v celé republice jsou odtud: Pelhřimov, Havlíčkův Brod a Nové Město na Moravě. Telč je těsně za nimi.</p>
-      <p>Stárnutí populace, odchod mladých za prací, postupné uzavírání služeb. Jakmile odejde doktor a zavře se škola, sociální odolnost začne erodovat. Vysočina je v tomto procesu dál, než si její statisticky dobré výsledky nechají na první pohled říct.</p>
+      <h3>Vysočina is surprisingly declining</h3>
+      <p>Remember the region without a single red dot on the map? Vysočina, statistically the healthiest region in Czechia, is falling. Three of the fifteen fastest-declining ORP in the entire country are from here: Pelhřimov, Havlíčkův Brod, and Nové Město na Moravě. Telč is close behind.</p>
+      <p>An aging population, young people leaving for work, gradual closure of services. Once the doctor leaves and the school closes, social resilience begins to erode. Vysočina is further along in this process than its statistically good results suggest at first glance.</p>
     </div>
     <div class="step" data-viz="momentum-leaders">
-      <h3>Odraz ode dna, stagnace nahoře</h3>
-      <p>Turnov, celkově první v žebříčku, má mírně záporné momentum. Udržet špičku je těžší než se k ní dostat. Naopak Podbořany, jedno z nejslabších ORP v zemi, rostou pátým nejrychlejším tempem. Je to odraz ode dna, nebo jen statistický šum?</p>
-      <p>Odpověď přijde s dalšími ročníky dat. Ale vzorec je jasný: konvergence existuje, jen je pomalá.</p>
+      <h3>Bouncing off the bottom, stagnation at the top</h3>
+      <p>Turnov, ranked first overall, has slightly negative momentum. Maintaining the top is harder than reaching it. Conversely, Podbořany, one of the weakest ORP in the country, is growing at the fifth fastest rate. Is this a bounce off the bottom, or just statistical noise?</p>
+      <p>The answer will come with more years of data. But the pattern is clear: convergence exists, it is just slow.</p>
     </div>
   </div>
   <div class="viz-sticky">
-    <div class="viz-container" id="viz-momentum" role="img" aria-label="Dynamika regionů v čase"></div>
-    <div class="viz-source">Zdroj: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Silnější regiony</a> · Analýza: David Navrátil</div>
+    <div class="viz-container" id="viz-momentum" role="img" aria-label="Regional dynamics over time"></div>
+    <div class="viz-source">Source: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Stronger Regions</a> · Analysis: David Navrátil</div>
   </div>
 </section>
 
-<!-- ===== INTERLUDE: Volby ===== -->
+<!-- ===== INTERLUDE: Elections ===== -->
 <section class="interlude">
   <div class="inner">
-    <h2>Jak volí prosperita</h2>
-    <p>Ještě jeden pohled na ta samá data. Propojili jsme 206 regionů s výsledky parlamentních voleb 2025: od 14 711 okrsků přes 6 389 obcí na úroveň ORP. To, co jsme našli, potvrzuje klíčové zjištění celé analýzy: sociální odolnost regionu koreluje s volební účastí silněji než příjem, vzdělání nebo velikost města.</p>
-    <span class="big-number">0,88</span>
-    <p>Korelace sociální odolnosti s volební účastí: r = 0,88. Nejsilnější vztah v celém datasetu.</p>
+    <h2>How prosperity votes</h2>
+    <p>One more look at the same data. We linked 206 regions with 2025 parliamentary election results: from 14,711 polling stations through 6,389 municipalities to the ORP level. What we found confirms the key finding of the entire analysis: a region's social resilience correlates with voter turnout more strongly than income, education, or city size.</p>
+    <span class="big-number">0.88</span>
+    <p>Correlation of social resilience with voter turnout: r = 0.88. The strongest relationship in the entire dataset.</p>
   </div>
 </section>
 
-<!-- ===== SECTION 6: Volby × Prosperita ===== -->
+<!-- ===== SECTION 6: Elections × Prosperity ===== -->
 <section class="scroll-section" id="sec-elections">
   <div class="steps">
     <div class="step" data-viz="elections-turnout">
-      <h2>Kde je sociální odolnost, chodí se k volbám</h2>
-      <p>Účast v parlamentních volbách 2025 dosáhla celostátního průměru 68,9 %. Ale rozptyl je obrovský: od <strong>54,7 %</strong> v Aši po <strong>76,6 %</strong> ve Šlapanicích. Rozdíl 22 procentních bodů.</p>
-      <p>Co rozhoduje? Ne velikost města: infrastruktura koreluje s účastí na pouhých 0,05. Rozhoduje sociální odolnost: exekuce, kriminalita, naděje dožití, vzdělání. Korelace <span class="highlight">r = 0,88</span>, nejsilnější vztah v celém datasetu.</p>
+      <h2>Where there is social resilience, people go to vote</h2>
+      <p>Turnout in the 2025 parliamentary elections reached a national average of 68.9%. But the spread is enormous: from <strong>54.7%</strong> in Aš to <strong>76.6%</strong> in Šlapanice. A difference of 22 percentage points.</p>
+      <p>What decides? Not city size: infrastructure correlates with turnout at just 0.05. Social resilience decides: foreclosures, crime, life expectancy, education. Correlation <span class="highlight">r = 0.88</span>, the strongest relationship in the entire dataset.</p>
       <div class="stat-box">
-        <div class="stat-row"><span class="stat-label">Prosperující regiony</span><span class="stat-value good">71,6 %</span></div>
-        <div class="stat-row"><span class="stat-label">Vnitřní periferie</span><span class="stat-value">68,2 %</span></div>
-        <div class="stat-row"><span class="stat-label">Města v sociálním napětí</span><span class="stat-value bad">67,3 %</span></div>
+        <div class="stat-row"><span class="stat-label">Prosperous regions</span><span class="stat-value good">71.6%</span></div>
+        <div class="stat-row"><span class="stat-label">Inner periphery</span><span class="stat-value">68.2%</span></div>
+        <div class="stat-row"><span class="stat-label">Cities under social strain</span><span class="stat-value bad">67.3%</span></div>
       </div>
     </div>
     <div class="step" data-viz="elections-blocs">
-      <h2>Jedna strana, jedna dělicí čára</h2>
-      <p>Korelace podílu ANO s celkovou prosperitou: <span class="highlight">−0,68</span>. S&nbsp;SPOLU přesně naopak: <span class="highlight">+0,65</span>. Čím nižší kvalita života v regionu, tím silnější ANO.</p>
-      <p>Ve <strong>141 z 206 ORP</strong> má ANO přes 35 %. Pod 25 % klesá jen ve čtyřech: Praze a jejím bezprostředním okolí.</p>
+      <h2>One party, one dividing line</h2>
+      <p>Correlation of ANO's vote share with overall prosperity: <span class="highlight">−0.68</span>. With SPOLU the exact opposite: <span class="highlight">+0.65</span>. The lower the quality of life in a region, the stronger ANO.</p>
+      <p>In <strong>141 of 206 ORP</strong>, ANO has over 35%. It drops below 25% in only four: Prague and its immediate surroundings.</p>
       <div class="stat-box">
-        <div class="stat-row"><span class="stat-label">Orlová (196. z 206)</span><span class="stat-value bad">ANO 55,9 %</span></div>
-        <div class="stat-row"><span class="stat-label">Černošice (50. z 206)</span><span class="stat-value good">ANO 20,3 %</span></div>
+        <div class="stat-row"><span class="stat-label">Orlová (196th of 206)</span><span class="stat-value bad">ANO 55.9%</span></div>
+        <div class="stat-row"><span class="stat-label">Černošice (50th of 206)</span><span class="stat-value good">ANO 20.3%</span></div>
       </div>
-      <p>Barva bodů ukazuje sociální odolnost (I2). Červené body, tedy vysoké exekuce, kriminalita a nízká naděje dožití, jsou téměř vždy nahoře. Prosperita a sociální odolnost předpovídají volební výsledek lépe než jakýkoliv průzkum.</p>
+      <p>The color of the dots shows social resilience (I2). Red dots — high foreclosures, crime, and low life expectancy — are almost always at the top. Prosperity and social resilience predict election outcomes better than any poll.</p>
     </div>
     <div class="step" data-viz="elections-populism">
-      <h2>Periferie se mobilizovala</h2>
-      <p>Mezi 2021 a 2025 stoupla účast ve <strong>všech 206 ORP</strong> bez výjimky. Průměrně o 4 procentní body. Ale čím nižší sociální odolnost, tím větší nárůst (r = −0,58).</p>
-      <p>Města v sociálním napětí: +4,8 procentního bodu. Prosperující regiony: +3,2 p.b. Periferie se mobilizovala silněji než centra.</p>
-      <p>ANO posílilo ve všech 206 ORP, průměrně o <strong>8,8 procentního bodu</strong>. V Orlové +16,3 p.b., v Praze +2,4 p.b. SPOLU ztratilo rovněž plošně: −4,4 p.b. V regionech, kde SPD výrazně oslabila, současně nejvíce posílilo ANO.</p>
+      <h2>The periphery mobilized</h2>
+      <p>Between 2021 and 2025, turnout increased in <strong>all 206 ORP</strong> without exception. On average by 4 percentage points. But the lower the social resilience, the greater the increase (r = −0.58).</p>
+      <p>Cities under social strain: +4.8 percentage points. Prosperous regions: +3.2 pp. The periphery mobilized more strongly than the centers.</p>
+      <p>ANO gained in all 206 ORP, on average by <strong>8.8 percentage points</strong>. In Orlová +16.3 pp, in Prague +2.4 pp. SPOLU lost across the board as well: −4.4 pp. In regions where SPD weakened significantly, ANO gained the most.</p>
     </div>
     <div class="step" data-viz="elections-periphery">
-      <h2>Periferie není jen jedna</h2>
-      <p>Když k původním datům prosperity přidáme volební chování, „vnitřní periferie" se rozpadne na dva odlišné typy.</p>
-      <p><strong>Aktivní venkov</strong>: regiony jako Blovice, Pacov nebo Moravské Budějovice. Vyšší účast, slabší ANO. Fungující komunitní život, i když ekonomicky slabší.</p>
-      <p><strong>Pasivní periferie</strong>: Vejprty, Vítkov, Králíky. Nízká účast, nejsilnější ANO, nejvyšší nárůst mezi 2021 a 2025. Regiony, kde se sociální rezignace promítá i do volebního chování.</p>
-      <p>Jeden typ periferie potřebuje ochranu toho, co funguje. Druhý potřebuje restart. Politika, která je hodí do jednoho pytle, nefunguje pro žádný z nich.</p>
+      <h2>The periphery is not just one</h2>
+      <p>When we add voting behavior to the original prosperity data, the "inner periphery" splits into two distinct types.</p>
+      <p><strong>Active countryside</strong>: regions like Blovice, Pacov, or Moravské Budějovice. Higher turnout, weaker ANO. Functioning community life, even if economically weaker.</p>
+      <p><strong>Passive periphery</strong>: Vejprty, Vítkov, Králíky. Low turnout, strongest ANO, the greatest increase between 2021 and 2025. Regions where social resignation is reflected in voting behavior.</p>
+      <p>One type of periphery needs protection of what works. The other needs a restart. Policies that lump them together work for neither.</p>
     </div>
   </div>
   <div class="viz-sticky">
-    <div class="viz-container" id="viz-elections" role="img" aria-label="Volební výsledky a prosperita regionů"></div>
-    <div class="viz-source">Zdroj: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Silnější regiony</a>, <a href="https://volby.cz" target="_blank" rel="noopener">ČSÚ / volby.cz</a> · Analýza: David Navrátil</div>
+    <div class="viz-container" id="viz-elections" role="img" aria-label="Election results and regional prosperity"></div>
+    <div class="viz-source">Source: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Stronger Regions</a>, <a href="https://volby.cz" target="_blank" rel="noopener">CSO / volby.cz</a> · Analysis: David Navrátil</div>
   </div>
 </section>
 
-<!-- ===== SEARCH: Najdi svůj region ===== -->
+<!-- ===== SEARCH: Find your region ===== -->
 <section class="interlude" id="sec-search">
   <div class="inner" style="max-width:600px">
-    <h2>Najdi svůj region</h2>
-    <p>Zadej název ORP a podívej se, jak si stojí ve všech čtyřech pohledech.</p>
+    <h2>Find your region</h2>
+    <p>Enter an ORP name and see how it scores across all four views.</p>
     <div class="search-wrap">
-      <input type="text" id="orp-search" placeholder="Např. Olomouc, Turnov, Orlová…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="orp-suggestions" aria-label="Vyhledat obec s rozšířenou působností">
-      <div id="orp-suggestions" class="search-suggestions" role="listbox" aria-label="Návrhy regionů"></div>
+      <input type="text" id="orp-search" placeholder="E.g. Olomouc, Turnov, Orlová…" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="orp-suggestions" aria-label="Search for a municipality with extended powers">
+      <div id="orp-suggestions" class="search-suggestions" role="listbox" aria-label="Region suggestions"></div>
     </div>
     <div id="orp-result" class="orp-result"></div>
   </div>
@@ -1186,97 +1186,97 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 
 <!-- ===== CONCLUSION ===== -->
 <section class="conclusion">
-  <h2>Co z toho plyne</h2>
+  <h2>Key takeaways</h2>
 
   <div class="takeaway">
-    <h3>Sociální odolnost je klíčová. A rozhoduje i o politice</h3>
-    <p>Exekuce, kriminalita, naděje dožití a stabilita rodin vysvětlují většinu rozdílů v prosperitě (r = 0,65) i ve volební účasti (r = 0,88). Infrastruktura sama o sobě nestačí. Sociální odolnost předpovídá i stranické preference: čím nižší, tím silnější podpora stran slibujících změnu: ANO, SPD, Motoristé, Stačilo! (r = −0,73).</p>
+    <h3>Social resilience is the key — and it determines politics too</h3>
+    <p>Foreclosures, crime, life expectancy, and family stability explain most of the differences in prosperity (r = 0.65) and voter turnout (r = 0.88). Infrastructure alone is not enough. Social resilience also predicts party preferences: the lower it is, the stronger the support for parties promising change: ANO, SPD, Motorists, Enough! (r = −0.73).</p>
   </div>
 
   <div class="takeaway">
-    <h3>Různé problémy vyžadují různá řešení</h3>
-    <p>Oslabená městská ORP jako Ostrava nebo Most mají infrastrukturu, potřebují sociální práci, dluhové poradny a pracovní programy. Aktivní venkov potřebuje ochranu toho, co funguje: lékaře, školy, dopravní spojení. Pasivní periferie potřebuje restart, ale jiný typ než průmyslová města. A turistické monokultury jako Český Krumlov potřebují diverzifikaci, ne další dotace do turismu.</p>
+    <h3>Different problems require different solutions</h3>
+    <p>Weakened urban ORP like Ostrava or Most have infrastructure; they need social work, debt counseling, and employment programs. The active countryside needs protection of what works: doctors, schools, transport connections. The passive periphery needs a restart, but a different kind than industrial cities. And tourism monocultures like Český Krumlov need diversification, not more tourism subsidies.</p>
   </div>
 
   <div class="takeaway">
-    <h3>Vysočina je varování</h3>
-    <p>Staticky nejzdravější kraj dynamicky eroduje nejrychleji. Jakmile odejde doktor a zavře se škola, statistiky se ještě pár let drží, ale proces je už nevratný. Vysočina ukazuje, že prevence je levnější než záchrana.</p>
+    <h3>Vysočina is a warning</h3>
+    <p>The statically healthiest region is dynamically eroding the fastest. Once the doctor leaves and the school closes, statistics hold up for a few more years, but the process is already irreversible. Vysočina shows that prevention is cheaper than rescue.</p>
   </div>
 
   <div class="takeaway">
-    <h3>Propast se prohlubuje</h3>
-    <p>Mezi volbami 2021 a 2025 se periferie mobilizovala silněji než centra, ale ve prospěch ANO. Chudší regiony přišly k volbám ve větším počtu a hlasovaly jednoznačněji pro ANO. Bohatší regiony posílily SPOLU. Regionální nerovnosti se promítají do politické geografie stále silněji.</p>
+    <h3>The gap is widening</h3>
+    <p>Between the 2021 and 2025 elections, the periphery mobilized more strongly than the centers, but in favor of ANO. Poorer regions came to vote in greater numbers and voted more decisively for ANO. Wealthier regions strengthened SPOLU. Regional inequalities are translating into political geography ever more strongly.</p>
   </div>
 
   <div class="takeaway">
-    <h3>Jedno číslo nestačí</h3>
-    <p>Žebříček 1–206 je orientační mapa, ne diagnóza. Pro rozhodování potřebujete profil regionu ve čtyřech pohledech, jeho trajektorii v čase a vědomí, že přeházení dvou ukazatelů změní top-10 z třetiny. Data ukazují směr. Odpovědi musí hledat lidé na místě.</p>
+    <h3>A single number is not enough</h3>
+    <p>A ranking of 1–206 is an orientation map, not a diagnosis. For decision-making, you need a region's profile across four views, its trajectory over time, and the awareness that swapping two indicators changes the top 10 by a third. Data shows the direction. Answers must be found by people on the ground.</p>
   </div>
 
   <div class="cta-section">
     <div class="cta-share">
-      <p><strong>Sdílejte analýzu</strong></p>
+      <p><strong>Share this analysis</strong></p>
       <div class="cta-buttons">
-        <button type="button" class="cta-btn" aria-label="Sdílet na X / Twitter" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent('V Orlové má exekuci každý osmý. 37 km odsud, čtyřikrát méně. Interaktivní analýza 206 regionů Česka.'),'_blank','width=600,height=400')">𝕏 / Twitter</button>
-        <button type="button" class="cta-btn" aria-label="Sdílet na LinkedIn" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank','width=600,height=400')">LinkedIn</button>
-        <button type="button" class="cta-btn" aria-label="Kopírovat odkaz do schránky" onclick="navigator.clipboard.writeText(location.href).then(()=>{this.textContent='Zkopírováno ✓';setTimeout(()=>{this.textContent='Kopírovat odkaz'},2000)})">Kopírovat odkaz</button>
+        <button type="button" class="cta-btn" aria-label="Share on X / Twitter" onclick="window.open('https://twitter.com/intent/tweet?url='+encodeURIComponent(location.href)+'&text='+encodeURIComponent('In Orlová, every eighth person faces foreclosure. 37 km away, four times fewer. An interactive analysis of 206 Czech regions.'),'_blank','width=600,height=400')">𝕏 / Twitter</button>
+        <button type="button" class="cta-btn" aria-label="Share on LinkedIn" onclick="window.open('https://www.linkedin.com/sharing/share-offsite/?url='+encodeURIComponent(location.href),'_blank','width=600,height=400')">LinkedIn</button>
+        <button type="button" class="cta-btn" aria-label="Copy link to clipboard" onclick="navigator.clipboard.writeText(location.href).then(()=>{this.textContent='Copied ✓';setTimeout(()=>{this.textContent='Copy link'},2000)})">Copy link</button>
       </div>
     </div>
     <div class="substack-card">
       <a href="https://davidnavratil.substack.com/p/co-rozhoduje-o-osudu-ceskych-regionu" target="_blank" rel="noopener" class="substack-card-link">
-        <img src="https://substackcdn.com/image/fetch/w_400,h_260,c_fill,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc4ba43b4-ddda-42ae-aec4-333adf1a9689_1024x1024.heic" alt="Co rozhoduje o osudu českých regionů" class="substack-card-img" loading="lazy" onerror="this.src='og-image.png'">
+        <img src="https://substackcdn.com/image/fetch/w_400,h_260,c_fill,f_webp,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc4ba43b4-ddda-42ae-aec4-333adf1a9689_1024x1024.heic" alt="What determines the fate of Czech regions" class="substack-card-img" loading="lazy" onerror="this.src='../og-image.png'">
         <div class="substack-card-body">
-          <span class="substack-card-label">Esej na Substacku</span>
-          <strong class="substack-card-title">Co rozhoduje o osudu českých regionů</strong>
-          <span class="substack-card-desc">Proč má Orlová pětkrát víc exekucí než Frýdlant, a co to znamená pro českou politiku.</span>
+          <span class="substack-card-label">Essay on Substack</span>
+          <strong class="substack-card-title">What determines the fate of Czech regions</strong>
+          <span class="substack-card-desc">Why Orlová has five times more foreclosures than Frýdlant, and what it means for Czech politics.</span>
         </div>
       </a>
     </div>
     <div class="cta-links">
-      <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener" class="cta-btn cta-btn-outline">Kompletní žebříček na silnejsiregiony.cz</a>
-      <a href="#metodologie" class="cta-btn cta-btn-outline">Metodologie</a>
+      <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener" class="cta-btn cta-btn-outline">Full ranking at silnejsiregiony.cz</a>
+      <a href="#methodology" class="cta-btn cta-btn-outline">Methodology</a>
     </div>
   </div>
 </section>
 
-<section class="methodology" id="metodologie">
-  <h2>Metodologie</h2>
+<section class="methodology" id="methodology">
+  <h2>Methodology</h2>
 
   <div class="method-block">
     <h3>Data</h3>
-    <p><strong>Index silnějších regionů</strong> vychází z 49 indikátorů kvality života pro 206 obcí s rozšířenou působností (ORP) + Prahu. Zdrojová data pocházejí z veřejně dostupných databází ČSÚ, MPSV, MZ ČR, ČÚZK, ČTÚ a dalších resortních zdrojů. Většina indikátorů reflektuje stav v letech 2023–2025; přesný rok pro každý ukazatel je dokumentován ve zdrojovém datasetu.</p>
-    <p><strong>Volební data:</strong> Výsledky parlamentních voleb 2025 a 2021 z ČSÚ / <a href="https://volby.cz" target="_blank" rel="noopener">volby.cz</a> (14 711 okrsků, 6 389 obcí, agregováno na úroveň ORP).</p>
+    <p>The <strong>Index of Stronger Regions</strong> is based on 49 quality-of-life indicators for 206 municipalities with extended powers (ORP) + Prague. Source data come from publicly available databases of the Czech Statistical Office (CSO), the Ministry of Labour and Social Affairs, the Ministry of Health, the Czech Office for Surveying, Mapping and Cadastre, the Czech Telecommunication Office, and other government sources. Most indicators reflect the state in 2023–2025; the exact year for each indicator is documented in the source dataset.</p>
+    <p><strong>Election data:</strong> Results of the 2025 and 2021 parliamentary elections from CSO / <a href="https://volby.cz" target="_blank" rel="noopener">volby.cz</a> (14,711 polling stations, 6,389 municipalities, aggregated to ORP level).</p>
   </div>
 
   <div class="method-block">
-    <h3>Čtyřfaktorový model</h3>
-    <p>Původní index používá 7 pilířů definovaných expertem. Tato analýza přidává alternativní pohled: <strong>explorační faktorovou analýzu</strong> (EFA) nad rankovými transformacemi 49 indikátorů. Metoda extrakce: Principal Axis Factoring (PAF), rotace: Varimax.</p>
-    <p>Paralelní analýza doporučuje 5 faktorů; zvolili jsme 4 jako kompromis mezi parsimonií a spolehlivostí (5. faktor má α = 0,55). Výsledné faktory:</p>
+    <h3>Four-factor model</h3>
+    <p>The original index uses 7 expert-defined pillars. This analysis adds an alternative view: <strong>exploratory factor analysis</strong> (EFA) on rank transformations of 49 indicators. Extraction method: Principal Axis Factoring (PAF), rotation: Varimax.</p>
+    <p>Parallel analysis recommends 5 factors; we chose 4 as a compromise between parsimony and reliability (the 5th factor has α = 0.55). Resulting factors:</p>
     <ul>
-      <li><strong>Infrastruktura a dostupnost</strong> (29,6 % variance, α = 0,85): čerpací stanice, obchody, doprava, internet, optika</li>
-      <li><strong>Sociální odolnost</strong> (31,0 %, α = 0,88): exekuce, kriminalita, naděje dožití, vzdělání, nezaměstnanost</li>
-      <li><strong>Atraktivita místa</strong> (23,5 %, α = 0,84): turismus, ubytování, restaurace, sportoviště, krajina</li>
-      <li><strong>Demografie a péče</strong> (15,9 %, α = 0,69): věkový průměr, migrace, lékaři, lékárny</li>
+      <li><strong>Infrastructure and accessibility</strong> (29.6% of variance, α = 0.85): gas stations, shops, transport, internet, fiber optics</li>
+      <li><strong>Social resilience</strong> (31.0%, α = 0.88): foreclosures, crime, life expectancy, education, unemployment</li>
+      <li><strong>Place attractiveness</strong> (23.5%, α = 0.84): tourism, accommodation, restaurants, sports facilities, landscape</li>
+      <li><strong>Demographics and care</strong> (15.9%, α = 0.69): average age, migration, doctors, pharmacies</li>
     </ul>
-    <p>Celková vysvětlená variance: 90,9 % (adj. R² = 0,91). KMO = 0,80, Bartlettův test: p &lt; 0,001. Bootstrap stabilita faktorových zátěží ověřena na 1 000 replikacích (41/42 přiřazených indikátorů stabilních).</p>
+    <p>Total explained variance: 90.9% (adj. R² = 0.91). KMO = 0.80, Bartlett's test: p &lt; 0.001. Bootstrap stability of factor loadings verified on 1,000 replications (41/42 assigned indicators stable).</p>
   </div>
 
   <div class="method-block">
     <h3>Clustering</h3>
-    <p>K-means clustering (k = 3) nad 4 faktorovými skóry po standardizaci. Tři typy regionů: Prosperující regiony, Vnitřní periferie, Města v sociálním napětí. Volba k podložena silhouette analýzou.</p>
+    <p>K-means clustering (k = 3) on 4 standardized factor scores. Three types of regions: Prosperous regions, Inner periphery, Cities under social strain. Choice of k supported by silhouette analysis.</p>
   </div>
 
   <div class="method-block">
-    <h3>Korelace a limity</h3>
-    <p>Uváděné korelace jsou Pearsonovy, ověřené Spearmanovým koeficientem a OLS s kontrolami. Analýza je <strong>deskriptivní</strong>: korelace na úrovni regionů neimplikují kauzální vztah a nemohou být přeneseny na chování jednotlivých voličů (ekologický klam).</p>
-    <p>Faktorové skóry jsou váženým průměrem rankových pozic a zohledňují relativní postavení ORP, nikoli absolutní hodnoty ukazatelů.</p>
+    <h3>Correlations and limitations</h3>
+    <p>Reported correlations are Pearson's, verified by Spearman's coefficient and OLS with controls. The analysis is <strong>descriptive</strong>: correlations at the regional level do not imply causation and cannot be transferred to individual voter behavior (ecological fallacy).</p>
+    <p>Factor scores are weighted averages of rank positions and reflect the relative standing of ORP, not absolute indicator values.</p>
   </div>
 
   <div class="method-block">
-    <h3>Autor a zdroj</h3>
-    <p>Analýza: <strong>David Navrátil</strong> · <a href="https://davidnavratil.com/analyses/index-silnejsich-regionu/">davidnavratil.com</a></p>
-    <p>Zdrojový projekt: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Index silnějších regionů</a> (49 indikátorů, projekt Evropa v datech a České spořitelny)</p>
-    <p>Při citaci prosím uvádějte zdroj a odkaz na tuto stránku.</p>
+    <h3>Author and source</h3>
+    <p>Analysis: <strong>David Navrátil</strong> · <a href="https://davidnavratil.com/analyses/index-silnejsich-regionu/en/">davidnavratil.com</a></p>
+    <p>Source project: <a href="https://www.silnejsiregiony.cz/" target="_blank" rel="noopener">Index of Stronger Regions</a> (49 indicators, a project by Evropa v datech and Česká spořitelna)</p>
+    <p>When citing, please reference the source and link to this page.</p>
   </div>
 </section>
 </main>
@@ -1284,18 +1284,18 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 <footer class="brand-footer">
   <div class="brand-footer-inner">
     <div class="brand-footer-top">
-      <p class="brand-footer-cta">Nechcete jen sledovat svět. Chcete mu rozumět.</p>
+      <p class="brand-footer-cta">You don't just want to watch the world. You want to understand it.</p>
       <a href="https://davidnavratil.substack.com/subscribe" target="_blank" rel="noopener" class="brand-footer-subscribe">
-        Odebírat newsletter
+        Subscribe to newsletter
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
     <div class="brand-footer-bottom">
       <nav class="brand-analyses-nav">
-        <a href="/analyses/index-silnejsich-regionu/" class="current">Index regionů</a>
-        <a href="/analyses/cesta-nafty/">Cesta nafty</a>
+        <a href="/analyses/index-silnejsich-regionu/en/" class="current">Regional Index</a>
+        <a href="/analyses/cesta-nafty/">Oil Journey</a>
         <a href="/analyses/hormuz/">Hormuz</a>
-        <a href="/analyses/hormuz-energy-simulator/">Hormuz simulátor</a>
+        <a href="/analyses/hormuz-energy-simulator/">Hormuz Simulator</a>
         <a href="/analyses/qatar-infrastructure/">Qatar</a>
       </nav>
       <span class="brand-footer-copy">&copy; 2026 David Navrátil</span>
@@ -1308,7 +1308,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 (function() {
   'use strict';
 
-  const DATA_BASE = './data/';
+  const DATA_BASE = '../data/';
   let DATA = {};
 
   // Czech number formatting: 72.9 → "72,9"
@@ -1353,8 +1353,6 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
     };
   }
 
-  // PLOTLY_LAYOUT removed — use ...getPlotlyLayout() directly
-
   const PLOTLY_CONFIG = { displayModeBar: false, responsive: true };
 
   // ===== Data loading =====
@@ -1384,35 +1382,35 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 
   // ===== Data: 7 pillars → 4 views (EFA rank-based, PAF + varimax) =====
   const PILLARS = {
-    'Demografie': ['Naděje dožití', 'Vysokoškoláci', 'Migrace', 'Věkový průměr', 'Živě narození', 'Sebevraždy'],
-    'Ekonomika': ['Exekuce', 'Nezaměstnanost', 'Podnikatelé', 'Příjmy obcí', 'Dostupnost bydlení', 'Podpora MAS'],
-    'Vzdělávání': ['Školky', 'Digitální kompetence', 'Vzděl. úspěšnost', 'Zameškané hodiny', 'Testování', 'Finance na žáka', 'Bez vzdělání', 'Počet ZŠ'],
-    'Dostupnost péče': ['Stomatologové', 'Praktici', 'Pediatři', 'Lékárny', 'Sociální služby'],
-    'Prostředí': ['Neziskovky', 'Ekolog. stabilita', 'Kriminalita', 'Separace plastů', 'Produkce odpadu', 'Třídění'],
-    'Volný čas': ['Divadla', 'Sportoviště', 'Knihovny', 'Kina', 'Muzea', 'Ubytování', 'Popl. z pobytu', 'Návštěvnost', 'Turistické cíle'],
-    'Občanská vyb.': ['Zásilkovna', 'Dokonč. byty', 'Obchody/km²', 'Zastávky MHD/km²', 'Optický internet', 'Restaurace', 'Silnice', 'Mobilní internet', 'Pevný internet', 'Čerpací st.', 'Dobíjecí st.'],
+    'Demographics': ['Life expectancy', 'University graduates', 'Migration', 'Average age', 'Live births', 'Suicides'],
+    'Economics': ['Foreclosures', 'Unemployment', 'Entrepreneurs', 'Municipal revenue', 'Housing affordability', 'MAS support'],
+    'Education': ['Kindergartens', 'Digital competence', 'Educational attainment', 'Missed classes', 'Testing', 'Funding per pupil', 'No education', 'Number of schools'],
+    'Healthcare access': ['Dentists', 'GPs', 'Pediatricians', 'Pharmacies', 'Social services'],
+    'Environment': ['NGOs', 'Ecological stability', 'Crime', 'Plastic separation', 'Waste production', 'Recycling'],
+    'Leisure': ['Theaters', 'Sports facilities', 'Libraries', 'Cinemas', 'Museums', 'Accommodation', 'Tourism fees', 'Visitors', 'Tourist attractions'],
+    'Civic amenities': ['Parcel lockers', 'Completed flats', 'Shops/km²', 'Transit stops/km²', 'Fiber internet', 'Restaurants', 'Roads', 'Mobile internet', 'Fixed internet', 'Gas stations', 'Charging stations'],
   };
 
   const VIEWS = {
-    'Dostupnost a infrastruktura': {
+    'Accessibility and infrastructure': {
       view: 'i1',
-      desc: 'Zastávky, obchody, internet, konektivita',
-      items: ['Čerpací st.', 'Dobíjecí st.', 'Obchody/km²', 'Zastávky MHD/km²', 'Pevný internet', 'Návštěvnost', 'Optický internet', 'Divadla', 'Mobilní internet', 'Stomatologové', 'Zásilkovna', 'Knihovny', 'Podpora MAS', 'Počet ZŠ'],
+      desc: 'Transit stops, shops, internet, connectivity',
+      items: ['Gas stations', 'Charging stations', 'Shops/km²', 'Transit stops/km²', 'Fixed internet', 'Visitors', 'Fiber internet', 'Theaters', 'Mobile internet', 'Dentists', 'Parcel lockers', 'Libraries', 'MAS support', 'Number of schools'],
     },
-    'Sociální odolnost': {
+    'Social resilience': {
       view: 'i2',
-      desc: 'Exekuce, kriminalita, zdraví a vzdělání',
-      items: ['Exekuce', 'Vzděl. úspěšnost', 'Naděje dožití', 'Bez vzdělání', 'Vysokoškoláci', 'Kriminalita', 'Nezaměstnanost', 'Zameškané hodiny', 'Školky', 'Dostupnost bydlení', 'Dokonč. byty', 'Třídění', 'Separace plastů'],
+      desc: 'Foreclosures, crime, health, and education',
+      items: ['Foreclosures', 'Educational attainment', 'Life expectancy', 'No education', 'University graduates', 'Crime', 'Unemployment', 'Missed classes', 'Kindergartens', 'Housing affordability', 'Completed flats', 'Recycling', 'Plastic separation'],
     },
-    'Atraktivita místa': {
+    'Place attractiveness': {
       view: 'i3',
-      desc: 'Turismus, krajina, restaurace, muzea',
-      items: ['Popl. z pobytu', 'Turistické cíle', 'Ubytování', 'Restaurace', 'Muzea', 'Ekolog. stabilita', 'Podnikatelé', 'Silnice', 'Sportoviště', 'Příjmy obcí'],
+      desc: 'Tourism, landscape, restaurants, museums',
+      items: ['Tourism fees', 'Tourist attractions', 'Accommodation', 'Restaurants', 'Museums', 'Ecological stability', 'Entrepreneurs', 'Roads', 'Sports facilities', 'Municipal revenue'],
     },
-    'Demografie': {
+    'Demographics': {
       view: 'i4',
-      desc: 'Stárnutí, migrace, dostupnost péče',
-      items: ['Věkový průměr', 'Migrace', 'Finance na žáka', 'Praktici', 'Lékárny'],
+      desc: 'Aging, migration, healthcare access',
+      items: ['Average age', 'Migration', 'Funding per pupil', 'GPs', 'Pharmacies'],
     },
   };
 
@@ -1420,7 +1418,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
     const el = document.getElementById('viz-data');
     try { Plotly.purge(el); } catch(_) {}
     const allTags = Object.values(PILLARS).flat();
-    let html = '<div class="data-grid" style="justify-content:center;align-items:center"><p class="data-grid-title">49 ukazatelů kvality života</p>';
+    let html = '<div class="data-grid" style="justify-content:center;align-items:center"><p class="data-grid-title">49 quality-of-life indicators</p>';
     html += '<div style="display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center;max-width:500px;margin:0 auto">';
     allTags.forEach((tag, i) => {
       html += `<span class="tag" style="opacity:0;animation:tagIn 0.3s ease ${i * 0.03}s forwards">${tag}</span>`;
@@ -1439,7 +1437,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
   function renderDataPillars() {
     const el = document.getElementById('viz-data');
     try { Plotly.purge(el); } catch(_) {}
-    let html = '<div class="data-grid"><p class="data-grid-title">7 pilířů projektu · 49 ukazatelů</p>';
+    let html = '<div class="data-grid"><p class="data-grid-title">7 project pillars · 49 indicators</p>';
     for (const [name, items] of Object.entries(PILLARS)) {
       html += `<div class="pillar-group"><h4>${name} <span class="pillar-count">${items.length}</span></h4><div class="tags">`;
       for (const item of items) html += `<span class="tag">${item}</span>`;
@@ -1452,8 +1450,8 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
   function renderDataViews() {
     const el = document.getElementById('viz-indexes');
     try { Plotly.purge(el); } catch(_) {}
-    let html = '<div class="data-grid"><p class="data-grid-title">4 pohledy · faktorová analýza (EFA)</p>';
-    // 3 main views
+    let html = '<div class="data-grid"><p class="data-grid-title">4 views · factor analysis (EFA)</p>';
+    // 4 main views
     for (const [name, cfg] of Object.entries(VIEWS)) {
       html += `<div class="view-group" data-view="${cfg.view}"><h4>${name} <span class="view-count">${cfg.items.length}</span></h4><div class="tags">`;
       for (const item of cfg.items) html += `<span class="tag">${item}</span>`;
@@ -1462,7 +1460,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
     // Remaining indicators
     const viewItems = new Set(Object.values(VIEWS).flatMap(v => v.items));
     const others = Object.values(PILLARS).flat().filter(x => !viewItems.has(x));
-    html += `<div class="view-group other-group"><h4>Ostatní v celkovém skóre <span class="view-count">${others.length}</span></h4><div class="tags">`;
+    html += `<div class="view-group other-group"><h4>Other in overall score <span class="view-count">${others.length}</span></h4><div class="tags">`;
     for (const item of others) html += `<span class="tag">${item}</span>`;
     html += '</div></div></div>';
     el.innerHTML = html;
@@ -1505,12 +1503,12 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
       text: avgScores.map(v => cz(v)),
       textposition: 'outside',
       textfont: { size: 12, color: C().navy },
-      hovertemplate: '<b>%{y}</b><br>Celkové skóre: %{x:.1f}<extra></extra>',
+      hovertemplate: '<b>%{y}</b><br>Overall score: %{x:.1f}<extra></extra>',
       showlegend: false,
     }], {
       ...getPlotlyLayout(),
       title: { text: isBottom ? 'Bottom 15' : 'Top 15', font: { size: 15, color: C().navy } },
-      xaxis: { range: [0, isBottom ? 55 : 80], title: 'Průměr 7 pilířů (0–100)', gridcolor: getColors().grid },
+      xaxis: { range: [0, isBottom ? 55 : 80], title: 'Average of 7 pillars (0–100)', gridcolor: getColors().grid },
       yaxis: { categoryorder: 'array', categoryarray: [...yLabels].reverse() },
       margin: { t: 40, r: 50, b: 50, l: 200 },
       height: 650,
@@ -1522,8 +1520,8 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
     const isI1I3 = which === 'scatter-i1-i3';
     const xKey = isI1I3 ? 'i1' : 'skore';
     const yKey = isI1I3 ? 'i3' : 'i2';
-    const xLabel = isI1I3 ? 'Dostupnost a infrastruktura' : 'Celková prosperita';
-    const yLabel = isI1I3 ? 'Atraktivita místa' : 'Sociální odolnost';
+    const xLabel = isI1I3 ? 'Accessibility and infrastructure' : 'Overall prosperity';
+    const yLabel = isI1I3 ? 'Place attractiveness' : 'Social resilience';
 
     const colorVals = orp.map(d => isI1I3 ? d.i2 : d.i2);
 
@@ -1551,7 +1549,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
         color: colorVals,
         colorscale: 'RdYlGn',
         showscale: true,
-        colorbar: { title: 'Sociální odolnost', thickness: 15 },
+        colorbar: { title: 'Social resilience', thickness: 15 },
         line: { width: 0.5, color: 'white' },
       },
       hovertemplate: '<b>%{text}</b><br>' + xLabel + ': %{x:.1f}<br>' + yLabel + ': %{y:.1f}<extra></extra>',
@@ -1575,7 +1573,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 
     Plotly.newPlot('viz-indexes', traces, {
       ...getPlotlyLayout(),
-      title: { text: isI1I3 ? 'Infrastruktura vs. atraktivita<br><span style="font-size:13px;color:#888">Dva nezávislé rozměry prosperity</span>' : 'Sociální odolnost je klíčová<br><span style="font-size:13px;color:#888">Celková prosperita × sociální odolnost  ·  r = 0,65</span>', font: { size: 15, color: C().navy } },
+      title: { text: isI1I3 ? 'Infrastructure vs. attractiveness<br><span style="font-size:13px;color:#888">Two independent dimensions of prosperity</span>' : 'Social resilience is the key<br><span style="font-size:13px;color:#888">Overall prosperity × social resilience  ·  r = 0.65</span>', font: { size: 15, color: C().navy } },
       xaxis: { title: xLabel },
       yaxis: { title: yLabel },
       height: 600,
@@ -1678,11 +1676,11 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 
     // --- Dumbbell chart ---
     const dims = [
-      { key: 'skore', label: 'Celkové skóre' },
-      { key: 'i1', label: 'Infrastruktura' },
-      { key: 'i2', label: 'Sociální odolnost' },
-      { key: 'i3', label: 'Atraktivita' },
-      { key: 'i4', label: 'Demografie' },
+      { key: 'skore', label: 'Overall score' },
+      { key: 'i1', label: 'Infrastructure' },
+      { key: 'i2', label: 'Social resilience' },
+      { key: 'i3', label: 'Attractiveness' },
+      { key: 'i4', label: 'Demographics' },
     ];
     const yLabels = dims.map(d => d.label);
     const aVals = dims.map(d => a[d.key]);
@@ -1723,7 +1721,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
       },
     ], {
       ...getPlotlyLayout(),
-      xaxis: { range: [-5, 108], gridcolor: 'rgba(0,0,0,0.04)', zeroline: false, dtick: 25, title: { text: 'Skóre 0–100', font: { size: 11, color: '#999' } } },
+      xaxis: { range: [-5, 108], gridcolor: 'rgba(0,0,0,0.04)', zeroline: false, dtick: 25, title: { text: 'Score 0–100', font: { size: 11, color: '#999' } } },
       yaxis: { autorange: 'reversed', gridcolor: 'rgba(0,0,0,0)', tickfont: { size: 12 } },
       shapes: shapes,
       annotations: gapAnnotations,
@@ -1735,10 +1733,10 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
   }
 
   const CORR_TITLES = {
-    'corr-vs-bydleni': 'Vzdělání vs. dostupné bydlení',
-    'corr-knihovny-cerpacky': 'Knihovny vs. čerpací stanice',
-    'corr-finance-vs': 'Finance na žáka vs. vysokoškoláci',
-    'corr-doziti-podnikatele': 'Naděje dožití vs. podnikatelé',
+    'corr-vs-bydleni': 'Education vs. affordable housing',
+    'corr-knihovny-cerpacky': 'Libraries vs. gas stations',
+    'corr-finance-vs': 'Funding per pupil vs. graduates',
+    'corr-doziti-podnikatele': 'Life expectancy vs. entrepreneurs',
   };
 
   function renderCorrelation(corrId) {
@@ -1757,7 +1755,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
     const xMin = Math.min(...xs);
     const xMax = Math.max(...xs);
 
-    const rFormatted = corr.r.toFixed(2).replace('.', ',').replace('-', '−');
+    const rFormatted = corr.r.toFixed(2).replace('-', '−');
     const isNeg = corr.r < 0;
     const dotColor = isNeg ? 'rgba(214,39,40,0.5)' : 'rgba(44,160,44,0.5)';
     const lineColor = isNeg ? 'rgba(214,39,40,0.7)' : 'rgba(44,160,44,0.7)';
@@ -1846,18 +1844,18 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
       }
     ], {
       ...getPlotlyLayout(),
-      title: { text: 'Kdo roste, kdo padá<br><span style="font-size:13px;color:#888">Celková prosperita × roční momentum (2021–2026)</span>', font: { size: 15, color: C().navy } },
-      xaxis: { title: 'Celková prosperita (4F skóre)', range: [14, 82] },
-      yaxis: { title: 'Roční momentum (annualizovaný)', zeroline: true, zerolinecolor: '#ccc', range: [-10, 10] },
+      title: { text: 'Who is rising, who is falling<br><span style="font-size:13px;color:#888">Overall prosperity × annual momentum (2021–2026)</span>', font: { size: 15, color: C().navy } },
+      xaxis: { title: 'Overall prosperity (4F score)', range: [14, 82] },
+      yaxis: { title: 'Annual momentum (annualized)', zeroline: true, zerolinecolor: '#ccc', range: [-10, 10] },
       shapes: [
         { type: 'line', x0: medI0, x1: medI0, y0: -10, y1: 10, line: { dash: 'dash', color: '#ccc' } },
         { type: 'line', x0: 14, x1: 82, y0: medMom, y1: medMom, line: { dash: 'dash', color: '#ccc' } },
       ],
       annotations: [
-        { x: 78, y: 8, text: 'Lídři', showarrow: false, font: { color: '#999', size: 11 } },
-        { x: 20, y: 8, text: 'Dohánějící', showarrow: false, font: { color: '#999', size: 11 } },
-        { x: 78, y: -8, text: 'Stagnující', showarrow: false, font: { color: '#999', size: 11 } },
-        { x: 20, y: -8, text: 'Propadající', showarrow: false, font: { color: '#999', size: 11 } },
+        { x: 78, y: 8, text: 'Leaders', showarrow: false, font: { color: '#999', size: 11 } },
+        { x: 20, y: 8, text: 'Catching up', showarrow: false, font: { color: '#999', size: 11 } },
+        { x: 78, y: -8, text: 'Stagnating', showarrow: false, font: { color: '#999', size: 11 } },
+        { x: 20, y: -8, text: 'Declining', showarrow: false, font: { color: '#999', size: 11 } },
         ...orpAnnotations,
       ],
       height: 600,
@@ -1875,7 +1873,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
         type: 'scatter', mode: 'markers',
         x: sub.map(d => d.i3),
         y: sub.map(d => d.ucast25),
-        text: sub.map(d => `${d.name}<br>Účast: ${d.ucast25}%<br>I3: ${d.i3}`),
+        text: sub.map(d => `${d.name}<br>Turnout: ${d.ucast25}%<br>I3: ${d.i3}`),
         marker: {
           size: sub.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2)),
           color: CLUSTER_COLOR_MAP_FN()[cl] || C().muted,
@@ -1888,9 +1886,9 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 
     Plotly.react('viz-elections', traces, {
       ...getPlotlyLayout(),
-      title: { text: 'Kde je sociální odolnost, chodí se k volbám<br><span style="font-size:13px;color:#888">Sociální odolnost × volební účast 2025  ·  r = 0,88</span>', font: { size: 15, color: C().navy } },
-      xaxis: { title: 'Sociální odolnost (0–100)', range: [5, 100], gridcolor: getColors().grid },
-      yaxis: { title: 'Volební účast 2025 (%)', range: [52, 78] },
+      title: { text: 'Where there is social resilience, people vote<br><span style="font-size:13px;color:#888">Social resilience × voter turnout 2025  ·  r = 0.88</span>', font: { size: 15, color: C().navy } },
+      xaxis: { title: 'Social resilience (0–100)', range: [5, 100], gridcolor: getColors().grid },
+      yaxis: { title: 'Voter turnout 2025 (%)', range: [52, 78] },
       height: 600,
       showlegend: true,
       legend: { x: 0.01, y: 0.99, bgcolor: getColors().legend_bg, bordercolor: '#E0DCD4', borderwidth: 1 },
@@ -1905,28 +1903,28 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
       type: 'scatter', mode: 'markers',
       x: orp.map(d => d.skore),
       y: orp.map(d => d.ano25),
-      text: orp.map(d => `${d.name}<br>SPOLU: ${d.spolu25}%<br>STAN: ${d.stan25}%<br>Piráti: ${d.pirati25}%`),
+      text: orp.map(d => `${d.name}<br>SPOLU: ${d.spolu25}%<br>STAN: ${d.stan25}%<br>Pirates: ${d.pirati25}%`),
       marker: {
         size: orp.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2)),
         color: orp.map(d => d.i3),
         colorscale: [[0, '#d62728'], [0.5, '#ffdd57'], [1, '#2ca02c']],
         showscale: true,
-        colorbar: { title: 'Sociální odolnost', thickness: 15 },
+        colorbar: { title: 'Social resilience', thickness: 15 },
         line: { width: 0.5, color: 'white' },
       },
-      hovertemplate: '<b>%{text}</b><br>Prosperita: %{x:.0f}<br>ANO: %{y:.1f}%<extra></extra>',
+      hovertemplate: '<b>%{text}</b><br>Prosperity: %{x:.0f}<br>ANO: %{y:.1f}%<extra></extra>',
     }], {
       ...getPlotlyLayout(),
-      title: { text: 'Jedna strana, jedna dělicí čára<br><span style="font-size:13px;color:#888">Celková prosperita × podíl ANO  ·  r = −0,68  ·  barva = sociální odolnost</span>', font: { size: 15, color: C().navy } },
-      xaxis: { title: 'Celková prosperita (0–100)', gridcolor: getColors().grid },
-      yaxis: { title: 'Podíl hlasů ANO (%)', gridcolor: getColors().grid },
+      title: { text: 'One party, one dividing line<br><span style="font-size:13px;color:#888">Overall prosperity × ANO vote share  ·  r = −0.68  ·  color = social resilience</span>', font: { size: 15, color: C().navy } },
+      xaxis: { title: 'Overall prosperity (0–100)', gridcolor: getColors().grid },
+      yaxis: { title: 'ANO vote share (%)', gridcolor: getColors().grid },
       margin: { t: 70, r: 20, b: 50, l: 60 },
       height: 600,
     }, PLOTLY_CONFIG);
   }
 
   function renderElectionsPopulism() {
-    // "Periferie se mobilizovala" → y = change in voter turnout 2021→2025
+    // "The periphery mobilized" → y = change in voter turnout 2021→2025
     const orp = DATA.elections.orp;
     const clusterNames = [...new Set(orp.map(d => d.cluster).filter(Boolean))];
 
@@ -1936,7 +1934,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
         type: 'scatter', mode: 'markers',
         x: sub.map(d => d.i2),
         y: sub.map(d => d.d_ucast),
-        text: sub.map(d => `${d.name}<br>Δ účast: +${cz(d.d_ucast)} p.b.<br>Účast 2025: ${d.ucast25}%<br>Soc. odolnost: ${d.i2}`),
+        text: sub.map(d => `${d.name}<br>Δ turnout: +${cz(d.d_ucast)} pp<br>Turnout 2025: ${d.ucast25}%<br>Social resilience: ${d.i2}`),
         marker: {
           size: sub.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2)),
           color: CLUSTER_COLOR_MAP_FN()[cl] || C().muted,
@@ -1949,9 +1947,9 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 
     Plotly.react('viz-elections', traces, {
       ...getPlotlyLayout(),
-      title: { text: 'Sociální odolnost vs. změna volební účasti<br><span style="font-size:13px;color:#888">2021 → 2025  ·  r = −0,58</span>', font: { size: 15, color: C().navy } },
-      xaxis: { title: 'Sociální odolnost (0–100)', gridcolor: getColors().grid },
-      yaxis: { title: 'Změna volební účasti (p.b.)', zeroline: true, zerolinecolor: '#ccc', gridcolor: getColors().grid },
+      title: { text: 'Social resilience vs. change in voter turnout<br><span style="font-size:13px;color:#888">2021 → 2025  ·  r = −0.58</span>', font: { size: 15, color: C().navy } },
+      xaxis: { title: 'Social resilience (0–100)', gridcolor: getColors().grid },
+      yaxis: { title: 'Change in voter turnout (pp)', zeroline: true, zerolinecolor: '#ccc', gridcolor: getColors().grid },
       height: 600,
       margin: { t: 70, r: 20, b: 50, l: 60 },
       showlegend: true,
@@ -1960,7 +1958,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
   }
 
   function renderElectionsPeriphery() {
-    // "Periferie není jen jedna" → y = ANO + SPD + Motoristé + Stačilo! (strany slibující změnu)
+    // "The periphery is not just one" → y = ANO + SPD + Motorists + Enough! (parties promising change)
     const orp = DATA.elections.orp;
     const clusterNames = [...new Set(orp.map(d => d.cluster).filter(Boolean))];
 
@@ -1970,7 +1968,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
         type: 'scatter', mode: 'markers',
         x: sub.map(d => d.i2),
         y: sub.map(d => d.populist25 || d.ano25),
-        text: sub.map(d => `${d.name}<br>ANO+SPD+Mot.+Stač.: ${cz(d.populist25 || d.ano25)}%<br>ANO: ${d.ano25}%<br>Soc. odolnost: ${d.i2}`),
+        text: sub.map(d => `${d.name}<br>ANO+SPD+Mot.+Enough: ${cz(d.populist25 || d.ano25)}%<br>ANO: ${d.ano25}%<br>Social resilience: ${d.i2}`),
         marker: {
           size: sub.map(d => Math.max(6, Math.sqrt(d.pop / 1000) * 2)),
           color: CLUSTER_COLOR_MAP_FN()[cl] || C().muted,
@@ -1983,9 +1981,9 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
 
     Plotly.react('viz-elections', traces, {
       ...getPlotlyLayout(),
-      title: { text: 'Sociální odolnost vs. strany slibující změnu<br><span style="font-size:13px;color:#888">ANO + SPD + Motoristé + Stačilo!  ·  r = −0,73</span>', font: { size: 15, color: C().navy } },
-      xaxis: { title: 'Sociální odolnost (0–100)', gridcolor: getColors().grid },
-      yaxis: { title: 'ANO + SPD + Motoristé + Stačilo! (%)', gridcolor: getColors().grid },
+      title: { text: 'Social resilience vs. parties promising change<br><span style="font-size:13px;color:#888">ANO + SPD + Motorists + Enough!  ·  r = −0.73</span>', font: { size: 15, color: C().navy } },
+      xaxis: { title: 'Social resilience (0–100)', gridcolor: getColors().grid },
+      yaxis: { title: 'ANO + SPD + Motorists + Enough! (%)', gridcolor: getColors().grid },
       height: 600,
       margin: { t: 70, r: 20, b: 50, l: 60 },
       showlegend: true,
@@ -2105,7 +2103,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
     obs.observe(hero);
   }
 
-  // ===== Search: Najdi svůj region =====
+  // ===== Search: Find your region =====
   function setupSearch() {
     const input = document.getElementById('orp-search');
     const sugBox = document.getElementById('orp-suggestions');
@@ -2176,20 +2174,20 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
       sugBox.classList.remove('visible');
 
       const dims = [
-        { key: 'i1', label: 'Infrastruktura', color: C().accent },
-        { key: 'i2', label: 'Sociální odolnost', color: C().navy },
-        { key: 'i3', label: 'Atraktivita', color: C().prosper },
-        { key: 'i4', label: 'Demografie', color: '#c08020' },
+        { key: 'i1', label: 'Infrastructure', color: C().accent },
+        { key: 'i2', label: 'Social resilience', color: C().navy },
+        { key: 'i3', label: 'Attractiveness', color: C().prosper },
+        { key: 'i4', label: 'Demographics', color: '#c08020' },
       ];
 
-      const rankText = d.rank ? `#${d.rank} z 206` : '';
-      const popText = d.pop ? d.pop.toLocaleString('cs-CZ') + ' obyvatel' : '';
+      const rankText = d.rank ? `#${d.rank} of 206` : '';
+      const popText = d.pop ? d.pop.toLocaleString('en-US') + ' inhabitants' : '';
       const clusterText = d.cluster || '';
 
       let html = `<div class="orp-card">`;
       html += `<h3>${d.name}</h3>`;
       html += `<div class="orp-meta">${[rankText, d.kraj, popText, clusterText].filter(Boolean).join(' · ')}</div>`;
-      html += `<div class="orp-bar-row"><span class="orp-bar-label" style="font-weight:700">Celkové skóre</span>`;
+      html += `<div class="orp-bar-row"><span class="orp-bar-label" style="font-weight:700">Overall score</span>`;
       html += `<div class="orp-bar-track"><div class="orp-bar-fill" style="width:${d.skore}%;background:var(--color-navy)"></div></div>`;
       html += `<span class="orp-bar-value">${cz(d.skore)}</span></div>`;
 
@@ -2275,7 +2273,7 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
       await loadData();
     } catch (err) {
       document.querySelector('main').innerHTML =
-        '<div style="text-align:center;padding:4rem 1rem"><h2>Nepodařilo se načíst data</h2><p>Zkuste obnovit stránku. Pokud problém přetrvává, kontaktujte autora.</p></div>';
+        '<div style="text-align:center;padding:4rem 1rem"><h2>Failed to load data</h2><p>Try refreshing the page. If the problem persists, contact the author.</p></div>';
       return;
     }
     setupHero();
