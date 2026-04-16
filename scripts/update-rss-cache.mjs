@@ -15,6 +15,9 @@ import { execSync } from 'node:child_process';
 const CACHE_PATH = path.join(process.cwd(), 'src', 'data', 'articles-cache.json');
 const FEED_URL = 'https://davidnavratil.substack.com/feed';
 
+/** Returns true if the string looks like valid RSS with items */
+const isValidRSS = (s) => typeof s === 'string' && s.includes('<item>');
+
 function parseRSS(xml) {
   const items = xml.split('<item>').slice(1, 7);
   return items.map((item) => {
@@ -48,67 +51,73 @@ function parseRSS(xml) {
 }
 
 try {
-  // Try multiple fetch strategies — Substack blocks some CI user-agents/IPs
+  // Try multiple fetch strategies — Substack blocks GitHub Actions IPs
   let xml = '';
 
-  // Strategy 1: Node.js native fetch (works in Node 22+)
-  try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
-    const res = await fetch(FEED_URL, {
-      signal: controller.signal,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; Feedfetcher-Google; +http://www.google.com/feedfetcher.html)',
-        'Accept': 'application/rss+xml, application/xml, text/xml, */*',
-      },
-    });
-    clearTimeout(timeout);
-    if (res.ok) xml = await res.text();
-  } catch { /* try next strategy */ }
-
-  // Strategy 2: curl with different user-agent
-  if (!xml) {
+  // Strategy 1: Node.js native fetch
+  if (!isValidRSS(xml)) {
     try {
-      xml = execSync(
-        `curl -sL --max-time 15 --retry 2 --retry-delay 2 -H "Accept: application/rss+xml, application/xml, text/xml" -A "Feedfetcher-Google" "${FEED_URL}"`,
-        { encoding: 'utf-8', timeout: 30000 }
-      );
-    } catch { /* try next strategy */ }
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000);
+      const res = await fetch(FEED_URL, {
+        signal: controller.signal,
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (compatible; Feedfetcher-Google; +http://www.google.com/feedfetcher.html)',
+          'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+        },
+      });
+      clearTimeout(timeout);
+      if (res.ok) {
+        const text = await res.text();
+        if (isValidRSS(text)) { xml = text; console.log('✓ Strategy 1 (native fetch) succeeded'); }
+      }
+    } catch { /* try next */ }
   }
 
-  // Strategy 3: curl via a plain browser user-agent
-  if (!xml) {
+  // Strategy 2: curl with feed-reader UA
+  if (!isValidRSS(xml)) {
     try {
-      xml = execSync(
-        `curl -sL --max-time 15 -H "Accept: text/html,application/xhtml+xml" -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" "${FEED_URL}"`,
+      const text = execSync(
+        `curl -sfL --max-time 15 --retry 1 -H "Accept: application/rss+xml" -A "Feedfetcher-Google" "${FEED_URL}"`,
         { encoding: 'utf-8', timeout: 25000 }
       );
-    } catch { /* try next strategy */ }
+      if (isValidRSS(text)) { xml = text; console.log('✓ Strategy 2 (curl Feedfetcher) succeeded'); }
+    } catch { /* try next */ }
   }
 
-  // Strategy 4: fetch via own server (Substack blocks GitHub Actions IPs)
-  if (!xml) {
+  // Strategy 3: curl with browser UA
+  if (!isValidRSS(xml)) {
+    try {
+      const text = execSync(
+        `curl -sfL --max-time 15 -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" "${FEED_URL}"`,
+        { encoding: 'utf-8', timeout: 25000 }
+      );
+      if (isValidRSS(text)) { xml = text; console.log('✓ Strategy 3 (curl browser UA) succeeded'); }
+    } catch { /* try next */ }
+  }
+
+  // Strategy 4: SSH to production server and fetch from there
+  if (!isValidRSS(xml)) {
     const sshKey = path.join(process.env.HOME || '/home/runner', '.ssh', 'id_ed25519');
-    const hasSSH = fs.existsSync(sshKey);
-    if (hasSSH) {
+    if (fs.existsSync(sshKey)) {
       try {
-        console.log('⚡ Trying RSS fetch via production server proxy…');
-        xml = execSync(
+        console.log('⚡ Trying RSS fetch via production server…');
+        const text = execSync(
           `ssh -o ConnectTimeout=10 -o LogLevel=ERROR root@77.42.84.152 'curl -sf --max-time 10 "${FEED_URL}"'`,
           { encoding: 'utf-8', timeout: 25000 }
         );
-        if (xml) console.log('✓ RSS fetched via server proxy');
+        if (isValidRSS(text)) { xml = text; console.log('✓ Strategy 4 (server proxy) succeeded'); }
+        else console.log('⚠ Server proxy returned non-RSS content');
       } catch (e) {
-        console.log(`⚠ Server proxy failed: ${e.message?.slice(0, 80)}`);
+        console.log(`⚠ Server proxy failed: ${e.message?.slice(0, 100)}`);
       }
     } else {
-      console.log(`ℹ No SSH key at ${sshKey}, skipping server proxy strategy`);
+      console.log('ℹ No SSH key found, skipping server proxy strategy');
     }
   }
 
-  if (!xml || !xml.includes('<item>')) {
-    console.log('⚠ All fetch strategies failed or returned no RSS data, keeping existing cache');
-    // Check cache staleness — warn if older than 3 days
+  if (!isValidRSS(xml)) {
+    console.log('⚠ All 4 fetch strategies failed, keeping existing cache');
     checkStaleness();
     process.exit(0);
   }
@@ -135,7 +144,7 @@ function checkStaleness() {
       const newest = new Date(cached[0].pubDate);
       const daysOld = (Date.now() - newest.getTime()) / (1000 * 60 * 60 * 24);
       if (daysOld > 3) {
-        console.log(`::warning::RSS cache is ${Math.floor(daysOld)} days stale (newest article: ${cached[0].pubDate}). Substack feed fetch is failing in CI.`);
+        console.log(`::warning::RSS cache is ${Math.floor(daysOld)} days stale (newest: ${cached[0].pubDate}). All Substack fetch strategies failing in CI.`);
       }
     }
   } catch { /* no cache to check */ }
