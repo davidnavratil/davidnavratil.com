@@ -26,7 +26,18 @@ jobs:
 
       - run: npm ci
 
+      - name: Setup SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H 77.42.84.152 >> ~/.ssh/known_hosts 2>/dev/null
+
       - name: Update RSS cache
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
         run: node scripts/update-rss-cache.mjs
 
       - name: Commit updated cache
@@ -39,15 +50,6 @@ jobs:
           git push
 
       - run: npm run build
-
-      - name: Setup SSH
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          mkdir -p ~/.ssh
-          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          ssh-keyscan -H 77.42.84.152 >> ~/.ssh/known_hosts 2>/dev/null
 
       - name: Deploy via rsync
         run: |

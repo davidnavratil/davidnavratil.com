@@ -83,6 +83,17 @@ try {
         `curl -sL --max-time 15 -H "Accept: text/html,application/xhtml+xml" -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" "${FEED_URL}"`,
         { encoding: 'utf-8', timeout: 25000 }
       );
+    } catch { /* try next strategy */ }
+  }
+
+  // Strategy 4: fetch via own server (Substack blocks GitHub Actions IPs)
+  if (!xml && fs.existsSync(path.join(process.env.HOME || '', '.ssh', 'id_ed25519'))) {
+    try {
+      console.log('⚡ Trying RSS fetch via production server proxy…');
+      xml = execSync(
+        `ssh -o LogLevel=ERROR root@77.42.84.152 'curl -sf --max-time 10 "${FEED_URL}"'`,
+        { encoding: 'utf-8', timeout: 20000 }
+      );
     } catch { /* all strategies failed */ }
   }
 
