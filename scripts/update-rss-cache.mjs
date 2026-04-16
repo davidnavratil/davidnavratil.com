@@ -19,7 +19,7 @@ const FEED_URL = 'https://davidnavratil.substack.com/feed';
 const isValidRSS = (s) => typeof s === 'string' && s.includes('<item>');
 
 function parseRSS(xml) {
-  const items = xml.split('<item>').slice(1, 7);
+  const items = xml.split('<item>').slice(1, 10);
   return items.map((item) => {
     const getTag = (tag) => {
       const match = item.match(new RegExp(`<${tag}><!\\[CDATA\\[([\\s\\S]*?)\\]\\]></${tag}>`))
