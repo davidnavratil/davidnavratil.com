@@ -48,11 +48,50 @@ function parseRSS(xml) {
 }
 
 try {
-  // Use curl as it has better connectivity than Node.js fetch in CI
-  const xml = execSync(`curl -sf --max-time 15 -A "Mozilla/5.0 (davidnavratil.com; RSS)" "${FEED_URL}"`, {
-    encoding: 'utf-8',
-    timeout: 20000,
-  });
+  // Try multiple fetch strategies — Substack blocks some CI user-agents/IPs
+  let xml = '';
+
+  // Strategy 1: Node.js native fetch (works in Node 22+)
+  try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    const res = await fetch(FEED_URL, {
+      signal: controller.signal,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; Feedfetcher-Google; +http://www.google.com/feedfetcher.html)',
+        'Accept': 'application/rss+xml, application/xml, text/xml, */*',
+      },
+    });
+    clearTimeout(timeout);
+    if (res.ok) xml = await res.text();
+  } catch { /* try next strategy */ }
+
+  // Strategy 2: curl with different user-agent
+  if (!xml) {
+    try {
+      xml = execSync(
+        `curl -sL --max-time 15 --retry 2 --retry-delay 2 -H "Accept: application/rss+xml, application/xml, text/xml" -A "Feedfetcher-Google" "${FEED_URL}"`,
+        { encoding: 'utf-8', timeout: 30000 }
+      );
+    } catch { /* try next strategy */ }
+  }
+
+  // Strategy 3: curl via a plain browser user-agent
+  if (!xml) {
+    try {
+      xml = execSync(
+        `curl -sL --max-time 15 -H "Accept: text/html,application/xhtml+xml" -A "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36" "${FEED_URL}"`,
+        { encoding: 'utf-8', timeout: 25000 }
+      );
+    } catch { /* all strategies failed */ }
+  }
+
+  if (!xml || !xml.includes('<item>')) {
+    console.log('⚠ All fetch strategies failed or returned no RSS data, keeping existing cache');
+    // Check cache staleness — warn if older than 3 days
+    checkStaleness();
+    process.exit(0);
+  }
 
   const articles = parseRSS(xml);
 
@@ -62,7 +101,22 @@ try {
     console.log(`✓ RSS cache updated: ${articles.length} articles`);
   } else {
     console.log('⚠ RSS returned 0 articles, keeping existing cache');
+    checkStaleness();
   }
 } catch (e) {
   console.log(`⚠ RSS fetch failed (${e.message?.slice(0, 80)}), keeping existing cache`);
+  checkStaleness();
+}
+
+function checkStaleness() {
+  try {
+    const cached = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf-8'));
+    if (cached.length > 0 && cached[0].pubDate) {
+      const newest = new Date(cached[0].pubDate);
+      const daysOld = (Date.now() - newest.getTime()) / (1000 * 60 * 60 * 24);
+      if (daysOld > 3) {
+        console.log(`::warning::RSS cache is ${Math.floor(daysOld)} days stale (newest article: ${cached[0].pubDate}). Substack feed fetch is failing in CI.`);
+      }
+    }
+  } catch { /* no cache to check */ }
 }
