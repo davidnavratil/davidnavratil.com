@@ -87,14 +87,23 @@ try {
   }
 
   // Strategy 4: fetch via own server (Substack blocks GitHub Actions IPs)
-  if (!xml && fs.existsSync(path.join(process.env.HOME || '', '.ssh', 'id_ed25519'))) {
-    try {
-      console.log('⚡ Trying RSS fetch via production server proxy…');
-      xml = execSync(
-        `ssh -o LogLevel=ERROR root@77.42.84.152 'curl -sf --max-time 10 "${FEED_URL}"'`,
-        { encoding: 'utf-8', timeout: 20000 }
-      );
-    } catch { /* all strategies failed */ }
+  if (!xml) {
+    const sshKey = path.join(process.env.HOME || '/home/runner', '.ssh', 'id_ed25519');
+    const hasSSH = fs.existsSync(sshKey);
+    if (hasSSH) {
+      try {
+        console.log('⚡ Trying RSS fetch via production server proxy…');
+        xml = execSync(
+          `ssh -o ConnectTimeout=10 -o LogLevel=ERROR root@77.42.84.152 'curl -sf --max-time 10 "${FEED_URL}"'`,
+          { encoding: 'utf-8', timeout: 25000 }
+        );
+        if (xml) console.log('✓ RSS fetched via server proxy');
+      } catch (e) {
+        console.log(`⚠ Server proxy failed: ${e.message?.slice(0, 80)}`);
+      }
+    } else {
+      console.log(`ℹ No SSH key at ${sshKey}, skipping server proxy strategy`);
+    }
   }
 
   if (!xml || !xml.includes('<item>')) {
