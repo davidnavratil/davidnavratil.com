@@ -81,6 +81,14 @@ export const analyses: Analysis[] = [
     date: '2026-04',
   },
   {
+    key: 'hormuz',
+    href: { cs: '/analyses/hormuz/', en: '/analyses/hormuz/en/' },
+    image: '/images/preview-hormuz.webp',
+    tags: ['tag.geopolitics', 'tag.energy', 'tag.supply'],
+    live: true,
+    date: '2026-03',
+  },
+  {
     key: 'ree',
     href: { cs: '/analyses/ree-dashboard/', en: '/analyses/ree-dashboard/en/' },
     image: '/images/preview-ree.webp',
