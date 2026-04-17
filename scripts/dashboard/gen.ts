@@ -142,13 +142,36 @@ function escapeHtml(s: string): string {
     .replace(/"/g, '&quot;');
 }
 
-function badge(text: string, color: string, fg = '#fff'): string {
-  return `<span style="display:inline-block;padding:2px 8px;border-radius:9999px;background:${color};color:${fg};font-size:12px;font-weight:600;letter-spacing:0.02em;">${escapeHtml(text)}</span>`;
+function badge(text: string, color: string, fg = '#fff', title?: string): string {
+  const t = title ? ` title="${escapeHtml(title)}"` : '';
+  return `<span${t} style="display:inline-block;padding:2px 8px;border-radius:9999px;background:${color};color:${fg};font-size:12px;font-weight:600;letter-spacing:0.02em;cursor:help;">${escapeHtml(text)}</span>`;
 }
 
-function codeTag(code: number, okLabel = '200'): string {
-  const ok = code === 200;
-  return badge(code === 0 ? 'net' : String(code), ok ? '#059669' : '#dc2626');
+/**
+ * Map HTTP status code to a Czech, human-readable label + color.
+ * Hover shows the numeric code for technical detail.
+ */
+function codeTag(code: number): string {
+  type Meta = { label: string; color: string; hint: string };
+  let m: Meta;
+  if (code === 200) {
+    m = { label: 'OK', color: '#059669', hint: '200 OK — stránka funguje' };
+  } else if (code === 401) {
+    m = { label: 'auth', color: '#B45309', hint: '401 Unauthorized — vyžaduje přihlášení' };
+  } else if (code === 403) {
+    m = { label: 'zakázáno', color: '#dc2626', hint: '403 Forbidden — přístup odepřen' };
+  } else if (code === 404) {
+    m = { label: 'chybí', color: '#dc2626', hint: '404 Not Found — stránka neexistuje' };
+  } else if (code === 301 || code === 302 || code === 307 || code === 308) {
+    m = { label: 'redirect', color: '#B45309', hint: `${code} Redirect — přesměrování` };
+  } else if (code >= 500) {
+    m = { label: 'chyba', color: '#dc2626', hint: `${code} Server error — chyba na serveru` };
+  } else if (code === 0) {
+    m = { label: 'síť', color: '#dc2626', hint: 'Síťová chyba — server neodpověděl' };
+  } else {
+    m = { label: String(code), color: '#736D64', hint: `HTTP ${code}` };
+  }
+  return badge(m.label, m.color, '#fff', m.hint);
 }
 
 function renderAnalysisCard(row: AnalysisRow): string {
