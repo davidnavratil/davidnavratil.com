@@ -36,6 +36,10 @@ export const translations = {
     // Analyses section
     'analyses.title': 'Analýzy, ke\u00a0kterým se nechodí pro názor, ale pro orientaci',
     'analyses.subtitle': 'Každá analýza spojuje data, scénáře a\u00a0vizuální logiku. Ne proto, aby ohromovala. Ale aby se v\u00a0ní dalo myslet.',
+    'analyses.opportunity-threat.title': 'Příležitost vs.\u00a0ohrožení: jak mozek mění režim pod tlakem',
+    'analyses.opportunity-threat.desc': 'Stejná situace může spustit výkonnostní mobilizaci, nebo obrannou rigiditu. Interaktivní analýza neurobiologie, fyziologie a\u00a0kognitivních důsledků challenge/threat framingu\u00a0— s\u00a0daty z\u00a0meta-analýz.',
+    'analyses.opportunity-threat.why': 'Rozdíl mezi výzvou a\u00a0ohrožením není v\u00a0situaci. Je v\u00a0hlavě.',
+    'analyses.opportunity-threat.cta': 'Otevřít analýzu',
     'analyses.index-regionu.title': 'Index silnějších regionů',
     'analyses.index-regionu.desc': '49\u00a0ukazatelů, 206\u00a0regionů. Interaktivní analýza: co\u00a0rozhoduje o\u00a0kvalitě života v\u00a0českých městech a\u00a0jak se to promítá do\u00a0voleb.',
     'analyses.index-regionu.why': 'V\u00a0Orlové má exekuci každý osmý. 37\u00a0km odsud čtyřikrát méně.',
@@ -87,6 +91,8 @@ export const translations = {
     'tag.data': 'Data',
     'tag.czech': 'Česko',
     'tag.elections': 'Volby',
+    'tag.psychology': 'Psychologie',
+    'tag.neuroscience': 'Neurověda',
 
     // Why people return
     'return.title': 'Ne další komentář. Nástroj, ke\u00a0kterému se vrátíte i\u00a0za\u00a0měsíc.',
@@ -220,6 +226,10 @@ export const translations = {
     // Analyses section
     'analyses.title': 'Not opinions. Orientation.',
     'analyses.subtitle': 'Each analysis connects data, scenarios, and visual logic. Not to impress. But to think with.',
+    'analyses.opportunity-threat.title': 'Opportunity vs.\u00a0Threat: How the Brain Switches Under Pressure',
+    'analyses.opportunity-threat.desc': 'The same situation can trigger performance mobilization or defensive rigidity. An interactive analysis of the neurobiology, physiology, and cognitive consequences of challenge/threat framing\u00a0— backed by meta-analytic data.',
+    'analyses.opportunity-threat.why': 'The difference between challenge and threat isn\u2019t in the situation. It\u2019s in the mind.',
+    'analyses.opportunity-threat.cta': 'Open analysis',
     'analyses.index-regionu.title': 'Czech Regional Prosperity Index',
     'analyses.index-regionu.desc': '49\u00a0indicators, 206\u00a0regions. Interactive analysis: what drives quality of life in Czech cities and how it shapes elections.',
     'analyses.index-regionu.why': 'In Orlová, one in eight faces foreclosure. 37\u00a0km away, four times fewer.',
@@ -271,6 +281,8 @@ export const translations = {
     'tag.data': 'Data',
     'tag.czech': 'Czechia',
     'tag.elections': 'Elections',
+    'tag.psychology': 'Psychology',
+    'tag.neuroscience': 'Neuroscience',
 
     // Why people return
     'return.title': 'Not another commentary. A tool you\'ll come back to in a month.',

@@ -25,6 +25,14 @@ export interface Analysis {
 
 export const analyses: Analysis[] = [
   {
+    key: 'opportunity-threat',
+    href: { cs: '/analyses/opportunity-vs-threat/', en: '/analyses/opportunity-vs-threat/?lang=en' },
+    image: '/images/preview-opportunity-threat.png',
+    tags: ['tag.psychology', 'tag.neuroscience', 'tag.risks'],
+    live: false,
+    date: '2026-04',
+  },
+  {
     key: 'index-regionu',
     href: '/analyses/index-silnejsich-regionu/',
     image: '/images/preview-index-regionu.webp',

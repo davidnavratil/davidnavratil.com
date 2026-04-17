@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # source photos
 fotky/
+
+# backup files (git is the backup)
+*.backup
