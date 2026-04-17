@@ -17,6 +17,41 @@ import { analyses, getHref, type Analysis } from '../../src/data/analyses.ts';
 
 const DOMAIN = 'https://davidnavratil.com';
 
+// Cross-repo: analysis repos to include in per-repo activity section.
+// Requires GH_PAT env (fine-grained PAT with Contents:Read + Metadata:Read across user repos).
+const ANALYSIS_REPOS = [
+  'opportunity-vs-threat',
+  'trust-in-society',
+  'cesta-nafty',
+  'energy-shock-2022-vs-2026',
+  'fertilizer-crisis',
+  'hormuz-energy-simulator',
+  'qatar-infrastructure',
+  'ree-dashboard',
+  'hormuz-simulator',
+  'uzka-hrdla',
+  'index-silnejsich-regionu',
+];
+
+const PAT = process.env.GH_PAT; // optional; when set, cross-repo section is included
+
+async function ghApi<T>(endpoint: string, fallback: T): Promise<T> {
+  if (!PAT) return fallback;
+  try {
+    const res = await fetch(`https://api.github.com${endpoint}`, {
+      headers: {
+        Authorization: `Bearer ${PAT}`,
+        Accept: 'application/vnd.github+json',
+        'X-GitHub-Api-Version': '2022-11-28',
+      },
+    });
+    if (!res.ok) return fallback;
+    return (await res.json()) as T;
+  } catch {
+    return fallback;
+  }
+}
+
 function daysAgoIso(d: number): string {
   const t = new Date();
   t.setUTCDate(t.getUTCDate() - d);
@@ -116,10 +151,46 @@ function weekRange(): string {
   return `${fmt(start)}–${fmt(end)}`;
 }
 
+type RepoActivity = {
+  repo: string;
+  commits: number;
+  deploys: number;
+  deploysFailed: number;
+  lastPush: string | null; // ISO
+  daysSincePush: number | null;
+};
+
+async function fetchRepoActivity(repo: string): Promise<RepoActivity> {
+  const since = daysAgoIso(7);
+  const [commitsData, runsData, repoData] = await Promise.all([
+    ghApi<Array<unknown>>(`/repos/davidnavratil/${repo}/commits?since=${since}&per_page=100`, []),
+    ghApi<{ workflow_runs: Array<{ conclusion: string; name: string }> }>(
+      `/repos/davidnavratil/${repo}/actions/runs?created=>${since.slice(0, 10)}`,
+      { workflow_runs: [] },
+    ),
+    ghApi<{ pushed_at: string | null }>(`/repos/davidnavratil/${repo}`, { pushed_at: null }),
+  ]);
+
+  const deployRuns = runsData.workflow_runs.filter((r) => (r.name || '').toLowerCase().includes('deploy'));
+  const lastPush = repoData.pushed_at;
+  const daysSincePush = lastPush
+    ? Math.floor((Date.now() - new Date(lastPush).getTime()) / (1000 * 60 * 60 * 24))
+    : null;
+
+  return {
+    repo,
+    commits: commitsData.length,
+    deploys: deployRuns.filter((r) => r.conclusion === 'success').length,
+    deploysFailed: deployRuns.filter((r) => r.conclusion === 'failure').length,
+    lastPush,
+    daysSincePush,
+  };
+}
+
 async function main() {
   console.log('Building weekly summary...');
 
-  const [commits, mergedPrs, closedIssues, deployRuns, auditRuns, dashboardRuns, auditIssue, openedPrs, articles, probes] =
+  const [commits, mergedPrs, closedIssues, deployRuns, auditRuns, dashboardRuns, auditIssue, openedPrs, articles, probes, repoActivities] =
     await Promise.all([
       Promise.resolve(weekCommits()),
       Promise.resolve(weekMergedPrs()),
@@ -131,6 +202,7 @@ async function main() {
       Promise.resolve(openPrs()),
       Promise.resolve(weekArticles()),
       probeAll(),
+      PAT ? Promise.all(ANALYSIS_REPOS.map(fetchRepoActivity)) : Promise.resolve<RepoActivity[]>([]),
     ]);
 
   const published = analyses.filter((a) => (a.status ?? (a.live ? 'published' : 'drafting')) === 'published').length;
@@ -191,6 +263,35 @@ async function main() {
       lines.push(`• ${a.title ?? a.name ?? '(bez titulu)'}`);
     }
     lines.push('');
+  }
+
+  // Cross-repo activity (only if PAT is set and returned data)
+  if (repoActivities.length > 0) {
+    const active = repoActivities.filter((r) => r.commits > 0 || r.deploys > 0);
+    const stale = repoActivities.filter((r) => r.daysSincePush !== null && r.daysSincePush >= 30);
+
+    if (active.length > 0) {
+      lines.push('*🛠️ Aktivita v analýzách*');
+      // sort most active first
+      active.sort((a, b) => b.commits + b.deploys - (a.commits + a.deploys));
+      for (const r of active.slice(0, 8)) {
+        const parts: string[] = [];
+        if (r.commits) parts.push(`${r.commits} commit${r.commits === 1 ? '' : 'y'}`);
+        if (r.deploys) parts.push(`${r.deploys} deploy${r.deploys === 1 ? '' : 'e'}`);
+        if (r.deploysFailed) parts.push(`⚠️ ${r.deploysFailed} failed`);
+        lines.push(`• ${r.repo} — ${parts.join(', ')}`);
+      }
+      lines.push('');
+    }
+
+    if (stale.length > 0) {
+      lines.push(`*💤 Tiché analýzy (≥30 dní bez pushe)*`);
+      stale.sort((a, b) => (b.daysSincePush ?? 0) - (a.daysSincePush ?? 0));
+      for (const r of stale.slice(0, 5)) {
+        lines.push(`• ${r.repo} — ${r.daysSincePush} dní`);
+      }
+      lines.push('');
+    }
   }
 
   lines.push('[Dashboard](https://davidnavratil.com/status/)');
