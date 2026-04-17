@@ -1,7 +1,9 @@
 ---
 import { useTranslations } from '../i18n/utils';
+import { analyses } from '../data/analyses';
 
 const t = useTranslations(Astro.currentLocale);
+const liveAnalysesCount = analyses.filter(a => a.live).length;
 ---
 
 <section class="metrics reveal band">
@@ -13,7 +15,7 @@ const t = useTranslations(Astro.currentLocale);
     </div>
     <div class="metric-divider"></div>
     <div class="metric">
-      <span class="metric-value">6</span>
+      <span class="metric-value">{liveAnalysesCount}</span>
       <span class="metric-label">{t('metrics.analyses.label')}</span>
     </div>
     <div class="metric-divider"></div>

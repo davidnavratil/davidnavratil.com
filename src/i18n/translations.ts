@@ -28,7 +28,6 @@ export const translations = {
     // Metrics
     'metrics.years.value': '15+',
     'metrics.years.label': 'let v\u00a0makroekonomii',
-    'metrics.analyses.value': '7',
     'metrics.analyses.label': 'interaktivních analýz',
     'metrics.articles.value': '700+',
     'metrics.articles.label': 'článků a\u00a0analýz',
@@ -222,7 +221,6 @@ export const translations = {
     // Metrics
     'metrics.years.value': '15+',
     'metrics.years.label': 'years in macroeconomics',
-    'metrics.analyses.value': '7',
     'metrics.analyses.label': 'interactive analyses',
     'metrics.articles.value': '700+',
     'metrics.articles.label': 'articles &\u00a0analyses',
