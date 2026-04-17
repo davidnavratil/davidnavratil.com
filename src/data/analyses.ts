@@ -17,8 +17,17 @@ export interface Analysis {
   image: string;
   /** Translation keys for tag badges */
   tags: readonly string[];
-  /** Whether the analysis is deployed and accessible */
+  /** Whether the analysis is deployed and accessible (drives public archive display) */
   live: boolean;
+  /**
+   * Lifecycle status (drives dashboard display; optional):
+   *  - 'published' = hotová a publikovaná (obvykle live:true)
+   *  - 'drafting'  = aktivně pracuju na ní (obvykle live:false)
+   *  - 'research'  = raná fáze, sběr podkladů
+   *  - 'archived'  = slepá ulička / opuštěná — skrýt z veřejných stránek
+   * Pokud není vyplněno, dashboard odvozuje z `live` flagu.
+   */
+  status?: 'published' | 'drafting' | 'research' | 'archived';
   /** Year-month for archive display */
   date: string;
 }
@@ -30,6 +39,7 @@ export const analyses: Analysis[] = [
     image: '/images/preview-opportunity-threat.png',
     tags: ['tag.psychology', 'tag.neuroscience', 'tag.risks'],
     live: false,
+    status: 'drafting',
     date: '2026-04',
   },
   {
@@ -38,6 +48,7 @@ export const analyses: Analysis[] = [
     image: '/images/preview-index-regionu.webp',
     tags: ['tag.data', 'tag.czech', 'tag.elections'],
     live: true,
+    status: 'published',
     date: '2026-04',
   },
   {
@@ -46,6 +57,7 @@ export const analyses: Analysis[] = [
     image: '/images/preview-cesta-nafty.webp',
     tags: ['tag.energy', 'tag.supply', 'tag.geopolitics'],
     live: true,
+    status: 'published',
     date: '2026-04',
   },
   {
@@ -54,6 +66,7 @@ export const analyses: Analysis[] = [
     image: '/images/preview-fertilizer.webp',
     tags: ['tag.geopolitics', 'tag.supply', 'tag.food'],
     live: false,
+    status: 'drafting',
     date: '2026-04',
   },
   {
@@ -62,6 +75,7 @@ export const analyses: Analysis[] = [
     image: '/images/preview-hormuz-simulator.webp',
     tags: ['tag.energy', 'tag.geopolitics', 'tag.supply'],
     live: true,
+    status: 'published',
     date: '2026-04',
   },
   {
@@ -70,6 +84,7 @@ export const analyses: Analysis[] = [
     image: '/images/preview-qatar.webp',
     tags: ['tag.geopolitics', 'tag.energy', 'tag.tech'],
     live: true,
+    status: 'published',
     date: '2026-03',
   },
   {
@@ -78,6 +93,7 @@ export const analyses: Analysis[] = [
     image: '/images/preview-trust.webp',
     tags: ['tag.psychology', 'tag.data', 'tag.czech'],
     live: false,
+    status: 'drafting',
     date: '2026-04',
   },
   {
@@ -86,6 +102,7 @@ export const analyses: Analysis[] = [
     image: '/images/preview-hormuz.webp',
     tags: ['tag.geopolitics', 'tag.energy', 'tag.supply'],
     live: true,
+    status: 'published',
     date: '2026-03',
   },
   {
@@ -94,6 +111,7 @@ export const analyses: Analysis[] = [
     image: '/images/preview-ree.webp',
     tags: ['tag.minerals', 'tag.china', 'tag.tech'],
     live: false,
+    status: 'drafting',
     date: '2026-03',
   },
   {
@@ -102,6 +120,7 @@ export const analyses: Analysis[] = [
     image: '/images/preview-chokepoints.webp',
     tags: ['tag.maps', 'tag.trade', 'tag.risks'],
     live: false,
+    status: 'drafting',
     date: '2026-03',
   },
 ];

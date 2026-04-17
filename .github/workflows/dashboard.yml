@@ -1,0 +1,90 @@
+name: Status dashboard
+
+on:
+  schedule:
+    # Daily at 5:00 UTC = 7:00 Prague (CEST) / 6:00 (CET).
+    # Cron cannot track DST — close enough either way.
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: read
+
+concurrency:
+  group: dashboard-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Generate dashboard
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: npx tsx scripts/dashboard/gen.ts
+
+      - name: Setup SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -H 77.42.84.152 >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Deploy dashboard to Mozek
+        run: |
+          ssh root@77.42.84.152 "mkdir -p /var/www/davidnavratil.com/status && chown -R www-data:www-data /var/www/davidnavratil.com/status"
+          scp /tmp/dashboard.html root@77.42.84.152:/var/www/davidnavratil.com/status/index.html
+          ssh root@77.42.84.152 "chown www-data:www-data /var/www/davidnavratil.com/status/index.html"
+
+      - name: Verify dashboard is served
+        env:
+          AUTH_USER: david
+          AUTH_PASS: ${{ secrets.DASHBOARD_PASSWORD }}
+        run: |
+          # Without auth → expect 401
+          UNAUTH=$(curl -s -o /dev/null -w "%{http_code}" https://davidnavratil.com/status/)
+          if [ "$UNAUTH" != "401" ]; then
+            echo "❌ Dashboard not protected (got $UNAUTH instead of 401)"
+            exit 1
+          fi
+          echo "✓ Unauth request correctly rejected (401)"
+
+          # With auth → expect 200 (only if password secret is set)
+          if [ -n "$AUTH_PASS" ]; then
+            AUTH=$(curl -s -o /dev/null -w "%{http_code}" -u "$AUTH_USER:$AUTH_PASS" https://davidnavratil.com/status/)
+            if [ "$AUTH" != "200" ]; then
+              echo "❌ Authenticated request failed (got $AUTH)"
+              exit 1
+            fi
+            echo "✓ Authenticated request OK (200)"
+          else
+            echo "ℹ DASHBOARD_PASSWORD secret not set — skipping auth verify"
+          fi
+
+      # Telegram notification — skipped silently if secrets not set.
+      # Enable later: add TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID repo secrets.
+      - name: Telegram daily digest
+        if: env.TG_BOT != '' && env.TG_CHAT != ''
+        env:
+          TG_BOT: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          MSG="🗂 Dashboard refreshed: https://davidnavratil.com/status/"
+          curl -s -X POST "https://api.telegram.org/bot${TG_BOT}/sendMessage" \
+            -d chat_id="${TG_CHAT}" \
+            -d text="${MSG}" \
+            -d parse_mode="Markdown" > /dev/null
+          echo "✓ Telegram notification sent"
