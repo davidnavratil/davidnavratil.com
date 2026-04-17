@@ -1,0 +1,56 @@
+name: Weekly audit
+
+on:
+  schedule:
+    # Sunday 19:00 UTC = 20:00 Prague (winter) / 21:00 Prague (summer)
+    - cron: '0 19 * * 0'
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run audit
+        run: npx tsx scripts/audit/run.ts
+
+      - name: Open or update audit issue
+        if: hashFiles('/tmp/audit-issue.md') != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          DATE=$(date -u +%Y-%m-%d)
+          TITLE="Týdenní audit ${DATE}"
+
+          # Ensure 'audit' label exists (no-op if already present)
+          gh label create audit --description "Weekly audit report" --color FBCA04 2>/dev/null || true
+
+          # Is there already an open audit issue? Reuse/update it to avoid duplicates.
+          EXISTING=$(gh issue list --label audit --state open --json number --jq '.[0].number // ""')
+          if [ -n "$EXISTING" ]; then
+            echo "Updating existing audit issue #${EXISTING}"
+            gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/audit-issue.md
+            gh issue comment "$EXISTING" --body "↻ Audit rerun $(date -u +%Y-%m-%dT%H:%MZ) — issue body updated."
+          else
+            echo "Creating new audit issue"
+            gh issue create \
+              --title "$TITLE" \
+              --body-file /tmp/audit-issue.md \
+              --label audit
+          fi
+
+      - name: Report clean
+        if: hashFiles('/tmp/audit-issue.md') == ''
+        run: echo "✓ Audit passed — no problems found."

@@ -1,0 +1,90 @@
+name: Audit fix executor
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  fix:
+    # Only run for /fix comments on issues labeled "audit"
+    if: |
+      contains(github.event.comment.body, '/fix') &&
+      contains(github.event.issue.labels.*.name, 'audit') &&
+      github.event.comment.user.login == github.event.issue.user.login || github.event.comment.author_association == 'OWNER'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install Python Pillow (for placeholder generator)
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install Pillow
+
+      - run: npm ci
+
+      - name: Apply approved fixes
+        id: apply
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: npx tsx scripts/audit/apply-fixes.ts
+        continue-on-error: true
+
+      - name: Open PR with changes
+        if: steps.apply.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "No file changes — nothing to PR."
+            gh issue comment "$ISSUE_NUMBER" --body "⚠️ \`/fix\` spuštěn, ale žádné zaškrtnuté položky nebo žádná změna v souborech."
+            exit 0
+          fi
+
+          BRANCH="audit-fix/issue-${ISSUE_NUMBER}-$(date -u +%Y%m%d-%H%M%S)"
+          git checkout -b "$BRANCH"
+          git add -A
+          git commit -m "Audit fixes for issue #${ISSUE_NUMBER}
+
+          Addresses approved items in the weekly audit report.
+          See issue #${ISSUE_NUMBER} for details.
+
+          Co-Authored-By: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+          git push -u origin "$BRANCH"
+
+          PR_URL=$(gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "Audit fixes for #${ISSUE_NUMBER}" \
+            --body "Schválené opravy z [#${ISSUE_NUMBER}](../issues/${ISSUE_NUMBER}).
+
+          Zkontroluj a mergni → auto-deploy pushne změny na Mozek.
+
+          Closes #${ISSUE_NUMBER}")
+
+          gh issue comment "$ISSUE_NUMBER" --body "✅ PR vytvořen: ${PR_URL}"
+
+      - name: Report failure
+        if: steps.apply.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          gh issue comment "$ISSUE_NUMBER" --body "❌ Executor selhal — viz [workflow run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+          exit 1
