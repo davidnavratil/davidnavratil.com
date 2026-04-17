@@ -74,17 +74,23 @@ jobs:
             echo "ℹ DASHBOARD_PASSWORD secret not set — skipping auth verify"
           fi
 
-      # Telegram notification — skipped silently if secrets not set.
-      # Enable later: add TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID repo secrets.
       - name: Telegram daily digest
-        if: env.TG_BOT != '' && env.TG_CHAT != ''
         env:
           TG_BOT: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          MSG="🗂 Dashboard refreshed: https://davidnavratil.com/status/"
+          if [ -z "$TG_BOT" ] || [ -z "$TG_CHAT" ]; then
+            echo "Telegram secrets not set — skipping notification"
+            exit 0
+          fi
+          if [ ! -f /tmp/telegram-digest.txt ]; then
+            echo "No digest file (gen.ts did not produce one)"
+            exit 0
+          fi
+          MSG=$(cat /tmp/telegram-digest.txt)
           curl -s -X POST "https://api.telegram.org/bot${TG_BOT}/sendMessage" \
-            -d chat_id="${TG_CHAT}" \
-            -d text="${MSG}" \
-            -d parse_mode="Markdown" > /dev/null
+            --data-urlencode "chat_id=${TG_CHAT}" \
+            --data-urlencode "text=${MSG}" \
+            --data-urlencode "parse_mode=Markdown" \
+            --data-urlencode "disable_web_page_preview=true" > /dev/null
           echo "✓ Telegram notification sent"

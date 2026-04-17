@@ -418,6 +418,36 @@ async function main() {
   writeFileSync('/tmp/dashboard.html', html);
   console.log(`Wrote /tmp/dashboard.html (${html.length} bytes)`);
 
+  // Telegram digest — short plain-text summary
+  const urlBroken = rows.filter((r) => !r.urlProbe.ok && r.status !== 'archived');
+  const imgBroken = rows.filter((r) => !r.imgProbe.ok && r.status !== 'archived');
+  const pageBroken = site.pages.filter((p) => !p.probe.ok);
+  const problems: string[] = [];
+  if (urlBroken.length) problems.push(`❌ ${urlBroken.length}x rozbitá URL: ${urlBroken.map((r) => r.key).join(', ')}`);
+  if (imgBroken.length) problems.push(`⚠️ ${imgBroken.length}x chybí obrázek: ${imgBroken.map((r) => r.key).join(', ')}`);
+  if (pageBroken.length) problems.push(`❌ ${pageBroken.length}x rozbitá stránka: ${pageBroken.map((p) => p.path).join(', ')}`);
+  if (site.sslDaysLeft !== null && site.sslDaysLeft < 30) problems.push(`⚠️ SSL vyprší za ${site.sslDaysLeft} dní`);
+  if (site.auditIssue) problems.push(`🔎 Otevřený audit: ${site.auditIssue.title}`);
+  if (site.dependabotPrs > 0) problems.push(`📦 ${site.dependabotPrs}x otevřený Dependabot PR`);
+
+  const publishedCount = rows.filter((r) => r.status === 'published').length;
+  const draftingCount = rows.filter((r) => r.status === 'drafting').length;
+
+  const ok = problems.length === 0;
+  const digest = [
+    ok ? '✅ *Ranní dashboard — vše OK*' : '⚠️ *Ranní dashboard — pozor*',
+    '',
+    `📊 ${publishedCount} publikovaných, ${draftingCount} rozpracovaných`,
+    `🌐 Stránky: ${site.pages.filter((p) => p.probe.ok).length}/${site.pages.length} OK`,
+    `🔒 SSL: ${site.sslDaysLeft === null ? '?' : site.sslDaysLeft + ' dní do expirace'}`,
+    ...(problems.length ? ['', ...problems] : []),
+    '',
+    '[Otevřít dashboard](https://davidnavratil.com/status/)',
+  ].join('\n');
+
+  writeFileSync('/tmp/telegram-digest.txt', digest);
+  console.log(`Wrote /tmp/telegram-digest.txt (${digest.length} chars)`);
+
   // brief status to stdout
   console.log('');
   console.log('Summary:');
