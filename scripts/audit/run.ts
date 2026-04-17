@@ -113,10 +113,34 @@ function formatIssue(findings: Finding[]): string {
   if (findings.length === 0) return '';
   const today = new Date().toISOString().slice(0, 10);
   const lines: string[] = [];
-  lines.push(`**Týdenní audit · ${today} · ${findings.length} problém${findings.length === 1 ? '' : 'ů'}**`);
+  const n = findings.length;
+  const noun = n === 1 ? 'problém' : n >= 2 && n <= 4 ? 'problémy' : 'problémů';
+  lines.push(`**Týdenní audit · ${today} · ${n} ${noun}**`);
   lines.push('');
-  lines.push('Zaškrtni `[x]` u položek, které chceš opravit, a do komentáře napiš **`/fix`**.');
-  lines.push('Executor vytvoří PR se všemi schválenými fixy. Nezaškrtnuté se ignorují.');
+  lines.push('---');
+  lines.push('');
+  lines.push('## 📋 Jak postupovat');
+  lines.push('');
+  lines.push('1. **Projdi seznam problémů níže** — každý má navržený fix.');
+  lines.push('2. **U každé položky, kterou chceš opravit, zaškrtni checkbox `[x]`.**');
+  lines.push('   - V GitHub UI: klikni na čtvereček. V e-mailu to nejde — otevři issue v prohlížeči.');
+  lines.push('3. **Napiš komentář s textem `/fix`** (stačí samotné slovo `/fix`).');
+  lines.push('4. **Počkej ~1 minutu** — executor vyrobí Pull Request se všemi zaškrtnutými opravami.');
+  lines.push('5. **Zkontroluj PR a mergni ho** — tím se pushne auto-deploy na Mozek.');
+  lines.push('');
+  lines.push('### Nechceš řešit nic?');
+  lines.push('');
+  lines.push('- **Ignorovat všechno** → zavři issue (nic se nestane)');
+  lines.push('- **Ignorovat jen některé** → nezaškrtávej je, jen zaškrtnuté půjdou do PR');
+  lines.push('- **Odložit** → nech issue otevřený, příští týden ho audit přepíše s aktuálním stavem');
+  lines.push('');
+  lines.push('### Bez počítače?');
+  lines.push('');
+  lines.push('Audit běží na GitHub serverech — nepotřebuje tvůj notebook. Issue, `/fix` komentář i merge PR jdou udělat z prohlížeče nebo GitHub mobile app.');
+  lines.push('');
+  lines.push('---');
+  lines.push('');
+  lines.push('## 🔍 Nalezené problémy');
   lines.push('');
 
   findings.forEach((f, i) => {
