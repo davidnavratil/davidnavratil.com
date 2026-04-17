@@ -27,6 +27,7 @@ jobs:
         run: npx tsx scripts/audit/run.ts
 
       - name: Open or update audit issue
+        id: audit_issue
         if: hashFiles('/tmp/audit-issue.md') != ''
         env:
           GH_TOKEN: ${{ github.token }}
@@ -43,13 +44,42 @@ jobs:
             echo "Updating existing audit issue #${EXISTING}"
             gh issue edit "$EXISTING" --title "$TITLE" --body-file /tmp/audit-issue.md
             gh issue comment "$EXISTING" --body "↻ Audit rerun $(date -u +%Y-%m-%dT%H:%MZ) — issue body updated."
+            ISSUE_NUM="$EXISTING"
           else
             echo "Creating new audit issue"
-            gh issue create \
+            URL=$(gh issue create \
               --title "$TITLE" \
               --body-file /tmp/audit-issue.md \
-              --label audit
+              --label audit)
+            ISSUE_NUM=$(basename "$URL")
           fi
+          echo "issue_number=$ISSUE_NUM" >> "$GITHUB_OUTPUT"
+
+      - name: Telegram alert (problems found)
+        if: hashFiles('/tmp/audit-issue.md') != ''
+        env:
+          TG_BOT: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ISSUE_NUM: ${{ steps.audit_issue.outputs.issue_number }}
+        run: |
+          if [ -z "$TG_BOT" ] || [ -z "$TG_CHAT" ]; then
+            echo "Telegram secrets not set — skipping notification"
+            exit 0
+          fi
+          COUNT=$(grep -cE '^## [0-9]+\. ' /tmp/audit-issue.md || echo "?")
+          NOUN="problémů"
+          [ "$COUNT" = "1" ] && NOUN="problém"
+          [[ "$COUNT" =~ ^[2-4]$ ]] && NOUN="problémy"
+          MSG="⚠️ *Týdenní audit našel ${COUNT} ${NOUN}*
+
+Projdi a zaškrtni /fix:
+https://github.com/davidnavratil/davidnavratil.com/issues/${ISSUE_NUM}"
+          curl -s -X POST "https://api.telegram.org/bot${TG_BOT}/sendMessage" \
+            --data-urlencode "chat_id=${TG_CHAT}" \
+            --data-urlencode "text=${MSG}" \
+            --data-urlencode "parse_mode=Markdown" \
+            --data-urlencode "disable_web_page_preview=true" > /dev/null
+          echo "✓ Telegram alert sent"
 
       - name: Report clean
         if: hashFiles('/tmp/audit-issue.md') == ''
