@@ -73,12 +73,12 @@ export const analyses: Analysis[] = [
     date: '2026-03',
   },
   {
-    key: 'hormuz',
-    href: { cs: '/analyses/hormuz/', en: '/analyses/hormuz/en/' },
-    image: '/images/preview-hormuz.webp',
-    tags: ['tag.geopolitics', 'tag.energy', 'tag.supply'],
-    live: true,
-    date: '2026-03',
+    key: 'trust',
+    href: '/analyses/trust-in-society/',
+    image: '/images/preview-trust.webp',
+    tags: ['tag.psychology', 'tag.data', 'tag.czech'],
+    live: false,
+    date: '2026-04',
   },
   {
     key: 'ree',
