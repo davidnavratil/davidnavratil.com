@@ -70,10 +70,7 @@ jobs:
           NOUN="problémů"
           [ "$COUNT" = "1" ] && NOUN="problém"
           [[ "$COUNT" =~ ^[2-4]$ ]] && NOUN="problémy"
-          MSG="⚠️ *Týdenní audit našel ${COUNT} ${NOUN}*
-
-Projdi a zaškrtni /fix:
-https://github.com/davidnavratil/davidnavratil.com/issues/${ISSUE_NUM}"
+          MSG=$(printf '⚠️ *Týdenní audit našel %s %s*\n\nProjdi a zaškrtni /fix:\nhttps://github.com/davidnavratil/davidnavratil.com/issues/%s' "$COUNT" "$NOUN" "$ISSUE_NUM")
           curl -s -X POST "https://api.telegram.org/bot${TG_BOT}/sendMessage" \
             --data-urlencode "chat_id=${TG_CHAT}" \
             --data-urlencode "text=${MSG}" \
