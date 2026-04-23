@@ -53,14 +53,28 @@ jobs:
 
       - name: Deploy via rsync
         run: |
-          # Dynamically exclude all analysis subdirectories on the server
-          EXCLUDES=$(ssh root@77.42.84.152 "ls -1 /var/www/davidnavratil.com/analyses/ 2>/dev/null" \
-            | while read -r dir; do [ -n "$dir" ] && echo "--exclude=analyses/${dir}/"; done)
-          echo "Auto-excluded: $EXCLUDES"
+          # Dynamically exclude all analysis subdirectories on the server.
+          # SAFETY: analyses/ content is never managed by this repo — it lives in
+          # per-analysis repos or is built on-server. If the SSH listing fails or
+          # returns empty, we MUST abort to avoid rsync --delete wiping /analyses/.
+          set -euo pipefail
+          ANALYSES_LIST=$(ssh -o BatchMode=yes -o ConnectTimeout=15 root@77.42.84.152 \
+            "ls -1 /var/www/davidnavratil.com/analyses/ 2>/dev/null")
+          if [ -z "$ANALYSES_LIST" ]; then
+            echo "::error::Failed to list /var/www/davidnavratil.com/analyses/ over SSH, or it is empty. Aborting to prevent accidental wipe."
+            exit 1
+          fi
+          EXCLUDES=$(echo "$ANALYSES_LIST" | while read -r dir; do [ -n "$dir" ] && echo "--exclude=analyses/${dir}/"; done)
+          # Belt-and-suspenders: always exclude known server-managed paths,
+          # even if the dynamic listing missed them.
+          STATIC_EXCLUDES="--exclude=analyses/hormuz-chart/ --exclude=status/"
+          echo "Auto-excluded:"
+          echo "$EXCLUDES"
+          echo "Static excludes: $STATIC_EXCLUDES"
           rsync -avz --delete \
             -e ssh \
             $EXCLUDES \
-            --exclude=status/ \
+            $STATIC_EXCLUDES \
             dist/ root@77.42.84.152:/var/www/davidnavratil.com/
 
       - name: Update CSP hashes in nginx
