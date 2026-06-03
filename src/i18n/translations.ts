@@ -79,6 +79,10 @@ export const translations = {
     'analyses.energyshock.desc': 'Proč energetická krize 2026 není repríza roku 2022 — a\u00a0co to znamená pro centrální banky',
     'analyses.energyshock.why': 'Stejná komodita, jiný mechanismus. Jiná reakce trhů, jiný dopad na inflaci.',
     'analyses.energyshock.cta': 'Otevřít analýzu',
+    'analyses.chloristan-amonny.title': 'Chloristan amonný: řetězec, který Evropě právě hoří pod rukama',
+    'analyses.chloristan-amonny.desc': 'Mapa dodavatelského řetězce raketového oxidovadla a tří cest, kterými na něm strukturálně závisí Česká republika. Plus aktuální upstream krize — francouzský precursorový závod padl pod čínský bankrot.',
+    'analyses.chloristan-amonny.why': 'Ne každé „palivo" v muničním boomu je chloristan amonný. A ne každá AP-závislost běží přes Ameriku.',
+    'analyses.chloristan-amonny.cta': 'Otevřít analýzu',
     'analyses.explore': 'Prozkoumat',
     'card.badge.live': 'Live',
     'tag.geopolitics': 'Geopolitika',
@@ -96,6 +100,8 @@ export const translations = {
     'tag.elections': 'Volby',
     'tag.psychology': 'Psychologie',
     'tag.neuroscience': 'Neurověda',
+    'tag.chemistry': 'Chemie',
+    'tag.defense': 'Obrana',
 
     // Why people return
     'return.title': 'Ne další komentář. Nástroj, ke\u00a0kterému se vrátíte i\u00a0za\u00a0měsíc.',
@@ -272,6 +278,10 @@ export const translations = {
     'analyses.energyshock.desc': 'Why the 2026 energy crisis is not a replay of 2022 — and what it means for central banks',
     'analyses.energyshock.why': 'Same commodity, different mechanism. Different market reaction, different inflation impact.',
     'analyses.energyshock.cta': 'Open analysis',
+    'analyses.chloristan-amonny.title': 'Ammonium Perchlorate: The Chain Quietly Burning Under Europe\'s Hands',
+    'analyses.chloristan-amonny.desc': 'A map of the supply chain of the rocket-propellant oxidizer and the three paths through which the Czech Republic structurally depends on it. Plus an unfolding upstream crisis — a French precursor plant fell under a Chinese bankruptcy.',
+    'analyses.chloristan-amonny.why': 'Not every "propellant" in the munitions boom is ammonium perchlorate. And not every AP dependency runs through America.',
+    'analyses.chloristan-amonny.cta': 'Open analysis',
     'analyses.explore': 'Explore',
     'card.badge.live': 'Live',
     'tag.geopolitics': 'Geopolitics',
@@ -289,6 +299,8 @@ export const translations = {
     'tag.elections': 'Elections',
     'tag.psychology': 'Psychology',
     'tag.neuroscience': 'Neuroscience',
+    'tag.chemistry': 'Chemistry',
+    'tag.defense': 'Defense',
 
     // Why people return
     'return.title': 'Not another commentary. A tool you\'ll come back to in a month.',

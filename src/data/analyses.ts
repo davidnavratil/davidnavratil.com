@@ -38,8 +38,8 @@ export const analyses: Analysis[] = [
     href: { cs: '/analyses/opportunity-vs-threat/', en: '/analyses/opportunity-vs-threat/?lang=en' },
     image: '/images/preview-opportunity-threat.png',
     tags: ['tag.psychology', 'tag.neuroscience', 'tag.risks'],
-    live: false,
-    status: 'drafting',
+    live: true,
+    status: 'published',
     date: '2026-04',
   },
   {
@@ -122,6 +122,15 @@ export const analyses: Analysis[] = [
     live: false,
     status: 'drafting',
     date: '2026-03',
+  },
+  {
+    key: 'chloristan-amonny',
+    href: { cs: '/analyses/chloristan-amonny/', en: '/analyses/chloristan-amonny/?lang=en' },
+    image: '/images/preview-chloristan-amonny.webp',
+    tags: ['tag.chemistry', 'tag.defense', 'tag.supply'],
+    live: false,
+    status: 'drafting',
+    date: '2026-05',
   },
 ];
 
