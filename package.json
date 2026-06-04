@@ -12,9 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/sitemap": "^3.7.3",
     "@fontsource/fraunces": "^5.2.9",
     "@fontsource/inter": "^5.2.8",
-    "astro": "^6.1.7"
+    "astro": "^6.4.4"
   }
 }
