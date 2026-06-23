@@ -29,6 +29,8 @@ export default defineConfig({
         // Hormuz (static)
         'https://davidnavratil.com/analyses/hormuz/',
         'https://davidnavratil.com/analyses/hormuz/en/',
+        // Hormuz Chart (React SPA dashboard, daily transits)
+        'https://davidnavratil.com/analyses/hormuz-chart/',
         // Cesta nafty (Next.js, root only)
         'https://davidnavratil.com/analyses/cesta-nafty/',
         // Qatar infrastructure (Next.js, root only)
