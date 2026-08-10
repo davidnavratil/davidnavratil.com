@@ -36,7 +36,7 @@ export const analyses: Analysis[] = [
   {
     key: 'opportunity-threat',
     href: { cs: '/analyses/opportunity-vs-threat/', en: '/analyses/opportunity-vs-threat/?lang=en' },
-    image: '/images/preview-opportunity-threat.png',
+    image: '/images/preview-opportunity-threat.webp',
     tags: ['tag.psychology', 'tag.neuroscience', 'tag.risks'],
     live: true,
     status: 'published',

@@ -77,6 +77,16 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
+  /* The header is position:fixed (~73px desktop, ~75px mobile). Without this,
+     every in-page anchor (#analyzy, #speaking, #about, #contact) parks its
+     heading underneath the header. */
+  scroll-padding-top: 5.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {

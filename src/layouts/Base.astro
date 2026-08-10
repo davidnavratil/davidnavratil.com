@@ -15,7 +15,7 @@ interface Props {
   description?: string;
 }
 
-const { title, description = 'David Navrátil — ekonom, analytik, autor interaktivních analýz' } = Astro.props;
+const { title, description = 'David Navrátil · ekonom, analytik, autor interaktivních analýz' } = Astro.props;
 const locale = Astro.currentLocale ?? 'cs';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // Compute hreflang alternates based on current path

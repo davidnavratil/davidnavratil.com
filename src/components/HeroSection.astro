@@ -15,6 +15,13 @@ const t = useTranslations(Astro.currentLocale);
         <span class="hero-eyebrow">{t('hero.eyebrow')}</span>
         <h1 class="hero-title">{t('hero.title')}</h1>
         <p class="hero-sub">{t('hero.sub')}</p>
+        {/*
+          Who he is, on the first screen. Previously "hlavní ekonom České
+          spořitelny" appeared only in the About section, seven screens down,
+          so a visitor arriving from LinkedIn never saw the one credential
+          that does most of the work.
+        */}
+        <p class="hero-identity">{t('hero.identity')}</p>
         <div class="hero-cta">
           <a href="#analyzy" class="btn-primary">
             {t('hero.cta.primary')}
@@ -29,7 +36,7 @@ const t = useTranslations(Astro.currentLocale);
       <div class="hero-preview">
         <img
           src="/images/preview-hormuz.webp"
-          alt="Analysis preview — Strait of Hormuz simulator"
+          alt="Analysis preview: Strait of Hormuz simulator"
           width="560"
           height="380"
           loading="eager"
@@ -142,6 +149,16 @@ const t = useTranslations(Astro.currentLocale);
     line-height: 1.7;
     color: rgba(255, 255, 255, 0.7);
     max-width: 520px;
+    margin-bottom: var(--space-sm, 0.75rem);
+  }
+  /* Slightly brighter than .hero-sub so the credential reads before the prose. */
+  .hero-identity {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 520px;
     margin-bottom: var(--space-lg, 2rem);
   }
 
@@ -241,6 +258,9 @@ const t = useTranslations(Astro.currentLocale);
     .hero-sub {
       margin-inline: auto;
     }
+    .hero-identity {
+      margin-inline: auto;
+    }
     .hero-cta {
       justify-content: center;
     }
@@ -257,7 +277,9 @@ const t = useTranslations(Astro.currentLocale);
 
   @media (max-width: 640px) {
     .hero {
-      padding: 4rem 0 2.5rem;
+      /* The fixed header is ~75px tall here, so the old 4rem (64px) let it
+         cover the first line of the eyebrow at scroll position 0. */
+      padding: 7rem 0 2.5rem;
     }
     .hero-inner {
       padding: 0 var(--space-sm, 1rem);
@@ -274,7 +296,7 @@ const t = useTranslations(Astro.currentLocale);
 
   @media (max-width: 400px) {
     .hero {
-      padding: 3.5rem 0 2rem;
+      padding: 6.5rem 0 2rem;
     }
     .hero-cta {
       flex-direction: column;
