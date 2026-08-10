@@ -180,6 +180,10 @@ export const translations = {
     'form.company': 'Firma (volitelné)',
     'form.message': 'Zpráva',
     'form.submit': 'Odeslat zprávu',
+    'form.sending': 'Odesílám…',
+    'form.success': 'Děkuji, zpráva dorazila. Ozvu se co nejdřív.',
+    'form.error': 'Odeslání se nepovedlo. Napište prosím přímo na davidxnavratil@gmail.com.',
+    'form.noscript': 'Formulář potřebuje JavaScript. Napište prosím na davidxnavratil@gmail.com.',
 
     // Footer
     'footer.copy': '© {year} David Navrátil',
@@ -383,6 +387,10 @@ export const translations = {
     'form.company': 'Company (optional)',
     'form.message': 'Message',
     'form.submit': 'Send message',
+    'form.sending': 'Sending…',
+    'form.success': 'Thank you, your message arrived. I will get back to you soon.',
+    'form.error': 'Sending failed. Please email me directly at davidxnavratil@gmail.com.',
+    'form.noscript': 'This form needs JavaScript. Please email davidxnavratil@gmail.com.',
 
     // Footer
     'footer.copy': '© {year} David Navrátil',

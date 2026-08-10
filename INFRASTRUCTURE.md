@@ -124,9 +124,27 @@ Docker bypass protection via DOCKER-USER chain in `/etc/ufw/after.rules`:
 - `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()`
 - `server_tokens off`
 
-### CSP Hash Management
+### Kde bezpečnostní hlavičky doopravdy vznikají
 
-Post-build script `scripts/update-csp-hashes.mjs` extracts SHA-256 hashes of inline scripts from `dist/` and updates nginx CSP on the server. Runs automatically in the GitHub Actions deploy pipeline.
+Zdroj pravdy je `server/snippets/security-headers.conf` v tomto repozitáři.
+Deploy ho nahraje na server jako `/etc/nginx/snippets/security-headers.conf`
+(krok `node scripts/update-csp.mjs`), ověří `nginx -t`, reloadne nginx a pak
+**zkontroluje, že se hlavička na živém webu opravdu změnila**. Když ne, deploy spadne.
+
+Dvě pasti, na které je potřeba dávat pozor:
+
+1. `/etc/nginx/sites-enabled/davidnavratil.com` **není symlink** na `sites-available`.
+   Je to samostatná kopie. Cokoli zapsaného do `sites-available` nginx nikdy nepřečte.
+2. Direktiva `add_header` se **nedědí** do `location` bloku, který má vlastní `add_header`.
+   Proto každý takový blok musí snippet znovu includovat. A protože `index index.html`
+   způsobí interní přesměrování z `/` na `/index.html`, dostane každá HTML stránka
+   hlavičky z bloku `location ~* \.html$`, tedy ze snippetu, ne ze `server` úrovně.
+
+Historie: dřívější skript `update-csp-hashes.mjs` počítal SHA-256 hashe inline skriptů
+a zapisoval je do `sites-available`. Kvůli oběma pastem výše to byla prázdná operace.
+Direktiva `form-action 'self'` přitom od 3. 4. 2026 tiše blokovala odesílání kontaktního
+formuláře a nic to nekontrolovalo. Odtud povinné ověření v deploy kroku a kontrola
+`FORM-BROKEN` v týdenním auditu.
 
 ## Cron Jobs
 
@@ -163,7 +181,7 @@ Trigger: push to `main` or daily at 06:00 UTC.
 2. `node scripts/update-rss-cache.mjs` — fetch Substack RSS, commit cache if changed
 3. `npm run build` — Astro static build
 4. `rsync` to server (dynamically excludes `/analyses/*` subdirectories)
-5. `node scripts/update-csp-hashes.mjs` — extract inline script hashes, update nginx CSP
+5. `node scripts/update-csp.mjs` — nahraje security-headers snippet na nginx, reloadne a ověří živou hlavičku
 
 ### Analysis projects (manual)
 

@@ -57,6 +57,16 @@ const REQUIRED_HEADERS: ReadonlyArray<[string, string | null]> = [
  * silently drops sub-routes (which has happened), the audit will flag it.
  * Paths are relative to DOMAIN.
  */
+/**
+ * The site's own pages. Until 2026-08-10 the audit probed only /analyses/*,
+ * so a broken homepage or archive would not have raised anything.
+ */
+const CORE_PAGES: readonly string[] = ['/', '/en/', '/analyses/', '/en/analyses/'];
+
+/** Page carrying the contact form, and the endpoint it must be able to reach. */
+const FORM_PAGE = `${DOMAIN}/`;
+const FORM_ENDPOINT_HOST = 'https://formspree.io';
+
 const SUBROUTE_PROBES: ReadonlyArray<{ analysis: string; path: string }> = [
   { analysis: 'chokepoints', path: '/analyses/uzka-hrdla/cesko' },
   { analysis: 'chokepoints', path: '/analyses/uzka-hrdla/historie' },
@@ -79,7 +89,9 @@ type Finding =
   | { type: 'SITEMAP-DEAD'; url: string; status: number; fix: null }
   | { type: 'SITEMAP-MISSING-LIVE'; key: string; expectedUrl: string; fix: null }
   | { type: 'HEADERS-MISSING'; url: string; missing: string[]; fix: null }
-  | { type: 'SUBROUTE-404'; analysis: string; url: string; status: number; fix: null };
+  | { type: 'SUBROUTE-404'; analysis: string; url: string; status: number; fix: null }
+  | { type: 'CORE-404'; url: string; status: number; fix: null }
+  | { type: 'FORM-BROKEN'; url: string; reason: string; detail: string; fix: null };
 
 const findings: Finding[] = [];
 
@@ -297,6 +309,133 @@ async function checkSubroutes() {
   }
 }
 
+/** The site's own pages must return 200. Cheap, and previously unchecked. */
+async function checkCorePages() {
+  for (const path of CORE_PAGES) {
+    const url = `${DOMAIN}${path}`;
+    const status = await probe(url);
+    if (status !== 200) {
+      findings.push({ type: 'CORE-404', url, status, fix: null });
+    }
+  }
+}
+
+/**
+ * Verify the contact form can actually submit.
+ *
+ * Background: from 2026-04-03 to 2026-08-10 the CSP shipped `form-action 'self'`
+ * while the form POSTed to formspree.io. Browsers blocked every submission,
+ * silently — no error for the visitor, HTTP 200 for any uptime check. Four
+ * months of enquiries were lost. Everything below exists so that cannot recur.
+ *
+ * We deliberately do not send a real submission (that would email David every
+ * week). Instead we assert each link in the chain that has to hold:
+ *   1. the page still contains a form pointing at the expected endpoint,
+ *   2. the CSP permits the transport we use for it (fetch -> connect-src),
+ *   3. `form-action` has not been widened, which would mean someone "fixed"
+ *      this by weakening the header instead of using fetch,
+ *   4. the endpoint itself is reachable.
+ */
+async function checkContactForm() {
+  let html: string;
+  let csp: string | null;
+  try {
+    const res = await fetch(FORM_PAGE, { cache: 'no-store' });
+    csp = res.headers.get('content-security-policy');
+    html = await res.text();
+  } catch (e) {
+    findings.push({
+      type: 'FORM-BROKEN',
+      url: FORM_PAGE,
+      reason: 'Stránku s formulářem se nepodařilo načíst',
+      detail: e instanceof Error ? e.message : String(e),
+      fix: null,
+    });
+    return;
+  }
+
+  const action = html.match(/<form[^>]*\saction="([^"]+)"/i)?.[1];
+  if (!action) {
+    findings.push({
+      type: 'FORM-BROKEN',
+      url: FORM_PAGE,
+      reason: 'Na stránce není žádný formulář',
+      detail: 'V HTML chybí <form action="...">. Zmizel kontaktní formulář?',
+      fix: null,
+    });
+    return;
+  }
+
+  if (!csp) {
+    findings.push({
+      type: 'FORM-BROKEN',
+      url: FORM_PAGE,
+      reason: 'Chybí hlavička Content-Security-Policy',
+      detail: 'Bez CSP nelze ověřit, že odeslání projde.',
+      fix: null,
+    });
+    return;
+  }
+
+  const directive = (name: string) =>
+    csp!.split(';').map((d) => d.trim()).find((d) => d.startsWith(`${name} `)) ?? '';
+
+  const isCrossOrigin = !action.startsWith('/') && !action.startsWith(DOMAIN);
+  const formAction = directive('form-action');
+  const connectSrc = directive('connect-src');
+
+  // The form is submitted with fetch(), so connect-src is what must allow it.
+  if (isCrossOrigin && !connectSrc.includes(FORM_ENDPOINT_HOST)) {
+    findings.push({
+      type: 'FORM-BROKEN',
+      url: FORM_PAGE,
+      reason: 'CSP blokuje odeslání formuláře',
+      detail:
+        `Formulář odesílá na ${action}, ale connect-src to nepovoluje.\n` +
+        `connect-src: \`${connectSrc || '(chybí)'}\`\n` +
+        'Oprava: doplnit `' + FORM_ENDPOINT_HOST + '` do connect-src v `server/snippets/security-headers.conf` ' +
+        'a spustit `node scripts/update-csp.mjs`.',
+      fix: null,
+    });
+  }
+
+  // Guard against the tempting wrong fix: widening form-action instead.
+  if (formAction && formAction.includes(FORM_ENDPOINT_HOST)) {
+    findings.push({
+      type: 'FORM-BROKEN',
+      url: FORM_PAGE,
+      reason: 'form-action byl rozvolněn na cizí doménu',
+      detail:
+        `form-action: \`${formAction}\`\n` +
+        'Formulář se odesílá přes fetch(), takže stačí connect-src. ' +
+        'Ponechat `form-action \'self\'` chrání před přesměrováním formuláře na cizí sběrač.',
+      fix: null,
+    });
+  }
+
+  // Finally: is the collector itself alive?
+  try {
+    const res = await fetch(action, { method: 'OPTIONS' });
+    if (res.status >= 500) {
+      findings.push({
+        type: 'FORM-BROKEN',
+        url: FORM_PAGE,
+        reason: 'Formspree endpoint neodpovídá',
+        detail: `${action} vrátil HTTP ${res.status}.`,
+        fix: null,
+      });
+    }
+  } catch (e) {
+    findings.push({
+      type: 'FORM-BROKEN',
+      url: FORM_PAGE,
+      reason: 'Formspree endpoint není dostupný',
+      detail: `${action}: ${e instanceof Error ? e.message : String(e)}`,
+      fix: null,
+    });
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Issue rendering
 // ---------------------------------------------------------------------------
@@ -391,6 +530,22 @@ function formatIssue(findings: Finding[]): string {
       lines.push('**Návrh:** zkontrolovat deploy příslušné analýzy. Buď chybí soubor v `/var/www/davidnavratil.com/analyses/`, nebo se změnil `trailingSlash` v Next.js configu a sub-route už neexistuje pod touto cestou.');
       lines.push('- [ ] (manuální — bez auto-fixu)');
       lines.push('');
+    } else if (f.type === 'CORE-404') {
+      lines.push(`## ${n}. 🔴 [CORE-404] \`${f.url}\` vrací ${f.status}`);
+      lines.push('');
+      lines.push('**Návrh:** hlavní stránka webu není dostupná. Zkontrolovat poslední deploy a nginx.');
+      lines.push('- [ ] (manuální — bez auto-fixu)');
+      lines.push('');
+    } else if (f.type === 'FORM-BROKEN') {
+      lines.push(`## ${n}. 🔴 [FORM-BROKEN] ${f.reason}`);
+      lines.push('');
+      lines.push(`Stránka: \`${f.url}\``);
+      lines.push('');
+      lines.push(f.detail);
+      lines.push('');
+      lines.push('> Kontaktní formulář je jediná konverzní cesta webu. Když nefunguje, poptávky se ztrácejí bez jakékoli chybové hlášky.');
+      lines.push('- [ ] (manuální — bez auto-fixu)');
+      lines.push('');
     }
   });
 
@@ -413,6 +568,8 @@ async function main() {
     checkSitemapDead(sitemapUrls),
     checkHeaders(),
     checkSubroutes(),
+    checkCorePages(),
+    checkContactForm(),
   ]);
   // sitemap-missing-live is purely synchronous and depends on sitemapUrls — run after the parallel batch.
   checkSitemapMissingLive(sitemapUrls);

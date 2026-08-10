@@ -28,3 +28,6 @@ fotky/
 
 # backup files (git is the backup)
 *.backup
+
+# Interní strategické dokumenty — repo je PUBLIC, sem nepatří
+DOPORUCENI-*.md

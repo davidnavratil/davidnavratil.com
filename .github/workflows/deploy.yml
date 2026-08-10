@@ -77,8 +77,8 @@ jobs:
             $STATIC_EXCLUDES \
             dist/ root@77.42.84.152:/var/www/davidnavratil.com/
 
-      - name: Update CSP hashes in nginx
-        run: node scripts/update-csp-hashes.mjs
+      - name: Sync security headers to nginx and verify them
+        run: node scripts/update-csp.mjs
 
       - name: Telegram alert on failure
         if: failure()

@@ -25,7 +25,26 @@ const t = useTranslations(Astro.currentLocale);
           </a>
         </div>
       </div>
-      <form action="https://formspree.io/f/xwvwvrqy" method="POST" class="contact-form">
+      <form
+        action="https://formspree.io/f/xwvwvrqy"
+        method="POST"
+        class="contact-form"
+        data-dn-form
+        data-msg-sending={t('form.sending')}
+        data-msg-ok={t('form.success')}
+        data-msg-error={t('form.error')}
+      >
+        <input type="hidden" name="_subject" value="Zpráva z davidnavratil.com" />
+        <input type="hidden" name="locale" value={Astro.currentLocale ?? 'cs'} />
+        {/* Honeypot — Formspree drops submissions where this is filled in. */}
+        <input
+          type="text"
+          name="_gotcha"
+          class="form-honeypot"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
         <div class="form-row">
           <label>
             <span>{t('form.name')}</span>
@@ -45,9 +64,13 @@ const t = useTranslations(Astro.currentLocale);
           <textarea name="message" rows="4" required></textarea>
         </label>
         <button type="submit" class="form-submit">
-          {t('form.submit')}
+          <span class="form-submit__label">{t('form.submit')}</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
+        <p class="form-status" role="status" aria-live="polite" hidden></p>
+        <noscript>
+          <p class="form-status" data-state="error">{t('form.noscript')}</p>
+        </noscript>
       </form>
     </div>
   </div>
@@ -171,6 +194,43 @@ const t = useTranslations(Astro.currentLocale);
   .form-submit:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px var(--color-accent-glow);
+  }
+  .form-submit[disabled] {
+    opacity: 0.6;
+    cursor: progress;
+    transform: none;
+  }
+
+  /* Off-screen spam trap. Not display:none — some bots skip hidden fields. */
+  .form-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-status {
+    margin: 0;
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    border: 1px solid transparent;
+  }
+  .form-status[data-state='ok'] {
+    color: #D8F3E4;
+    background: rgba(45, 160, 110, 0.15);
+    border-color: rgba(45, 160, 110, 0.45);
+  }
+  .form-status[data-state='error'] {
+    color: #FBDCD5;
+    background: rgba(200, 70, 45, 0.15);
+    border-color: rgba(200, 70, 45, 0.45);
+  }
+  .form-status[data-state='sending'] {
+    color: #B5B1A9;
   }
 
   @media (max-width: 900px) {
