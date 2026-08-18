@@ -43,6 +43,8 @@ export default defineConfig({
         'https://davidnavratil.com/analyses/index-silnejsich-regionu/',
         // Fertilizer crisis (Next.js, root only — live:false but deployed)
         'https://davidnavratil.com/analyses/fertilizer-crisis/',
+        // Rýn/Kaub (Next.js, root only)
+        'https://davidnavratil.com/analyses/rhine-kaub/',
         // REE Dashboard (Next.js export — root paths keep slash, sub-routes drop it)
         'https://davidnavratil.com/analyses/ree-dashboard/',
         'https://davidnavratil.com/analyses/ree-dashboard/cs/',

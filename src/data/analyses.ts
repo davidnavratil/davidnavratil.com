@@ -34,6 +34,17 @@ export interface Analysis {
 
 export const analyses: Analysis[] = [
   {
+    key: 'rhine-kaub',
+    // EN verze webu zatím neexistuje (přepínač je schovaný za EN_READY),
+    // proto zatím jeden href pro oba jazyky. Po EN passu přepnout na ?lang=en.
+    href: '/analyses/rhine-kaub/',
+    image: '/images/preview-rhine-kaub.webp',
+    tags: ['tag.trade', 'tag.supply', 'tag.geopolitics'],
+    live: true,
+    status: 'published',
+    date: '2026-08',
+  },
+  {
     key: 'opportunity-threat',
     href: { cs: '/analyses/opportunity-vs-threat/', en: '/analyses/opportunity-vs-threat/?lang=en' },
     image: '/images/preview-opportunity-threat.webp',
