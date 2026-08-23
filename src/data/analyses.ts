@@ -34,6 +34,17 @@ export interface Analysis {
 
 export const analyses: Analysis[] = [
   {
+    key: 'potravinovy-sok',
+    // Jazykový přepínač je uvnitř aplikace (localStorage), URL parametr nečte,
+    // proto jeden href pro oba jazyky.
+    href: '/analyses/potravinovy-sok-2026-27/',
+    image: '/images/preview-potravinovy-sok.png',
+    tags: ['tag.food', 'tag.supply', 'tag.geopolitics'],
+    live: true,
+    status: 'published',
+    date: '2026-08',
+  },
+  {
     key: 'rhine-kaub',
     // EN verze webu zatím neexistuje (přepínač je schovaný za EN_READY),
     // proto zatím jeden href pro oba jazyky. Po EN passu přepnout na ?lang=en.

@@ -45,6 +45,8 @@ export default defineConfig({
         'https://davidnavratil.com/analyses/fertilizer-crisis/',
         // Rýn/Kaub (Next.js, root only)
         'https://davidnavratil.com/analyses/rhine-kaub/',
+        // Potravinový šok 2026-27 (Next.js, root only)
+        'https://davidnavratil.com/analyses/potravinovy-sok-2026-27/',
         // REE Dashboard (Next.js export — root paths keep slash, sub-routes drop it)
         'https://davidnavratil.com/analyses/ree-dashboard/',
         'https://davidnavratil.com/analyses/ree-dashboard/cs/',
