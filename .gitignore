@@ -31,3 +31,7 @@ fotky/
 
 # Interní strategické dokumenty — repo je PUBLIC, sem nepatří
 DOPORUCENI-*.md
+
+# Komentáře — sesbíraná data a analýzy patří jen na server, ne do public repa
+comments-data/
+scripts/comments/*.local.*

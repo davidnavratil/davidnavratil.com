@@ -1,0 +1,132 @@
+{
+  "_comment": "Syntetická testovací data — smyšlení autoři i texty. Slouží k lokálnímu vývoji (COMMENTS_FIXTURE). Žádná reálná data komentujících nesmí být commitována do tohoto veřejného repa.",
+  "posts": [
+    {
+      "post": {
+        "id": "fx-1001",
+        "slug": "ai-zlevnuje-prvni-omyl",
+        "title": "AI zlevňuje první omyl",
+        "url": "https://davidnavratil.substack.com/p/ai-zlevnuje-prvni-omyl",
+        "comment_count": 6,
+        "date": "2026-08-18T06:00:00Z"
+      },
+      "comments": [
+        {
+          "id": "c-1",
+          "name": "Jana Testová",
+          "handle": "janatestova",
+          "body": "Skvělý text, díky! Konečně někdo popsal, proč mi AI nástroje šetří čas, ale zároveň mám pocit, že míň přemýšlím.",
+          "date": "2026-08-18T08:12:00Z",
+          "reaction_count": 14,
+          "children": []
+        },
+        {
+          "id": "c-2",
+          "name": "Petr Vzorek",
+          "body": "Zajímavé, ale nesouhlasím s tezí o klesající ceně omylu. U softwaru možná, ale ve fyzickém světě (stavby, energetika) je cena prvního omylu pořád obrovská a AI ji nesnižuje. Neměla by analýza rozlišovat mezi bity a atomy?",
+          "date": "2026-08-18T09:30:00Z",
+          "reaction_count": 8,
+          "children": [
+            {
+              "id": "c-3",
+              "name": "Jana Testová",
+              "handle": "janatestova",
+              "body": "Tohle je dobrá připomínka, taky by mě zajímalo, jak to autor vidí u infrastruktury.",
+              "date": "2026-08-18T10:02:00Z",
+              "reaction_count": 3,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "c-4",
+          "name": "Karel Skeptik",
+          "body": "Další AI hype článek. Ekonomové by měli radši mlčet o technologiích, kterým nerozumí.",
+          "date": "2026-08-18T11:45:00Z",
+          "reaction_count": 1,
+          "children": []
+        },
+        {
+          "id": "c-5",
+          "name": "Eva Datová",
+          "body": "Můžete prosím doplnit zdroj k číslu o 40% poklesu nákladů na prototypování? Hledala jsem to v citované studii a našla jsem jen 25% pro softwarové firmy. Možná čtu jinou verzi.",
+          "date": "2026-08-19T07:20:00Z",
+          "reaction_count": 11,
+          "children": []
+        },
+        {
+          "id": "c-6",
+          "name": "XSS Tester <script>alert('x')</script>",
+          "body": "Test bezpečnosti: <img src=x onerror=alert(1)> a odkaz javascript:alert(2) — tenhle komentář ověřuje escapování.",
+          "date": "2026-08-19T12:00:00Z",
+          "reaction_count": 0,
+          "children": []
+        }
+      ]
+    },
+    {
+      "post": {
+        "id": "fx-1002",
+        "slug": "ryn-nizka-voda",
+        "title": "Rýn, nízká voda a evropský průmysl",
+        "url": "https://davidnavratil.substack.com/p/ryn-nizka-voda",
+        "comment_count": 3,
+        "date": "2026-08-10T06:00:00Z"
+      },
+      "comments": [
+        {
+          "id": "c-7",
+          "name": "Martin Logistik",
+          "body": "Pracuji ve spedici a můžu potvrdit — když je Kaub pod 80 cm, sazby za barže letí nahoru během dnů. Jen doplním, že část objemů se dnes přesouvá na železnici dřív než v roce 2022, trh se poučil.",
+          "date": "2026-08-10T14:00:00Z",
+          "reaction_count": 22,
+          "children": []
+        },
+        {
+          "id": "c-8",
+          "name": "Alena Nováková",
+          "body": "Bylo by možné příště přidat i dopad na české firmy? Většina textů o Rýnu končí u BASF, ale zajímalo by mě, kdo v ČR je na tom závislý.",
+          "date": "2026-08-11T09:15:00Z",
+          "reaction_count": 9,
+          "children": []
+        },
+        {
+          "id": "c-9",
+          "name": "Tomáš Rýpal",
+          "body": "Zase katastrofické scénáře. Loni jste psal, že bude plynová krize, a nic se nestalo.",
+          "date": "2026-08-11T16:40:00Z",
+          "reaction_count": 2,
+          "children": []
+        }
+      ]
+    },
+    {
+      "post": {
+        "id": "fx-1003",
+        "slug": "haber-moralni-ucetnictvi",
+        "title": "Haber a morální účetnictví",
+        "url": "https://davidnavratil.substack.com/p/haber-moralni-ucetnictvi",
+        "comment_count": 2,
+        "date": "2026-07-28T06:00:00Z"
+      },
+      "comments": [
+        {
+          "id": "c-10",
+          "name": "Filip Historik",
+          "body": "Krásně napsané. Jen drobnost — Haber dostal Nobelovu cenu v roce 1918 (udělena 1919), v textu je 1920. Jinak klobouk dolů za propojení chemie a etiky.",
+          "date": "2026-07-28T19:00:00Z",
+          "reaction_count": 17,
+          "children": []
+        },
+        {
+          "id": "c-11",
+          "name": "Lucie Čtenářka",
+          "body": "Tenhle formát esejí je přesně důvod, proč odebírám. Víc takových, klidně i delších.",
+          "date": "2026-07-29T08:30:00Z",
+          "reaction_count": 12,
+          "children": []
+        }
+      ]
+    }
+  ]
+}
