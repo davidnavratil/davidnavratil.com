@@ -1,0 +1,121 @@
+---
+// Film „Svět se nemění po kapitolách“ (bez zvuku): skutečné záběry (Mixkit, licence bez uvedení autora),
+// čísla z ověřeného katalogu Megatrendy a nejistoty, závěr s mapou 76 sil.
+// Dvě verze ze stejných scén: krátká (12 čísel, úvodní stránka) a plná (20 čísel, /megatrendy).
+// Zdroj střihu: megatrends/04_vystupy/video_intro/ (scenar.json, render.py); seznam čísel generuje gen_film_data.py.
+// Spustí se sám, až na něj čtenář dojede, a zastaví se, když odjede. Kdo si nepřeje pohyb, spustí ho tlačítkem.
+import cisla from '../data/film-cisla.json';
+
+interface Props { verze?: 'kratka' | 'plna' }
+const { verze = 'kratka' } = Astro.props;
+const plna = verze === 'plna';
+const seznam = plna ? cisla : cisla.filter((c) => c.kratka);
+const src = plna ? '/video/svet-se-nemeni-po-kapitolach.mp4' : '/video/svet-se-nemeni-po-kapitolach-kratka.mp4';
+const delka = plna ? '1,5 minuty' : '1 minuta';
+const popisFilmu = `Krátký film, ${seznam.length} čísel o bezpečnosti, surovinách, čipech, energii, počasí, demografii, důvěře a práci; na konci mapa 76 sil katalogu Megatrendy a nejistoty.`;
+const idSeznamu = `film-cisla-${verze}`;
+---
+
+<section class="film" aria-labelledby={`film-title-${verze}`}>
+  <div class="film-inner">
+    <p class="film-kicker" id={`film-title-${verze}`}>Svět se nemění po kapitolách · {delka}</p>
+    <div class="film-box">
+      <video
+        class="film-video"
+        src={src}
+        poster="/video/svet-poster.jpg"
+        width="1280"
+        height="720"
+        muted
+        playsinline
+        loop
+        preload="none"
+        aria-label={popisFilmu}
+        aria-describedby={idSeznamu}
+      ></video>
+      <button type="button" class="film-toggle" aria-pressed="false" data-film-toggle>
+        <span class="film-play" aria-hidden="true">▶</span><span class="film-pause" aria-hidden="true">❚❚</span>
+        <span class="film-label">Přehrát</span>
+      </button>
+    </div>
+    <p class="film-note">Čísla z&nbsp;ověřené části katalogu Megatrendy a&nbsp;nejistoty, stav 21.&nbsp;11.&nbsp;2026. Výjimkou je údaj o&nbsp;dronech (17&nbsp;vozidel): výsledek cvičení podle novinového komentáře, bez oficiálního vyhodnocení. Zdroje a&nbsp;výhrady jsou v&nbsp;seznamu níže.</p>
+    <details class="film-cisla" id={idSeznamu}>
+      <summary>Čísla z&nbsp;filmu a&nbsp;jejich zdroje ({seznam.length})</summary>
+      <ol>
+        {seznam.map((c) => (
+          <li>
+            <span class="fc-n">{c.cislo}</span>
+            <span class="fc-t">{c.popis}</span>
+            <span class="fc-z">Zdroj: {c.zdroj}</span>
+          </li>
+        ))}
+      </ol>
+    </details>
+  </div>
+</section>
+
+<style>
+  .film {
+    background: #07121d;
+    padding: clamp(40px, 6vw, 72px) max(16px, env(safe-area-inset-left, 0px)) clamp(36px, 5vw, 60px);
+  }
+  .film-inner { max-width: 1080px; margin: 0 auto; }
+  .film-kicker {
+    margin: 0 0 16px;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8dd4cb;
+  }
+  .film-box { position: relative; border-radius: 10px; overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45); background: #000; }
+  .film-video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+  .film-toggle {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 999px;
+    background: rgba(7, 18, 29, 0.62);
+    color: #ffffff;
+    font: 600 13px var(--font-sans);
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+  }
+  .film-toggle:hover, .film-toggle:focus-visible { background: rgba(7, 18, 29, 0.85); outline: none; border-color: #ffffff; }
+  .film-pause { display: none; letter-spacing: -2px; font-size: 11px; }
+  .film-toggle[aria-pressed='true'] .film-play { display: none; }
+  .film-toggle[aria-pressed='true'] .film-pause { display: inline; }
+  .film-note { margin: 14px 0 0; font-family: var(--font-sans); font-size: 0.8rem; line-height: 1.5; color: rgba(255, 255, 255, 0.66); }
+  .film-cisla { margin-top: 18px; border-top: 1px solid rgba(255, 255, 255, 0.16); padding-top: 14px; color: #dce6ee; font-family: var(--font-sans); }
+  .film-cisla summary { cursor: pointer; font-size: 0.95rem; font-weight: 600; color: #ffffff; }
+  .film-cisla summary:focus-visible { outline: 2px solid #8dd4cb; outline-offset: 3px; }
+  .film-cisla ol { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 18px 32px; }
+  .film-cisla li { display: grid; gap: 4px; min-width: 0; align-content: start; }
+  .fc-n { font-family: var(--font-serif); font-size: 1.5rem; line-height: 1.1; color: #ffffff; }
+  .fc-t { font-size: 0.9rem; line-height: 1.5; color: #dce6ee; }
+  .fc-z { font-size: 0.78rem; line-height: 1.45; color: #a9bccb; }
+</style>
+
+<script is:inline>
+  (function () {
+    document.querySelectorAll('.film').forEach(function (sec) {
+      var v = sec.querySelector('video'), b = sec.querySelector('[data-film-toggle]'), lab = b.querySelector('.film-label');
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var userPaused = false;
+      function sync() { var on = !v.paused; b.setAttribute('aria-pressed', String(on)); lab.textContent = on ? 'Pozastavit' : 'Přehrát'; }
+      function play() { v.preload = 'auto'; var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      v.addEventListener('play', sync); v.addEventListener('pause', sync);
+      b.addEventListener('click', function () { if (v.paused) { userPaused = false; play(); } else { userPaused = true; v.pause(); } });
+      if (reduce || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting && !userPaused) play(); else if (!e.isIntersecting && !v.paused) v.pause(); });
+      }, { threshold: 0.45 }).observe(v);
+    });
+  })();
+</script>

@@ -8,7 +8,7 @@ const t = useTranslations(Astro.currentLocale);
   <div class="contact-card reveal">
     <div class="contact-grid">
       <div class="contact-info">
-        <h2>{t('contact.title')}</h2>
+        <h2 set:html={t('contact.title')} />
         <p>{t('contact.desc')}</p>
         <div class="contact-links">
           <a href="mailto:davidxnavratil@gmail.com" class="contact-link">
@@ -68,6 +68,9 @@ const t = useTranslations(Astro.currentLocale);
           <span class="form-submit__label">{t('form.submit')}</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
+        {Astro.currentLocale !== 'en' && (
+          <p class="form-privacy">Údaje z&nbsp;formuláře použiji jen k&nbsp;odpovědi na vaši zprávu. Zprávy se ukládají na serveru webu a&nbsp;doručují přes Gmail (Google). O&nbsp;výmaz můžete kdykoli požádat na davidxnavratil@gmail.com.</p>
+        )}
         <p class="form-status" role="status" aria-live="polite" hidden></p>
         <noscript>
           <p class="form-status" data-state="error">{t('form.noscript')}</p>
@@ -78,6 +81,8 @@ const t = useTranslations(Astro.currentLocale);
 </section>
 
 <style>
+  .form-privacy { margin: 0; font-size: 0.8rem; line-height: 1.5; color: rgba(255, 255, 255, 0.72); }
+  .form-privacy a { color: inherit; text-decoration: underline; }
   .contact {
     margin-bottom: var(--space-lg);
   }

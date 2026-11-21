@@ -12,12 +12,20 @@ const MAX_FEATURED = 4;
 const analyses = [...allAnalyses]
   .sort((a, b) => (a.live === b.live ? 0 : a.live ? -1 : 1))
   .slice(0, MAX_FEATURED);
+
+/** Obálky karet pro českou verzi: číslo a věta vycházejí z názvu a perexu analýzy, žádný nový údaj. */
+const covers: Record<string, { n: string; t: string; slovo?: boolean }> = locale === 'en' ? {} : {
+  'potravinovy-sok': { n: '6 bran', t: 'mezi cenou močoviny a\u00a0nákupním košíkem' },
+  'rhine-kaub': { n: '8 cm', t: 'nejcitovanější číslo léta 2026 na Rýně' },
+  'opportunity-threat': { n: 'Výzva, nebo ohrožení?', t: 'jak mozek přepíná pod tlakem', slovo: true },
+  'index-regionu': { n: '206 obvodů', t: '49\u00a0ukazatelů kvality života v\u00a0českých městech' },
+};
 ---
 
 <section class="analyses container" id="analyzy">
   <div class="section-header reveal">
     <div class="section-tag">{t('nav.analyses')}</div>
-    <h2>{t('analyses.title')}</h2>
+    <h2 set:html={t('analyses.title')} />
     <p class="section-lead">{t('analyses.subtitle')}</p>
   </div>
 
@@ -27,6 +35,13 @@ const analyses = [...allAnalyses]
         href={getHref(analysis, locale)}
         class={`analysis-card reveal${i > 0 ? ` reveal-delay-${i}` : ''}`}
       >
+        {covers[analysis.key] ? (
+          /* Obálka v jednom stylu: ztmavený tematický záběr (Mixkit), přes něj jedno číslo a jedna věta. */
+          <div class="card-cover" aria-hidden="true" style={`background-image: linear-gradient(180deg, rgba(13,37,61,.28) 0%, rgba(13,37,61,.5) 42%, rgba(13,37,61,.92) 82%), url(/images/obalky/${analysis.key}.jpg)`}>
+            <strong class={covers[analysis.key].slovo ? 'cover-num cover-word' : 'cover-num'}>{covers[analysis.key].n}</strong>
+            <span class="cover-text">{covers[analysis.key].t}</span>
+          </div>
+        ) : (
         <div class="card-image">
           <img
             src={analysis.image}
@@ -36,6 +51,7 @@ const analyses = [...allAnalyses]
             height="500"
           />
         </div>
+        )}
         <div class="card-content">
           <div class="card-meta">
             <div class="card-tags">
@@ -43,9 +59,6 @@ const analyses = [...allAnalyses]
                 <span>{t(tag)}</span>
               ))}
             </div>
-            {analysis.live && (
-              <div class="card-badge">{t('card.badge.live')}</div>
-            )}
           </div>
           <h3>{t(`analyses.${analysis.key}.title`)}</h3>
           <p class="card-desc" set:html={t(`analyses.${analysis.key}.desc`)} />
@@ -95,6 +108,7 @@ const analyses = [...allAnalyses]
   }
 
   .analyses {
+    padding-top: var(--space-2xl);
     margin-bottom: var(--space-2xl);
   }
 
@@ -124,6 +138,21 @@ const analyses = [...allAnalyses]
     box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
     border-color: color-mix(in srgb, var(--color-accent) 40%, var(--color-border));
   }
+
+  .card-cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 0.6rem;
+    min-height: 240px;
+    padding: 1.6rem 1.7rem;
+    background: #102d47 center / cover no-repeat;
+    border-left: 4px solid #2aa3b0;
+    color: #ffffff;
+  }
+  .cover-num { font-family: var(--font-serif); font-weight: 400; font-size: clamp(2.6rem, 4.4vw, 3.6rem); line-height: 1; letter-spacing: -0.035em; color: #ffffff; }
+  .cover-word { font-size: clamp(1.7rem, 2.6vw, 2.2rem); line-height: 1.1; }
+  .cover-text { font-size: 0.98rem; line-height: 1.45; color: #c9d6e0; max-width: 26ch; }
 
   /* Card image */
   .card-image {
@@ -195,7 +224,7 @@ const analyses = [...allAnalyses]
   .card-content h3 {
     font-family: var(--font-serif);
     font-size: 1.4rem;
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: var(--space-xs);
     line-height: 1.3;
   }

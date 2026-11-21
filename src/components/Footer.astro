@@ -12,6 +12,14 @@ const year = new Date().getFullYear();
       <p>&copy; {year} David Navrátil</p>
     </div>
     <div class="footer-links">
+      {Astro.currentLocale !== 'en' && (
+        <>
+          <a href="/megatrendy/">Megatrendy</a>
+          <a href="/analyses/">Analýzy</a>
+          <a href="/prednasky/">Přednášky</a>
+          <a href="/pro-poradatele/">Pro pořadatele a&nbsp;novináře</a>
+        </>
+      )}
       <a href="https://davidnavratil.substack.com" target="_blank" rel="noopener">Substack</a>
       <a href="https://www.linkedin.com/in/david-navratil/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
@@ -69,4 +77,6 @@ const year = new Date().getFullYear();
   @media (max-width: 640px) {
     .footer-inner { flex-direction: column; gap: var(--space-sm); }
   }
+  .footer-links { flex-wrap: wrap; row-gap: 0.4rem; min-width: 0; }
+  @media (max-width: 640px) { .footer-inner { flex-direction: column; align-items: flex-start; gap: 1rem; } }
 </style>

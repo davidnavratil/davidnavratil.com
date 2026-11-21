@@ -61,7 +61,7 @@ const REQUIRED_HEADERS: ReadonlyArray<[string, string | null]> = [
  * The site's own pages. Until 2026-08-10 the audit probed only /analyses/*,
  * so a broken homepage or archive would not have raised anything.
  */
-const CORE_PAGES: readonly string[] = ['/', '/en/', '/analyses/', '/en/analyses/'];
+const CORE_PAGES: readonly string[] = ['/', '/en/', '/analyses/', '/en/analyses/', '/prednasky/', '/megatrendy/', '/pro-poradatele/'];
 
 /** Page carrying the contact form, and the endpoint it must be able to reach. */
 const FORM_PAGE = `${DOMAIN}/`;

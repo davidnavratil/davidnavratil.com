@@ -29,20 +29,11 @@ const t = useTranslations(Astro.currentLocale);
           <span>{t('speaking.case3')}</span>
         </div>
       </div>
-      <div class="speaking-stats">
-        <div class="speaking-stat">
-          <span class="stat-value">{t('speaking.stat1.value')}</span>
-          <span class="stat-label">{t('speaking.stat1.label')}</span>
-        </div>
-        <div class="speaking-stat">
-          <span class="stat-value">{t('speaking.stat2.value')}</span>
-          <span class="stat-label">{t('speaking.stat2.label')}</span>
-        </div>
-      </div>
-      <a href="#contact" class="btn-primary">
+      <a href={Astro.currentLocale === 'en' ? '#contact' : '/prednasky/'} class="btn-primary">
         {t('speaking.cta')}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
+      {Astro.currentLocale !== 'en' && <p class="speaking-org"><a href="/pro-poradatele/">Podklady pro pořadatele a&nbsp;novináře</a></p>}
     </div>
     <div class="speaking-gallery">
       <div class="gallery-item gallery-large">
@@ -60,6 +51,8 @@ const t = useTranslations(Astro.currentLocale);
 </section>
 
 <style>
+  .speaking-org { margin: 0.9rem 0 0; font-size: 0.9rem; }
+  .speaking-org a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
   .section-tag {
     display: inline-flex;
     align-items: center;
@@ -128,7 +121,7 @@ const t = useTranslations(Astro.currentLocale);
     display: block;
     font-family: var(--font-serif);
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--color-accent);
     line-height: 1;
   }
@@ -203,13 +196,15 @@ const t = useTranslations(Astro.currentLocale);
       padding-bottom: var(--space-lg);
       margin-bottom: var(--space-xl);
     }
+    /* Mobil: velká fotka přes celou šířku, dvě menší pod ní vedle sebe */
     .speaking-gallery {
       grid-template-columns: 1fr 1fr;
-      height: 220px;
+      grid-template-rows: auto auto;
+      height: auto;
     }
-    .gallery-large {
-      grid-row: auto;
-    }
+    .gallery-large { grid-column: 1 / 3; grid-row: 1; aspect-ratio: 16 / 10; }
+    .gallery-small-top { grid-column: 1; grid-row: 2; aspect-ratio: 4 / 3; }
+    .gallery-small-bottom { grid-column: 2; grid-row: 2; aspect-ratio: 4 / 3; }
     .btn-primary {
       min-height: 44px;
     }
@@ -222,12 +217,6 @@ const t = useTranslations(Astro.currentLocale);
   }
 
   @media (max-width: 400px) {
-    .speaking-gallery {
-      grid-template-columns: 1fr;
-      height: auto;
-    }
-    .gallery-item {
-      height: 160px;
-    }
+    .speaking-gallery { height: auto; }
   }
 </style>

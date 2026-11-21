@@ -8,29 +8,15 @@ const t = useTranslations(Astro.currentLocale);
   <div class="newsletter-card">
     <div class="newsletter-glow"></div>
     <div class="newsletter-content">
-      <h2 class="newsletter-heading">{t('newsletter.title')}</h2>
+      <h2 class="newsletter-heading" set:html={t('newsletter.title')} />
       <p class="newsletter-lead">{t('newsletter.desc')}</p>
       <ul class="newsletter-values">
-        <li>
-          <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>{t('newsletter.value1')}</span>
-        </li>
-        <li>
-          <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>{t('newsletter.value2')}</span>
-        </li>
-        <li>
-          <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>{t('newsletter.value3')}</span>
-        </li>
-        <li>
-          <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>{t('newsletter.value4')}</span>
-        </li>
-        <li>
-          <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-          <span>{t('newsletter.value5')}</span>
-        </li>
+        {(['newsletter.value1', 'newsletter.value2', 'newsletter.value3', 'newsletter.value4', 'newsletter.value5'] as const).map((k) => t(k)).filter(Boolean).map((v) => (
+          <li>
+            <svg class="check-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>{v}</span>
+          </li>
+        ))}
       </ul>
       <div class="newsletter-form-wrap">
         <a href="https://davidnavratil.substack.com/subscribe" target="_blank" rel="noopener" class="newsletter-btn">

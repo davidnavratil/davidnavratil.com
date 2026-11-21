@@ -1,0 +1,24 @@
+---
+// Stránka pro pořadatele a média. Obsah je v src/data/pro-poradatele.html (generuje gen_poradatele.py).
+// Fotky v public/images/pro-poradatele/ jsou bez metadat EXIF (poloha, zařízení).
+import '@fontsource/fraunces/400-italic.css';
+import '@fontsource/fraunces/500.css';
+import '../styles/pr.css';
+import Base from '../layouts/Base.astro';
+import obsah from '../data/pro-poradatele.html?raw';
+---
+
+<Base title="Pro pořadatele: bio, fotky a podklady | David Navrátil" description="Podklady pro pořadatele akcí s Davidem Navrátilem: bio ve třech délkách, úvod pro moderátora, fotky ke stažení, video, témata, formáty a technické potřeby." image="/images/pro-poradatele/david-navratil-podium-regiony.jpg">
+  <Fragment set:html={obsah} />
+  <p class="pr-nl"><b>Peníze, procenta a&nbsp;prosperita:</b> newsletter o&nbsp;ekonomice, technologiích a&nbsp;státu. <a href="https://davidnavratil.substack.com/subscribe" target="_blank" rel="noopener">Odebírat zdarma&nbsp;<span aria-hidden="true">→</span></a></p>
+</Base>
+
+<script is:inline>
+  // Tlačítka „Zkopírovat“: text do schránky, při neúspěchu aspoň označit text k ručnímu zkopírování
+  document.querySelectorAll('.pr [data-copy]').forEach(b => b.addEventListener('click', async () => {
+    const el = document.getElementById(b.dataset.copy), txt = el.textContent.replace(/\u00a0/g, ' ').trim(), puv = b.textContent;
+    try { await navigator.clipboard.writeText(txt); b.textContent = 'Zkopírováno'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Označeno, zkopírujte Ctrl+C'; }
+    setTimeout(() => { b.textContent = puv; }, 2200);
+  }));
+</script>

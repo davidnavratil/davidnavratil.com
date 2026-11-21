@@ -1,0 +1,159 @@
+---
+// Vlajková loď webu: katalog „Megatrendy a nejistoty“ (celá mapa vazeb, animace, wow čísla, ukázka rozcestí)
+// a pod ním webové analýzy a newsletter. Obsah je v src/data/megatrendy.html (generuje ho gen_mega.py
+// z katalogu a ze stránky /prednasky); mapa se vytváří z 02_katalog/db/katalog.json (gen_mapa.py).
+import '@fontsource/fraunces/400-italic.css';
+import '@fontsource/fraunces/500.css';
+import '../styles/pr.css';
+import Base from '../layouts/Base.astro';
+import AnalysesSection from '../components/AnalysesSection.astro';
+import FilmSection from '../components/FilmSection.astro';
+import uvod from '../data/megatrendy-uvod.html?raw';
+import obsah from '../data/megatrendy.html?raw';
+---
+
+<Base title="Megatrendy a nejistoty: mapa 76 sil do roku 2031 | David Navrátil" description="Katalog 40 trendů a 36 nejistot s výhledem do roku 2031: co se děje s penězi, prací, technologiemi a státem a podle čeho poznáme, že se mýlíme. Každé číslo má zdroj." image="/images/megatrendy/megatrendy-og.jpg">
+  <Fragment set:html={uvod} />
+  <Fragment set:html={obsah} />
+  <FilmSection verze="plna" />
+  <div class="pr-after"><AnalysesSection /></div>
+  <p class="pr-nl"><b>Peníze, procenta a&nbsp;prosperita:</b> newsletter o&nbsp;ekonomice, technologiích a&nbsp;státu. <a href="https://davidnavratil.substack.com/subscribe" target="_blank" rel="noopener">Odebírat zdarma&nbsp;<span aria-hidden="true">→</span></a></p>
+</Base>
+
+<script is:inline>
+
+    'use strict';
+    // Animace v sekci Metoda: 76 karet katalogu se z pěti oblastí rozdělí na „co víme“ a dvě budoucnosti; rozcestí zůstane stát.
+    (function () {
+      const W = 560, H = 380, st = document.getElementById('pole-stage'); if (!st) return;
+      const obl = [['Společnost', 13, 9], ['Ekonomika', 8, 9], ['Technologie', 10, 7], ['Regulace a politika', 3, 9], ['Klima a zdroje', 6, 2]];
+      let seed = 20261121; const R = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      for (let i = 0; i < 5; i++) R();
+      const items = []; obl.forEach(([n, t, u], k) => { for (let i = 0; i < t; i++) items.push({k, typ: 't', i}); for (let i = 0; i < u; i++) items.push({k, typ: 'n', i: t + i}); });
+      const colW = W / 5, base = H * 0.80, step = 19, fx = W * 0.46, fy = H * 0.48;
+      let ti = 0, ui = 0;
+      const el = (cls, css, txt) => { const e = document.createElement('div'); e.className = cls; e.style.cssText = css; if (txt) e.textContent = txt; st.appendChild(e); return e; };
+      const line = (x1, y1, x2, y2, c) => { const L = Math.hypot(x2 - x1, y2 - y1), a = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        el('pole-line cC', `left:${x1}px;top:${y1}px;width:${L}px;background:${c};transform:rotate(${a}deg)`); };
+      line(20, H * 0.76, fx, fy, 'rgba(245,241,232,.35)'); line(fx, fy, W - 24, fy - H * 0.38, 'rgba(141,212,203,.6)'); line(fx, fy, W - 24, fy + H * 0.38, 'rgba(224,149,75,.6)');
+      obl.forEach(([n], k) => el('pole-lab cB', `left:${colW * k + 3}px;width:${colW - 6}px;top:${base + 14}px`, n));
+      el('cC', `position:absolute;left:${fx - 8}px;top:${fy - 8}px;width:16px;height:16px;border-radius:50%;background:#e0954b;box-shadow:0 0 0 7px rgba(224,149,75,.18)`);
+      el('pole-lab cC', `left:${fx - 190}px;top:${fy - 64}px;width:170px;text-align:right;color:#e0954b;font-weight:600`, 'rozcestí: data rozhodnou');
+      el('pole-lab cC', `left:${W - 170}px;top:${fy - H * 0.38 - 32}px;width:150px;text-align:right;color:#8dd4cb;font-weight:600`, 'budoucnost A');
+      el('pole-lab cC', `left:${W - 170}px;top:${fy + H * 0.38 + 12}px;width:150px;text-align:right;color:#e0954b;font-weight:600`, 'budoucnost B');
+      items.forEach(it => {
+        const col = it.i % 3, row = Math.floor(it.i / 3);
+        const bx = colW * it.k + colW / 2 + (col - 1) * step - 6, by = base - row * step;
+        let cx, cy, up = false;
+        if (it.typ === 't') { const s = ti++ / 39; cx = 24 + s * (fx - 50); cy = H * 0.76 - s * (H * 0.76 - fy) + (R() - 0.5) * 22; }
+        else { up = ui % 2 === 0; const s = Math.floor(ui / 2) / 17; ui++; cx = fx + 18 + s * (W - fx - 50); cy = fy + (up ? -1 : 1) * s * (H * 0.38) + (R() - 0.5) * 12; }
+        el('pd ' + it.typ + (up ? ' up' : ''), `--bx:${bx.toFixed(0)}px;--by:${by.toFixed(0)}px;--cx:${cx.toFixed(0)}px;--cy:${cy.toFixed(0)}px;animation-delay:-${(R() * 0.5).toFixed(2)}s`);
+      });
+      const box = st.parentElement;
+      const fit = () => { const s = Math.min(1, box.clientWidth / W); st.style.transform = `scale(${s})`; st.style.setProperty('--lf', (Math.max(11, 12 * s) / s).toFixed(1) + 'px'); box.style.height = (H * s) + 'px'; };
+      fit(); window.addEventListener('resize', fit);
+    })();
+        // Animace proběhne jednou a zůstane na rozcestí; tlačítko ji přehraje znovu
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)'), mb = document.getElementById('motion-toggle'), panel = document.getElementById('pole-panel');
+    const upd = () => { mb.hidden = mq.matches; }; mq.addEventListener('change', upd); upd();
+    mb.addEventListener('click', () => { panel.classList.remove('wait'); panel.getAnimations({subtree: true}).forEach(a => { a.cancel(); a.play(); }); });
+    // Animace se spustí, až když na ni čtenář dojede
+    if ('IntersectionObserver' in window) { const io2 = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { panel.classList.remove('wait'); io2.disconnect(); } }, {threshold: 0.5}); io2.observe(panel); } else panel.classList.remove('wait');
+    // Graf regionů se vykreslí, až když na něj čtenář dojede
+    const conv = document.querySelector('.conv'); conv.classList.add('anim');
+    if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { conv.classList.add('go'); io.disconnect(); } }, {threshold: 0.4}); io.observe(conv); } else conv.classList.add('go');
+    
+    // Mapa vazeb: najetí (nebo fokus klávesnicí) zvýrazní sousedy bodu nebo celý svazek, kliknutí výběr podrží.
+    (function () {
+      const box = document.getElementById('mapa-box'), dataEl = document.getElementById('mapa-data');
+      if (!box || !dataEl) return;
+      const svg = box.querySelector('svg'), info = document.getElementById('mapa-info');
+      const D = JSON.parse(dataEl.textContent), F = D.f, G = D.g;
+      const nodes = [...svg.querySelectorAll('.mn')], edges = [...svg.querySelectorAll('.me')], arcs = [...svg.querySelectorAll('.ma')];
+      const legBtns = [...document.querySelectorAll('.mapa-leg button')];
+      const empty = info.innerHTML;
+      let lock = null;
+      // Detail síly přes mapu: jedna věta o tom, o co jde, a síly, se kterými souvisí (na ty se dá kliknout dál).
+      const det = document.createElement('div');
+      det.className = 'mapa-detail'; det.hidden = true; det.setAttribute('role', 'dialog'); det.setAttribute('aria-label', 'Detail síly');
+      box.appendChild(det);
+      let zpet = null;
+      const closeDetail = () => { det.hidden = true; info.hidden = false; if (zpet && zpet.focus) zpet.focus(); zpet = null; };
+      const openDetail = id => {
+        const f = F[id]; if (!f) return;
+        const li = f.nb.map(x => `<li><button type="button" data-id="${x}"><i style="background:${G[F[x].g].c}"></i><span>${esc(F[x].n)}</span></button></li>`).join('');
+        det.innerHTML = `<button type="button" class="md-x" aria-label="Zavřít detail">×</button>` +
+          `<p class="md-m"><i style="background:${G[f.g].c}"></i>${f.t} · ${esc(G[f.g].n)}</p><h3 class="md-n">${esc(f.n)}</h3>` +
+          (f.v ? `<p class="md-v">${esc(f.v)}</p>` : '') + (f.z ? `<p class="md-z">Zdroj: ${esc(f.z)}</p>` : '') +
+          (f.nb.length ? `<p class="md-q">Souvisí s&nbsp;${f.nb.length} ${f.nb.length === 1 ? 'silou' : 'silami'}:</p><ul>${li}</ul>` : '');
+        det.hidden = false; det.scrollTop = 0; info.hidden = true;
+        det.querySelector('.md-x').focus({ preventScroll: true });
+      };
+      det.addEventListener('click', e => {
+        if (e.target.closest('.md-x')) { lock = null; clear(); closeDetail(); return; }
+        const b = e.target.closest('button[data-id]'); if (b) { lock = b.dataset.id; showNode(lock); openDetail(lock); }
+      });
+      const esc = t => String(t).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
+      const clear = () => {
+        svg.classList.remove('f');
+        nodes.forEach(n => n.classList.remove('on', 'sel'));
+        edges.forEach(e => e.classList.remove('on'));
+        arcs.forEach(a => a.classList.remove('on'));
+        legBtns.forEach(b => b.setAttribute('aria-pressed', 'false'));
+        info.innerHTML = empty;
+      };
+      const showNode = id => {
+        const f = F[id]; if (!f) return;
+        const nb = new Set([id, ...f.nb]);
+        svg.classList.add('f');
+        nodes.forEach(n => { n.classList.toggle('on', nb.has(n.dataset.id)); n.classList.toggle('sel', n.dataset.id === id); });
+        edges.forEach(e => e.classList.toggle('on', e.dataset.a === id || e.dataset.b === id));
+        arcs.forEach(a => a.classList.toggle('on', +a.dataset.g === f.g));
+        legBtns.forEach(b => b.setAttribute('aria-pressed', 'false'));
+        const li = f.nb.map(x => `<li data-id="${x}"><i style="background:${G[F[x].g].c}"></i><span>${esc(F[x].n)}</span></li>`).join('');
+        info.innerHTML = `<span class="mi-n">${esc(f.n)}</span><span class="mi-m">${f.t} · ${esc(G[f.g].n)}</span>` +
+          (f.nb.length ? `<p class="mi-q">Souvisí s&nbsp;${f.nb.length} ${f.nb.length === 1 ? 'silou' : 'silami'}:</p><ul>${li}</ul>` : '<p class="mi-q">Karta zatím nemá vazby na jiné síly.</p>') +
+          (lock ? '<button type="button" class="mi-x">Zrušit výběr</button>' : '');
+      };
+      const showGroup = g => {
+        svg.classList.add('f');
+        const ids = Object.keys(F).filter(x => F[x].g === g), set = new Set(ids);
+        nodes.forEach(n => { n.classList.toggle('on', set.has(n.dataset.id)); n.classList.remove('sel'); });
+        edges.forEach(e => e.classList.toggle('on', set.has(e.dataset.a) && set.has(e.dataset.b)));
+        arcs.forEach(a => a.classList.toggle('on', +a.dataset.g === g));
+        legBtns.forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.g === g)));
+        const btn = legBtns.find(b => +b.dataset.g === g), q = btn ? btn.title : '';
+        info.innerHTML = `<span class="mi-n">${esc(G[g].n)}</span><span class="mi-m">svazek · ${ids.length} sil</span>` + (q ? `<p class="mi-q">${esc(q)}</p>` : '') +
+          `<ul>${ids.map(x => `<li data-id="${x}"><i style="background:${G[g].c}"></i><span>${esc(F[x].n)}</span></li>`).join('')}</ul>` +
+          (lock ? '<button type="button" class="mi-x">Zrušit výběr</button>' : '');
+      };
+      const show = k => { if (!k) return clear(); if (k.startsWith('g:')) showGroup(+k.slice(2)); else showNode(k); };
+      const hover = k => { if (!lock) show(k); };
+      const toggle = k => { lock = lock === k ? null : k; show(lock || k); if (!lock) clear(); };
+      nodes.forEach(n => {
+        n.addEventListener('mouseenter', () => hover(n.dataset.id));
+        n.addEventListener('mouseleave', () => hover(null));
+        n.addEventListener('focus', () => hover(n.dataset.id));
+        n.addEventListener('blur', () => hover(null));
+        const otevri = () => { zpet = n; lock = n.dataset.id; showNode(lock); openDetail(lock); };
+        n.addEventListener('click', otevri);
+        n.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); otevri(); } });
+      });
+      legBtns.forEach(b => {
+        const k = 'g:' + b.dataset.g;
+        b.addEventListener('mouseenter', () => hover(k));
+        b.addEventListener('mouseleave', () => hover(null));
+        b.addEventListener('click', () => toggle(k));
+      });
+      info.addEventListener('click', e => {
+        if (e.target.closest('.mi-x')) { lock = null; clear(); closeDetail(); return; }
+        const li = e.target.closest('li[data-id]'); if (li) { lock = li.dataset.id; showNode(lock); openDetail(lock); }
+      });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && (lock || !det.hidden)) { lock = null; clear(); closeDetail(); } });
+      // Na úzkém displeji jsou popisky skryté, mapa se proto přiblíží na samotný kruh
+      const full = svg.getAttribute('viewBox'), crop = svg.dataset.crop, mq = window.matchMedia('(max-width: 700px)');
+      const fit = () => svg.setAttribute('viewBox', mq.matches && crop ? crop : full);
+      fit(); mq.addEventListener('change', fit);
+    })();
+
+</script>

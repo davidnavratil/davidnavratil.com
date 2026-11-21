@@ -29,7 +29,7 @@
   --color-band: #EDE9E0;
 
   --gradient-hero: linear-gradient(135deg, #163A5F 0%, #1E3A5F 50%, #0F2A4A 100%);
-  --gradient-accent: linear-gradient(135deg, #1B7D8A, #2A9BAA, #3DB5C5);
+  --gradient-accent: linear-gradient(#1B7D8A, #1B7D8A); /* plná barva jako tlačítka na podstránkách */
   --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(250,248,243,0.6));
   --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(27,125,138,0.04), transparent 40%);
 
@@ -42,8 +42,8 @@
   --space-2xl: 4.5rem;
   --space-3xl: 5.5rem;
 
-  --radius: 12px;
-  --radius-lg: 20px;
+  --radius: 3px;
+  --radius-lg: 4px;
 }
 
 [data-theme="dark"] {
@@ -61,6 +61,7 @@
   --color-olive: #9AAB8C;
   --color-section-tag: #7AB4C0;
   --color-band: #2A2824;
+  --gradient-accent: linear-gradient(#1F8A98, #1F8A98);
 
   --gradient-hero: linear-gradient(135deg, #1C1B18 0%, #2A2824 50%, #1C1B18 100%);
   --gradient-card: linear-gradient(145deg, rgba(42,40,36,0.8), rgba(28,27,24,0.4));
@@ -103,10 +104,10 @@ main {
 /* ===== Typography ===== */
 h1, h2, h3, h4 {
   font-family: var(--font-serif);
-  font-weight: 700;
-  line-height: 1.15;
+  font-weight: 400;
+  line-height: 1.12;
   color: var(--color-text);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
@@ -190,3 +191,13 @@ a:hover {
   html { font-size: 15px; }
   .container { padding-inline: 1rem; }
 }
+
+/* ===== Jeden vizuální jazyk s podstránkami (/megatrendy, /prednasky): lehký serif s tyrkysovou kurzívou,
+   hranaté karty a tlačítka v plné barvě. Přebíjí zaoblení zapsaná přímo v komponentách. ===== */
+h1 em, h2 em { font-style: italic; font-weight: 400; color: var(--color-accent); }
+h3 { font-weight: 500; letter-spacing: -0.015em; }
+.btn-primary, .btn-secondary, .newsletter-btn, .form-submit, .card-cta, .nav-cta-btn, .mobile-cta-btn,
+.door, .analysis-card, .card-image, .contact-card, .newsletter-card, .article-card, .article-image,
+.about-photo, .about-photo img, .gallery-item, .gallery-item img, .contact-link,
+.contact-form input, .contact-form textarea, .card-tags span, .card-badge { border-radius: 3px !important; }
+.btn-primary, .newsletter-btn, .form-submit { box-shadow: none !important; }

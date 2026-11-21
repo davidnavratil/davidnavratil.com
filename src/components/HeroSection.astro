@@ -1,19 +1,31 @@
 ---
 import { useTranslations } from '../i18n/utils';
+import mapaHero from '../data/mapa-hero.svg?raw';
 
 const t = useTranslations(Astro.currentLocale);
+const en = Astro.currentLocale === 'en';
+const doors = [
+  { key: 'explore', href: en ? '#analyzy' : '/megatrendy/' },
+  { key: 'invite', href: en ? '#speaking' : '/prednasky/' },
+  { key: 'read', href: '#newsletter' },
+];
 ---
 
 <section class="hero">
   <div class="hero-bg">
+    {/* Film na pozadí úvodu: tiché záběry bez textu, ztmavené, aby nadpis zůstal čitelný. Jen na širokých
+        obrazovkách a jen když si čtenář nepřeje omezit pohyb (spouští ho skript níže). */}
+    {!en && <video class="hero-video" muted playsinline loop preload="none" aria-hidden="true" tabindex="-1" data-src="/video/uvod-pozadi.mp4"></video>}
+    <div class="hero-shade"></div>
     <div class="grid-pattern"></div>
     <div class="hero-glow"></div>
   </div>
+  {!en && <button type="button" class="hero-video-toggle" hidden aria-pressed="true">Pozastavit pozadí</button>}
   <div class="hero-inner">
     <div class="hero-grid">
       <div class="hero-content">
         <span class="hero-eyebrow">{t('hero.eyebrow')}</span>
-        <h1 class="hero-title">{t('hero.title')}</h1>
+        <h1 class="hero-title" set:html={t('hero.title')} />
         <p class="hero-sub">{t('hero.sub')}</p>
         {/*
           Who he is, on the first screen. Previously "hlavní ekonom České
@@ -22,32 +34,60 @@ const t = useTranslations(Astro.currentLocale);
           that does most of the work.
         */}
         <p class="hero-identity">{t('hero.identity')}</p>
-        <div class="hero-cta">
-          <a href="#analyzy" class="btn-primary">
-            {t('hero.cta.primary')}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </a>
-          <a href="#newsletter" class="btn-secondary">
-            {t('hero.cta.secondary')}
-          </a>
-        </div>
-        <p class="hero-microcopy">{t('hero.microcopy')}</p>
       </div>
       <div class="hero-preview">
-        <img
-          src="/images/preview-hormuz.webp"
-          alt="Analysis preview: Strait of Hormuz simulator"
-          width="560"
-          height="380"
-          loading="eager"
-          fetchpriority="high"
-        />
+        {en ? (
+          <img
+            src="/images/preview-hormuz.webp"
+            alt="Analysis preview: Strait of Hormuz simulator"
+            width="560"
+            height="380"
+            loading="eager"
+            fetchpriority="high"
+          />
+        ) : (
+          /* Slib „Mapa světa…“ vedle skutečné mapy: 76 sil katalogu a vazby mezi nimi (generuje gen_mapa.py). */
+          <a href="/megatrendy/" class="hero-map">
+            <Fragment set:html={mapaHero} />
+            <span class="hero-map-cap"><strong>76&nbsp;sil a&nbsp;276&nbsp;vazeb</strong>, výhled do roku 2031 · Prohlédnout mapu <span aria-hidden="true">→</span></span>
+          </a>
+        )}
       </div>
     </div>
+    {/* Jeden slib (nadpis) a troje dveře: každé pro jiného návštěvníka (čtenář, pořadatel, vedení firmy, novinář). */}
+    <nav class="doors" aria-label={t('doors.label')}>
+      {doors.map((d) => (
+        <a href={d.href} class="door">
+          <span class="door-kicker">{t(`doors.${d.key}.kicker`)}</span>
+          <strong class="door-title">{t(`doors.${d.key}.title`)}</strong>
+          <span class="door-text">{t(`doors.${d.key}.text`)}</span>
+          <span class="door-arrow" aria-hidden="true">→</span>
+        </a>
+      ))}
+    </nav>
   </div>
 </section>
 
+<script is:inline>
+  (function () {
+    var v = document.querySelector('.hero-video'); if (!v) return;
+    var ok = window.matchMedia('(min-width: 901px)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!ok || (navigator.connection && navigator.connection.saveData)) return;
+    v.src = v.dataset.src;
+    v.addEventListener('canplay', function () { v.classList.add('on'); }, { once: true });
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+    var b = document.querySelector('.hero-video-toggle');
+    if (b) { b.hidden = false; b.addEventListener('click', function () { if (v.paused) { v.play(); b.textContent = 'Pozastavit pozadí'; b.setAttribute('aria-pressed', 'true'); } else { v.pause(); b.textContent = 'Spustit pozadí'; b.setAttribute('aria-pressed', 'false'); } }); }
+  })();
+</script>
+
 <style>
+  .hero-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease; }
+  .hero-video.on { opacity: 1; }
+  .hero-video-toggle { position: absolute; right: 18px; bottom: 14px; z-index: 2; padding: 6px 12px; border: 1px solid rgba(255,255,255,.35); background: rgba(7,18,29,.55); color: #fff; font: 600 12px var(--font-sans); cursor: pointer; border-radius: 3px; }
+  .hero-video-toggle:hover, .hero-video-toggle:focus-visible { border-color: #fff; outline: none; }
+  .hero-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(13, 37, 61, 0.93) 0%, rgba(13, 37, 61, 0.84) 55%, rgba(13, 37, 61, 0.74) 100%); }
+
   .hero {
     position: relative;
     min-height: 100vh;
@@ -130,18 +170,20 @@ const t = useTranslations(Astro.currentLocale);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-accent);
+    color: #8dd4cb;
     margin-bottom: var(--space-md, 1.5rem);
   }
 
   .hero-title {
     font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 700;
-    line-height: 1.15;
+    font-size: clamp(2.2rem, 4.4vw, 3.6rem);
+    font-weight: 400;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
     color: #ffffff;
     margin-bottom: var(--space-md, 1.5rem);
   }
+  .hero-title :global(em) { color: #8dd4cb; }
 
   .hero-sub {
     font-family: var(--font-sans);
@@ -239,6 +281,98 @@ const t = useTranslations(Astro.currentLocale);
     background: rgba(255, 255, 255, 0.06);
   }
 
+  /* Mapa sil v úvodu: vazby se při načtení postupně vykreslí, body naskočí (bez animace, když si to čtenář nepřeje) */
+  .hero-map {
+    position: relative;
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    margin-inline: auto;
+    color: #ffffff;
+    text-decoration: none;
+  }
+  .hero-map :global(.hm-svg) { display: block; width: 100%; height: auto; overflow: visible; }
+  .hero-map :global(.hm-e) { stroke-width: 1; stroke-opacity: 0.34; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .hero-map :global(.hm-s) { stroke-width: 1.8; stroke-opacity: 0.7; }
+  .hero-map :global(.hm-a) { opacity: 0.95; }
+  .hero-map-cap {
+    display: block;
+    margin-top: 0.9rem;
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .hero-map-cap strong { color: #ffffff; font-weight: 600; }
+  .hero-map:hover .hero-map-cap { color: #ffffff; }
+  .hero-map:hover :global(.hm-e) { stroke-opacity: 0.55; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-map :global(.hm-e) { stroke-dashoffset: 1; animation: hm-draw 1.8s cubic-bezier(.3,.6,.3,1) forwards; animation-delay: calc(0.4s + var(--i) * 14ms); }
+    .hero-map :global(.hm-n) { opacity: 0; animation: hm-in 0.5s ease-out forwards; animation-delay: calc(var(--j) * 9ms); }
+    .hero-map :global(.hm-a) { opacity: 0; animation: hm-in 0.8s ease-out 0.2s forwards; }
+  }
+  @keyframes hm-draw { to { stroke-dashoffset: 0; } }
+  @keyframes hm-in { to { opacity: 0.95; } }
+
+  /* Troje dveře pod slibem */
+  .doors {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-md, 1.5rem);
+    margin-top: var(--space-xl, 3rem);
+  }
+  .door {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 1.25rem 3rem 1.35rem 1.35rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+  .door:hover {
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.09);
+    transform: translateY(-2px);
+  }
+  .door-kicker {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #8dd4cb;
+  }
+  .door-title {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .door-text {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: rgba(255, 255, 255, 0.72);
+  }
+  .door-arrow {
+    position: absolute;
+    right: 1.2rem;
+    top: 1.2rem;
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.6);
+    transition: transform 0.2s;
+  }
+  .door:hover .door-arrow { transform: translateX(3px); color: #ffffff; }
+  @media (max-width: 900px) {
+    .doors { grid-template-columns: 1fr; gap: 0.75rem; text-align: left; }
+  }
+
   /* Mobile */
   @media (max-width: 900px) {
     .hero {
@@ -247,29 +381,32 @@ const t = useTranslations(Astro.currentLocale);
     }
     .hero-grid {
       grid-template-columns: 1fr;
-      text-align: center;
+      text-align: left;
     }
     .hero-content {
       max-width: 100%;
     }
     .hero-eyebrow {
-      margin-inline: auto;
+      margin-inline: 0;
     }
     .hero-sub {
-      margin-inline: auto;
+      margin-inline: 0;
     }
     .hero-identity {
-      margin-inline: auto;
+      margin-inline: 0;
     }
     .hero-cta {
       justify-content: center;
     }
     .hero-microcopy {
-      margin-inline: auto;
+      margin-inline: 0;
     }
-    .hero-preview {
-      margin-top: var(--space-md, 1.5rem);
-    }
+    .hero-inner { display: flex; flex-direction: column; }
+    .hero-grid { display: contents; }
+    .hero-content { order: 1; text-align: left; }
+    .hero-identity { margin-bottom: 0; }
+    .doors { order: 2; margin-top: var(--space-md, 1.5rem); }
+    .hero-preview { order: 3; margin-top: var(--space-lg, 2rem); }
     .hero-preview img {
       max-width: 100%;
     }
@@ -285,7 +422,7 @@ const t = useTranslations(Astro.currentLocale);
       padding: 0 var(--space-sm, 1rem);
     }
     .hero-title {
-      font-size: clamp(1.6rem, 6vw, 2rem);
+      font-size: clamp(1.9rem, 7.4vw, 2.3rem);
     }
     .btn-primary,
     .btn-secondary {

@@ -37,8 +37,15 @@ function parseRSS(xml: string): RawArticle[] {
     const cleanDesc = rawDesc
       .replace(/&#(\d+);/g, (_: string, n: string) => String.fromCharCode(parseInt(n)))
       .replace(/<[^>]+>/g, '')
-      .slice(0, 160)
       .trim();
+    // Ukázka končí na hranici slova; před výpustkou nezůstane čárka, spojka ani předložka.
+    let shortDesc = cleanDesc;
+    if (cleanDesc.length > 157) {
+      shortDesc = cleanDesc.slice(0, 157).replace(/\s+\S*$/, '');
+      let prev = '';
+      while (prev !== shortDesc) { prev = shortDesc; shortDesc = shortDesc.replace(/[\s,;:(„]+$/, '').replace(/\s+(a|i|o|u|k|s|v|z|že|ale|nebo|aby|když|který|která|které|kteří|na|do|od|po|pro|při|za|ze|ve|ke|se|si|je|jak|než|ani|už)$/i, ''); }
+    }
+    const nbspDesc = (shortDesc === cleanDesc ? cleanDesc : shortDesc + '…').replace(/(^|\s)([ksvzouaiKSVZOUAI]) /g, '$1$2\u00a0');
 
     const encMatch = item.match(/<enclosure[^>]+url="([^"]+)"/);
     let image = encMatch ? encMatch[1] : '';
@@ -50,7 +57,7 @@ function parseRSS(xml: string): RawArticle[] {
       title: getTag('title'),
       link: getTag('link'),
       pubDate: getTag('pubDate'),
-      description: cleanDesc + (cleanDesc.length >= 157 ? '…' : ''),
+      description: nbspDesc,
       image,
     };
   });
@@ -107,10 +114,10 @@ articles = formatArticles(rawArticles, Astro.currentLocale);
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
         {t('articles.subtitle')}
       </div>
-      <h2>{t('articles.title')}</h2>
+      <h2 set:html={t('articles.title')} />
     </div>
     <div class="articles-grid reveal">
-      {articles.map((article) => (
+      {articles.slice(0, 6).map((article) => (
         <a href={article.link} target="_blank" rel="noopener" class="article-card">
           {article.image && (
             <div class="article-image">
@@ -250,6 +257,7 @@ articles = formatArticles(rawArticles, Astro.currentLocale);
   }
 
   @media (max-width: 640px) {
+    .article-card:nth-child(n + 4) { display: none; }
     .articles-grid {
       grid-template-columns: 1fr;
     }

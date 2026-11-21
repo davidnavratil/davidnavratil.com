@@ -5,6 +5,9 @@ import { useTranslations, getAlternatePath } from '../i18n/utils';
 const locale = Astro.currentLocale;
 const t = useTranslations(locale);
 const switchHref = getAlternatePath(locale, '/');
+// Kotvy míří na úvodní stránku, aby fungovaly i z podstránek (např. /prednasky/).
+const home = locale === 'en' ? '/en/' : '/';
+const speakingHref = locale === 'en' ? '/en/#speaking' : '/prednasky/';
 ---
 
 <header class="header">
@@ -14,14 +17,15 @@ const switchHref = getAlternatePath(locale, '/');
       <span class="logo-text">David Navrátil</span>
     </a>
     <nav class="nav">
-      <a href="#analyzy" class="nav-link">{t('nav.analyses')}</a>
-      <a href="#newsletter" class="nav-link">{t('nav.newsletter')}</a>
-      <a href="#speaking" class="nav-link">{t('nav.speaking')}</a>
-      <a href="#about" class="nav-link">{t('nav.about')}</a>
-      <a href="#contact" class="nav-link">{t('nav.contact')}</a>
+      {locale !== 'en' && <a href="/megatrendy/" class="nav-link">Megatrendy</a>}
+      <a href={`${home}#analyzy`} class="nav-link">{t('nav.analyses')}</a>
+      <a href={speakingHref} class="nav-link">{t('nav.speaking')}</a>
+      <a href={`${home}#newsletter`} class="nav-link">{t('nav.newsletter')}</a>
+      <a href={`${home}#about`} class="nav-link">{t('nav.about')}</a>
+      <a href={`${home}#contact`} class="nav-link">{t('nav.contact')}</a>
       <a href={switchHref} class="lang-switch">{t('lang.code')}</a>
       <ThemeToggle />
-      <a href="#newsletter" class="nav-cta-btn">{t('nav.subscribe')}</a>
+      <a href={`${home}#newsletter`} class="nav-cta-btn">{t('nav.subscribe')}</a>
     </nav>
 
     <!-- Mobile menu button -->
@@ -36,16 +40,17 @@ const switchHref = getAlternatePath(locale, '/');
 
   <!-- Mobile nav -->
   <div class="mobile-nav" id="mobile-nav">
-    <a href="#analyzy" class="mobile-link">{t('nav.analyses')}</a>
-    <a href="#newsletter" class="mobile-link">{t('nav.newsletter')}</a>
-    <a href="#speaking" class="mobile-link">{t('nav.speaking')}</a>
-    <a href="#about" class="mobile-link">{t('nav.about')}</a>
-    <a href="#contact" class="mobile-link">{t('nav.contact')}</a>
+    {locale !== 'en' && <a href="/megatrendy/" class="mobile-link">Megatrendy</a>}
+    <a href={`${home}#analyzy`} class="mobile-link">{t('nav.analyses')}</a>
+    <a href={speakingHref} class="mobile-link">{t('nav.speaking')}</a>
+    <a href={`${home}#newsletter`} class="mobile-link">{t('nav.newsletter')}</a>
+    <a href={`${home}#about`} class="mobile-link">{t('nav.about')}</a>
+    <a href={`${home}#contact`} class="mobile-link">{t('nav.contact')}</a>
     <div class="mobile-bottom">
       <a href={switchHref} class="lang-switch">{t('lang.code')}</a>
       <ThemeToggle />
     </div>
-    <a href="#newsletter" class="mobile-cta-btn">{t('nav.subscribe')}</a>
+    <a href={`${home}#newsletter`} class="mobile-cta-btn">{t('nav.subscribe')}</a>
   </div>
 </header>
 
@@ -57,7 +62,7 @@ const switchHref = getAlternatePath(locale, '/');
     right: 0;
     z-index: 100;
     padding: var(--space-sm) 0;
-    background: color-mix(in srgb, var(--color-bg) 85%, transparent);
+    background: color-mix(in srgb, var(--color-bg) 97%, transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);

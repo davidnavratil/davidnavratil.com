@@ -1,5 +1,7 @@
 ---
 import '@fontsource/fraunces/400.css';
+import '@fontsource/fraunces/400-italic.css';
+import '@fontsource/fraunces/500.css';
 import '@fontsource/fraunces/600.css';
 import '@fontsource/fraunces/700.css';
 import '@fontsource/inter/400.css';
@@ -13,9 +15,12 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  /** Obrázek pro náhled při sdílení; výchozí je /og-image.png (1200 × 630). */
+  image?: string;
 }
 
-const { title, description = 'David Navrátil · ekonom, analytik, autor interaktivních analýz' } = Astro.props;
+const { title, description = 'David Navrátil · ekonom, analytik, autor interaktivních analýz', image } = Astro.props;
+const ogImage = new URL(image ?? '/og-image.png', Astro.site);
 const locale = Astro.currentLocale ?? 'cs';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // Compute hreflang alternates based on current path
@@ -48,15 +53,15 @@ const ogLocale = locale === 'en' ? 'en_US' : 'cs_CZ';
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:locale" content={ogLocale} />
-    <meta property="og:image" content={new URL('/og-image.png', Astro.site)} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image" content={ogImage} />
+    {!image && <meta property="og:image:width" content="1200" />}
+    {!image && <meta property="og:image:height" content="630" />}
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL('/og-image.png', Astro.site)} />
+    <meta name="twitter:image" content={ogImage} />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preload" as="image" type="image/webp" href="/images/preview-hormuz.webp" />

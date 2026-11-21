@@ -2,8 +2,8 @@
 import Base from '../layouts/Base.astro';
 import HeroSection from './HeroSection.astro';
 import TrustBar from './TrustBar.astro';
+import FilmSection from './FilmSection.astro';
 import AnalysesSection from './AnalysesSection.astro';
-import WhyPeopleReturn from './WhyPeopleReturn.astro';
 import NewsletterCTA from './NewsletterCTA.astro';
 import LatestArticles from './LatestArticles.astro';
 import AboutSection from './AboutSection.astro';
@@ -18,8 +18,8 @@ const t = useTranslations(Astro.currentLocale);
 
   <HeroSection />
   <TrustBar />
+  {Astro.currentLocale !== 'en' && <FilmSection />}
   <AnalysesSection />
-  <WhyPeopleReturn />
   <NewsletterCTA />
   <LatestArticles />
   <AboutSection />
