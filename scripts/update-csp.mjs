@@ -81,12 +81,13 @@ async function verify(expected) {
   // Belt and braces: the contact form is the site's only conversion path, and
   // it is exactly what silently broke last time. Assert its transport directly.
   const connectSrc = live.split(';').find((d) => d.trim().startsWith('connect-src')) ?? '';
-  if (!connectSrc.includes('https://formspree.io')) {
-    throw new Error(`connect-src does not permit https://formspree.io — the contact form will fail. Got: ${connectSrc.trim()}`);
+  // The form posts to our own /api/poptavka (same origin) since 2026-11.
+  if (!connectSrc.includes("'self'")) {
+    throw new Error(`connect-src does not permit 'self' — the contact form will fail. Got: ${connectSrc.trim()}`);
   }
 
   console.log(`✓ Live CSP on ${VERIFY_URL} matches the snippet`);
-  console.log('✓ connect-src permits https://formspree.io (contact form can submit)');
+  console.log("✓ connect-src permits 'self' (contact form can submit to /api/poptavka)");
 }
 
 const source = readFileSync(LOCAL_SNIPPET, 'utf8');

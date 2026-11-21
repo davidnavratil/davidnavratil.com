@@ -94,3 +94,25 @@ jobs:
             --data-urlencode "parse_mode=Markdown" \
             --data-urlencode "disable_web_page_preview=true" > /dev/null
           echo "✓ Telegram notification sent"
+
+      # Denní kontrola příjmu poptávek z formuláře (týdenní audit ji dělá jen v neděli).
+      # ok:false znamená, že poptávka čeká ve frontě přes hodinu, tedy e-maily neodcházejí.
+      - name: Check enquiry form backend
+        if: always()
+        env:
+          TG_BOT: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TG_CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          BODY=$(curl -s -m 20 https://davidnavratil.com/api/poptavka/zdravi || true)
+          if echo "$BODY" | grep -Eq '"ok": *true'; then
+            echo "✓ Příjem poptávek v pořádku: $BODY"
+            exit 0
+          fi
+          echo "❌ Příjem poptávek neodpovídá správně: ${BODY:-bez odpovědi}"
+          if [ -n "$TG_BOT" ] && [ -n "$TG_CHAT" ]; then
+            curl -s -X POST "https://api.telegram.org/bot${TG_BOT}/sendMessage" \
+              --data-urlencode "chat_id=${TG_CHAT}" \
+              --data-urlencode "text=⚠️ davidnavratil.com: formulář poptávek nefunguje. Odpověď kontroly: ${BODY:-bez odpovědi}" \
+              --data-urlencode "disable_web_page_preview=true" > /dev/null
+          fi
+          exit 1
