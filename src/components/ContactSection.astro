@@ -26,7 +26,7 @@ const t = useTranslations(Astro.currentLocale);
         </div>
       </div>
       <form
-        action="https://formspree.io/f/xwvwvrqy"
+        action="/api/poptavka"
         method="POST"
         class="contact-form"
         data-dn-form
@@ -34,9 +34,10 @@ const t = useTranslations(Astro.currentLocale);
         data-msg-ok={t('form.success')}
         data-msg-error={t('form.error')}
       >
-        <input type="hidden" name="_subject" value="Zpráva z davidnavratil.com" />
+        {/* Zprávy přijímá vlastní server (server/poptavky/), ne Formspree. */}
+        <input type="hidden" name="zdroj" value="kontakt" />
         <input type="hidden" name="locale" value={Astro.currentLocale ?? 'cs'} />
-        {/* Honeypot — Formspree drops submissions where this is filled in. */}
+        {/* Past na roboty: lidé pole nevidí; vyplněná zpráva přijde označená „[ověřit]“. */}
         <input
           type="text"
           name="_gotcha"

@@ -414,6 +414,37 @@ async function checkContactForm() {
   }
 
   // Finally: is the collector itself alive?
+  // Since 2026-11 the form posts to our own /api/poptavka on Mozek. Its public
+  // health check reports whether anything is stuck in the outgoing mail queue
+  // (ok:false = an enquiry has waited over an hour, so e-mail delivery is down).
+  if (!isCrossOrigin) {
+    const health = new URL(action.replace(/\/$/, '') + '/zdravi', FORM_PAGE).toString();
+    try {
+      const res = await fetch(health, { cache: 'no-store' });
+      const body = (await res.json().catch(() => null)) as { ok?: boolean; ve_fronte?: number; nejstarsi_min?: number } | null;
+      if (!res.ok || !body || body.ok !== true) {
+        findings.push({
+          type: 'FORM-BROKEN',
+          url: FORM_PAGE,
+          reason: 'Příjem poptávek na serveru neodesílá e-maily',
+          detail:
+            `${health} vrátil HTTP ${res.status}: ${JSON.stringify(body)}.\n` +
+            'Poptávky jsou uložené ve frontě /var/lib/poptavky/fronta, ale nedorazily do schránky. ' +
+            'Zkontrolovat `journalctl -u poptavky` a /var/lib/poptavky/msmtp.log (nejčastěji neplatné heslo aplikace Gmailu).',
+          fix: null,
+        });
+      }
+    } catch (e) {
+      findings.push({
+        type: 'FORM-BROKEN',
+        url: FORM_PAGE,
+        reason: 'Příjem poptávek na serveru není dostupný',
+        detail: `${health}: ${e instanceof Error ? e.message : String(e)}`,
+        fix: null,
+      });
+    }
+    return;
+  }
   try {
     const res = await fetch(action, { method: 'OPTIONS' });
     if (res.status >= 500) {
