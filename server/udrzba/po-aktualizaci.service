@@ -1,0 +1,11 @@
+[Unit]
+Description=Kontrola po nocni aktualizaci a e-mail se souhrnem
+After=network-online.target docker.service nginx.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/root/udrzba/po-aktualizaci.sh
+
+[Install]
+WantedBy=multi-user.target

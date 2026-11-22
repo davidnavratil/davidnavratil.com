@@ -1,0 +1,7 @@
+[Unit]
+Description=Jednorazova nocni aktualizace serveru (zaloha, apt upgrade, restart)
+After=network-online.target docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/root/udrzba/nocni-aktualizace.sh

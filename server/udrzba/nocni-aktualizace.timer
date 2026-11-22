@@ -1,0 +1,9 @@
+[Unit]
+Description=Nocni aktualizace 23. 11. 2026 v 02:30 prazskeho casu
+
+[Timer]
+OnCalendar=2026-11-23 01:30:00 UTC
+Persistent=false
+
+[Install]
+WantedBy=timers.target
