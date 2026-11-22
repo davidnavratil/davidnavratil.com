@@ -390,7 +390,7 @@ export const translations = {
     'about.pillar3.desc': 'Macroeconomic trends, AI, geopolitics. Conferences and corporate workshops.',
     'about.credentials.role': 'Chief Economist, Ceska sporitelna (Erste Group)',
     'about.credentials.team': 'Head of Strategic Research &\u00a0Insight',
-    'about.credentials.media': 'Regular media commentator (Czech TV, CNN Prima, HN)',
+    'about.credentials.media': 'Regular media commentator (Czech TV, Hospodářské noviny)',
     'about.credentials.speaking': 'Corporate keynotes and conference speaking',
 
     // Newsletter CTA
