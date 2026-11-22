@@ -1,4 +1,6 @@
-# Infrastructure Runbook — davidnavratil.com
+# Infrastructure Runbook: davidnavratil.com
+
+> **Rozcestník a postupy pro běžné situace:** `davidnavratil-meta/docs/PROVOZ.md` (zálohy, nasazení, hlídání, co dělat když). Tento soubor drží technické podrobnosti serveru.
 
 > Last updated: 2026-04-03
 
