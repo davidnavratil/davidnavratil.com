@@ -52,7 +52,7 @@ STRANKY = {
   <div style="position:absolute;left:640px;top:84px;width:500px">
     <div class=eyebrow>Přednášky a debaty s vedením firem</div>
     <h1 style="font-size:60px">Nevíme, co přijde. <em>Víme, podle čeho to poznáme.</em></h1>
-    <p>Místo jedné předpovědi několik možných budoucností a&nbsp;kroky, které se vyplatí skoro v&nbsp;každé.</p>
+    <p>K&nbsp;prognóze i&nbsp;několik scénářů budoucnosti a&nbsp;kroky, které se vyplatí skoro v&nbsp;každém z&nbsp;nich.</p>
   </div>
   <div class=url style="left:640px;bottom:58px">davidnavratil.com/prednasky</div>"""),
  'og-pro-poradatele': page(f"""

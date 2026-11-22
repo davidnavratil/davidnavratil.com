@@ -18,13 +18,13 @@ assert len(temata) == 7
 
 BIO = [
     ('Krátké', 'do programu, na pozvánku',
-     'David Navrátil je hlavní ekonom České spořitelny a spoluautor Indexu prosperity a finančního zdraví i projektu Silnější regiony. Předpovědi nedělá. Ukazuje několik možných budoucností, podle jakých čísel poznáme, která se blíží, a jak se připravit na kteroukoli z nich.'),
+     'David Navrátil je hlavní ekonom České spořitelny a spoluautor Indexu prosperity a finančního zdraví i projektu Silnější regiony. K prognózám přidává scénáře: ukazuje několik možných budoucností, podle jakých čísel poznáme, která se blíží, a jak se připravit na kteroukoli z nich.'),
     ('Střední', 'na web akce, do tiskové zprávy',
      'David Navrátil je hlavní ekonom České spořitelny, kde od roku 2008 vede tým ekonomických a strategických analýz. '
      'Rodák z Ostravska začínal v České národní bance. '
      'Je spoluautorem Indexu prosperity a finančního zdraví a projektu Silnější regiony, které ukazují, v čem Česko a jeho regiony zaostávají a kde mají náskok. '
      'Zajímá ho, jak udržet prosperitu v době polykrize, kdy se stárnutí, umělá inteligence, drahá energie a válka potkávají najednou. '
-     'Místo jedné předpovědi ukazuje scénáře různých budoucností a cestu přes odolnost a schopnost reinvence: umět včas změnit to, co přestalo fungovat. '
+     'K prognóze přidává scénáře různých budoucností a cestu přes odolnost a schopnost reinvence: umět včas změnit to, co přestalo fungovat. '
      'Mluví lidsky, s čísly, která si lidé pamatují ještě cestou domů, a s humorem, který neubírá na přesnosti. '
      'CzechCrunch ho spolu s Davidem Markem označil za dva mediálně nejvýraznější makroekonomy v Česku.'),
     ('Dlouhé', 'do sborníku, pro moderátora',
@@ -38,17 +38,17 @@ BIO = [
      'Ročně má přes 50 přednášek a přes 15 let komentuje ekonomiku v médiích; CzechCrunch ho spolu s Davidem Markem označil za dva mediálně nejvýraznější makroekonomy v Česku. '
      'Píše newsletter Peníze, procenta a prosperita.'),
     ('English, short', 'for programmes and invitations',
-     'David Navrátil is Chief Economist of Česká spořitelna (Erste Group) and co-author of the Czech Prosperity and Financial Health Index. He does not make forecasts. He shows several possible futures, the numbers that tell us which one is coming, and how to be ready for any of them.'),
+     'David Navrátil is Chief Economist of Česká spořitelna (Erste Group) and co-author of the Czech Prosperity and Financial Health Index. Alongside his forecasts he works with scenarios: he shows several possible futures, the numbers that tell us which one is coming, and how to be ready for any of them.'),
     ('English, medium', 'for event websites and press releases',
      'David Navrátil is Chief Economist of Česká spořitelna (Erste Group), where he has led the Economic and Strategic Research team since 2008. '
      'Born in the Ostrava region, he started his career at the Czech National Bank. '
      'He co-authors the Prosperity and Financial Health Index and the Stronger Regions project, which show where Czechia and its regions lag behind and where they lead. '
      'His focus is prosperity in an age of polycrisis, when ageing, artificial intelligence, expensive energy and war hit at once. '
-     'Instead of a single forecast he offers scenarios of different futures and a path through resilience and the ability to reinvent. '
+     'Alongside the forecast he offers scenarios of different futures and a path through resilience and the ability to reinvent. '
      'He speaks plainly, with numbers people still remember on their way home, and with humour that never costs precision. '
      'The Czech tech and business outlet CzechCrunch named him, together with David Marek, one of the country’s two most media-prominent macroeconomists.'),
 ]
-UVOD = 'Ekonom je člověk, který vám dnes sofistikovaně vysvětlí, jak bude za rok vypadat svět, ekonomika i úrokové sazby. A za rok vám ještě sofistikovaněji a naprosto přesně vysvětlí, v čem se mýlil a proč. Náš další host tuhle hru nehraje. Místo jedné předpovědi ukáže několik budoucností, podle jakých čísel poznáme, kam se to láme, a jak si vybudovat odolnost pro kteroukoli z nich. Hlavní ekonom České spořitelny a spoluautor Indexu prosperity. Přivítejte Davida Navrátila.'
+UVOD = 'Ekonom je člověk, který vám dnes sofistikovaně vysvětlí, jak bude za rok vypadat svět, ekonomika i úrokové sazby. A za rok vám ještě sofistikovaněji a naprosto přesně vysvětlí, v čem se mýlil a proč. Náš další host prognózy dělá taky. Jen k nim přidává pojistku: několik scénářů, čísla, podle kterých poznáme, kam se to láme, a odolnost pro kterýkoli z nich. Hlavní ekonom České spořitelny a spoluautor Indexu prosperity. Přivítejte Davida Navrátila.'
 FOTO = [
     ('david-navratil-portret.jpg', 'Portrét', 960, 540, ''),
     ('david-navratil-praha.jpg', 'Portrét s Prahou', 1600, 1120, ' class="tall"'),
