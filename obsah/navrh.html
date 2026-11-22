@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Přednášky a strategické debaty Davida Navrátila o megatrendech, scénářích a odolnosti firem do roku 2031. Více možných budoucností a čísla, podle kterých poznáte, která přichází.">
+  <meta name="theme-color" content="#F5F1E8">
+  <title>David Navrátil: scénáře budoucnosti pro konference a vedení firem</title>
+  <meta property="og:title" content="David Navrátil: scénáře budoucnosti pro konference a vedení firem">
+  <meta property="og:description" content="Nevíme, co přijde. Víme, podle čeho to poznáme. Přednášky a strategické debaty o megatrendech, scénářích a odolnosti firem do roku 2031.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://davidnavratil.com/images/megatrendy/foto-regiony.jpg">
+  <meta property="og:image:alt" content="David Navrátil přednáší o regionech před zaplněným sálem">
+  <!-- Písma Fraunces a Inter hostuje web sám (@fontsource v Base.astro); žádné načítání z Googlu. -->
+  <style>
+    :root{--paper:#f5f1e8;--ink:#163a5f;--teal:#1b7d8a;--muted:#556675;--line:#cfd2cb;--orange:#ad4b30;--amber:#e0954b;--night:#102d47;--mint:#8dd4cb;--white:#fffdf8;--serif:Fraunces,Georgia,serif;--sans:Inter,Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.6 var(--sans);-webkit-font-smoothing:antialiased}
+    button,input,select,textarea{font:inherit}a{color:inherit;text-underline-offset:5px}button{cursor:pointer}
+    :focus-visible{outline:3px solid var(--orange);outline-offset:4px}
+    img{display:block;max-width:100%;height:auto}svg{display:block;max-width:100%}h1,h2,h3,p,figure{margin:0}h1,h2,h3{font-weight:400}
+    h1,h2{font-family:var(--serif);line-height:1.06;letter-spacing:-.04em}h1{font-size:clamp(46px,5.2vw,74px)}h2{font-size:clamp(34px,3.4vw,50px)}h2 em,h1 em{font-style:italic;color:var(--teal)}
+    p+p{margin-top:14px}.wrap{width:min(1240px,calc(100% - 96px));margin:auto}
+    .eyebrow{font-size:11px;font-weight:650;text-transform:uppercase;letter-spacing:.16em;line-height:1.6;color:#156872}
+    .source{font-size:11px;line-height:1.55;color:var(--muted)}
+    .section{padding:96px 0}.section-top{display:flex;justify-content:space-between;gap:48px;align-items:flex-end;margin-bottom:44px}.section-top h2{max-width:720px;margin-top:16px}.section-top>p{max-width:360px;color:var(--muted);font-size:15px}
+    .button{min-height:50px;display:inline-flex;align-items:center;gap:22px;padding:14px 22px;background:var(--ink);color:var(--white);text-decoration:none;border:1px solid var(--ink);font-size:14px;font-weight:600}.button:hover{background:var(--teal);border-color:var(--teal)}.button.light{background:var(--paper);color:var(--ink);border-color:var(--paper)}.button.light:hover{background:var(--mint)}
+    .text-link{display:inline-flex;gap:12px;align-items:center;font-size:14px;font-weight:550}
+    .skip{position:absolute;left:16px;top:-100px;z-index:10;padding:12px;background:var(--white)}.skip:focus{top:12px}
+    header{border-bottom:1px solid var(--line)}.nav{min-height:88px;display:flex;align-items:center;justify-content:space-between;gap:24px}.wordmark{text-decoration:none;font-family:var(--serif);font-size:26px;letter-spacing:-.05em}.wordmark span{color:var(--teal)}.nav-links{display:flex;gap:28px;align-items:center}.nav-links>a:not(.button){font-size:13px;text-decoration:none}.nav-links>a:not(.button):hover{text-decoration:underline}.nav .button{min-height:44px;padding:10px 16px}
+    /* Hero */
+    .hero{padding:60px 0 56px}.hero-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}.hero h1{margin-top:20px}.hero-copy{max-width:520px;font-size:18px;color:var(--muted);line-height:1.7;margin-top:26px}
+    .hero-actions{display:flex;align-items:center;gap:26px;flex-wrap:wrap;margin-top:30px}.hero-person{display:flex;align-items:center;gap:13px;margin-top:32px;font-size:12px;line-height:1.55}.hero-person img{width:46px;height:46px;object-fit:cover;object-position:52% 22%;border-radius:50%}.hero-person strong{display:block;font-size:14px}.hero-person span{color:var(--muted)}
+    .panel{background:var(--night);color:var(--paper);padding:26px 28px 22px;position:relative;overflow:hidden}.panel-top{display:flex;align-items:center;justify-content:space-between;gap:12px}.panel-top .eyebrow{color:#b9c7d1;font-size:10px}
+    .motion-toggle{white-space:nowrap;border:1px solid #617586;background:transparent;color:var(--paper);padding:7px 11px;min-height:40px;font-size:11px;display:flex;gap:7px;align-items:center}.motion-toggle:hover{background:#25465f}
+    .pole-caps{position:relative;height:84px;margin-top:18px;font-size:31px;line-height:1.15;letter-spacing:-.03em}.pole-caps span{position:absolute;inset:0}.pole-caps em{font-style:italic;color:var(--mint)}
+    .pole-box{position:relative;width:100%}.pole-stage{position:absolute;left:0;top:0;width:560px;height:380px;transform-origin:0 0}
+    .pd{position:absolute;left:0;top:0;border-radius:50%;transform:translate(var(--cx),var(--cy));animation:pole 7s cubic-bezier(.62,0,.32,1) both}
+    .pd.t{width:12px;height:12px;background:var(--paper)}.pd.n{width:12px;height:12px;border:2.5px solid #e0954b;animation:pole 7s cubic-bezier(.62,0,.32,1) both,colB 7s linear both}.pd.n.up{border-color:#8dd4cb;animation:pole 7s cubic-bezier(.62,0,.32,1) both,colA 7s linear both}
+    @keyframes pole{0%,38%{transform:translate(var(--bx),var(--by))}70%,100%{transform:translate(var(--cx),var(--cy))}}
+    @keyframes colA{0%,44%{border-color:#c9d3df}72%,100%{border-color:#8dd4cb}}
+    @keyframes colB{0%,44%{border-color:#c9d3df}72%,100%{border-color:#e0954b}}
+    .cB{opacity:0;animation:fB 7s linear both}.cC{opacity:1;animation:fC 7s linear both}
+    @keyframes fB{0%,40%{opacity:1}50%,100%{opacity:0}}@keyframes fC{0%,56%{opacity:0}72%,100%{opacity:1}}
+    .pole-lab{position:absolute;font-size:var(--lf,12px);color:#c1cbd3;text-align:center;line-height:1.3}.pole-line{position:absolute;height:2px;transform-origin:0 50%}
+    .pole-legend{font-size:12px;color:#c4d0d8;margin:12px 0 14px;display:flex;flex-wrap:wrap;gap:6px 22px}.pole-legend span{white-space:nowrap;display:inline-flex;align-items:center;gap:8px}.mk{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--paper)}.mk.ring{background:none;border:2px solid #c9d3df}
+    .panel .source{color:#b9c7d1;border-top:1px solid #3a5368;padding-top:13px;font-size:11px}
+    /* Kde vystupoval */
+    .stagebar{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.stagebar-inner{display:flex;gap:18px 34px;align-items:baseline;flex-wrap:wrap;padding:22px 0}.stagebar .eyebrow{color:var(--muted)}.stagebar ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:14px;font-weight:550}
+    /* Wow */
+    .wow-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.feature{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column}
+    .feature h3{font:31px/1.15 var(--serif);letter-spacing:-.03em;margin-top:16px}.feature h3 em{font-style:italic;color:var(--mint)}.feature .unit{font-size:12px;color:#c1cbd3;margin-top:8px}
+    .conv{width:100%;margin-top:14px}.conv text{font-family:var(--sans)}.conv.anim .draw{stroke-dasharray:1;stroke-dashoffset:1}.conv.anim.go .draw{animation:draw 2.4s .2s ease-out forwards}@keyframes draw{to{stroke-dashoffset:0}}
+    .feature .reading{font-size:14px;line-height:1.55;color:#e0e6e8;margin:10px 0 16px}.feature .reading strong{color:var(--mint);font-weight:600}.feature .source{margin-top:auto}
+    .card{background:var(--white);border:1px solid var(--line);padding:24px 22px 18px;display:flex;flex-direction:column;gap:10px;min-height:268px}
+    .num{font-family:var(--serif);font-size:50px;line-height:1;letter-spacing:-.04em;color:var(--ink)}.num.o{color:var(--orange)}.num.t{color:var(--teal)}
+    .card p.txt{font-size:15px;line-height:1.5;color:#26405a;flex-grow:1}.card .source{border-top:1px solid var(--line);padding-top:10px}
+    /* Kdo bude mluvit */
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}.portrait{position:relative}.portrait img{aspect-ratio:1.12;object-fit:cover;object-position:62% center}.portrait-tag{position:absolute;bottom:40px;left:-18px;background:var(--paper);padding:14px 22px;border:1px solid var(--line);font:22px var(--serif)}
+    .about-copy h2{margin:16px 0 24px}.about-copy .q{font:22px/1.4 var(--serif);color:var(--ink)}.about-copy p:not(.eyebrow):not(.q){color:var(--muted);font-size:16px}.creds{border-top:1px solid var(--line);margin-top:24px;padding-top:18px;font-size:13px;line-height:1.8}.creds strong{font-weight:600}.creds span{display:block;color:var(--muted)}
+    .gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:12px;margin-top:56px}.gallery figure:first-child{grid-row:span 2}.gallery figure:nth-child(4){grid-column:span 2}.gallery img{width:100%;height:100%;object-fit:cover}.gallery figure{position:relative;overflow:hidden;min-height:180px}
+    .videos{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}.video{display:grid;grid-template-columns:180px 1fr;gap:18px;align-items:center;text-decoration:none;border:1px solid var(--line);background:var(--white);padding:12px}.video:hover{border-color:var(--teal)}.video .thumb{position:relative;aspect-ratio:16/9;overflow:hidden}.video .thumb img{width:100%;height:100%;object-fit:cover}.video .play{position:absolute;inset:0;display:grid;place-items:center}.video .play span{width:44px;height:44px;border-radius:50%;background:rgba(16,45,71,.86);display:grid;place-items:center;color:#fff;font-size:15px}.video strong{display:block;font:19px/1.3 var(--serif)}.video small{color:var(--muted);font-size:12px}
+    /* Formáty */
+    .formats{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.format{padding:36px 44px 36px 0;display:flex;flex-direction:column;align-items:flex-start}.format+.format{border-left:1px solid var(--line);padding-left:44px;padding-right:0}
+    .format-top{width:100%;display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:22px}.duration{font-size:12px;border:1px solid var(--line);padding:5px 10px;white-space:nowrap}.format h3{font:36px/1.12 var(--serif);letter-spacing:-.04em}.format>p{font-size:16px;color:var(--muted);margin-top:16px;max-width:460px}
+    .format ul{list-style:none;margin:22px 0 28px;padding:0;font-size:14px}.format li{padding-left:20px;position:relative;margin:8px 0}.format li:before{content:"→";color:var(--teal);position:absolute;left:0}.format .button{margin-top:auto}
+    .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px;margin-top:48px}.step b{display:block;font:44px/1 var(--serif);color:var(--teal);font-weight:400}.step h3{font-size:19px;font-weight:600;margin:12px 0 6px;letter-spacing:-.01em}.step p{font-size:14px;color:var(--muted)}
+    .faq{margin-top:44px;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;padding-top:28px}.faq h3{font-size:15px;font-weight:600;letter-spacing:0;margin-bottom:6px}.faq p{font-size:14px;color:var(--muted)}
+    /* Témata */
+    .topics{border-top:1px solid var(--line)}.topics details{border-bottom:1px solid var(--line)}.topics summary{display:grid;grid-template-columns:64px 1fr 30px;gap:20px;align-items:center;cursor:pointer;padding:22px 0;list-style:none}.topics summary::-webkit-details-marker{display:none}.tnum{font-size:12px;color:var(--teal)}.topics summary h3{font:28px/1.3 var(--serif);letter-spacing:-.02em}.tplus{font-size:25px;text-align:center}.tplus:after{content:"+"}.topics details[open] .tplus:after{content:"−"}.tbody{max-width:760px;padding:0 30px 24px 84px;font-size:15px;color:var(--muted)}.tbody a{display:inline-block;margin-top:12px;font-size:13px;color:var(--ink)}
+    /* Metoda */
+    .method{background:var(--night);color:var(--paper)}.method .eyebrow{color:var(--mint)}.method .section-top>p{color:#c4d0d8}.method h2 em{color:var(--mint)}
+    .method-layout{display:grid;grid-template-columns:1.05fr 1fr;gap:72px}.legend{display:flex;gap:22px;font-size:12px;color:#c4d0d8;margin-bottom:22px}.legend span{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
+    .frow{display:grid;grid-template-columns:170px 1fr;gap:14px;border-top:1px solid #3c5365;padding:16px 0;align-items:center}.fname{font-size:14px}.fname small{display:block;font-size:11px;color:#adbfcc;margin-top:2px}.dots{display:flex;flex-wrap:wrap;gap:7px;max-width:270px}.dots span{flex:0 0 10px;height:10px;background:var(--mint);border:1px solid var(--mint);border-radius:50%}.dots span.u{background:none;border-color:#bdcbd4}
+    .principles{counter-reset:p;margin:0;padding:0;list-style:none}.principles li{display:grid;grid-template-columns:34px 1fr;gap:14px;margin-bottom:28px}.principles li:before{counter-increment:p;content:counter(p,decimal-leading-zero);font-size:12px;color:var(--mint);padding-top:8px}.principles h3{font:25px/1.25 var(--serif);letter-spacing:-.02em}.principles p{font-size:14px;color:#c4d0d8;margin-top:6px}
+    .kstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #3c5365;margin-top:44px}.kstat{padding:22px 24px 0;border-left:1px solid #3c5365}.kstat:first-child{border-left:0;padding-left:0}.kstat strong{display:block;font:38px/1.1 var(--serif);font-weight:400;letter-spacing:-.03em}.kstat p{font-size:12px;color:#c4d0d8;margin-top:6px}
+    /* Příklad */
+    .example{padding:88px 0;border-bottom:1px solid var(--line)}.ex-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:72px;align-items:start}.ex-intro h2{font-size:40px;margin:16px 0 20px}.ex-intro>p:not(.eyebrow){font-size:15px;color:var(--muted)}.baseline{display:flex;gap:40px;margin:24px 0 10px}.baseline strong{display:block;font:40px/1.1 var(--serif)}.baseline span{font-size:12px;color:var(--muted)}
+    .scenario{border:1px solid var(--line);background:var(--white);padding:28px}.sc-top{display:flex;gap:20px;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:20px}.sc-top p{font-size:13px}.sc-top strong{font:42px/1 var(--serif);white-space:nowrap}
+    .tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:22px}.tabs button{border:1px solid var(--line);color:var(--ink);padding:12px;text-align:left;background:transparent;font-size:13px;line-height:1.5}.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:var(--white)}.tabs button span{display:block;font-weight:650}
+    .sc-body{padding:22px 0 0;min-height:150px}.sc-body h3{font:28px/1.2 var(--serif);margin-bottom:8px}.sc-body p{font-size:14px;color:var(--muted)}.sc-status{font-size:13px;border-top:1px solid var(--line);padding-top:16px}.sc-status strong{color:var(--orange)}[hidden]{display:none!important}
+    /* Slidy */
+    .slides{background:#e8e8df;padding:80px 0}.slides-grid{display:grid;grid-template-columns:.6fr 1fr;gap:64px;align-items:center}.slides h2{font-size:40px;margin:16px 0 20px}.slides-copy>p:not(.eyebrow){font-size:15px;color:var(--muted)}
+    .slide-button{display:block;border:0;padding:0;background:var(--night);width:100%;position:relative}.slide-button:after{content:"Zvětšit";position:absolute;right:12px;bottom:12px;background:var(--paper);color:var(--ink);padding:7px 10px;font-size:11px}.slide-button img{width:100%;aspect-ratio:16/9}
+    .strip{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.strip img{width:100%;aspect-ratio:16/9;object-fit:cover}.slides figcaption{font-size:11px;color:var(--muted);margin-top:12px}
+    /* Kontakt */
+    .contact{background:var(--night);color:var(--paper)}.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:88px}.contact .eyebrow{color:var(--mint)}.contact h2{font-size:50px;margin-top:18px}.contact-copy>p:not(.eyebrow){font-size:16px;max-width:380px;color:#c4d0d8;margin-top:24px}
+    .mail{margin-top:30px;border-top:1px solid #3c5365;padding-top:20px;font-size:14px;color:#c4d0d8}.mail a{color:var(--paper);font-weight:600}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.field label{display:block;font-size:12px;margin-bottom:7px}.opt{color:#afc1cf}.field input,.field select,.field textarea{display:block;width:100%;min-width:0;min-height:48px;padding:12px;background:#1b3a52;border:1px solid #647c8d;color:var(--paper);border-radius:0;font-size:15px;color-scheme:dark}.field input::placeholder,.field textarea::placeholder{color:#acbcc7;opacity:1}.field textarea{min-height:120px;resize:vertical}.field.full{grid-column:1/-1}
+    .form-bottom{display:flex;align-items:center;gap:20px;margin-top:22px}.form-bottom p{font-size:12px;color:#b9cbd7;max-width:300px}.sent{margin-top:18px;font-size:14px;color:var(--mint)}
+    footer{padding:28px 0}.foot{display:flex;justify-content:space-between;align-items:center;gap:20px}.foot p{font-size:12px;color:var(--muted)}
+    dialog{width:min(1240px,94vw);max-height:90vh;padding:15px;border:1px solid var(--line);background:var(--paper);color:var(--ink)}dialog::backdrop{background:rgba(6,23,38,.88)}.dtop{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:12px;font-size:13px}.dtop button{min-width:44px;min-height:44px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-size:20px}dialog img{width:100%;max-height:75vh;object-fit:contain}
+    @media(max-width:1100px){.wrap{width:calc(100% - 64px)}.wow-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-grid,.about-grid,.method-layout,.ex-layout,.slides-grid,.contact-grid{gap:40px}}
+    @media(max-width:780px){.wrap{width:calc(100% - 40px)}.nav{min-height:74px}.nav-links>a:not(.button){display:none}.hero{padding:34px 0 30px}.hero-grid,.about-grid,.method-layout,.ex-layout,.slides-grid,.contact-grid{grid-template-columns:1fr;gap:34px}.hero h1{font-size:46px}.hero-copy{font-size:16px}
+      .pole-caps{height:76px;font-size:24px}.panel{padding:20px 18px}.section{padding:60px 0}.section-top{display:block;margin-bottom:28px}.section-top>p{margin-top:16px}
+      .wow-grid{grid-template-columns:1fr}.feature{grid-column:auto;grid-row:auto}.card{min-height:0}.num{font-size:46px}
+      .gallery{grid-template-columns:1fr 1fr}.gallery figure:first-child{grid-column:span 2;grid-row:auto}.videos{grid-template-columns:1fr}.video{grid-template-columns:120px 1fr}
+      .formats{grid-template-columns:1fr}.format{padding:28px 0}.format+.format{border-left:0;border-top:1px solid var(--line);padding-left:0}.steps,.faq{grid-template-columns:1fr;gap:22px}
+      .topics summary{grid-template-columns:26px 1fr 22px;gap:10px}.topics summary h3{font-size:22px}.tbody{padding:0 8px 22px 36px}
+      .frow{grid-template-columns:130px 1fr}.kstats{grid-template-columns:1fr 1fr}.kstat{padding:18px 14px 0}.kstat:nth-child(3){border-left:0;padding-left:0}.contact h2{font-size:42px}.form-grid{grid-template-columns:1fr}.form-bottom{flex-direction:column;align-items:flex-start}.portrait-tag{left:-6px}.foot{flex-direction:column;align-items:flex-start}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.pd{transform:translate(var(--cx),var(--cy))!important}.pd.n{border-color:#e0954b!important}.pd.n.up{border-color:#8dd4cb!important}.cB{opacity:0!important}.cC{opacity:1!important}.conv .draw{stroke-dashoffset:0}}
+      .show{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;margin-top:56px}.show h3{font:30px/1.2 var(--serif);letter-spacing:-.02em;margin:12px 0 14px}.show p:not(.eyebrow){font-size:15px;color:var(--muted)}.show figcaption{font-size:11px;color:var(--muted);margin-top:10px}
+    .vcard{display:flex;gap:16px;align-items:center;margin-top:24px;padding:16px;border:1px solid var(--line);background:var(--white);text-decoration:none}.vcard:hover{border-color:var(--teal)}.vcard .vplay{flex:0 0 56px;height:56px;border-radius:50%;background:var(--night);color:var(--paper);display:grid;place-items:center;font-size:18px}.vcard strong{display:block;font:19px/1.3 var(--serif)}.vcard small{color:var(--muted);font-size:12px}
+    @media(max-width:780px){.show{grid-template-columns:1fr;gap:28px}.show>div{order:-1}.gallery figure:nth-child(4){grid-column:span 2}}
+      .panel .eyebrow,.feature .eyebrow{color:var(--mint)}
+    .hero-photo{margin:0}.hero-photo img{width:100%;aspect-ratio:1.18;object-fit:cover;object-position:30% center}
+    .method .panel{background:#173c58;border:1px solid #3c5365}.panel.wait *{animation-play-state:paused!important}
+    .conv .ax{font-size:14px}.conv .lb{font-size:15px}
+    @media(max-width:780px){.conv .ax{font-size:19px}.conv .lb{font-size:20px}.conv .big{font-size:28px}}
+    @media(prefers-reduced-motion:reduce){.conv.anim .draw{stroke-dasharray:none;stroke-dashoffset:0}}
+    .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+      .gdpr a{color:var(--paper)}.gdpr strong{color:var(--paper);font-weight:600}.gdpr{font-size:11px;line-height:1.55;color:#b9cbd7;margin-top:18px;max-width:620px}
+      .wow-cta{display:flex;align-items:center;justify-content:flex-end;gap:20px;flex-wrap:wrap;margin-top:28px;font:22px/1.3 var(--serif)}
+    .stage-head{margin-top:64px}.stage-head h3{font:30px/1.2 var(--serif);letter-spacing:-.02em;margin-top:10px}.stage-head+.gallery{margin-top:22px}
+    .vbig{display:flex;gap:28px;align-items:center;margin-top:28px;padding:34px 40px;background:var(--night);color:var(--paper);text-decoration:none}.vbig:hover{background:#173c58}.vbig .vplay{flex:0 0 84px;height:84px;border-radius:50%;background:var(--paper);color:var(--night);display:grid;place-items:center;font-size:28px;padding-left:5px}.vbig small{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:8px}.vbig strong{display:block;font:30px/1.2 var(--serif);font-weight:400}
+    @media(max-width:780px){.wow-cta{justify-content:flex-start;font-size:19px}.vbig{padding:22px;gap:16px}.vbig .vplay{flex-basis:56px;height:56px;font-size:20px}.vbig strong{font-size:21px}}
+      .vbig .vthumb{position:relative;flex:0 0 min(42%,400px);aspect-ratio:16/9;overflow:hidden}.vbig .vthumb img{width:100%;height:100%;object-fit:cover}.vbig .vthumb .vplay{position:absolute;left:50%;top:50%;width:72px;height:72px;transform:translate(-50%,-50%);box-shadow:0 6px 24px rgba(0,0,0,.35)}
+    @media(max-width:780px){.vbig{flex-direction:column;align-items:stretch}.vbig .vthumb{flex-basis:auto}}
+      .fork-ex{margin-top:48px;border-top:1px solid #3c5365;padding-top:32px;max-width:900px}.fork-ex h3{font:30px/1.2 var(--serif);margin:10px 0 12px}.fork-ex>p:not(.eyebrow):not(.source){color:#c4d0d8;font-size:15px;max-width:720px}
+    .fork-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:18px 0 14px}.fork-row div{border:1px solid #3c5365;padding:16px 18px;background:#173c58}.fork-row b{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mint);margin-bottom:6px}.fork-row div+div b{color:#e0954b}.fork-row span{font-size:14px;color:#e0e6e8}
+    .fork-note{font-size:14px;color:#c4d0d8;margin-bottom:10px}.fork-ex .source{color:#b9c7d1;font-size:12px}
+    @media(max-width:780px){.fork-row{grid-template-columns:1fr}}
+      .alink{font-size:13px;font-weight:600;color:var(--teal);text-decoration:none;margin-top:6px}.alink:hover{text-decoration:underline}.feature .alink{color:var(--mint);margin-top:10px;display:inline-block}
+    .nl{margin-top:36px;border-top:1px solid #3c5365;padding-top:20px;font-size:14px;color:#c4d0d8}.nl a{color:var(--paper);font-weight:600}
+      .obrazy{margin-top:22px;border-top:1px solid var(--line);padding-top:16px}.obrazy dl{margin:8px 0 0;display:grid;gap:8px}.obrazy dt{display:inline;font-weight:650;font-size:14px}.obrazy dt:after{content:": "}.obrazy dd{display:inline;margin:0;font-size:14px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#obsah">Přeskočit na obsah</a>
+  <header>
+    <div class="wrap nav">
+      <a class="wordmark" href="#">David Navrátil<span>.</span></a>
+      <nav class="nav-links" aria-label="Hlavní navigace">
+        <a href="#cisla">Čísla</a><a href="#metoda">Metoda</a><a href="#kdo">Kdo bude mluvit</a><a href="#temata">Témata</a><a href="#formaty">Formáty</a>
+        <a class="button" href="#poptavka">Domluvit vystoupení</a>
+      </nav>
+    </div>
+  </header>
+  <main id="obsah">
+
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Megatrendy · scénáře · odolnost · horizont 2031</p>
+          <h1 id="hero-title">Nevíme, co přijde. <em>Víme, podle čeho to poznáme.</em></h1>
+          <p class="hero-copy">S předpověďmi je potíž: z mnoha vyjde nanejvýš jedna a předem nikdo neví, která. David Navrátil proto na konferencích i ve strategických debatách s vedením firem nesází na jedinou. Ukáže několik možných budoucností do roku 2031, čísla, která včas napoví, ke které se schyluje, a kroky, které se vyplatí skoro v každé z nich.</p>
+          <div class="hero-actions"><a class="button" href="#poptavka">Domluvit vystoupení <span aria-hidden="true">→</span></a><a class="text-link" href="#cisla">Nejdřív ukázka čísel <span aria-hidden="true">↓</span></a><a class="text-link" href="/pro-poradatele/">Podklady pro pořadatele a novináře <span aria-hidden="true">→</span></a></div>
+          <div class="hero-person"><img src="img/foto-gesto.jpg" width="46" height="46" alt=""><div><strong>David Navrátil</strong><span>Hlavní ekonom České spořitelny · pravidelně v ČT, CNN Prima News a Hospodářských novinách</span></div></div>
+        </div>
+        <figure class="hero-photo"><img src="img/foto-regiony.jpg" width="1086" height="724" alt="David Navrátil přednáší o regionech před zaplněným sálem, na plátně Orlová a Jablunkov"></figure>
+      </div>
+    </section>
+
+    <div class="stagebar" aria-label="Kde vystupoval">
+      <div class="wrap stagebar-inner"><p class="eyebrow">V roce 2026 vystoupil například na</p>
+        <ul><li>ReVize</li><li>Inspire &amp; Impact Network</li><li>Eastlog</li><li>JuiceUp Engagement Summit</li><li>Konference CRR „Třicet!“</li></ul>
+      </div>
+    </div>
+
+    <section class="section" id="cisla" aria-labelledby="wow-title">
+      <div class="wrap">
+        <div class="section-top"><div><p class="eyebrow">Ochutnávka z dat</p><h2 id="wow-title">Čísla, která byste <em>nejspíš tipovali jinak</em></h2></div><p>Pár čísel z toho, s čím David chodí na pódium. Pod každým číslem najdete zdroj i výhradu, tedy přesně to, co se do titulků obvykle nevejde.</p></div>
+        <div class="wow-grid">
+          <figure class="panel feature" aria-labelledby="conv-title">
+            <p class="eyebrow">Regiony · HDP na obyvatele</p>
+            <h3 id="conv-title">Severozápad Čech je po 24 letech vůči průměru EU tam, kde začínal, <em>polské Lublinsko si mezitím polepšilo o 20 bodů.</em></h3>
+            <p class="unit">HDP na obyvatele v paritě kupní síly, průměr EU = 100</p>
+            <svg class="conv" viewBox="0 0 480 300" role="img" aria-labelledby="conv-svg-t conv-svg-d">
+              <title id="conv-svg-t">Severozápad Čech a Lublinsko, 2000 až 2024</title>
+              <desc id="conv-svg-d">Severozápad Čech: 61 bodů (průměr EU = 100) v roce 2000, ve vybraných letech nejvýš 65 (2019 a 2020), v roce 2024 opět 61. Lublinsko: 35 v roce 2000, 44 v roce 2010, 51 v roce 2019, 55 v letech 2020 a 2024. Zdroj Eurostat; údaj za Lublinsko 2024 je předběžný.</desc>
+              <g stroke="#3c566a" stroke-width="1" stroke-dasharray="2 6"><path d="M60 90H420M60 150H420M60 210H420"/></g>
+              <g class="ax" fill="#9fb2c0" font-size="14"><text x="52" y="94" text-anchor="end">60</text><text x="52" y="154" text-anchor="end">50</text><text x="52" y="214" text-anchor="end">40</text><text x="60" y="292" text-anchor="middle">2000</text><text x="210" y="292" text-anchor="middle">2010</text><text x="420" y="292" text-anchor="middle">2024</text></g>
+              <polyline class="draw" pathLength="1" fill="none" stroke="#f5f1e8" stroke-width="3" stroke-linejoin="round" points="60,84 180,66 210,72 285,66 345,60 360,60 375,84 405,78 420,84"/>
+              <polyline class="draw" pathLength="1" fill="none" stroke="#8dd4cb" stroke-width="3" stroke-linejoin="round" points="60,240 210,186 345,144 360,120 420,120"/>
+              <g fill="#f5f1e8"><circle cx="180" cy="66" r="3"/><circle cx="210" cy="72" r="3"/><circle cx="285" cy="66" r="3"/><circle cx="345" cy="60" r="3"/><circle cx="360" cy="60" r="3"/><circle cx="375" cy="84" r="3"/><circle cx="405" cy="78" r="3"/></g><g fill="#8dd4cb"><circle cx="210" cy="186" r="3"/><circle cx="345" cy="144" r="3"/><circle cx="360" cy="120" r="3"/></g><g fill="#102d47" stroke="#f5f1e8" stroke-width="2"><circle cx="60" cy="84" r="4.5"/><circle cx="420" cy="84" r="4.5"/></g>
+              <g fill="#102d47" stroke="#8dd4cb" stroke-width="2"><circle cx="60" cy="240" r="4.5"/><circle cx="420" cy="120" r="4.5"/></g>
+              <g class="big" font-size="24" font-weight="500"><text x="68" y="64" fill="#f5f1e8">61</text><text x="432" y="92" fill="#f5f1e8">61</text><text x="74" y="262" fill="#8dd4cb">35</text><text x="432" y="128" fill="#8dd4cb">55</text></g>
+              <g class="lb" font-size="15"><text x="150" y="50" fill="#f5f1e8">Severozápad Čech</text><text x="226" y="212" fill="#8dd4cb">Lublinsko, Polsko</text></g>
+            </svg>
+            <p class="reading">Mezitím býval Severozápad i na 63 až 65 (naposledy v roce 2020), v roce 2021 ale spadl zpátky na 61. <strong>Co rozhoduje o tom, kdo dohání a kdo přešlapuje?</strong></p>
+            <figcaption class="source">Eurostat, HDP v paritě kupní síly; Severozápad = Karlovarský a Ústecký kraj; vybrané roky, ne roční řada; Lublinsko 2024 předběžně, polská řada má zlomy, rozdíl 20 bodů je orientační odvození</figcaption>
+            <a class="alink" href="https://davidnavratil.com/analyses/index-silnejsich-regionu/">Interaktivní analýza: Index silnějších regionů <span aria-hidden="true">→</span></a>
+          </figure>
+          <article class="card"><p class="eyebrow">AI ve firmách</p><strong class="num t">7 %</strong><p class="txt">firem v eurozóně používá AI významně, dalších 64 % ji zkouší nebo používá mírně. Připomíná to posilovnu: permanentku má většina, naplno cvičí málokdo. Sledujte, jestli přibude těch, kdo cvičí naplno, a co se u nich změní v provozu.</p><p class="source">ECB, průzkum firem SAFE (4. čtvrtletí 2025); podle průzkumu ECB mezi lidmi (CES) používá AI v práci 52 % zaměstnaných, v roce 2024 to bylo 26 %; oba průzkumy pokrývají jen eurozónu, tedy bez Česka</p></article>
+          <article class="card"><p class="eyebrow">Regiony · obyvatelé</p><strong class="num o">3 ze 14</strong><p class="txt">Jen tři kraje budou mít podle projekce ČSÚ v roce 2081 víc obyvatel než v roce 2024: Praha, Středočeský a Plzeňský. Karlovarský kraj by přišel o 44 % obyvatel. Projekce stojí na předpokladech o plodnosti a stěhování. Když se předpoklady změní, zestárne projekce rychleji než obyvatelstvo.</p><p class="source">ČSÚ, projekce obyvatelstva v krajích, stav k 1. 1. 2024 a k 1. 1. 2081</p></article>
+          <article class="card"><p class="eyebrow">Komu připadne AI dividenda?</p><strong class="num">5,2 % HDP</strong><p class="txt">V roce 2025 vynesly firmy v Česku svým zahraničním vlastníkům o 5,2 % HDP víc, než přinesly české přímé investice v cizině. Jestli AI zvedne zisky firem se zahraničním vlastníkem, může se to ukázat právě v tomto čísle.</p><p class="source">ČNB, platební bilance 2025; včetně zisků ponechaných ve firmách; vyšší odliv dividend ČNB spojuje s mimořádně ziskovým rokem 2024</p></article>
+          <article class="card"><p class="eyebrow">Vzdělávání dospělých</p><strong class="num t">2,8×</strong><p class="txt">větší podíl dospělých se vzdělává v Dánsku než v Česku: 31 % proti 11 %. Česko zatím zůstává pod průměrem EU (14 %), mezera se ale zmenšuje.</p><p class="source">Eurostat 2025, 25 až 64 let, poslední 4 týdny; poměr je odvození, Dánsko má zlom řady</p></article>
+          <article class="card"><p class="eyebrow">Demografie</p><strong class="num o">1919</strong><p class="txt">V roce 2025 zemřelo zhruba o 36 tisíc lidí víc, než se narodilo. Větší přirozený úbytek Česko od roku 1919 nezaznamenalo. Že obyvatel přesto přibylo, je zásluha jediné věci: stěhování ze zahraničí.</p><p class="source">ČSÚ, pohyb obyvatelstva 2025, předběžné údaje</p><a class="alink" href="https://davidnavratil.com/analyses/ceska-domacnost-v-pohybu/">Interaktivní analýza: Od přání k dítěti <span aria-hidden="true">→</span></a></article>
+          <article class="card"><p class="eyebrow">Vedro, sucho a ceny</p><strong class="num o">41,9 °C</strong><p class="txt">Nový teplotní rekord Česka, 28. 6. 2026 v Doksanech. Základních obilovin se podle odhadu sklidilo o 16 % méně, a potraviny a nealkoholické nápoje byly přesto v říjnu meziročně o 4 % levnější, máslo o 32 %. Zčásti za to může vysoká loňská základna. Čekám, že se to obrátí: sucho, slabší úroda, drahá hnojiva a energie se do cen teprve propíšou.</p><p class="source">MZe podle ČHMÚ (červen 2026); ČSÚ, odhad sklizně k 30. 9. 2026 (příčiny: jarní mrazy, sucho, vedro) a ceny za říjen 2026</p><a class="alink" href="https://davidnavratil.com/analyses/potravinovy-sok-2026-27/">Interaktivní analýza: Potravinový šok 2026 až 2027 <span aria-hidden="true">→</span></a></article>
+          <article class="card"><p class="eyebrow">Úzká hrdla</p><strong class="num o">2,6 z 20</strong><p class="txt">Hormuzským průlivem teklo v roce 2024 denně 20 milionů barelů ropy, pětina toho, co svět spotřebuje kapalných paliv. Obchvatové ropovody by z toho kolem průlivu převedly jen asi 2,6 milionu; zbytek je na průlivu závislý.</p><p class="source">U.S. Energy Information Administration; stav před krizí roku 2026</p><a class="alink" href="https://davidnavratil.com/analyses/hormuz-energy-simulator/">Interaktivní analýza: Kolik poptávky po ropě zmizí po zavření Hormuzu <span aria-hidden="true">→</span></a></article>
+          <article class="card"><p class="eyebrow">Jednotný trh</p><strong class="num">110 %</strong><p class="txt">Tak vysokému clu by podle modelu MMF odpovídaly překážky, na které narážejí služby při obchodu uvnitř EU. U výrobků zpracovatelského průmyslu je to 44 %. Celnice zmizely, překážky zůstaly.</p><p class="source">MMF, Finance and Development 6/2025; modelový odhad (gravitační model), ne naměřené clo</p></article>
+        </div>
+        <p class="wow-cta"><span>Ve vašem oboru budou rozhodovat jiná čísla. Chcete vědět, která?</span> <a class="button" href="#poptavka">Domluvit vystoupení <span aria-hidden="true">→</span></a></p>
+      </div>
+    </section>
+
+    <section class="section method" id="metoda" aria-labelledby="metoda-title">
+      <div class="wrap">
+        <div class="section-top"><div><p class="eyebrow">Co stojí za každým vystoupením</p><h2 id="metoda-title">Mapa 76 sil <em>s výhledem do roku 2031</em></h2></div><p>O stárnutí, AI, klimatu i geopolitice se píšou samostatné knihy a pořádají samostatné konference. Katalog Megatrendy a nejistoty je dává na jednu mapu, protože firma je potkává všechny najednou.</p></div>
+        <div class="method-layout">
+          <figure class="panel wait" id="pole-panel" aria-labelledby="pole-title">
+          <div class="panel-top"><p class="eyebrow">Katalog Megatrendy a nejistoty · stav 21. 11. 2026</p><button type="button" class="motion-toggle" id="motion-toggle"><span aria-hidden="true">↻</span><span>Přehrát znovu</span></button></div>
+          <h3 id="pole-title" class="pole-caps"><span class="cB">76 sil, které katalog sleduje do roku 2031.</span><span class="cC">U 40 trendů je směr jasný, <em>u 36 nejistot ho teprve ukážou data.</em></span></h3>
+          <div class="pole-box" aria-hidden="true"><div class="pole-stage" id="pole-stage"></div></div>
+          <p class="pole-legend"><span><i class="mk"></i>40 trendů: směr známe</span><span><i class="mk ring"></i>36 nejistot: u každé aspoň dvě možné budoucnosti</span></p>
+          <figcaption class="source">Každá tečka je jedna karta katalogu s ověřenými čísly, hypotézami a ukazateli, podle nichž se pozná, která budoucnost nastává. Dvě větve jsou zjednodušení; u každé nejistoty zůstávají možné všechny její budoucnosti.</figcaption>
+        </figure>
+          <ol class="principles">
+            <li><div><h3>Co je změřené, se nemíchá s odhadem.</h3><p>U každého tvrzení je vidět, jestli je změřené, odhadnuté, nebo jde o hypotézu, odkud pochází a nakolik se na něj dá spolehnout.</p></div></li>
+            <li><div><h3>Každá teze projde oponenturou.</h3><p>Funguje jako STK: nezajímá ji, co na autě funguje, ale kde by mohlo selhat. Hledá proto důkazy proti, ne potvrzení.</p></div></li>
+            <li><div><h3>Co rozhodne, je dané předem.</h3><p>U každé nejistoty jsou ukazatele a prahy stanovené dřív, než přijdou data, takže terč nejde dodatečně posunout tam, kam zrovna dopadl šíp. Která budoucnost přichází, pak ukážou data, ne dojem.</p></div></li>
+          </ol>
+        </div>
+        <div class="fork-ex">
+          <p class="eyebrow">Příklad rozcestí · důvěra</p>
+          <h3>Vydrží mladým vyšší důvěra?</h3>
+          <p>Mladí v Česku (16 až 29 let) věří ostatním lidem víc než ti od 65 let: 5,8 proti 5,0 na škále 0 až 10. Otázka zní, jestli tu důvěru s věkem ztratí, nebo si ji odnesou s sebou. Katalog proto sleduje skupinu 25 až 34 let: v roce 2025 měla 5,5, celá populace od 16 let 5,3. V roce 2031 do ní budou patřit lidé, kterým bylo v roce 2025 od 19 do 28 let.</p>
+          <div class="fork-row"><div><b>Budoucnost A</b><span>průměr let 2029 až 2031 aspoň 5,7 a zároveň aspoň o 0,3 bodu nad celkem: signál ve prospěch důvěřivější generace</span></div><div><b>Budoucnost B</b><span>průměr let 2029 až 2031 nejvýš 5,5, nebo odstup od celku nejvýš 0,2 bodu: signál, že vyšší důvěra mladých nemusí přetrvat</span></div></div>
+          <p class="fork-note">Padne-li výsledek mezi obě budoucnosti, platí poctivé „nerozhodnuto“. Samotné prahy přitom neoddělí vliv věku, generace a doby, ukážou jen směr. Dnešní zveřejněné hodnoty (5,5 a odstup 0,2 bodu) by znamenaly budoucnost B. O výsledku testu ale rozhodne až průměr let 2029 až 2031.</p>
+          <p class="source">Eurostat, EU-SILC 2025; prahy jsou hypotézy katalogu stanovené předem a vyhodnotí se ze zveřejněných zaokrouhlených hodnot po vydání dat za rok 2031; věk lidí v roce 2031 je odvození; srovnání s rokem 2013 (nízká spolehlivost) naznačuje vliv věku, průzkum ESS naopak vliv doby (odvození)</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kdo" aria-labelledby="kdo-title">
+      <div class="wrap">
+        <div class="about-grid">
+          <figure class="portrait"><img src="img/portret.jpg" width="1400" height="980" loading="lazy" alt="David Navrátil, portrét na střeše s výhledem na Prahu"></figure>
+          <div class="about-copy"><p class="eyebrow">Kdo bude mluvit</p><h2 id="kdo-title">Velké změny vysvětlené bez španělských vesnic, <em>pro laika stejně jako pro představenstvo.</em></h2>
+            <p class="q">Co udělá stárnutí s vašimi zákazníky? Komu připadne výnos z AI? A kdy je čas změnit plán?</p>
+            <p>Na konferencích má obvykle každé téma svého řečníka: jeden mluví o ekonomice, druhý o technologiích, třetí o společnosti, a jak to spolu souvisí, si publikum skládá samo o přestávce u kávy. David to poskládá za něj: z dat vybere, co se týká právě vašeho publika, a ukáže, kde se změny potkávají.</p>
+            <div class="creds"><strong>Hlavní ekonom České spořitelny (Erste Group)</strong><span>Začínal v České národní bance, od roku 2008 vede tým Ekonomické a strategické analýzy.</span><span>Přes 50 přednášek ročně a víc než 15 let v médiích.</span><span>Autor newsletteru Peníze, procenta a prosperita a interaktivních analýz na davidnavratil.com.</span><div class="obrazy"><p class="eyebrow">Tři pojmy bez žargonu</p><dl>
+              <div><dt>Parita kupní síly</dt><dd>srovnává, kolik si kdo za své peníze koupí, ne kolik by to dělalo po přepočtu kurzem.</dd></div>
+              <div><dt>Úzké hrdlo</dt><dd>místo, kde stačí jedna zácpa, aby vázl celý provoz.</dd></div>
+              <div><dt>Práh ukazatele</dt><dd>číslo, u kterého se předem domluvíte, že přestanete debatovat a začnete jednat.</dd></div>
+            </dl></div>
+          </div>
+          </div>
+        </div>
+        <div class="stage-head"><p class="eyebrow">Jak to vypadá na pódiu</p><h3>Snímky se dají přečíst jedním pohledem, aby zbytek času patřil výkladu.</h3></div>
+        <div class="gallery">
+          <figure><img src="img/foto-33km.jpg" width="1086" height="724" loading="lazy" alt="David Navrátil při přednášce, za ním velká čísla na plátně"></figure>
+          <figure><img src="img/foto-publikum.jpg" width="1086" height="724" loading="lazy" alt="Publikum sleduje přednášku, na plátně tři velká čísla"></figure>
+          <figure><img src="img/foto-10x.jpg" width="1000" height="667" loading="lazy" alt="Velké konferenční pódium se slidem s číslem 10×"></figure>
+          <figure><img src="img/foto-500.jpg" width="1086" height="724" loading="lazy" alt="David Navrátil vysvětluje snímek o reformaci a třicetileté válce"></figure>
+        </div>
+        <div class="show">
+          <figure>
+            <button class="slide-button" type="button" id="open-slide" aria-label="Zvětšit snímek o délce starobního důchodu"><img src="img/slide-duchod-v3.jpg" width="1440" height="810" loading="lazy" alt="Snímek: Řádné starobní důchody ukončené v roce 1970 se pobíraly 11 let, v roce 2024 skoro čtvrt století"></button>
+            <figcaption>Zdroj: ČSSZ, Statistická ročenka důchodového pojištění 2024, tab. 6.7; průměrná doba pobírání řádného starobního důchodu u důchodů zaniklých v daném roce, od roku 2018 jen zaniklých úmrtím (zlom řady)</figcaption>
+          </figure>
+          <div><p class="eyebrow">Ukázka snímku</p>
+            <p>Velký graf, velké číslo a co nejméně textu, protože sál, který čte, neposlouchá. U každého grafu pak zazní, co ukazuje, kde má meze a proč by vás měl zajímat. Tenhle ukazuje, že řádné starobní důchody ukončené v roce 1970 se pobíraly 11 let a v roce 2024 skoro čtvrt století. K mezím patří, že jde o důchody, které už skončily, ne o odhad pro dnešní nové důchodce.</p>
+            </div>
+        </div>
+        <a class="vbig" href="https://www.youtube.com/watch?v=LKv59Hes3n4" target="_blank" rel="noopener"><span class="vthumb"><img src="img/video-retail.jpg" width="480" height="270" loading="lazy" alt=""><span class="vplay" aria-hidden="true">▶</span></span><span><small>Czech Retail Days 2025 · záznam na YouTube</small><strong>Rizika i příležitosti: ekonomický výhled pro retail 2026+</strong></span></a>
+      </div>
+    </section>
+
+    <section class="section" id="temata" aria-labelledby="temata-title" style="padding-top:24px">
+      <div class="wrap">
+        <div class="section-top"><div><p class="eyebrow">O čem mluví</p><h2 id="temata-title">Svět se bohužel nemění po kapitolách, <em>mění se všechno naráz.</em></h2></div><p>Každé téma David šije na míru publiku a vždycky dojde až k otázce, kterou si v sále stejně každý položí: co to znamená pro naši firmu, naše zákazníky a naše lidi?</p></div>
+        <div class="topics">
+          <details open><summary><span class="tnum">01</span><h3>Scénáře místo předpovědí: jak být připraven na víc než jednu budoucnost</h3><span class="tplus" aria-hidden="true"></span></summary><div class="tbody"><p>Balit se na dovolenou podle předpovědi počasí na příští srpen by nikdo nechtěl, a přesto tak vzniká nejeden firemní plán. Jak místo toho sestavit několik možných budoucností, které kroky se vyplatí ve většině z nich a co firmě pomůže včas zatočit, když se svět vydá jinudy.</p><a href="#poptavka" data-topic="Scénáře místo předpovědí">Tohle chci slyšet →</a></div></details>
+          <details><summary><span class="tnum">02</span><h3>Krize, které se potkávají</h3><span class="tplus" aria-hidden="true"></span></summary><div class="tbody"><p>Geopolitické, energetické a ekonomické otřesy už nechodí jeden po druhém, ale ve skupinkách. Kde má vaše firma svůj malý Hormuz a jak ho najít dřív, než ho najde krize.</p><a href="#poptavka" data-topic="Krize, které se potkávají">Tohle chci slyšet →</a></div></details>
+          <details><summary><span class="tnum">03</span><h3>AI: zisk pro všechny, nebo pro hrstku?</h3><span class="tplus" aria-hidden="true"></span></summary><div class="tbody"><p>Většina firem v eurozóně AI zatím zkouší nebo používá mírně, významně ji používá jen malá část. Kdo na ní nakonec vydělá, jestli firmy, jejich zaměstnanci, nebo zahraniční vlastníci, a kde to bude vidět dřív než v účetnictví.</p><a href="#poptavka" data-topic="AI: zisk pro všechny, nebo pro hrstku?">Tohle chci slyšet →</a></div></details>
+          <details><summary><span class="tnum">04</span><h3>Stárnutí: zákazníci, práce, úspory</h3><span class="tplus" aria-hidden="true"></span></summary><div class="tbody"><p>Česko stárne a s ním vaši zákazníci, zaměstnanci i jejich úspory. Co to udělá s trhem práce, s regiony a se životními plány lidí, kterým firma něco prodává.</p><a href="#poptavka" data-topic="Stárnutí: zákazníci, práce, úspory">Tohle chci slyšet →</a></div></details>
+          <details><summary><span class="tnum">05</span><h3>Důvěra: co drží společnost pohromadě</h3><span class="tplus" aria-hidden="true"></span></summary><div class="tbody"><p>Důvěra se v účetnictví nevykazuje, a přesto se v něm projeví: kde chybí, bývají obchody pomalejší a dražší. Proč se týká i firem a jak se dá sledovat, jestli roste, nebo slábne.</p><a href="#poptavka" data-topic="Důvěra: co drží společnost pohromadě">Tohle chci slyšet →</a></div></details>
+          <details><summary><span class="tnum">06</span><h3>Peníze domácností: kam se stěhují úspory</h3><span class="tplus" aria-hidden="true"></span></summary><div class="tbody"><p>Proč se úspory domácností dávají do pohybu právě teď, kam míří a co z toho plyne pro firmy, které by je rády přivítaly.</p><a href="#poptavka" data-topic="Peníze domácností: kam se stěhují úspory">Tohle chci slyšet →</a></div></details>
+          <details><summary><span class="tnum">07</span><h3>Regiony: kdo dohání a kdo přešlapuje</h3><span class="tplus" aria-hidden="true"></span></summary><div class="tbody"><p>Proč se polské Lublinsko k průměru EU blíží, zatímco Severozápad Čech stojí na místě, a co o tom rozhoduje.</p><a href="#poptavka" data-topic="Regiony: kdo dohání a kdo přešlapuje">Tohle chci slyšet →</a></div></details>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="section" id="formaty" aria-labelledby="formaty-title" style="padding-top:40px">
+      <div class="wrap">
+        <div class="section-top"><div><p class="eyebrow">Dva formáty</p><h2 id="formaty-title">Přednáška, <em>nebo debata s vedením</em></h2></div><p>Záleží na tom, jestli chcete téma otevřít celému sálu, nebo ho s vedením dotáhnout až k rozhodnutí, co dál. Obojí česky nebo anglicky.</p></div>
+        <div class="formats">
+          <article class="format"><div class="format-top"><p class="eyebrow">Konference a firemní akce</p><span class="duration">40 až 60 minut</span></div><h3>Přednáška</h3><p>Velké změny přeložené do řeči vašeho publika a čísla vybraná tak, aby je lidé mohli druhý den vyprávět kolegům.</p><ul><li>dvě až tři možné budoucnosti a čísla, která je od sebe odliší</li><li>příklady z oboru, ve kterém publikum pracuje</li><li>prostor pro otázky, i ty nepříjemné</li></ul><a class="button" href="#poptavka" data-format="prednaska">Domluvit přednášku <span aria-hidden="true">→</span></a></article>
+          <article class="format"><div class="format-top"><p class="eyebrow">Vedení firmy</p><span class="duration">2 až 3 hodiny</span></div><h3>Strategická debata</h3><p>Scénářové plánování u jednoho stolu s vedením. David projde síly, které mění váš obor, a poskládá z nich dvě až tři možné budoucnosti. U každé si řeknete, co by pro firmu znamenala, a nakonec vyberete kroky, které obstojí ve většině z nich. Odnesete si scénáře a krátký seznam čísel s prahy, které můžete hlídat dál.</p><ul><li>pět sil předem vybraných pro váš obor</li><li>dva až tři scénáře a co by znamenaly pro vás</li><li>kroky, které obstojí ve většině scénářů</li></ul><a class="button" href="#poptavka" data-format="debata">Domluvit strategickou debatu <span aria-hidden="true">→</span></a></article>
+        </div>
+        <div class="steps">
+          <div class="step"><b>1</b><h3>Napíšete, pro koho to bude</h3><p>Jaká akce, kdo bude v sále a s čím mají lidé odejít. Stačí pár vět, román to být nemusí.</p></div>
+          <div class="step"><b>2</b><h3>Domluvíte téma</h3><p>Krátce si zavoláte s Davidem a on pak vybere síly a čísla, které se týkají právě vašich lidí.</p></div>
+          <div class="step"><b>3</b><h3>Dostanete vystoupení na míru</h3><p>Čísla se před akcí znovu kontrolují proti zdrojům, aby nikdo z pódia necitoval loňskou statistiku jako novinku. Po debatě vám zůstanou scénáře a seznam ukazatelů, které můžete hlídat dál.</p></div>
+        </div>
+        <div class="faq">
+          <div><h3>Termín ještě není jistý?</h3><p>Napište i tak. Termín se dá s Davidem doladit později a na tématu se mezitím může začít pracovat.</p></div>
+          
+          <div><h3>Jak velké publikum?</h3><p>Od jednoho stolu v zasedačce po zaplněný sál; formát se přizpůsobí počtu židlí.</p></div>
+        </div>
+      </div>
+    </section>
+
+
+    
+
+
+    
+
+    
+
+    <section class="section contact" id="poptavka" aria-labelledby="poptavka-title">
+      <div class="wrap contact-grid">
+        <div class="contact-copy"><p class="eyebrow">Poptávka</p><h2 id="poptavka-title">Pozvěte Davida na svou akci</h2><p>Napište, pro koho akci chystáte a s čím mají lidé odcházet. Téma a formát pak doladíte s Davidem.</p>
+          <p class="mail">Nebo rovnou e-mailem: <a href="mailto:davidxnavratil@gmail.com">davidxnavratil@gmail.com</a></p>
+          <p class="nl">Zatím nic nechystáte? Davidův newsletter <a href="https://davidnavratil.com/#newsletter">Peníze, procenta a prosperita</a> průběžně ukazuje, co se ve světě mění a proč.</p></div>
+        <form id="inquiry" action="/api/poptavka" method="post" novalidate>
+          <div class="form-grid">
+            <div class="field"><label for="name">Jméno</label><input id="name" name="name" autocomplete="name" maxlength="120" required></div>
+            <div class="field"><label for="email">E-mail</label><input id="email" name="email" type="email" autocomplete="email" maxlength="200" required></div>
+            <div class="field full"><label for="company">Firma nebo akce</label><input id="company" name="company" autocomplete="organization" maxlength="200" required></div>
+            <div class="field"><label for="date">Termín <span class="opt">(nepovinné)</span></label><input id="date" name="date" maxlength="120" placeholder="Datum nebo období"></div>
+            <div class="field"><label for="format">Formát</label><select id="format" name="format"><option value="nevim" selected>Zatím nevím</option><option value="prednaska">Přednáška</option><option value="debata">Strategická debata s vedením</option></select></div>
+            <div class="field full"><label for="message">Kdo bude poslouchat a co si má odnést <span class="opt">(nepovinné)</span></label><textarea id="message" name="message" maxlength="4000"></textarea></div>
+            <div class="hp" aria-hidden="true"><label for="web">Nevyplňujte</label><input id="web" name="web" tabindex="-1" autocomplete="off"></div>
+          </div>
+          <div class="form-bottom"><button class="button light" type="submit" id="send">Odeslat poptávku <span aria-hidden="true">→</span></button><p>Odpověď přijde na e-mail, který uvedete.</p></div>
+          <p class="sent" id="sent" role="status" aria-live="polite"></p>
+          <p class="gdpr">Údaje používá David Navrátil (správce) k vyřízení poptávky. Poptáváte-li vlastním jménem, právním základem jsou kroky před uzavřením smlouvy na vaši žádost; jednáte-li za firmu, oprávněný zájem na komunikaci o její poptávce. Bez jména, e-mailu a firmy nebo akce formulář poptávku nepřijme. Poptávky se ukládají na serveru webu u společnosti Hetzner Online (datové centrum ve Finsku) a doručují se přes službu Gmail (Google), která může data předávat do USA na základě rámce EU a USA pro ochranu osobních údajů. Uchovávají se po dobu potřebnou k vyřízení poptávky a případné navazující spolupráce, poté se mažou. Máte právo na přístup, opravu, výmaz, omezení zpracování a za podmínek GDPR na přenositelnost (napište na davidxnavratil@gmail.com) a právo podat stížnost u Úřadu pro ochranu osobních údajů.</p>
+          <p class="gdpr"><strong>Právo vznést námitku:</strong> pokud jednáte za firmu, zpracovávají se vaše údaje na základě oprávněného zájmu. Z důvodů souvisejících s vaší situací můžete kdykoli vznést námitku na davidxnavratil@gmail.com.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap foot"><a class="wordmark" href="#">David Navrátil<span>.</span></a><p>Čísla mají datum spotřeby. Čísla z dat na této stránce jsou ověřená k 21. 11. 2026 a před každou akcí se ověřují znovu; zdroj najdete u každého z nich.</p><a href="#" style="font-size:13px">Zpět nahoru ↑</a></div></footer>
+  <dialog id="slide-dialog" aria-labelledby="dlg-t"><div class="dtop"><p id="dlg-t">Snímek z přednášky: délka starobního důchodu</p><button type="button" id="close-slide" aria-label="Zavřít">×</button></div><img src="img/slide-duchod-v3.jpg" width="1440" height="810" alt="Snímek: Řádné starobní důchody ukončené v roce 1970 se pobíraly 11 let, v roce 2024 skoro čtvrt století"></dialog>
+  <script>
+    'use strict';
+    // Animace v sekci Metoda: 76 karet katalogu se z pěti oblastí rozdělí na „co víme“ a dvě budoucnosti; rozcestí zůstane stát.
+    (function () {
+      const W = 560, H = 380, st = document.getElementById('pole-stage'); if (!st) return;
+      const obl = [['Společnost', 13, 9], ['Ekonomika', 8, 9], ['Technologie', 10, 7], ['Regulace a politika', 3, 9], ['Klima a zdroje', 6, 2]];
+      let seed = 20261121; const R = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      for (let i = 0; i < 5; i++) R();
+      const items = []; obl.forEach(([n, t, u], k) => { for (let i = 0; i < t; i++) items.push({k, typ: 't', i}); for (let i = 0; i < u; i++) items.push({k, typ: 'n', i: t + i}); });
+      const colW = W / 5, base = H * 0.80, step = 19, fx = W * 0.46, fy = H * 0.48;
+      let ti = 0, ui = 0;
+      const el = (cls, css, txt) => { const e = document.createElement('div'); e.className = cls; e.style.cssText = css; if (txt) e.textContent = txt; st.appendChild(e); return e; };
+      const line = (x1, y1, x2, y2, c) => { const L = Math.hypot(x2 - x1, y2 - y1), a = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        el('pole-line cC', `left:${x1}px;top:${y1}px;width:${L}px;background:${c};transform:rotate(${a}deg)`); };
+      line(20, H * 0.76, fx, fy, 'rgba(245,241,232,.35)'); line(fx, fy, W - 24, fy - H * 0.38, 'rgba(141,212,203,.6)'); line(fx, fy, W - 24, fy + H * 0.38, 'rgba(224,149,75,.6)');
+      obl.forEach(([n], k) => el('pole-lab cB', `left:${colW * k + 3}px;width:${colW - 6}px;top:${base + 14}px`, n));
+      el('cC', `position:absolute;left:${fx - 8}px;top:${fy - 8}px;width:16px;height:16px;border-radius:50%;background:#e0954b;box-shadow:0 0 0 7px rgba(224,149,75,.18)`);
+      el('pole-lab cC', `left:${fx - 190}px;top:${fy - 64}px;width:170px;text-align:right;color:#e0954b;font-weight:600`, 'rozcestí: data rozhodnou');
+      el('pole-lab cC', `left:${W - 170}px;top:${fy - H * 0.38 - 32}px;width:150px;text-align:right;color:#8dd4cb;font-weight:600`, 'budoucnost A');
+      el('pole-lab cC', `left:${W - 170}px;top:${fy + H * 0.38 + 12}px;width:150px;text-align:right;color:#e0954b;font-weight:600`, 'budoucnost B');
+      items.forEach(it => {
+        const col = it.i % 3, row = Math.floor(it.i / 3);
+        const bx = colW * it.k + colW / 2 + (col - 1) * step - 6, by = base - row * step;
+        let cx, cy, up = false;
+        if (it.typ === 't') { const s = ti++ / 39; cx = 24 + s * (fx - 50); cy = H * 0.76 - s * (H * 0.76 - fy) + (R() - 0.5) * 22; }
+        else { up = ui % 2 === 0; const s = Math.floor(ui / 2) / 17; ui++; cx = fx + 18 + s * (W - fx - 50); cy = fy + (up ? -1 : 1) * s * (H * 0.38) + (R() - 0.5) * 12; }
+        el('pd ' + it.typ + (up ? ' up' : ''), `--bx:${bx.toFixed(0)}px;--by:${by.toFixed(0)}px;--cx:${cx.toFixed(0)}px;--cy:${cy.toFixed(0)}px;animation-delay:-${(R() * 0.5).toFixed(2)}s`);
+      });
+      const box = st.parentElement;
+      const fit = () => { const s = Math.min(1, box.clientWidth / W); st.style.transform = `scale(${s})`; st.style.setProperty('--lf', (Math.max(11, 12 * s) / s).toFixed(1) + 'px'); box.style.height = (H * s) + 'px'; };
+      fit(); window.addEventListener('resize', fit);
+    })();
+        // Animace proběhne jednou a zůstane na rozcestí; tlačítko ji přehraje znovu
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)'), mb = document.getElementById('motion-toggle'), panel = document.getElementById('pole-panel');
+    const upd = () => { mb.hidden = mq.matches; }; mq.addEventListener('change', upd); upd();
+    mb.addEventListener('click', () => { panel.classList.remove('wait'); panel.getAnimations({subtree: true}).forEach(a => { a.cancel(); a.play(); }); });
+    // Animace se spustí, až když na ni čtenář dojede
+    if ('IntersectionObserver' in window) { const io2 = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { panel.classList.remove('wait'); io2.disconnect(); } }, {threshold: 0.5}); io2.observe(panel); } else panel.classList.remove('wait');
+    // Graf regionů se vykreslí, až když na něj čtenář dojede
+    const conv = document.querySelector('.conv'); conv.classList.add('anim');
+    if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { conv.classList.add('go'); io.disconnect(); } }, {threshold: 0.4}); io.observe(conv); } else conv.classList.add('go');
+    // Předvyplnění formuláře
+    document.querySelectorAll('[data-format]').forEach(a => a.addEventListener('click', () => { document.getElementById('format').value = a.dataset.format; }));
+    document.querySelectorAll('[data-topic]').forEach(a => a.addEventListener('click', () => { const m = document.getElementById('message'), t = 'Zajímá mě téma „' + a.dataset.topic + '“'; if (!m.value.includes(t)) m.value = m.value ? m.value + '\n' + t : t; }));
+    // Snímek ve větším
+    const dlg = document.getElementById('slide-dialog');
+    document.getElementById('open-slide').addEventListener('click', () => dlg.showModal());
+    document.getElementById('close-slide').addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+    // Odeslání poptávky: na server (/api/poptavka); když to nejde, připraví e-mail.
+    const form = document.getElementById('inquiry'), sent = document.getElementById('sent'), send = document.getElementById('send'), t0 = Date.now();
+    const zprava = t => { sent.textContent = t; };
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      for (const id of ['name', 'email', 'company']) { const f = document.getElementById(id); f.setCustomValidity(f.value.trim() ? '' : 'Vyplňte prosím tento údaj.'); if (!f.reportValidity()) { f.addEventListener('input', () => f.setCustomValidity(''), {once: true}); return; } }
+      const em = document.getElementById('email'); if (!em.checkValidity()) { em.reportValidity(); return; }
+      const v = Object.fromEntries(new FormData(form)); v.t = t0; v.page = location.pathname;
+      send.disabled = true; zprava('Odesílá se…');
+      try {
+        const ac = new AbortController(), limit = setTimeout(() => ac.abort(), 15000);
+        let r, d;
+        try {
+          r = await fetch('/api/poptavka', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(v), signal: ac.signal});
+          d = await r.json().catch(() => ({}));
+        } finally { clearTimeout(limit); }
+        if (r.status === 422) { zprava('Zkontrolujte prosím jméno, e-mail a firmu. Něco z toho chybí nebo nesedí.'); return; }
+        if (!r.ok || !d.ok) throw new Error(r.status);
+        form.reset(); zprava('Díky, poptávka dorazila. Odpověď přijde na e-mail, který jste uvedli.');
+      } catch (err) {
+        const fmt = document.getElementById('format').selectedOptions[0].textContent;
+        const body = ['Jméno: ' + v.name.trim(), 'E-mail: ' + v.email.trim(), 'Firma nebo akce: ' + v.company.trim(), 'Termín: ' + (v.date.trim() || 'k domluvě'), 'Formát: ' + fmt, '', v.message.trim()].join('\n');
+        location.href = 'mailto:davidxnavratil@gmail.com?subject=' + encodeURIComponent('Poptávka vystoupení: ' + v.company.trim()) + '&body=' + encodeURIComponent(body);
+        zprava('Přijetí poptávky se nepodařilo potvrdit. Údaje zůstaly ve formuláři a otevřel se vám e-mail s připravenou zprávou; pokud se nic neotevřelo, napište prosím na davidxnavratil@gmail.com.');
+      } finally { send.disabled = false; }
+    });
+  </script>
+</body>
+</html>

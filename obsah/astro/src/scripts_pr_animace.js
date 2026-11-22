@@ -1,0 +1,42 @@
+
+    'use strict';
+    // Animace v sekci Metoda: 76 karet katalogu se z pěti oblastí rozdělí na „co víme“ a dvě budoucnosti; rozcestí zůstane stát.
+    (function () {
+      const W = 560, H = 380, st = document.getElementById('pole-stage'); if (!st) return;
+      const obl = [['Společnost', 13, 9], ['Ekonomika', 8, 9], ['Technologie', 10, 7], ['Regulace a politika', 3, 9], ['Klima a zdroje', 6, 2]];
+      let seed = 20261121; const R = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      for (let i = 0; i < 5; i++) R();
+      const items = []; obl.forEach(([n, t, u], k) => { for (let i = 0; i < t; i++) items.push({k, typ: 't', i}); for (let i = 0; i < u; i++) items.push({k, typ: 'n', i: t + i}); });
+      const colW = W / 5, base = H * 0.80, step = 19, fx = W * 0.46, fy = H * 0.48;
+      let ti = 0, ui = 0;
+      const el = (cls, css, txt) => { const e = document.createElement('div'); e.className = cls; e.style.cssText = css; if (txt) e.textContent = txt; st.appendChild(e); return e; };
+      const line = (x1, y1, x2, y2, c) => { const L = Math.hypot(x2 - x1, y2 - y1), a = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        el('pole-line cC', `left:${x1}px;top:${y1}px;width:${L}px;background:${c};transform:rotate(${a}deg)`); };
+      line(20, H * 0.76, fx, fy, 'rgba(245,241,232,.35)'); line(fx, fy, W - 24, fy - H * 0.38, 'rgba(141,212,203,.6)'); line(fx, fy, W - 24, fy + H * 0.38, 'rgba(224,149,75,.6)');
+      obl.forEach(([n], k) => el('pole-lab cB', `left:${colW * k + 3}px;width:${colW - 6}px;top:${base + 14}px`, n));
+      el('cC', `position:absolute;left:${fx - 8}px;top:${fy - 8}px;width:16px;height:16px;border-radius:50%;background:#e0954b;box-shadow:0 0 0 7px rgba(224,149,75,.18)`);
+      el('pole-lab cC', `left:${fx - 190}px;top:${fy - 64}px;width:170px;text-align:right;color:#e0954b;font-weight:600`, 'rozcestí: data rozhodnou');
+      el('pole-lab cC', `left:${W - 170}px;top:${fy - H * 0.38 - 32}px;width:150px;text-align:right;color:#8dd4cb;font-weight:600`, 'budoucnost A');
+      el('pole-lab cC', `left:${W - 170}px;top:${fy + H * 0.38 + 12}px;width:150px;text-align:right;color:#e0954b;font-weight:600`, 'budoucnost B');
+      items.forEach(it => {
+        const col = it.i % 3, row = Math.floor(it.i / 3);
+        const bx = colW * it.k + colW / 2 + (col - 1) * step - 6, by = base - row * step;
+        let cx, cy, up = false;
+        if (it.typ === 't') { const s = ti++ / 39; cx = 24 + s * (fx - 50); cy = H * 0.76 - s * (H * 0.76 - fy) + (R() - 0.5) * 22; }
+        else { up = ui % 2 === 0; const s = Math.floor(ui / 2) / 17; ui++; cx = fx + 18 + s * (W - fx - 50); cy = fy + (up ? -1 : 1) * s * (H * 0.38) + (R() - 0.5) * 12; }
+        el('pd ' + it.typ + (up ? ' up' : ''), `--bx:${bx.toFixed(0)}px;--by:${by.toFixed(0)}px;--cx:${cx.toFixed(0)}px;--cy:${cy.toFixed(0)}px;animation-delay:-${(R() * 0.5).toFixed(2)}s`);
+      });
+      const box = st.parentElement;
+      const fit = () => { const s = Math.min(1, box.clientWidth / W); st.style.transform = `scale(${s})`; st.style.setProperty('--lf', (Math.max(11, 12 * s) / s).toFixed(1) + 'px'); box.style.height = (H * s) + 'px'; };
+      fit(); window.addEventListener('resize', fit);
+    })();
+        // Animace proběhne jednou a zůstane na rozcestí; tlačítko ji přehraje znovu
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)'), mb = document.getElementById('motion-toggle'), panel = document.getElementById('pole-panel');
+    const upd = () => { mb.hidden = mq.matches; }; mq.addEventListener('change', upd); upd();
+    mb.addEventListener('click', () => { panel.classList.remove('wait'); panel.getAnimations({subtree: true}).forEach(a => { a.cancel(); a.play(); }); });
+    // Animace se spustí, až když na ni čtenář dojede
+    if ('IntersectionObserver' in window) { const io2 = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { panel.classList.remove('wait'); io2.disconnect(); } }, {threshold: 0.5}); io2.observe(panel); } else panel.classList.remove('wait');
+    // Graf regionů se vykreslí, až když na něj čtenář dojede
+    const conv = document.querySelector('.conv'); conv.classList.add('anim');
+    if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { conv.classList.add('go'); io.disconnect(); } }, {threshold: 0.4}); io.observe(conv); } else conv.classList.add('go');
+    

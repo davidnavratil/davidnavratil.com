@@ -1,0 +1,332 @@
+{
+ "fps": 30,
+ "w": 1280,
+ "h": 720,
+ "sceny": [
+  {
+   "id": "s00",
+   "klip": "mixkit-4401-720.mp4",
+   "od": 3.0,
+   "delka": 3.8,
+   "typ": "uvod",
+   "radek1": "Svět se nemění po kapitolách.",
+   "radek2": "Mění se všechno naráz.",
+   "kratka": true
+  },
+  {
+   "klip": "mixkit-23372-720.mp4",
+   "od": 2.0,
+   "delka": 4.0,
+   "cislo": "0,9 → 3,5 %",
+   "text": "HDP na obranu: Česko v roce 2014 a cíl NATO pro rok 2035",
+   "zdroj": "NATO; k tomu až 1,5 % HDP na širší bezpečnost",
+   "popis": "Česko dávalo v roce 2014 na obranu 0,94 % HDP. Spojenci NATO se v Haagu zavázali, že do roku 2035 budou dávat nejméně 3,5 % HDP na obranu a až 1,5 % HDP na širší bezpečnost, dohromady 5 %.",
+   "zdroj_plny": "NATO, Defence Expenditure of NATO Countries 2014 až 2025; Haagská deklarace NATO, 25. 6. 2025",
+   "claims": [
+    "C966",
+    "C964"
+   ],
+   "kratka": true,
+   "id": "s01"
+  },
+  {
+   "klip": "mixkit-44642-720.mp4",
+   "od": 1.0,
+   "delka": 4.0,
+   "cislo": "17",
+   "text": "obrněných vozidel cvičně vyřadila desítka lidí s drony",
+   "zdroj": "cvičení Hedgehog 2025 v Estonsku; simulace, podle komentáře WSJ",
+   "popis": "Na cvičení Hedgehog 2025 v Estonsku (přes 16 000 vojáků z 12 zemí NATO) asi desetičlenný ukrajinský tým s drony v roli protivníka za půl dne simulovaně vyřadil 17 obrněných vozidel a provedl 30 dalších úderů. Je to výsledek cvičení podle novinového komentáře, ne oficiální vyhodnocení.",
+   "zdroj_plny": "The Wall Street Journal (komentář), únor 2026; shrnutí Ukrajinska pravda, 13. 2. 2026",
+   "claims": [
+    "C972"
+   ],
+   "kratka": true,
+   "id": "s02",
+   "tier_vyjimka": "C, na přání Davida 21. 11. 2026"
+  },
+  {
+   "klip": "mixkit-5301-720.mp4",
+   "od": 1.0,
+   "delka": 4.0,
+   "cislo": "588 mld. USD",
+   "text": "téměř tolik potřebuje Ukrajina na obnovu, skoro 3× HDP",
+   "zdroj": "Světová banka a partneři, RDNA5; na příští desetiletí",
+   "popis": "Potřeby obnovy Ukrajiny na příští desetiletí odhadují Světová banka a partneři na téměř 588 mld. USD, téměř trojnásobek odhadovaného HDP Ukrajiny za rok 2025.",
+   "zdroj_plny": "Světová banka a partneři, RDNA5, 23. 2. 2026, stav k 31. 12. 2025",
+   "claims": [
+    "C1479"
+   ],
+   "kratka": false,
+   "id": "s03"
+  },
+  {
+   "klip": "mixkit-21607-720.mp4",
+   "od": 0.5,
+   "delka": 4.0,
+   "cislo": "45 %",
+   "text": "dovozu plynu do EU šlo v roce 2021 z Ruska",
+   "zdroj": "IEA 2022; potrubím i jako LNG",
+   "popis": "EU v roce 2021 dovezla z Ruska asi 155 mld. m³ plynu potrubím a jako LNG, zhruba 45 % dovozu a téměř 40 % celé spotřeby.",
+   "zdroj_plny": "Mezinárodní energetická agentura (IEA), A 10-Point Plan to Reduce the EU's Reliance on Russian Natural Gas, 3. 3. 2022",
+   "claims": [
+    "C2184"
+   ],
+   "kratka": false,
+   "id": "s04"
+  },
+  {
+   "klip": "mixkit-35454-720.mp4",
+   "od": 2.0,
+   "delka": 4.0,
+   "cislo": "2,6 z 20",
+   "text": "mil. barelů ropy denně by obešlo Hormuz potrubím",
+   "zdroj": "U.S. EIA, rok 2024, stav před krizí roku 2026",
+   "popis": "Hormuzským průlivem teklo v roce 2024 asi 20 mil. barelů ropy denně. Saúdské a emirátské ropovody by ho při přerušení dokázaly obejít s kapacitou asi 2,6 mil. barelů denně.",
+   "zdroj_plny": "U.S. Energy Information Administration, 16. 6. 2025; stav před krizí roku 2026",
+   "claims": [
+    "C542"
+   ],
+   "kratka": true,
+   "id": "s05"
+  },
+  {
+   "klip": "mixkit-45821-720.mp4",
+   "od": 1.0,
+   "delka": 4.0,
+   "cislo": "46 %",
+   "text": "vzácných zemin dovezla EU z Číny, 28 % z Ruska",
+   "zdroj": "Eurostat 2024, podle hmotnosti, bez magnetů",
+   "popis": "EU v roce 2024 dovezla 46 % vzácných zemin (podle hmotnosti) z Číny a 28 % z Ruska. Jde o suroviny a sloučeniny; hlavní závislost je v rafinaci a magnetech.",
+   "zdroj_plny": "Eurostat, 9. 4. 2025",
+   "claims": [
+    "C552"
+   ],
+   "kratka": true,
+   "id": "s06"
+  },
+  {
+   "klip": "mixkit-15431-720.mp4",
+   "od": 1.0,
+   "delka": 4.0,
+   "cislo": "25 %",
+   "text": "strategických surovin má EU do roku 2030 umět recyklovat",
+   "zdroj": "nařízení (EU) 2024/1252; nezávazná referenční hodnota",
+   "popis": "Akt o kritických surovinách chce, aby recyklační kapacita EU do roku 2030 dokázala vyrobit nejméně 25 % roční spotřeby strategických surovin. Je to referenční hodnota, ne vymahatelný cíl.",
+   "zdroj_plny": "Nařízení (EU) 2024/1252, čl. 5 odst. 1",
+   "claims": [
+    "N3"
+   ],
+   "kratka": false,
+   "id": "s07"
+  },
+  {
+   "klip": "mixkit-47051-720.mp4",
+   "od": 0.5,
+   "delka": 4.0,
+   "cislo": "asi 4×",
+   "text": "víc kapacity na čipy pod 20 nm má Tchaj-wan než Čína",
+   "zdroj": "OECD 2025, továrny v provozu; data o Číně spíš podhodnocená",
+   "popis": "Kapacita továren v provozu, které umějí logické čipy pod 20 nm (září 2025): Tchaj-wan 1,55 mil. waferů měsíčně v přepočtu na osmipalcové, USA 0,84 mil., Čína 0,39 mil. Jde o celou kapacitu těchto továren, ne jen o část vyhrazenou nejmenším čipům. Data o Číně jsou podle OECD pravděpodobně podhodnocená, poměr je odvození.",
+   "zdroj_plny": "OECD, The chip landscape, Science, Technology and Industry Policy Papers č. 188, 2025",
+   "claims": [
+    "N5"
+   ],
+   "kratka": true,
+   "id": "s08"
+  },
+  {
+   "klip": "mixkit-46418-720.mp4",
+   "od": 5.5,
+   "delka": 4.0,
+   "cislo": "57 z 60",
+   "text": "rychlovlaků Siemens pro Čínu se vyrobilo v Číně",
+   "zdroj": "SASAC, zakázka z roku 2005; po předání technologií",
+   "popis": "Ze zakázky na 60 vysokorychlostních souprav Siemens (2005) přišly 3 hotové, 57 se vyrobilo v Číně po předání technologií. Program výslovně měnil přístup na trh za technologie.",
+   "zdroj_plny": "SASAC, sdělení k zakázce, listopad 2005",
+   "claims": [
+    "C2072"
+   ],
+   "kratka": true,
+   "id": "s09"
+  },
+  {
+   "klip": "mixkit-28351-720.mp4",
+   "od": 1.0,
+   "delka": 4.0,
+   "cislo": "68 %",
+   "text": "elektřiny Francie vyrobily v roce 2025 jaderné elektrárny",
+   "zdroj": "RTE, metropolitní Francie",
+   "popis": "Jaderné elektrárny vyrobily v roce 2025 68 % elektřiny metropolitní Francie (podíl na výrobě, ne na spotřebě).",
+   "zdroj_plny": "RTE, bilan électrique 2025",
+   "claims": [
+    "C1964"
+   ],
+   "kratka": true,
+   "id": "s10"
+  },
+  {
+   "klip": "mixkit-47918-720.mp4",
+   "od": 1.0,
+   "delka": 4.0,
+   "cislo": "17 %",
+   "text": "elektřiny EU dodal vítr, druhý největší zdroj po jádru",
+   "zdroj": "Ember 2026, rok 2025",
+   "popis": "Větrné elektrárny vyrobily v roce 2025 16,9 % elektřiny EU, víc než plyn (16,7 %). Větší podíl mělo jen jádro.",
+   "zdroj_plny": "Ember, European Electricity Review 2026; pořadí zdrojů potvrzují i data Eurostatu",
+   "claims": [
+    "N2"
+   ],
+   "kratka": false,
+   "id": "s11"
+  },
+  {
+   "id": "s12",
+   "klip": "mixkit-9692-720.mp4",
+   "od": 0.5,
+   "delka": 4.0,
+   "teplota": "teplo",
+   "cislo": "41,9 °C",
+   "text": "nový teplotní rekord Česka, Doksany 28. 6. 2026",
+   "zdroj": "ČHMÚ",
+   "claims": [
+    "C1435"
+   ],
+   "popis": "28. 6. 2026 naměřil ČHMÚ v Doksanech 41,9 °C, nové absolutní teplotní maximum Česka.",
+   "zdroj_plny": "ČHMÚ; Informační zpráva MZe o hydrologické situaci za červen 2026",
+   "kratka": true
+  },
+  {
+   "klip": "mixkit-9953-720.mp4",
+   "od": 1.0,
+   "delka": 4.0,
+   "cislo": "71 mld. Kč",
+   "text": "škod napáchaly povodně 2024, pojišťovny čekaly 20 mld.",
+   "zdroj": "žádost do Fondu solidarity EU, i náklady krize",
+   "popis": "Česko v žádosti do Fondu solidarity EU vyčíslilo škody z povodní v září 2024 na 70,6 mld. Kč, včetně nákladů na zvládání krize. Pojišťovny tehdy odhadovaly plnění na 19,6 mld. Kč.",
+   "zdroj_plny": "Ministerstvo financí, žádost do Fondu solidarity EU; odhad České asociace pojišťoven",
+   "claims": [
+    "C172"
+   ],
+   "kratka": false,
+   "id": "s13"
+  },
+  {
+   "klip": "mixkit-48790-720.mp4",
+   "od": 1.0,
+   "delka": 4.0,
+   "cislo": "11 → 25 let",
+   "text": "trval průměrný starobní důchod: 1970 a 2024",
+   "zdroj": "ČSSZ, důchody zaniklé v daném roce",
+   "popis": "Průměrná doba pobírání řádného starobního důchodu u důchodů zaniklých v daném roce: 11 let (1970), 24,7 roku (2024). Do roku 2017 všechny důvody zániku, od 2018 jen úmrtí.",
+   "zdroj_plny": "ČSSZ, Statistická ročenka z oblasti důchodového pojištění 2024, tab. 6.7",
+   "claims": [
+    "C1181"
+   ],
+   "kratka": false,
+   "id": "s14"
+  },
+  {
+   "klip": "mixkit-48795-720.mp4",
+   "od": 2.5,
+   "delka": 4.0,
+   "cislo": "36 tisíc",
+   "text": "lidí víc zemřelo, než se narodilo. Nejvíc od roku 1919.",
+   "zdroj": "ČSÚ, rok 2025, předběžné údaje",
+   "popis": "V roce 2025 zemřelo o 35,7 tisíce lidí víc, než se narodilo. Větší přirozený úbytek Česko od roku 1919 nezaznamenalo. Obyvatel přesto přibylo díky stěhování ze zahraničí.",
+   "zdroj_plny": "ČSÚ, Pohyb obyvatelstva, rok 2025 (31. 3. 2026); předběžné údaje",
+   "claims": [
+    "C463"
+   ],
+   "kratka": true,
+   "id": "s15"
+  },
+  {
+   "klip": "mixkit-44880-720.mp4",
+   "od": 1.0,
+   "delka": 4.0,
+   "cislo": "19 %",
+   "text": "Čechů věřilo vládě (2023). Průměr OECD: 39 %.",
+   "zdroj": "OECD Trust Survey 2023; novější česká data nejsou",
+   "popis": "Vysokou nebo středně vysokou důvěru v národní vládu mělo na podzim 2023 19 % Čechů, průměr zemí OECD byl 39 %.",
+   "zdroj_plny": "OECD, Drivers of Trust in Public Institutions 2024, country note Czechia",
+   "claims": [
+    "C462"
+   ],
+   "kratka": true,
+   "id": "s16"
+  },
+  {
+   "klip": "mixkit-14051-720.mp4",
+   "od": 1.0,
+   "delka": 4.5,
+   "cislo": "61 → 61",
+   "text": "Severozápad Čech vůči průměru EU. Lublinsko: 35 → 55.",
+   "zdroj": "Eurostat, HDP na obyvatele v PPS, 2000 a 2024",
+   "popis": "HDP na obyvatele v paritě kupní síly vůči průměru EU: Severozápad 61 v roce 2000 i 2024, polské Lublinsko 35 a 55. Lublinsko 2024 předběžně, polská řada má zlomy.",
+   "zdroj_plny": "Eurostat, regionální HDP v paritě kupní síly",
+   "claims": [
+    "C1378",
+    "C1380"
+   ],
+   "kratka": false,
+   "id": "s17"
+  },
+  {
+   "klip": "mixkit-47257-720.mp4",
+   "od": 0.5,
+   "delka": 4.0,
+   "cislo": "24 %",
+   "text": "zaměstnaných v Česku pracuje v průmyslu, nejvíc v EU",
+   "zdroj": "Eurostat 2025, zpracovatelský průmysl; EU 13,5 %",
+   "popis": "Ve zpracovatelském průmyslu pracovalo v roce 2025 24 % zaměstnaných v Česku, nejvíc ze všech zemí EU (průměr EU 13,5 %).",
+   "zdroj_plny": "Eurostat, nama_10_a10_e, 2025",
+   "claims": [
+    "C1487"
+   ],
+   "kratka": true,
+   "id": "s18"
+  },
+  {
+   "klip": "mixkit-23219-720.mp4",
+   "od": 3.0,
+   "delka": 4.0,
+   "cislo": "7 %",
+   "text": "firem eurozóny používá AI významně, 64 % zkouší nebo mírně",
+   "zdroj": "ECB, průzkum SAFE, 4. čtvrtletí 2025",
+   "popis": "Podle průzkumu ECB mezi firmami eurozóny používá AI významně 7 % firem, dalších 64 % ji zkouší nebo používá mírně. Česko v průzkumu není.",
+   "zdroj_plny": "ECB, P. R. Lane, projev 30. 10. 2026; průzkum SAFE, 4. čtvrtletí 2025",
+   "claims": [
+    "C2318"
+   ],
+   "kratka": false,
+   "id": "s19"
+  },
+  {
+   "klip": "mixkit-50133-720.mp4",
+   "od": 1.0,
+   "delka": 4.0,
+   "cislo": "2,8×",
+   "text": "větší podíl dospělých se vzdělává v Dánsku než v Česku",
+   "zdroj": "Eurostat 2025: 31 % proti 11 %; poměr je odvození",
+   "popis": "Za poslední 4 týdny se vzdělávalo 31 % Dánů a 11 % Čechů ve věku 25 až 64 let (2025, Dánsko má zlom řady). Česko je pod průměrem EU (14 %), mezera se ale zmenšuje.",
+   "zdroj_plny": "Eurostat, trng_lfse_01, 2025",
+   "claims": [
+    "C1567"
+   ],
+   "kratka": true,
+   "id": "s20"
+  },
+  {
+   "id": "s21",
+   "klip": "mixkit-42358-720.mp4",
+   "od": 2.0,
+   "delka": 7.5,
+   "typ": "zaver",
+   "radek1": "Mapa světa, který přestal být přehledný.",
+   "radek2": "Megatrendy a nejistoty · 76 sil do roku 2031",
+   "radek3": "davidnavratil.com/megatrendy",
+   "kratka": true
+  }
+ ]
+}
