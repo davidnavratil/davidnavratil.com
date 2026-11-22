@@ -17,6 +17,10 @@
  *    7. Sub-route smoke test: for known Next.js sub-routes (declared in
  *       SUBROUTE_PROBES) verify each returns 200
  *       (catches broken deploys that ship the root but lose sub-pages)
+ *    8. Browser check (added 2026-11-22, see browser.ts): every live analysis and
+ *       the site's own pages opened in headless Chromium; reports CSP violations,
+ *       JavaScript errors, failed own-file requests and empty pages
+ *       (catches a page that returns 200 but is broken for the visitor)
  *
  *  Output (when findings exist):
  *    - /tmp/audit-findings.json  — machine-readable list of findings
@@ -32,6 +36,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import * as tls from 'node:tls';
 import { analyses, getHref, type Analysis } from '../../src/data/analyses.ts';
+import { checkInBrowser, formatBrowserFinding, type BrowserFinding } from './browser.ts';
 
 const DOMAIN = 'https://davidnavratil.com';
 const HOST = 'davidnavratil.com';
@@ -61,7 +66,7 @@ const REQUIRED_HEADERS: ReadonlyArray<[string, string | null]> = [
  * The site's own pages. Until 2026-08-10 the audit probed only /analyses/*,
  * so a broken homepage or archive would not have raised anything.
  */
-const CORE_PAGES: readonly string[] = ['/', '/en/', '/analyses/', '/en/analyses/', '/prednasky/', '/megatrendy/', '/pro-poradatele/'];
+const CORE_PAGES: readonly string[] = ['/', '/en/', '/analyses/', '/en/analyses/', '/prednasky/', '/megatrendy/', '/pro-poradatele/', '/en/prednasky/', '/en/megatrendy/', '/en/pro-poradatele/'];
 
 /** Page carrying the contact form, and the endpoint it must be able to reach. */
 const FORM_PAGE = `${DOMAIN}/`;
@@ -91,7 +96,8 @@ type Finding =
   | { type: 'HEADERS-MISSING'; url: string; missing: string[]; fix: null }
   | { type: 'SUBROUTE-404'; analysis: string; url: string; status: number; fix: null }
   | { type: 'CORE-404'; url: string; status: number; fix: null }
-  | { type: 'FORM-BROKEN'; url: string; reason: string; detail: string; fix: null };
+  | { type: 'FORM-BROKEN'; url: string; reason: string; detail: string; fix: null }
+  | BrowserFinding;
 
 const findings: Finding[] = [];
 
@@ -567,6 +573,8 @@ function formatIssue(findings: Finding[]): string {
       lines.push('**Návrh:** hlavní stránka webu není dostupná. Zkontrolovat poslední deploy a nginx.');
       lines.push('- [ ] (manuální — bez auto-fixu)');
       lines.push('');
+    } else if (f.type === 'BROWSER-ERRORS') {
+      lines.push(...formatBrowserFinding(n, f));
     } else if (f.type === 'FORM-BROKEN') {
       lines.push(`## ${n}. 🔴 [FORM-BROKEN] ${f.reason}`);
       lines.push('');
@@ -602,6 +610,15 @@ async function main() {
     checkCorePages(),
     checkContactForm(),
   ]);
+  // Browser check runs after the HTTP probes, one page at a time (keeps the runner light).
+  const pages = new Set<string>(CORE_PAGES.map((p) => `${DOMAIN}${p}`));
+  for (const a of analyses.filter((x) => x.live)) {
+    for (const loc of ['cs', 'en']) {
+      const h = getHref(a, loc);
+      pages.add(h.startsWith('http') ? h : `${DOMAIN}${h}`);
+    }
+  }
+  findings.push(...(await checkInBrowser([...pages].filter((u) => u.startsWith(DOMAIN)), HOST)));
   // sitemap-missing-live is purely synchronous and depends on sitemapUrls — run after the parallel batch.
   checkSitemapMissingLive(sitemapUrls);
 

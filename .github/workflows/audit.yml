@@ -23,6 +23,10 @@ jobs:
 
       - run: npm ci
 
+      # Kontrola v prohlížeči (scripts/audit/browser.ts): Playwright jen pro tenhle běh, ne závislost projektu
+      - name: Install headless Chromium
+        run: npm install --no-save playwright@1 && npx playwright install --with-deps chromium
+
       - name: Run audit
         run: npx tsx scripts/audit/run.ts
 
