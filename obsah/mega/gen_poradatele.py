@@ -22,31 +22,34 @@ BIO = [
     ('Střední', 'na web akce, do tiskové zprávy',
      'David Navrátil je hlavní ekonom České spořitelny, kde od roku 2008 vede tým ekonomických a strategických analýz. '
      'Rodák z Ostravska začínal v České národní bance. '
+     'Složitá témata vysvětluje ostravskou kadencí, napřímo a bez mlhy. '
      'Je spoluautorem Indexu prosperity a finančního zdraví a projektu Silnější regiony, které ukazují, v čem Česko a jeho regiony zaostávají a kde mají náskok. '
      'Zajímá ho, jak udržet prosperitu v době polykrize, kdy se stárnutí, umělá inteligence, drahá energie a válka potkávají najednou. '
      'K prognóze přidává scénáře různých budoucností a cestu přes odolnost a schopnost reinvence: umět včas změnit to, co přestalo fungovat. '
      'Mluví lidsky, s čísly, která si lidé pamatují ještě cestou domů, a s humorem, který neubírá na přesnosti. '
-     'CzechCrunch ho spolu s Davidem Markem označil za dva mediálně nejvýraznější makroekonomy v Česku.'),
+     'CzechCrunch ho označil za jednoho ze dvou mediálně nejvýraznějších makroekonomů v Česku.'),
     ('Dlouhé', 'do sborníku, pro moderátora',
      'David Navrátil je hlavní ekonom České spořitelny. '
      'Rodák z Ostravska vystudoval VŠB-TU Ostrava, začínal jako analytik v České národní bance, do České spořitelny přešel v roce 2004 a od roku 2008 je jejím hlavním ekonomem a vede tým ekonomických a strategických analýz. '
-     'Z Ostravy si přivezl zvyk říkat věci napřímo, a tak i složitá témata vysvětluje bez mlhy a bez strašení. '
+     'Z Ostravy si přivezl kadenci a zvyk říkat věci napřímo, a tak i složitá témata vysvětluje bez mlhy a bez strašení. '
      'Je spoluautorem Indexu prosperity a finančního zdraví, který porovnává Česko s Evropou, a projektu Silnější regiony, který hledá, proč se některým regionům daří lépe, než by napovídala jejich výchozí pozice. '
      'Zajímá ho, jak podpořit prosperitu v době polykrize. '
      'Sestavuje proto katalog Megatrendy a nejistoty a u každé nejistoty předem určuje, podle čeho se pozná, kam se věci hýbou. '
      'Na konferencích a ve strategických debatách s vedením firem ukazuje scénáře různých budoucností a cestu přes odolnost a schopnost reinvence. '
-     'Ročně má přes 50 přednášek a přes 15 let komentuje ekonomiku v médiích; CzechCrunch ho spolu s Davidem Markem označil za dva mediálně nejvýraznější makroekonomy v Česku. '
+     'Ročně má přes 50 přednášek a přes 15 let komentuje ekonomiku v médiích; CzechCrunch ho označil za jednoho ze dvou mediálně nejvýraznějších makroekonomů v Česku. '
      'Píše newsletter Peníze, procenta a prosperita.'),
     ('English, short', 'for programmes and invitations',
-     'David Navrátil is Chief Economist of Česká spořitelna (Erste Group) and co-author of the Czech Prosperity and Financial Health Index. Alongside his forecasts he works with scenarios: he shows several possible futures, the numbers that tell us which one is coming, and how to be ready for any of them.'),
+     'David Navrátil is Chief Economist of Česká spořitelna (Erste Group) and co-author of the Prosperity and Financial Health Index and the Stronger Regions project. Alongside his forecasts he works with scenarios: he shows several possible futures, the numbers that tell us which one is coming, and how to be ready for any of them.'),
     ('English, medium', 'for event websites and press releases',
      'David Navrátil is Chief Economist of Česká spořitelna (Erste Group), where he has led the Economic and Strategic Research team since 2008. '
      'Born in the Ostrava region, he started his career at the Czech National Bank. '
+     'He explains complicated topics the Ostrava way: straight to the point and without fog. '
      'He co-authors the Prosperity and Financial Health Index and the Stronger Regions project, which show where Czechia and its regions lag behind and where they lead. '
      'His focus is prosperity in an age of polycrisis, when ageing, artificial intelligence, expensive energy and war hit at once. '
-     'Alongside the forecast he offers scenarios of different futures and a path through resilience and the ability to reinvent. '
+     'To the forecast he adds scenarios of different futures and a way through them: '
+     'resilience and the ability to reinvent, that is, to change in time what has stopped working. '
      'He speaks plainly, with numbers people still remember on their way home, and with humour that never costs precision. '
-     'The Czech tech and business outlet CzechCrunch named him, together with David Marek, one of the country’s two most media-prominent macroeconomists.'),
+     'The Czech tech and business outlet CzechCrunch named him one of the two most visible macroeconomists in the Czech media.'),
 ]
 UVOD = 'Ekonom je člověk, který vám dnes sofistikovaně vysvětlí, jak bude za rok vypadat svět, ekonomika i úrokové sazby. A za rok vám ještě sofistikovaněji a naprosto přesně vysvětlí, v čem se mýlil a proč. Náš další host prognózy dělá taky. Jen k nim přidává pojistku: několik scénářů, čísla, podle kterých poznáme, kam se to láme, a odolnost pro kterýkoli z nich. Hlavní ekonom České spořitelny a spoluautor Indexu prosperity. Přivítejte Davida Navrátila.'
 FOTO = [
