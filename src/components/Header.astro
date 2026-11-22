@@ -10,28 +10,34 @@ const home = locale === 'en' ? '/en/' : '/';
 const speakingHref = locale === 'en' ? '/en/prednasky/' : '/prednasky/';
 const megaHref = locale === 'en' ? '/en/megatrendy/' : '/megatrendy/';
 const megaLabel = locale === 'en' ? 'Megatrends' : 'Megatrendy';
+// Na úvodní stránce lišta splývá s tmavým úvodem (průhledná, světlý text); po odrolování dostane
+// tmavé pozadí úvodu. Na ostatních stránkách je plná v barvě papíru. Úprava 22. 11. 2026.
+const path = Astro.url.pathname;
+const isHome = path === '/' || path === '/en/' || path === '/en';
+const active = (href: string) => path.startsWith(href) ? 'page' : undefined;
 ---
 
-<header class="header">
+<header class:list={['header', { 'header--overlay': isHome }]}>
   <div class="container header-inner">
-    <a href={locale === 'en' ? '/en/' : '/'} class="logo">
-      <span class="logo-mark">DN</span>
+    <a href={home} class="logo" aria-label="David Navrátil, úvodní stránka">
       <span class="logo-text">David Navrátil</span>
     </a>
-    <nav class="nav">
-      <a href={megaHref} class="nav-link">{megaLabel}</a>
+    <nav class="nav" aria-label={locale === 'en' ? 'Main' : 'Hlavní'}>
+      <a href={megaHref} class="nav-link" aria-current={active(megaHref)}>{megaLabel}</a>
       <a href={`${home}#analyzy`} class="nav-link">{t('nav.analyses')}</a>
-      <a href={speakingHref} class="nav-link">{t('nav.speaking')}</a>
+      <a href={speakingHref} class="nav-link" aria-current={active(speakingHref)}>{t('nav.speaking')}</a>
       <a href={`${home}#newsletter`} class="nav-link">{t('nav.newsletter')}</a>
       <a href={`${home}#about`} class="nav-link">{t('nav.about')}</a>
       <a href={`${home}#contact`} class="nav-link">{t('nav.contact')}</a>
-      <a href={switchHref} class="lang-switch">{t('lang.code')}</a>
-      <ThemeToggle />
+      <span class="nav-tools">
+        <a href={switchHref} class="lang-switch" hreflang={locale === 'en' ? 'cs' : 'en'}>{t('lang.code')}</a>
+        <ThemeToggle />
+      </span>
       <a href={`${home}#newsletter`} class="nav-cta-btn">{t('nav.subscribe')}</a>
     </nav>
 
     <!-- Mobile menu button -->
-    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
       <svg class="menu-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <line x1="3" y1="6" x2="21" y2="6" class="line-top"/>
         <line x1="3" y1="12" x2="21" y2="12" class="line-mid"/>
@@ -42,9 +48,9 @@ const megaLabel = locale === 'en' ? 'Megatrends' : 'Megatrendy';
 
   <!-- Mobile nav -->
   <div class="mobile-nav" id="mobile-nav">
-    <a href={megaHref} class="mobile-link">{megaLabel}</a>
+    <a href={megaHref} class="mobile-link" aria-current={active(megaHref)}>{megaLabel}</a>
     <a href={`${home}#analyzy`} class="mobile-link">{t('nav.analyses')}</a>
-    <a href={speakingHref} class="mobile-link">{t('nav.speaking')}</a>
+    <a href={speakingHref} class="mobile-link" aria-current={active(speakingHref)}>{t('nav.speaking')}</a>
     <a href={`${home}#newsletter`} class="mobile-link">{t('nav.newsletter')}</a>
     <a href={`${home}#about`} class="mobile-link">{t('nav.about')}</a>
     <a href={`${home}#contact`} class="mobile-link">{t('nav.contact')}</a>
@@ -58,104 +64,134 @@ const megaLabel = locale === 'en' ? 'Megatrends' : 'Megatrendy';
 
 <style>
   .header {
+    --h-ink: var(--color-text);
+    --h-soft: var(--color-text-secondary);
+    --h-line: var(--color-border);
+    --h-acc: var(--color-accent);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 100;
-    padding: var(--space-sm) 0;
-    background: color-mix(in srgb, var(--color-bg) 97%, transparent);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
-    transition: background 0.3s ease;
+    padding: 1rem 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--h-line);
+    transition: background-color 0.25s ease, border-color 0.25s ease;
   }
+  /* Úvodní stránka: lišta leží na tmavém úvodu, proto světlý text a bez vlastního pozadí */
+  .header--overlay {
+    --h-ink: #F3EFE6;
+    --h-soft: rgba(243, 239, 230, 0.76);
+    --h-line: rgba(243, 239, 230, 0.12);
+    --h-acc: #8dd4cb;
+    background: transparent;
+  }
+  .header--overlay.is-scrolled,
+  .header--overlay.is-open {
+    background: rgba(18, 42, 68, 0.97);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  :global([data-theme="dark"]) .header--overlay.is-scrolled,
+  :global([data-theme="dark"]) .header--overlay.is-open { background: rgba(28, 27, 24, 0.97); }
+  /* Na úvodní stránce je obsah úvodu širší než běžný obsah; lišta se zarovná s ním */
+  .header--overlay .header-inner { max-width: calc(1115px + 2 * var(--space-md)); }
+
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: var(--space-md);
   }
   .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    color: var(--color-text);
+    color: var(--h-ink);
     text-decoration: none;
     transition: opacity 0.2s;
   }
-  .logo:hover { opacity: 0.8; color: var(--color-text); }
-  .logo-mark {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 8px;
-    background: var(--gradient-accent);
-    color: white;
-    font-family: var(--font-serif);
-    font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 0.05em;
-  }
+  .logo:hover { opacity: 0.75; color: var(--h-ink); }
   .logo-text {
     font-family: var(--font-serif);
-    font-size: 1rem;
-    font-weight: 700;
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
   }
   .nav {
     display: flex;
     align-items: center;
-    gap: var(--space-md);
+    gap: 1.75rem;
   }
   .nav-link {
+    position: relative;
+    padding: 0.3rem 0;
     font-size: 0.9rem;
-    color: var(--color-text-secondary);
+    color: var(--h-soft);
+    text-decoration: none;
     transition: color 0.2s;
   }
-  .nav-link:hover {
-    color: var(--color-text);
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background: var(--h-acc);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  .nav-link:hover { color: var(--h-ink); }
+  .nav-link:hover::after { transform: scaleX(1); }
+  .nav-link[aria-current="page"] { color: var(--h-ink); }
+  .nav-link[aria-current="page"]::after { transform: scaleX(1); }
+  .nav-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding-left: 1.1rem;
+    border-left: 1px solid var(--h-line);
   }
   .lang-switch {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-    border: 1px solid var(--color-border);
-    color: var(--color-text-secondary);
+    letter-spacing: 0.08em;
+    color: var(--h-soft);
     text-decoration: none;
-    transition: border-color 0.2s, color 0.2s;
+    transition: color 0.2s;
   }
-  .lang-switch:hover {
-    border-color: var(--color-accent);
-    color: var(--color-text);
+  .lang-switch:hover { color: var(--h-ink); }
+  .header :global(.theme-toggle) {
+    border: 0;
+    padding: 0.25rem;
+    color: var(--h-soft);
+    min-width: 32px;
+    min-height: 32px;
   }
+  .header :global(.theme-toggle:hover) { color: var(--h-ink); }
+  .header :global(.theme-toggle svg) { width: 18px; height: 18px; }
   .nav-cta-btn {
     display: inline-flex;
     align-items: center;
-    padding: 0.4rem 1rem;
-    border-radius: 8px;
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
     background: var(--gradient-accent);
-    color: white;
+    color: #fff;
     font-size: 0.85rem;
     font-weight: 600;
     text-decoration: none;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 2px 8px var(--color-accent-glow);
     white-space: nowrap;
+    transition: background 0.2s;
   }
-  .nav-cta-btn:hover {
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px var(--color-accent-glow);
-  }
+  .nav-cta-btn:hover { color: #fff; background: var(--color-accent-hover); }
+  .header--overlay .nav-cta-btn { background: #8dd4cb; color: #102d47; }
+  .header--overlay .nav-cta-btn:hover { background: #F3EFE6; color: #102d47; }
 
   .menu-toggle {
     display: none;
     background: none;
     border: none;
-    color: var(--color-text);
+    color: var(--h-ink);
     cursor: pointer;
     padding: 0.5rem;
     min-width: 44px;
@@ -174,7 +210,7 @@ const megaLabel = locale === 'en' ? 'Megatrends' : 'Megatrendy';
     visibility: hidden;
   }
   .mobile-nav.open {
-    max-height: 400px;
+    max-height: 480px;
     padding-bottom: var(--space-md);
     visibility: visible;
   }
@@ -182,11 +218,12 @@ const megaLabel = locale === 'en' ? 'Megatrends' : 'Megatrendy';
     display: block;
     padding: 0.75rem 0;
     font-size: 1rem;
-    color: var(--color-text-secondary);
-    border-bottom: 1px solid var(--color-border);
+    color: var(--h-soft);
+    border-bottom: 1px solid var(--h-line);
     text-decoration: none;
     min-height: 44px;
   }
+  .mobile-link[aria-current="page"] { color: var(--h-ink); font-weight: 600; }
   .mobile-bottom {
     display: flex;
     align-items: center;
@@ -196,24 +233,21 @@ const megaLabel = locale === 'en' ? 'Megatrends' : 'Megatrendy';
   .mobile-cta-btn {
     display: block;
     margin-top: var(--space-sm);
-    padding: 0.7rem 1rem;
-    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    border-radius: 2px;
     background: var(--gradient-accent);
-    color: white;
+    color: #fff;
     font-size: 0.95rem;
     font-weight: 600;
     text-align: center;
     text-decoration: none;
-    box-shadow: 0 2px 8px var(--color-accent-glow);
-    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .mobile-cta-btn:hover {
-    color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 14px var(--color-accent-glow);
-  }
+  .header--overlay .mobile-cta-btn { background: #8dd4cb; color: #102d47; }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1060px) {
+    .nav { gap: 1.25rem; }
+  }
+  @media (max-width: 960px) {
     .nav { display: none; }
     .menu-toggle { display: flex; }
     .mobile-nav { display: flex; }
@@ -222,17 +256,26 @@ const megaLabel = locale === 'en' ? 'Megatrends' : 'Megatrendy';
 
 <script is:inline>
   (function() {
+    var header = document.querySelector('.header');
     var btn = document.querySelector('.menu-toggle');
     var nav = document.getElementById('mobile-nav');
+    // Na úvodní stránce dostane lišta pozadí, jakmile čtenář odroluje z úvodu
+    if (header && header.classList.contains('header--overlay')) {
+      var onScroll = function() { header.classList.toggle('is-scrolled', window.scrollY > 24); };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
     if (!btn || !nav) return;
     btn.addEventListener('click', function() {
       var open = nav.classList.toggle('open');
       btn.setAttribute('aria-expanded', String(open));
+      if (header) header.classList.toggle('is-open', open);
     });
     nav.querySelectorAll('.mobile-link, .mobile-cta-btn').forEach(function(link) {
       link.addEventListener('click', function() {
         nav.classList.remove('open');
         btn.setAttribute('aria-expanded', 'false');
+        if (header) header.classList.remove('is-open');
       });
     });
   })();
