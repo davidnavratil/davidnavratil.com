@@ -23,6 +23,11 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'always',
   },
+  // Astro 7 zhušťuje CSS novějším zápisem (např. @media (width<=640px)). cssTarget drží
+  // zápis srozumitelný i pro Safari 15 a 16 (starší iPhony); jinak by tam nefungovalo mobilní rozvržení.
+  vite: {
+    build: { cssTarget: ['chrome100', 'safari15', 'firefox100', 'edge100'] },
+  },
   integrations: [
     sitemap({
       customPages: [
