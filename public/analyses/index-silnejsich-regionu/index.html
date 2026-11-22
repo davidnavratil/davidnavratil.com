@@ -1653,28 +1653,29 @@ html.dark .analysis-header { background: rgba(28,27,24,0.95); }
       {
         type: 'scattermap',
         lat: [a.lat], lon: [a.lon],
-        mode: 'markers+text',
+        mode: 'markers',
         marker: { size: 14, color: C().prosper },
-        text: [a.name], textposition: 'top center',
-        textfont: { size: 13, family: 'Inter', color: C().navy, weight: 600 },
-        showlegend: false,
+        // Popisky přímo v mapě (mode text) shazovaly mapu: Plotly žádá ikonu „-15.svg“, která neexistuje. Jména jsou proto v legendě.
+        name: `${a.name} (#${a.rank})`,
+        showlegend: true,
         hovertemplate: `<b>${a.name}</b><br>#${a.rank}<extra></extra>`,
       },
       {
         type: 'scattermap',
         lat: [b.lat], lon: [b.lon],
-        mode: 'markers+text',
+        mode: 'markers',
         marker: { size: 14, color: C().weak },
-        text: [b.name], textposition: 'bottom center',
-        textfont: { size: 13, family: 'Inter', color: C().navy, weight: 600 },
-        showlegend: false,
+        // Popisky přímo v mapě (mode text) shazovaly mapu: Plotly žádá ikonu „-15.svg“, která neexistuje. Jména jsou proto v legendě.
+        name: `${b.name} (#${b.rank})`,
+        showlegend: true,
         hovertemplate: `<b>${b.name}</b><br>#${b.rank}<extra></extra>`,
       },
     ], {
       paper_bgcolor: 'rgba(0,0,0,0)', plot_bgcolor: 'rgba(0,0,0,0)',
       map: { style: 'open-street-map', zoom: 9, center: { lat: (a.lat + b.lat) / 2, lon: (a.lon + b.lon) / 2 } },
-      height: 260,
-      margin: { t: 0, r: 0, b: 0, l: 0 },
+      legend: { orientation: 'h', x: 0, y: 0, yanchor: 'top', font: { size: 13, color: C().navy }, bgcolor: 'rgba(0,0,0,0)' },
+      height: 290,
+      margin: { t: 0, r: 0, b: 30, l: 0 },
     }, PLOTLY_CONFIG);
 
     // --- Dumbbell chart ---
