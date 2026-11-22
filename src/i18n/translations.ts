@@ -144,7 +144,7 @@ export const translations = {
     'speaking.stat2.value': '15+',
     'speaking.stat2.label': 'let v\u00a0médiích',
     'speaking.tags': 'V\u00a0roce 2026\u00a0například ReVize, Eastlog a\u00a0konference CRR „Třicet!“',
-    'speaking.case1': 'Scénáře místo předpovědí',
+    'speaking.case1': 'Prognóza nestačí: připravit se na víc než jednu budoucnost',
     'speaking.case2': 'AI: zisk pro všechny, nebo pro hrstku?',
     'speaking.case3': 'Stárnutí: zákazníci, práce, úspory',
 
