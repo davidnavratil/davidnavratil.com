@@ -18,13 +18,17 @@ assert len(temata) == 7
 
 BIO = [
     ('Krátké', 'do programu, na pozvánku',
-     'David Navrátil je hlavní ekonom České spořitelny. Sestavuje katalog Megatrendy a nejistoty, který sleduje 76 sil s výhledem do roku 2031, píše newsletter Peníze, procenta a prosperita a ročně má přes 50 přednášek.'),
+     'David Navrátil je hlavní ekonom České spořitelny a spoluautor Indexu prosperity a finančního zdraví i projektu Silnější regiony. Předpovědi nedělá. Ukazuje několik možných budoucností, podle jakých čísel poznáme, která se blíží, a jak se připravit na kteroukoli z nich.'),
     ('Střední', 'na web akce, do tiskové zprávy',
-     'David Navrátil je hlavní ekonom České spořitelny (Erste Group). Začínal v České národní bance, od roku 2008 vede tým Ekonomické a strategické analýzy. Sestavuje katalog Megatrendy a nejistoty, který sleduje 76 sil s výhledem do roku 2031. Má přes 50 přednášek ročně, pravidelně komentuje ekonomiku v ČT, CNN Prima News a Hospodářských novinách a píše newsletter Peníze, procenta a prosperita.'),
+     'David Navrátil je hlavní ekonom České spořitelny, kde od roku 2008 vede tým ekonomických a strategických analýz. Rodák z Ostravska začínal v České národní bance. Je spoluautorem Indexu prosperity a finančního zdraví a projektu Silnější regiony, které ukazují, v čem Česko a jeho regiony zaostávají a kde mají náskok. Zajímá ho, jak udržet prosperitu v době polykrize, kdy se stárnutí, umělá inteligence, drahá energie a válka potkávají najednou. Místo jedné předpovědi ukazuje scénáře různých budoucností a cestu přes odolnost a schopnost reinvence: umět včas změnit to, co přestalo fungovat. Mluví lidsky, s čísly, která si lidé pamatují ještě cestou domů, a s humorem, který neubírá na přesnosti.'),
     ('Dlouhé', 'do sborníku, pro moderátora',
-     'David Navrátil je hlavní ekonom České spořitelny (Erste Group). Začínal v České národní bance a od roku 2008 vede tým Ekonomické a strategické analýzy. Zabývá se tím, jak ekonomiku mění technologie, geopolitika, demografie a instituce. Sestavuje katalog Megatrendy a nejistoty: 40 trendů, u kterých je směr jasný, a 36 nejistot, u nichž předem určuje ukazatele a prahy, které ukážou, kam se věci hýbou. Na konferencích a ve strategických debatách s vedením firem ukazuje několik možných budoucností a kroky, které se vyplatí ve většině z nich. Má přes 50 přednášek ročně, víc než 15 let komentuje ekonomiku v médiích, píše newsletter Peníze, procenta a prosperita a staví interaktivní analýzy na davidnavratil.com.'),
+     'David Navrátil je hlavní ekonom České spořitelny. Rodák z Ostravska vystudoval VŠB-TU Ostrava, začínal jako analytik v České národní bance, do České spořitelny přešel v roce 2004 a od roku 2008 je jejím hlavním ekonomem a vede tým ekonomických a strategických analýz. Z Ostravy si přivezl zvyk říkat věci napřímo, a tak i složitá témata vysvětluje bez mlhy a bez strašení. Je spoluautorem Indexu prosperity a finančního zdraví, který porovnává Česko s Evropou, a projektu Silnější regiony, který hledá, proč se některým regionům daří lépe, než by napovídala jejich výchozí pozice. Zajímá ho, jak podpořit prosperitu v době polykrize. Sestavuje proto katalog Megatrendy a nejistoty a u každé nejistoty předem určuje, podle čeho se pozná, kam se věci hýbou. Na konferencích a ve strategických debatách s vedením firem ukazuje scénáře různých budoucností a cestu přes odolnost a schopnost reinvence. Ročně má přes 50 přednášek, přes 15 let komentuje ekonomiku v médiích a píše newsletter Peníze, procenta a prosperita.'),
+    ('English, short', 'for programmes and invitations',
+     'David Navrátil is Chief Economist of Česká spořitelna (Erste Group) and co-author of the Czech Prosperity and Financial Health Index. He does not make forecasts. He shows several possible futures, the numbers that tell us which one is coming, and how to be ready for any of them.'),
+    ('English, medium', 'for event websites and press releases',
+     'David Navrátil is Chief Economist of Česká spořitelna (Erste Group), where he has led the Economic and Strategic Research team since 2008. Born in the Ostrava region, he started his career at the Czech National Bank. He co-authors the Prosperity and Financial Health Index and the Stronger Regions project, which show where Czechia and its regions lag behind and where they lead. His focus is prosperity in an age of polycrisis, when ageing, artificial intelligence, expensive energy and war hit at once. Instead of a single forecast he offers scenarios of different futures and a path through resilience and the ability to reinvent. He speaks plainly, with numbers people still remember on their way home, and with humour that never costs precision.'),
 ]
-UVOD = 'Možná ho znáte z ČT nebo z CNN Prima News jako hlavního ekonoma České spořitelny. Říká se, že ekonomové předpověděli devět z posledních pěti recesí. Náš host proto dnes žádnou předpověď nepřinese. Ukáže několik budoucností, které do roku 2031 připadají v úvahu, a podle čeho poznáme, která se blíží. Přivítejte Davida Navrátila.'
+UVOD = 'Ekonom je člověk, který vám dnes sofistikovaně vysvětlí, jak bude za rok vypadat svět, ekonomika i úrokové sazby. A za rok vám ještě sofistikovaněji a naprosto přesně vysvětlí, v čem se mýlil a proč. Náš další host tuhle hru nehraje. Místo jedné předpovědi ukáže několik budoucností, podle jakých čísel poznáme, kam se to láme, a jak si vybudovat odolnost pro kteroukoli z nich. Hlavní ekonom České spořitelny a spoluautor Indexu prosperity. Přivítejte Davida Navrátila.'
 FOTO = [
     ('david-navratil-portret.jpg', 'Portrét', 960, 540, ''),
     ('david-navratil-praha.jpg', 'Portrét s Prahou', 1600, 1120, ' class="tall"'),
@@ -35,9 +39,16 @@ FOTO = [
 ]
 words = lambda s: len(s.split())
 
-bio_html = '\n'.join(
-    f'<article class="bio"><h3>{n}</h3><p class="meta">{nbsp(k)} · {words(b)} slov</p><p id="bio-{i}">{nbsp(b)}</p><button type="button" class="copy" data-copy="bio-{i}">Zkopírovat</button></article>'
-    for i, (n, k, b) in enumerate(BIO))
+def bio_karta(i, n, k, b):
+    en = n.startswith('English')
+    lang = ' lang="en"' if en else ''
+    meta = (k if en else nbsp(k)) + ' · ' + str(words(b)) + (' words' if en else ' slov')
+    text = b if en else nbsp(b)
+    return (f'<article class="bio"{lang}><h3>{n}</h3><p class="meta">{meta}</p><p id="bio-{i}">{text}</p>'
+            f'<button type="button" class="copy" data-copy="bio-{i}">Zkopírovat</button></article>')
+
+
+bio_html = '\n'.join(bio_karta(i, n, k, b) for i, (n, k, b) in enumerate(BIO))
 foto_html = '\n'.join(
     f'<figure{c}><img src="/images/pro-poradatele/{f}" width="{w}" height="{h}" loading="lazy" alt="David Navrátil: {nbsp(a.lower())}"><figcaption><span>{nbsp(a)} · {w}×{h}&nbsp;px</span><a href="/images/pro-poradatele/{f}" download>Stáhnout</a></figcaption></figure>'
     for f, a, w, h, c in FOTO)
@@ -56,7 +67,7 @@ markup = f'''<div class="pr">
     <section class="org-sec" id="bio" aria-labelledby="bio-title">
       <div class="wrap">
         <p class="eyebrow">Bio</p>
-        <h2 id="bio-title">Ve třech délkách, <em>stačí zkopírovat</em></h2>
+        <h2 id="bio-title">Česky i&nbsp;anglicky, <em>stačí zkopírovat</em></h2>
         <div class="bio-grid">
 {bio_html}
         </div>
@@ -66,7 +77,7 @@ markup = f'''<div class="pr">
     <section class="org-sec" id="uvod" aria-labelledby="uvod-title">
       <div class="wrap">
         <p class="eyebrow">Úvod pro moderátora</p>
-        <h2 id="uvod-title">Dvacet vteřin <em>před prvním slovem</em></h2>
+        <h2 id="uvod-title">Půl minuty <em>před prvním slovem</em></h2>
         <div class="intro-box"><p id="uvod-text">{nbsp(UVOD)}</p><button type="button" class="copy" data-copy="uvod-text">Zkopírovat</button></div>
       </div>
     </section>
