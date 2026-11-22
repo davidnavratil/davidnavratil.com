@@ -26,7 +26,8 @@
  * ---------------------------------------------------------------------------
  */
 
-import { readFileSync, writeFileSync, unlinkSync } from 'fs';
+import { readFileSync, writeFileSync, unlinkSync, existsSync, readdirSync, statSync } from 'fs';
+import { createHash } from 'crypto';
 import { execSync } from 'child_process';
 import { join } from 'path';
 import { tmpdir } from 'os';
@@ -90,7 +91,55 @@ async function verify(expected) {
   console.log("✓ connect-src permits 'self' (contact form can submit to /api/poptavka)");
 }
 
-const source = readFileSync(LOCAL_SNIPPET, 'utf8');
+/**
+ * Hashes of the inline scripts in the built site (dist/, analyses excluded: they have their own
+ * CSP in the nginx site config). Added to script-src next to 'unsafe-inline': browsers that
+ * understand hashes (all current ones) then ignore 'unsafe-inline' and run only these scripts,
+ * old browsers fall back to 'unsafe-inline'. Added 2026-11-22.
+ */
+function inlineScriptHashes(dir) {
+  const hashes = new Set();
+  const walk = (d) => {
+    for (const name of readdirSync(d)) {
+      const p = join(d, name);
+      if (statSync(p).isDirectory()) { if (!(d === dir && name === 'analyses')) walk(p); continue; }
+      if (!name.endsWith('.html')) continue;
+      const html = readFileSync(p, 'utf8');
+      for (const m of html.matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
+        const attrs = m[1] ?? '';
+        if (/\ssrc=/.test(attrs)) continue;
+        const type = attrs.match(/\stype="([^"]+)"/);
+        if (type && !['module', 'text/javascript'].includes(type[1])) continue; // JSON data blocks do not run
+        hashes.add(`'sha256-${createHash('sha256').update(m[2], 'utf8').digest('base64')}'`);
+      }
+    }
+  };
+  walk(dir);
+  // The analyses index pages are part of the site, not separate analyses
+  for (const p of ['analyses/index.html', 'en/analyses/index.html']) {
+    const f = join(dir, p);
+    if (!existsSync(f)) continue;
+    for (const m of readFileSync(f, 'utf8').matchAll(/<script(\s[^>]*)?>([\s\S]*?)<\/script>/g)) {
+      const attrs = m[1] ?? '';
+      if (/\ssrc=/.test(attrs)) continue;
+      const type = attrs.match(/\stype="([^"]+)"/);
+      if (type && !['module', 'text/javascript'].includes(type[1])) continue;
+      hashes.add(`'sha256-${createHash('sha256').update(m[2], 'utf8').digest('base64')}'`);
+    }
+  }
+  return [...hashes].sort();
+}
+
+const DIST = new URL('../dist', import.meta.url).pathname;
+let source = readFileSync(LOCAL_SNIPPET, 'utf8');
+if (existsSync(DIST)) {
+  const hashes = inlineScriptHashes(DIST);
+  if (hashes.length === 0) throw new Error('dist/ has no inline scripts? Refusing to guess the CSP.');
+  source = source.replace(/(add_header\s+Content-Security-Policy\s+"[^"]*script-src 'self')/, `$1 ${hashes.join(' ')}`);
+  console.log(`script-src: ${hashes.length} hashes of inline scripts from dist/`);
+} else {
+  console.log('dist/ not found: deploying the snippet without script hashes');
+}
 const csp = expectedCsp(source);
 
 if (VERIFY_ONLY) {
