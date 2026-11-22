@@ -43,16 +43,16 @@ STRANKY = {
   <div style="position:absolute;left:72px;top:92px;width:560px">
     <div class=eyebrow>Megatrendy · přednášky · analýzy</div>
     <h1 style="font-size:66px">Mapa světa, <em>který přestal být přehledný</em></h1>
-    <p>76&nbsp;sil do roku 2031. Každé číslo se zdrojem, u&nbsp;každé nejistoty předem dané ukazatele.</p>
+    <p>76&nbsp;sil do roku 2031. U&nbsp;každého čísla zdroj, u&nbsp;každé nejistoty test, podle kterého poznám, že se mýlím.</p>
   </div>
   <div class=url style="left:72px;bottom:58px">David Navrátil <span class=who>· davidnavratil.com</span></div>"""),
  'og-prednasky': page(f"""
   <div style="position:absolute;left:0;top:0;width:560px;height:630px;background:url({b64('foto-gesto.jpg','image/jpeg')}) 46% 50%/auto 100% no-repeat"></div>
   <div style="position:absolute;left:440px;top:0;width:121px;height:630px;background:linear-gradient(90deg,rgba(16,45,71,0),#102d47)"></div>
   <div style="position:absolute;left:640px;top:84px;width:500px">
-    <div class=eyebrow>Přednášky a strategické debaty</div>
+    <div class=eyebrow>Přednášky a debaty s vedením firem</div>
     <h1 style="font-size:60px">Nevíme, co přijde. <em>Víme, podle čeho to poznáme.</em></h1>
-    <p>Scénáře do roku 2031 pro konference a&nbsp;vedení firem. Česky i&nbsp;anglicky.</p>
+    <p>Místo jedné předpovědi několik možných budoucností a&nbsp;kroky, které se vyplatí skoro v&nbsp;každé.</p>
   </div>
   <div class=url style="left:640px;bottom:58px">davidnavratil.com/prednasky</div>"""),
  'og-pro-poradatele': page(f"""
@@ -60,8 +60,8 @@ STRANKY = {
   <div style="position:absolute;left:440px;top:0;width:121px;height:630px;background:linear-gradient(90deg,rgba(16,45,71,0),#102d47)"></div>
   <div style="position:absolute;left:640px;top:96px;width:500px">
     <div class=eyebrow>Pro pořadatele a média</div>
-    <h1 style="font-size:60px">Všechno pro vaši akci <em>na jedné stránce</em></h1>
-    <p>Bio ve třech délkách, úvod pro moderátora, fotky ke stažení a&nbsp;technika.</p>
+    <h1 style="font-size:58px">Co po řečníkovi obvykle <em>sháníte <span style="white-space:nowrap">e-mailem</span></em></h1>
+    <p>Bio ve třech délkách, úvod pro moderátora, fotky a&nbsp;technické nároky. Na jedné stránce.</p>
   </div>
   <div class=url style="left:640px;bottom:58px">davidnavratil.com/pro-poradatele</div>"""),
 }
