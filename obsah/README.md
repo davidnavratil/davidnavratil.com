@@ -51,3 +51,9 @@ a zapíše `src/data/en/*.html`; obálky `src/pages/en/*.astro` vyrobí `gen_str
 Když v češtině přibude nebo se změní text, skript vypíše úseky bez překladu a anglické soubory nechá beze změny:
 překlad doplňte do příslušného `sl_*.json` (klíč = český úsek, hodnota = anglický) a spusťte `vyrob.sh` znovu.
 Film na /megatrendy je česky, anglická stránka ho nemá.
+
+## Mapa sil z katalogu
+
+`python3 obsah/mega/vytah_mapa.py` vytáhne z `megatrends/02_katalog/db/katalog.json` aktivní síly a svazky
+do `obsah/mega/mapa.json`. `git diff obsah/mega/mapa.json` pak ukáže, co se v katalogu změnilo, a `bash obsah/vyrob.sh`
+změnu promítne do /megatrendy (i anglické; nové věty pak doplnit do `obsah/en/sl_megatrendy.json`).
