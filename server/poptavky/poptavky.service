@@ -1,0 +1,23 @@
+[Unit]
+Description=Příjem poptávek vystoupení z davidnavratil.com (/api/poptavka)
+After=network.target
+
+[Service]
+User=poptavky
+Group=poptavky
+Environment=POPTAVKY_UCHOVAT_DNI=0
+ExecStart=/usr/bin/python3 /opt/poptavky/server.py
+Restart=always
+RestartSec=5
+# Zabezpečení: služba vidí jen svůj adresář s poptávkami.
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/poptavky
+ProtectKernelTunables=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+
+[Install]
+WantedBy=multi-user.target

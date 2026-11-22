@@ -1,0 +1,14 @@
+[Unit]
+Description=Opakované odeslání poptávek, které čekají ve frontě
+
+[Service]
+Type=oneshot
+User=poptavky
+Group=poptavky
+Environment=POPTAVKY_UCHOVAT_DNI=0
+ExecStart=/usr/bin/python3 /opt/poptavky/server.py --znovu
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=yes
+PrivateTmp=yes
+ReadWritePaths=/var/lib/poptavky

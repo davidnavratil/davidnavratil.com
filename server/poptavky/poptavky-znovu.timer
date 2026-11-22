@@ -1,0 +1,9 @@
+[Unit]
+Description=Každých 15 minut zkusit odeslat poptávky z fronty
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=15min
+
+[Install]
+WantedBy=timers.target

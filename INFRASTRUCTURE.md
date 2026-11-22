@@ -229,3 +229,39 @@ Each analysis has `npm run deploy` which builds + rsync to `/var/www/davidnavrat
 | Backup script | `/root/backup.sh` |
 | SSL certs | `/etc/letsencrypt/live/davidnavratil.com/` |
 | UFW after-rules | `/etc/ufw/after.rules` |
+
+## Příjem poptávek z webu (/api/poptavka)
+
+Přidáno 21. 11. 2026. Zdroj a instalace: `server/poptavky/`.
+
+- **Co to dělá:** formulář poptávky vystoupení posílá POST na `https://davidnavratil.com/api/poptavka`.
+  nginx ho předá službě `poptavky.service` (Python, jen standardní knihovna, `127.0.0.1:8731`,
+  běží jako uživatel `poptavky` se zúženými právy).
+- **Kontaktní formulář na úvodní stránce** (cs i en, od 21. 11. 2026, commit 4b8fa40) jde na stejnou adresu:
+  posílá `multipart/form-data` se skrytým polem `zdroj=kontakt`; zpráva je povinná, firma ne,
+  e-mail přijde s předmětem „Zpráva z webu: …“ (poptávky z /prednasky/ mají „Poptávka vystoupení: …“).
+  Formspree se už nepoužívá (v CSP zůstává povolené, neškodí); týdenní audit (`scripts/audit/run.ts`)
+  místo Formspree hlídá `/api/poptavka/zdravi`.
+- **Nic se neztratí:** každá poptávka se nejdřív uloží do `/var/lib/poptavky/fronta/<id>.json`,
+  teprve pak se odešle e-mailem přes msmtp na davidxnavratil@gmail.com (Reply-To = tazatel).
+  Po úspěchu se přesune do `/var/lib/poptavky/odeslano/`. Neodeslané zkouší znovu
+  `poptavky-znovu.timer` každých 15 minut.
+- **Ochrana proti spamu:** skryté pole `web`, minimální doba vyplnění 3 s, limity délky,
+  kontrola e-mailu, nginx `limit_req zone=poptavka` (1 za minutu z IP, nárazově 3), jen POST.
+- **Záloha:** `/root/backup.sh` denně balí `/var/lib/poptavky` do `poptavky-DATUM.tar.gz`.
+- **Kontrola:** `https://davidnavratil.com/api/poptavka/zdravi` (veřejné, jen počty) vrací `ok`,
+  počet poptávek ve frontě a stáří nejstarší v minutách; `ok: false`, když poptávka čeká déle než 60 minut.
+- **Podezřelé poptávky** (vyplněné skryté pole, odeslání do 3 s) se nezahazují, přijdou s „[ověřit]“ v předmětu.
+- **Mazání:** automatické mazání je vypnuté (`POPTAVKY_UCHOVAT_DNI=0` v unit souborech). Text u formuláře slibuje
+  uchování po dobu potřebnou k vyřízení a navazující spolupráci; staré poptávky maže David ručně
+  (`/var/lib/poptavky/odeslano`). Zapnutí: nastavit počet dní a `systemctl daemon-reload && systemctl restart poptavky`. Log: `journalctl -u poptavky`, pošta: `/var/lib/poptavky/msmtp.log`.
+- **Návrat:** zálohy původních souborů v `/root/nginx-zalohy/poptavky-*`; vypnutí
+  `systemctl disable --now poptavky.service poptavky-znovu.timer` a vrácení nginx konfigurace ze zálohy.
+
+### Odesílání pošty ze serveru (msmtp)
+
+Od srpna do 21. 11. 2026 Gmail odmítal heslo (chyba 535), takže neodcházela ani upozornění
+`/root/uptime-check.sh`. Opraveno 21. 11. 2026 novým heslem aplikace. Když se chyba 535 v
+`/var/log/msmtp.log` objeví znovu: vytvořit nové heslo aplikace v účtu davidxnavratilxmozek@gmail.com
+(myaccount.google.com/apppasswords) a spustit `ssh -t root@77.42.84.152 bash /opt/poptavky/nastav-heslo.sh`.
+Skript heslo zapíše, pošle zkušební e-mail a odešle poptávky z fronty.
