@@ -64,6 +64,41 @@ STRANKY = {
     <p>Bio ve třech délkách, úvod pro moderátora, fotky a&nbsp;technické nároky. Na jedné stránce.</p>
   </div>
   <div class=url style="left:640px;bottom:58px">davidnavratil.com/pro-poradatele</div>"""),
+ # Anglické verze (stránky /en/...)
+ 'og-en-uvod': page(f"""
+  <div style="position:absolute;left:640px;top:35px">{svg}</div>
+  <div style="position:absolute;left:72px;top:92px;width:560px">
+    <div class=eyebrow>Megatrends · talks · analyses</div>
+    <h1 style="font-size:62px">A map of a world <em>that stopped being easy to read</em></h1>
+    <p>76&nbsp;forces to 2031. A source for every number, and for every uncertainty a test that shows when I am wrong.</p>
+  </div>
+  <div class=url style="left:72px;bottom:58px">David Navrátil <span class=who>· davidnavratil.com/en</span></div>"""),
+ 'og-en-megatrendy': page(f"""
+  <div style="position:absolute;left:640px;top:35px">{svg}</div>
+  <div style="position:absolute;left:72px;top:110px;width:560px">
+    <div class=eyebrow>Catalogue · horizon 2031</div>
+    <h1 style="font-size:70px">Megatrends <em>and uncertainties</em></h1>
+    <p>40&nbsp;trends and 36&nbsp;uncertainties on one map. Every number has a source.</p>
+  </div>
+  <div class=url style="left:72px;bottom:58px">davidnavratil.com/en/megatrendy</div>"""),
+ 'og-en-prednasky': page(f"""
+  <div style="position:absolute;left:0;top:0;width:560px;height:630px;background:url({b64('foto-gesto.jpg','image/jpeg')}) 46% 50%/auto 100% no-repeat"></div>
+  <div style="position:absolute;left:440px;top:0;width:121px;height:630px;background:linear-gradient(90deg,rgba(16,45,71,0),#102d47)"></div>
+  <div style="position:absolute;left:640px;top:84px;width:500px">
+    <div class=eyebrow>Keynotes and leadership sessions</div>
+    <h1 style="font-size:58px">We don’t know what’s coming. <em>We know how we’ll tell.</em></h1>
+    <p>Alongside the forecast, several scenarios of the future and the steps that pay off in almost all of them.</p>
+  </div>
+  <div class=url style="left:640px;bottom:58px">davidnavratil.com/en/prednasky</div>"""),
+ 'og-en-pro-poradatele': page(f"""
+  <div style="position:absolute;left:0;top:0;width:560px;height:630px;background:url({b64('david-navratil-praha.jpg','image/jpeg')}) 50% 30%/auto 100% no-repeat"></div>
+  <div style="position:absolute;left:440px;top:0;width:121px;height:630px;background:linear-gradient(90deg,rgba(16,45,71,0),#102d47)"></div>
+  <div style="position:absolute;left:640px;top:96px;width:500px">
+    <div class=eyebrow>For organisers and press</div>
+    <h1 style="font-size:56px">What you usually chase a speaker for <em>by e-mail</em></h1>
+    <p>Bio in several lengths, an introduction for the host, photos and technical needs. On one page.</p>
+  </div>
+  <div class=url style="left:640px;bottom:58px">davidnavratil.com/en/pro-poradatele</div>"""),
 }
 
 async def main():

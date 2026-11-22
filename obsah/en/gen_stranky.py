@@ -27,7 +27,7 @@ STRANKY = {
 'prednasky': SPOLECNE + POLE + [
     ("import obsah from '../data/prednasky.html?raw';", "import obsah from '../../data/en/prednasky.html?raw';"),
     ('<Base title="David Navrátil: scénáře budoucnosti pro konference a vedení firem" description="Přednášky a strategické debaty Davida Navrátila o megatrendech, scénářích a odolnosti firem do roku 2031. Více možných budoucností a čísla, podle kterých poznáte, která přichází." image="/images/og/prednasky.jpg">',
-     '<Base title="David Navrátil: future scenarios for conferences and leadership teams" description="Keynotes and strategy sessions by David Navrátil, Chief Economist of Česká spořitelna, on megatrends, scenarios and corporate resilience to 2031. Several possible futures and the numbers that tell you which one is coming." image="/images/og/prednasky.jpg">'),
+     '<Base title="David Navrátil: future scenarios for conferences and leadership teams" description="Keynotes and strategy sessions by David Navrátil, Chief Economist of Česká spořitelna, on megatrends, scenarios and corporate resilience to 2031. Several possible futures and the numbers that tell you which one is coming." image="/images/og/en-prednasky.jpg">'),
     ("'Zajímá mě téma „' + a.dataset.topic + '“'", "'I am interested in the topic “' + a.dataset.topic + '”'"),
     ("'Vyplňte prosím tento údaj.'", "'Please fill in this field.'"),
     ("zprava('Odesílá se…');", "zprava('Sending…');"),
@@ -47,7 +47,7 @@ STRANKY = {
 'pro-poradatele': SPOLECNE + [
     ("import obsah from '../data/pro-poradatele.html?raw';", "import obsah from '../../data/en/pro-poradatele.html?raw';"),
     ('<Base title="Pro pořadatele: bio, fotky a podklady | David Navrátil" description="Podklady pro pořadatele akcí s Davidem Navrátilem: bio ve třech délkách, úvod pro moderátora, fotky ke stažení, video, témata, formáty a technické potřeby." image="/images/og/pro-poradatele.jpg">',
-     '<Base title="For organisers: bio, photos and materials | David Navrátil" description="Materials for event organisers working with David Navrátil: bio in several lengths, an introduction for the host, photos to download, video, topics, formats and technical needs." image="/images/og/pro-poradatele.jpg">'),
+     '<Base title="For organisers: bio, photos and materials | David Navrátil" description="Materials for event organisers working with David Navrátil: bio in several lengths, an introduction for the host, photos to download, video, topics, formats and technical needs." image="/images/og/en-pro-poradatele.jpg">'),
     ("b.textContent = 'Zkopírováno';", "b.textContent = 'Copied';"),
     ("b.textContent = 'Označeno, zkopírujte Ctrl+C';", "b.textContent = 'Selected, copy with Ctrl+C';"),
 ],
@@ -57,7 +57,7 @@ STRANKY = {
     ("import uvod from '../data/megatrendy-uvod.html?raw';", "import uvod from '../../data/en/megatrendy-uvod.html?raw';"),
     ("import obsah from '../data/megatrendy.html?raw';", "import obsah from '../../data/en/megatrendy.html?raw';"),
     ('<Base title="Megatrendy a nejistoty: mapa 76 sil do roku 2031 | David Navrátil" description="Katalog 40 trendů a 36 nejistot s výhledem do roku 2031: co se děje s penězi, prací, technologiemi a státem a podle čeho poznáme, že se mýlíme. Každé číslo má zdroj." image="/images/megatrendy/megatrendy-og.jpg">',
-     '<Base title="Megatrends and uncertainties: a map of 76 forces to 2031 | David Navrátil" description="A catalogue of 40 trends and 36 uncertainties looking ahead to 2031: what is happening to money, work, technology and the state, and how we will know we are wrong. Every number has a source." image="/images/megatrendy/megatrendy-og.jpg">'),
+     '<Base title="Megatrends and uncertainties: a map of 76 forces to 2031 | David Navrátil" description="A catalogue of 40 trends and 36 uncertainties looking ahead to 2031: what is happening to money, work, technology and the state, and how we will know we are wrong. Every number has a source." image="/images/og/en-megatrendy.jpg">'),
     ('  <FilmSection verze="plna" />\n', ''),  # film je česky
     ("det.setAttribute('aria-label', 'Detail síly');", "det.setAttribute('aria-label', 'Force detail');"),
     ('aria-label="Zavřít detail"', 'aria-label="Close detail"'),

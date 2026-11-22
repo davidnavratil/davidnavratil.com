@@ -20,7 +20,7 @@ interface Props {
 }
 
 const { title, description = 'David Navrátil · ekonom, analytik, autor interaktivních analýz', image } = Astro.props;
-const ogImage = new URL(image ?? '/images/og/uvod.jpg', Astro.site);
+const ogImage = new URL(image ?? ((Astro.currentLocale ?? 'cs') === 'en' ? '/images/og/en-uvod.jpg' : '/images/og/uvod.jpg'), Astro.site);
 const locale = Astro.currentLocale ?? 'cs';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // Compute hreflang alternates based on current path
