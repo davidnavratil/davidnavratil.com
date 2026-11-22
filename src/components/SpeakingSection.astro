@@ -29,11 +29,13 @@ const t = useTranslations(Astro.currentLocale);
           <span>{t('speaking.case3')}</span>
         </div>
       </div>
-      <a href={Astro.currentLocale === 'en' ? '#contact' : '/prednasky/'} class="btn-primary">
+      <a href={Astro.currentLocale === 'en' ? '/en/prednasky/' : '/prednasky/'} class="btn-primary">
         {t('speaking.cta')}
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      {Astro.currentLocale !== 'en' && <p class="speaking-org"><a href="/pro-poradatele/">Podklady pro pořadatele a&nbsp;novináře</a></p>}
+      {Astro.currentLocale === 'en'
+        ? <p class="speaking-org"><a href="/en/pro-poradatele/">Materials for organisers and press</a></p>
+        : <p class="speaking-org"><a href="/pro-poradatele/">Podklady pro pořadatele a&nbsp;novináře</a></p>}
     </div>
     <div class="speaking-gallery">
       <div class="gallery-item gallery-large">

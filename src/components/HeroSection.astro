@@ -5,8 +5,8 @@ import mapaHero from '../data/mapa-hero.svg?raw';
 const t = useTranslations(Astro.currentLocale);
 const en = Astro.currentLocale === 'en';
 const doors = [
-  { key: 'explore', href: en ? '#analyzy' : '/megatrendy/' },
-  { key: 'invite', href: en ? '#speaking' : '/prednasky/' },
+  { key: 'explore', href: en ? '/en/megatrendy/' : '/megatrendy/' },
+  { key: 'invite', href: en ? '/en/prednasky/' : '/prednasky/' },
   { key: 'read', href: '#newsletter' },
 ];
 ---

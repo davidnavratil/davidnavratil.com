@@ -1,6 +1,6 @@
 #!/bin/bash
 # Vyrobí obsah stránek /prednasky, /megatrendy a /pro-poradatele z navrh.html a podkladů v této složce
-# a zapíše ho do src/data/. Obálky stránek (src/pages/*.astro) a styly (src/styles/pr.css) se upravují ručně.
+# a zapíše ho do src/data/ (anglickou verzi do src/data/en/ a src/pages/en/, viz obsah/en/en.sh). Obálky stránek (src/pages/*.astro) a styly (src/styles/pr.css) se upravují ručně.
 # Použití: bash obsah/vyrob.sh   (z kořene repozitáře nebo odkudkoli)
 set -euo pipefail
 O="$(cd "$(dirname "$0")" && pwd)"; REPO="$(dirname "$O")"
@@ -20,6 +20,8 @@ for f in prednasky.html megatrendy.html megatrendy-uvod.html pro-poradatele.html
   cp "astro/src/data/$f" "$REPO/src/data/$f"
 done
 cd "$REPO"
-V="src/data/prednasky.html src/data/megatrendy.html src/data/megatrendy-uvod.html src/data/pro-poradatele.html src/data/film-cisla.json"
+# Anglická verze; když chybí překlad nového textu, česká verze se zapíše a angličtina zůstane předchozí.
+bash "$O/en/en.sh" || echo "POZOR: anglická verze se neaktualizovala, viz výpis výše (obsah/en/sl_*.json)."
+V="src/data/prednasky.html src/data/megatrendy.html src/data/megatrendy-uvod.html src/data/pro-poradatele.html src/data/film-cisla.json src/data/en src/pages/en"
 if git diff --quiet -- $V; then echo "Hotovo: obsah se nezměnil."; else echo "Hotovo, změněné soubory:"; git diff --stat -- $V; fi
 echo "Dál: npm run build, kontrola náhledu (npm run preview), commit; push do main web nasadí."

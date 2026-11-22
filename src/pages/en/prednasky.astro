@@ -1,0 +1,99 @@
+---
+// VYGENEROVÁNO z ../prednasky.astro skriptem obsah/en/gen_stranky.py: needitovat ručně,
+// změny dělat v české obálce a v tabulce ve skriptu.
+// Prodejní stránka přednášek a strategických debat (scénářové plánování).
+// Obsah je v src/data/prednasky.html, aby se text dal upravovat bez zásahu do kódu.
+// Čísla na stránce pocházejí z ověřeného katalogu „Megatrendy a nejistoty“ (stav 21. 11. 2026).
+// Formulář posílá na /api/poptavka (služba poptavky na serveru, viz server/poptavky/).
+import '@fontsource/fraunces/400-italic.css';
+import '@fontsource/fraunces/500.css';
+import '../../styles/pr.css';
+import Base from '../../layouts/Base.astro';
+import obsah from '../../data/en/prednasky.html?raw';
+---
+
+<Base title="David Navrátil: future scenarios for conferences and leadership teams" description="Keynotes and strategy sessions by David Navrátil, Chief Economist of Česká spořitelna, on megatrends, scenarios and corporate resilience to 2031. Several possible futures and the numbers that tell you which one is coming." image="/images/og/prednasky.jpg">
+  <Fragment set:html={obsah} />
+  <p class="pr-nl"><b>Peníze, procenta a&nbsp;prosperita</b> (Money, Percentages and Prosperity): my newsletter on the economy, technology and the state, in Czech. <a href="https://davidnavratil.substack.com/subscribe" target="_blank" rel="noopener">Subscribe free&nbsp;<span aria-hidden="true">→</span></a></p>
+</Base>
+
+<script is:inline>
+
+    'use strict';
+    // Animace v sekci Metoda: 76 karet katalogu se z pěti oblastí rozdělí na „co víme“ a dvě budoucnosti; rozcestí zůstane stát.
+    (function () {
+      const W = 560, H = 380, st = document.getElementById('pole-stage'); if (!st) return;
+      const obl = [['Society', 13, 9], ['Economy', 8, 9], ['Technology', 10, 7], ['Regulation and politics', 3, 9], ['Climate and resources', 6, 2]];
+      let seed = 20261121; const R = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      for (let i = 0; i < 5; i++) R();
+      const items = []; obl.forEach(([n, t, u], k) => { for (let i = 0; i < t; i++) items.push({k, typ: 't', i}); for (let i = 0; i < u; i++) items.push({k, typ: 'n', i: t + i}); });
+      const colW = W / 5, base = H * 0.80, step = 19, fx = W * 0.46, fy = H * 0.48;
+      let ti = 0, ui = 0;
+      const el = (cls, css, txt) => { const e = document.createElement('div'); e.className = cls; e.style.cssText = css; if (txt) e.textContent = txt; st.appendChild(e); return e; };
+      const line = (x1, y1, x2, y2, c) => { const L = Math.hypot(x2 - x1, y2 - y1), a = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+        el('pole-line cC', `left:${x1}px;top:${y1}px;width:${L}px;background:${c};transform:rotate(${a}deg)`); };
+      line(20, H * 0.76, fx, fy, 'rgba(245,241,232,.35)'); line(fx, fy, W - 24, fy - H * 0.38, 'rgba(141,212,203,.6)'); line(fx, fy, W - 24, fy + H * 0.38, 'rgba(224,149,75,.6)');
+      obl.forEach(([n], k) => el('pole-lab cB', `left:${colW * k + 3}px;width:${colW - 6}px;top:${base + 14}px`, n));
+      el('cC', `position:absolute;left:${fx - 8}px;top:${fy - 8}px;width:16px;height:16px;border-radius:50%;background:#e0954b;box-shadow:0 0 0 7px rgba(224,149,75,.18)`);
+      el('pole-lab cC', `left:${fx - 190}px;top:${fy - 64}px;width:170px;text-align:right;color:#e0954b;font-weight:600`, 'crossroads: the data decide');
+      el('pole-lab cC', `left:${W - 170}px;top:${fy - H * 0.38 - 32}px;width:150px;text-align:right;color:#8dd4cb;font-weight:600`, 'future A');
+      el('pole-lab cC', `left:${W - 170}px;top:${fy + H * 0.38 + 12}px;width:150px;text-align:right;color:#e0954b;font-weight:600`, 'future B');
+      items.forEach(it => {
+        const col = it.i % 3, row = Math.floor(it.i / 3);
+        const bx = colW * it.k + colW / 2 + (col - 1) * step - 6, by = base - row * step;
+        let cx, cy, up = false;
+        if (it.typ === 't') { const s = ti++ / 39; cx = 24 + s * (fx - 50); cy = H * 0.76 - s * (H * 0.76 - fy) + (R() - 0.5) * 22; }
+        else { up = ui % 2 === 0; const s = Math.floor(ui / 2) / 17; ui++; cx = fx + 18 + s * (W - fx - 50); cy = fy + (up ? -1 : 1) * s * (H * 0.38) + (R() - 0.5) * 12; }
+        el('pd ' + it.typ + (up ? ' up' : ''), `--bx:${bx.toFixed(0)}px;--by:${by.toFixed(0)}px;--cx:${cx.toFixed(0)}px;--cy:${cy.toFixed(0)}px;animation-delay:-${(R() * 0.5).toFixed(2)}s`);
+      });
+      const box = st.parentElement;
+      const fit = () => { const s = Math.min(1, box.clientWidth / W); st.style.transform = `scale(${s})`; st.style.setProperty('--lf', (Math.max(11, 12 * s) / s).toFixed(1) + 'px'); box.style.height = (H * s) + 'px'; };
+      fit(); window.addEventListener('resize', fit);
+    })();
+        // Animace proběhne jednou a zůstane na rozcestí; tlačítko ji přehraje znovu
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)'), mb = document.getElementById('motion-toggle'), panel = document.getElementById('pole-panel');
+    if (mb && panel) {
+    const upd = () => { mb.hidden = mq.matches; }; mq.addEventListener('change', upd); upd();
+    mb.addEventListener('click', () => { panel.classList.remove('wait'); panel.getAnimations({subtree: true}).forEach(a => { a.cancel(); a.play(); }); });
+    // Animace se spustí, až když na ni čtenář dojede
+    if ('IntersectionObserver' in window) { const io2 = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { panel.classList.remove('wait'); io2.disconnect(); } }, {threshold: 0.5}); io2.observe(panel); } else panel.classList.remove('wait');
+    }
+    // Graf regionů se vykreslí, až když na něj čtenář dojede
+    const conv = document.querySelector('.conv'); conv.classList.add('anim');
+    if ('IntersectionObserver' in window) { const io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) { conv.classList.add('go'); io.disconnect(); } }, {threshold: 0.4}); io.observe(conv); } else conv.classList.add('go');
+    // Předvyplnění formuláře
+    document.querySelectorAll('[data-format]').forEach(a => a.addEventListener('click', () => { document.getElementById('format').value = a.dataset.format; }));
+    document.querySelectorAll('[data-topic]').forEach(a => a.addEventListener('click', () => { const m = document.getElementById('message'), t = 'I am interested in the topic “' + a.dataset.topic + '”'; if (!m.value.includes(t)) m.value = m.value ? m.value + '\n' + t : t; }));
+    // Snímek ve větším
+    const dlg = document.getElementById('slide-dialog');
+    document.getElementById('open-slide').addEventListener('click', () => dlg.showModal());
+    document.getElementById('close-slide').addEventListener('click', () => dlg.close());
+    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+    // Odeslání poptávky: na server (/api/poptavka); když to nejde, připraví e-mail.
+    const form = document.getElementById('inquiry'), sent = document.getElementById('sent'), send = document.getElementById('send'), t0 = Date.now();
+    const zprava = t => { sent.textContent = t; };
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      for (const id of ['name', 'email', 'company']) { const f = document.getElementById(id); f.setCustomValidity(f.value.trim() ? '' : 'Please fill in this field.'); if (!f.reportValidity()) { f.addEventListener('input', () => f.setCustomValidity(''), {once: true}); return; } }
+      const em = document.getElementById('email'); if (!em.checkValidity()) { em.reportValidity(); return; }
+      const v = Object.fromEntries(new FormData(form)); v.t = t0; v.page = location.pathname;
+      send.disabled = true; zprava('Sending…');
+      try {
+        const ac = new AbortController(), limit = setTimeout(() => ac.abort(), 15000);
+        let r, d;
+        try {
+          r = await fetch('/api/poptavka', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(v), signal: ac.signal});
+          d = await r.json().catch(() => ({}));
+        } finally { clearTimeout(limit); }
+        if (r.status === 422) { zprava('Please check your name, e-mail and company. Something is missing or does not look right.'); return; }
+        if (!r.ok || !d.ok) throw new Error(r.status);
+        form.reset(); zprava('Thank you, your enquiry has arrived. The reply will come to the e-mail address you gave.');
+      } catch (err) {
+        const fmt = document.getElementById('format').selectedOptions[0].textContent;
+        const body = ['Name: ' + v.name.trim(), 'E-mail: ' + v.email.trim(), 'Company or event: ' + v.company.trim(), 'Date: ' + (v.date.trim() || 'to be agreed'), 'Format: ' + fmt, '', v.message.trim()].join('\n');
+        location.href = 'mailto:davidxnavratil@gmail.com?subject=' + encodeURIComponent('Speaking enquiry: ' + v.company.trim()) + '&body=' + encodeURIComponent(body);
+        zprava('We could not confirm that your enquiry arrived. Your details are still in the form and an e-mail with a prepared message has opened; if nothing opened, please write to davidxnavratil@gmail.com.');
+      } finally { send.disabled = false; }
+    });
+  
+</script>

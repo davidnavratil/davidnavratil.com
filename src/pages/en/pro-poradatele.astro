@@ -1,0 +1,26 @@
+---
+// VYGENEROVÁNO z ../pro-poradatele.astro skriptem obsah/en/gen_stranky.py: needitovat ručně,
+// změny dělat v české obálce a v tabulce ve skriptu.
+// Stránka pro pořadatele a média. Obsah je v src/data/pro-poradatele.html (generuje gen_poradatele.py).
+// Fotky v public/images/pro-poradatele/ jsou bez metadat EXIF (poloha, zařízení).
+import '@fontsource/fraunces/400-italic.css';
+import '@fontsource/fraunces/500.css';
+import '../../styles/pr.css';
+import Base from '../../layouts/Base.astro';
+import obsah from '../../data/en/pro-poradatele.html?raw';
+---
+
+<Base title="For organisers: bio, photos and materials | David Navrátil" description="Materials for event organisers working with David Navrátil: bio in several lengths, an introduction for the host, photos to download, video, topics, formats and technical needs." image="/images/og/pro-poradatele.jpg">
+  <Fragment set:html={obsah} />
+  <p class="pr-nl"><b>Peníze, procenta a&nbsp;prosperita</b> (Money, Percentages and Prosperity): my newsletter on the economy, technology and the state, in Czech. <a href="https://davidnavratil.substack.com/subscribe" target="_blank" rel="noopener">Subscribe free&nbsp;<span aria-hidden="true">→</span></a></p>
+</Base>
+
+<script is:inline>
+  // Tlačítka „Zkopírovat“: text do schránky, při neúspěchu aspoň označit text k ručnímu zkopírování
+  document.querySelectorAll('.pr [data-copy]').forEach(b => b.addEventListener('click', async () => {
+    const el = document.getElementById(b.dataset.copy), txt = el.textContent.replace(/\u00a0/g, ' ').trim(), puv = b.textContent;
+    try { await navigator.clipboard.writeText(txt); b.textContent = 'Copied'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selected, copy with Ctrl+C'; }
+    setTimeout(() => { b.textContent = puv; }, 2200);
+  }));
+</script>

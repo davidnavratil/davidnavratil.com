@@ -43,3 +43,11 @@ Ručně (mimo generátor) se upravují: obálky stránek `src/pages/prednasky.as
 Složeno 22. 11. 2026 z dílčích archivů `megatrends/04_vystupy/web_navrh_final/v14/generatory_*.tgz`
 (původně běžely v cloudovém prostoru konverzace). Ověřeno: `vyrob.sh` vyrobí přesně stejné soubory, jaké byly
 nasazené v commitu 7db4ba5.
+
+## Anglická verze (/en/megatrendy, /en/prednasky, /en/pro-poradatele)
+
+`obsah/en/en.sh` (volá ho `vyrob.sh`) přeloží hotové české fragmenty podle slovníků `obsah/en/sl_*.json`
+a zapíše `src/data/en/*.html`; obálky `src/pages/en/*.astro` vyrobí `gen_stranky.py` z českých obálek.
+Když v češtině přibude nebo se změní text, skript vypíše úseky bez překladu a anglické soubory nechá beze změny:
+překlad doplňte do příslušného `sl_*.json` (klíč = český úsek, hodnota = anglický) a spusťte `vyrob.sh` znovu.
+Film na /megatrendy je česky, anglická stránka ho nemá.

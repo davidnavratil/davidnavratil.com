@@ -12,7 +12,14 @@ const year = new Date().getFullYear();
       <p>&copy; {year} David Navrátil</p>
     </div>
     <div class="footer-links">
-      {Astro.currentLocale !== 'en' && (
+      {Astro.currentLocale === 'en' ? (
+        <>
+          <a href="/en/megatrendy/">Megatrends</a>
+          <a href="/en/analyses/">Analyses</a>
+          <a href="/en/prednasky/">Speaking</a>
+          <a href="/en/pro-poradatele/">For organisers and press</a>
+        </>
+      ) : (
         <>
           <a href="/megatrendy/">Megatrendy</a>
           <a href="/analyses/">Analýzy</a>

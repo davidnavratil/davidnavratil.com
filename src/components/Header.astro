@@ -7,7 +7,9 @@ const t = useTranslations(locale);
 const switchHref = getAlternatePath(locale, '/');
 // Kotvy míří na úvodní stránku, aby fungovaly i z podstránek (např. /prednasky/).
 const home = locale === 'en' ? '/en/' : '/';
-const speakingHref = locale === 'en' ? '/en/#speaking' : '/prednasky/';
+const speakingHref = locale === 'en' ? '/en/prednasky/' : '/prednasky/';
+const megaHref = locale === 'en' ? '/en/megatrendy/' : '/megatrendy/';
+const megaLabel = locale === 'en' ? 'Megatrends' : 'Megatrendy';
 ---
 
 <header class="header">
@@ -17,7 +19,7 @@ const speakingHref = locale === 'en' ? '/en/#speaking' : '/prednasky/';
       <span class="logo-text">David Navrátil</span>
     </a>
     <nav class="nav">
-      {locale !== 'en' && <a href="/megatrendy/" class="nav-link">Megatrendy</a>}
+      <a href={megaHref} class="nav-link">{megaLabel}</a>
       <a href={`${home}#analyzy`} class="nav-link">{t('nav.analyses')}</a>
       <a href={speakingHref} class="nav-link">{t('nav.speaking')}</a>
       <a href={`${home}#newsletter`} class="nav-link">{t('nav.newsletter')}</a>
@@ -40,7 +42,7 @@ const speakingHref = locale === 'en' ? '/en/#speaking' : '/prednasky/';
 
   <!-- Mobile nav -->
   <div class="mobile-nav" id="mobile-nav">
-    {locale !== 'en' && <a href="/megatrendy/" class="mobile-link">Megatrendy</a>}
+    <a href={megaHref} class="mobile-link">{megaLabel}</a>
     <a href={`${home}#analyzy`} class="mobile-link">{t('nav.analyses')}</a>
     <a href={speakingHref} class="mobile-link">{t('nav.speaking')}</a>
     <a href={`${home}#newsletter`} class="mobile-link">{t('nav.newsletter')}</a>
