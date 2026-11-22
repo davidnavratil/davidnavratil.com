@@ -27,8 +27,6 @@ const active = (href: string) => path.startsWith(href) ? 'page' : undefined;
       <a href={`${home}#analyzy`} class="nav-link">{t('nav.analyses')}</a>
       <a href={speakingHref} class="nav-link" aria-current={active(speakingHref)}>{t('nav.speaking')}</a>
       <a href={`${home}#newsletter`} class="nav-link">{t('nav.newsletter')}</a>
-      <a href={`${home}#about`} class="nav-link">{t('nav.about')}</a>
-      <a href={`${home}#contact`} class="nav-link">{t('nav.contact')}</a>
       <span class="nav-tools">
         <a href={switchHref} class="lang-switch" hreflang={locale === 'en' ? 'cs' : 'en'}>{t('lang.code')}</a>
         <ThemeToggle />
@@ -52,8 +50,6 @@ const active = (href: string) => path.startsWith(href) ? 'page' : undefined;
     <a href={`${home}#analyzy`} class="mobile-link">{t('nav.analyses')}</a>
     <a href={speakingHref} class="mobile-link" aria-current={active(speakingHref)}>{t('nav.speaking')}</a>
     <a href={`${home}#newsletter`} class="mobile-link">{t('nav.newsletter')}</a>
-    <a href={`${home}#about`} class="mobile-link">{t('nav.about')}</a>
-    <a href={`${home}#contact`} class="mobile-link">{t('nav.contact')}</a>
     <div class="mobile-bottom">
       <a href={switchHref} class="lang-switch">{t('lang.code')}</a>
       <ThemeToggle />
