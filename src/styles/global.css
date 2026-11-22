@@ -18,18 +18,19 @@
   --color-surface-elevated: #FAF8F3;
   --color-text: #111111;
   --color-text-secondary: #4B4B4B;
-  --color-accent: #1B7D8A;
-  --color-accent-hover: #156A75;
+  --color-accent: #176F7B;
+  --color-accent-bg: #176F7B; /* plocha pod bílým textem (tlačítka, štítky), kontrast aspoň 4,5:1 */
+  --color-accent-hover: #135E69;
   --color-accent-glow: rgba(27, 125, 138, 0.12);
   --color-border: #E0DCD4;
-  --color-muted: #736D64;
+  --color-muted: #6A645B;
   --color-navy: #163A5F;
   --color-olive: #69735F;
   --color-section-tag: #163A5F;
   --color-band: #EDE9E0;
 
   --gradient-hero: linear-gradient(135deg, #163A5F 0%, #1E3A5F 50%, #0F2A4A 100%);
-  --gradient-accent: linear-gradient(#1B7D8A, #1B7D8A); /* plná barva jako tlačítka na podstránkách */
+  --gradient-accent: linear-gradient(#176F7B, #176F7B); /* plná barva jako tlačítka na podstránkách */
   --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.95), rgba(250,248,243,0.6));
   --gradient-glow: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(27,125,138,0.04), transparent 40%);
 
@@ -57,11 +58,12 @@
   --color-accent-glow: rgba(91, 158, 173, 0.10);
   --color-border: #3D3B36;
   --color-muted: #A09C94;
-  --color-navy: #4A8BC2;
+  --color-navy: #6FA6D6;
   --color-olive: #9AAB8C;
   --color-section-tag: #7AB4C0;
   --color-band: #2A2824;
-  --gradient-accent: linear-gradient(#1F8A98, #1F8A98);
+  --gradient-accent: linear-gradient(#1A7884, #1A7884);
+  --color-accent-bg: #1A7884;
 
   --gradient-hero: linear-gradient(135deg, #1C1B18 0%, #2A2824 50%, #1C1B18 100%);
   --gradient-card: linear-gradient(145deg, rgba(42,40,36,0.8), rgba(28,27,24,0.4));

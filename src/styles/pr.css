@@ -17,8 +17,8 @@
 .pr h2 em,.pr h1 em{font-style:italic;color:var(--teal)}
 .pr p+p{margin-top:14px}
 .pr .wrap{max-width:var(--max-width,1080px);margin-inline:auto;padding-inline:var(--space-md,1.5rem)}
-.pr .eyebrow{font-size:11px;font-weight:650;text-transform:uppercase;letter-spacing:.16em;line-height:1.6;color:var(--color-accent-hover)}
-.pr .source{font-size:11px;line-height:1.55;color:var(--muted)}
+.pr .eyebrow{font-size:12px;font-weight:650;text-transform:uppercase;letter-spacing:.16em;line-height:1.6;color:var(--color-accent-hover)}
+.pr .source{font-size:12px;line-height:1.55;color:var(--muted)}
 .pr .section{padding:96px 0}
 .pr .section-top{display:flex;justify-content:space-between;gap:48px;align-items:flex-end;margin-bottom:44px}
 .pr .section-top h2{max-width:720px;margin-top:16px}
@@ -51,7 +51,7 @@
 .pr .panel{background:var(--night);color:var(--paper);padding:26px 28px 22px;position:relative;overflow:hidden}
 .pr .panel-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .pr .panel-top .eyebrow{color:#b9c7d1;font-size:10px}
-.pr .motion-toggle{white-space:nowrap;border:1px solid #617586;background:transparent;color:var(--paper);padding:7px 11px;min-height:40px;font-size:11px;display:flex;gap:7px;align-items:center}
+.pr .motion-toggle{white-space:nowrap;border:1px solid #617586;background:transparent;color:var(--paper);padding:7px 11px;min-height:40px;font-size:12px;display:flex;gap:7px;align-items:center}
 .pr .motion-toggle:hover{background:#25465f}
 .pr .pole-caps{position:relative;height:84px;margin-top:18px;font-size:31px;line-height:1.15;letter-spacing:-.03em}
 .pr .pole-caps span{position:absolute;inset:0}
@@ -75,7 +75,7 @@
 .pr .pole-legend span{white-space:nowrap;display:inline-flex;align-items:center;gap:8px}
 .pr .mk{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--paper)}
 .pr .mk.ring{background:none;border:2px solid #c9d3df}
-.pr .panel .source{color:#b9c7d1;border-top:1px solid #3a5368;padding-top:13px;font-size:11px}
+.pr .panel .source{color:#b9c7d1;border-top:1px solid #3a5368;padding-top:13px;font-size:12px}
 .pr /* Kde vystupoval */
     .stagebar{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .pr .stagebar-inner{display:flex;gap:18px 34px;align-items:baseline;flex-wrap:wrap;padding:22px 0}
@@ -167,7 +167,7 @@
 .pr .legend span{display:inline-flex;align-items:center;gap:8px;white-space:nowrap}
 .pr .frow{display:grid;grid-template-columns:170px 1fr;gap:14px;border-top:1px solid #3c5365;padding:16px 0;align-items:center}
 .pr .fname{font-size:14px}
-.pr .fname small{display:block;font-size:11px;color:#adbfcc;margin-top:2px}
+.pr .fname small{display:block;font-size:12px;color:#adbfcc;margin-top:2px}
 .pr .dots{display:flex;flex-wrap:wrap;gap:7px;max-width:270px}
 .pr .dots span{flex:0 0 10px;height:10px;background:var(--mint);border:1px solid var(--mint);border-radius:50%}
 .pr .dots span.u{background:none;border-color:#bdcbd4}
@@ -209,11 +209,11 @@
 .pr .slides h2{font-size:40px;margin:16px 0 20px}
 .pr .slides-copy>p:not(.eyebrow){font-size:15px;color:var(--muted)}
 .pr .slide-button{display:block;border:0;padding:0;background:var(--night);width:100%;position:relative}
-.pr .slide-button:after{content:"Zvětšit";position:absolute;right:12px;bottom:12px;background:var(--paper);color:var(--ink);padding:7px 10px;font-size:11px}
+.pr .slide-button:after{content:"Zvětšit";position:absolute;right:12px;bottom:12px;background:var(--paper);color:var(--ink);padding:7px 10px;font-size:12px}
 .pr .slide-button img{width:100%;aspect-ratio:16/9}
 .pr .strip{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
 .pr .strip img{width:100%;aspect-ratio:16/9;object-fit:cover}
-.pr .slides figcaption{font-size:11px;color:var(--muted);margin-top:12px}
+.pr .slides figcaption{font-size:12px;color:var(--muted);margin-top:12px}
 .pr /* Kontakt */
     .contact{background:var(--night);color:var(--paper)}
 .pr .contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:88px}
@@ -290,7 +290,7 @@
 .pr .show{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center;margin-top:56px}
 .pr .show h3{font:30px/1.2 var(--serif);letter-spacing:-.02em;margin:12px 0 14px}
 .pr .show p:not(.eyebrow){font-size:15px;color:var(--muted)}
-.pr .show figcaption{font-size:11px;color:var(--muted);margin-top:10px}
+.pr .show figcaption{font-size:12px;color:var(--muted);margin-top:10px}
 .pr .vcard{display:flex;gap:16px;align-items:center;margin-top:24px;padding:16px;border:1px solid var(--line);background:var(--white);text-decoration:none}
 .pr .vcard:hover{border-color:var(--teal)}
 .pr .vcard .vplay{flex:0 0 56px;height:56px;border-radius:50%;background:var(--night);color:var(--paper);display:grid;place-items:center;font-size:18px}
@@ -313,7 +313,7 @@
 .pr .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .pr .gdpr a{color:var(--paper)}
 .pr .gdpr strong{color:var(--paper);font-weight:600}
-.pr .gdpr{font-size:11px;line-height:1.55;color:#b9cbd7;margin-top:18px;max-width:620px}
+.pr .gdpr{font-size:12px;line-height:1.55;color:#b9cbd7;margin-top:18px;max-width:620px}
 .pr .wow-cta{display:flex;align-items:center;justify-content:flex-end;gap:20px;flex-wrap:wrap;margin-top:28px;font:22px/1.3 var(--serif)}
 .pr .stage-head{margin-top:64px}
 .pr .stage-head h3{font:30px/1.2 var(--serif);letter-spacing:-.02em;margin-top:10px}
@@ -368,8 +368,8 @@
 .pr .wow-more a{color:var(--ink);font-weight:600}
 
 /* Jedna barva hlavního tlačítka na celém webu (tyrkysová, bílý text) */
-.pr .button,.pr button.button,.pr form button[type=submit]{background:#1B7D8A !important;border-color:#1B7D8A !important;color:#fff !important}
-.pr .button:hover,.pr form button[type=submit]:hover{background:#156A75 !important;border-color:#156A75 !important}
+.pr .button,.pr button.button,.pr form button[type=submit]{background:#176F7B !important;border-color:#176F7B !important;color:#fff !important}
+.pr .button:hover,.pr form button[type=submit]:hover{background:#135E69 !important;border-color:#135E69 !important}
 /* Zdroj u karet čísel drží u dna, graf v kartě Regiony vyplní výšku */
 .pr .wow-grid{align-items:start}
 .pr .wow-grid .feature{align-self:stretch}
@@ -534,7 +534,7 @@
 /* /prednasky: tlačítko k poptávce ukotvené dole, jen na mobilu */
 .pr .cta-dock{display:none}
 @media(max-width:780px){
-  .pr .cta-dock:not([hidden]){display:flex;justify-content:center;align-items:center;gap:8px;position:fixed;z-index:40;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));padding:14px 18px;background:#1B7D8A;color:#fff;font:600 15px/1.2 var(--sans,inherit);text-decoration:none;border-radius:4px;box-shadow:0 10px 30px rgba(7,18,29,.35)}
+  .pr .cta-dock:not([hidden]){display:flex;justify-content:center;align-items:center;gap:8px;position:fixed;z-index:40;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));padding:14px 18px;background:#176F7B;color:#fff;font:600 15px/1.2 var(--sans,inherit);text-decoration:none;border-radius:4px;box-shadow:0 10px 30px rgba(7,18,29,.35)}
 }
 /* /megatrendy: mapa v úvodu na kruhovém podkladu místo tmavého čtverce */
 .pr .mega-map{border-radius:50%;padding:7%;aspect-ratio:1;box-shadow:0 30px 70px rgba(16,45,71,.22)}
@@ -563,5 +563,5 @@
 /* jednořádkový newsletter na podstránkách */
 .pr-nl{max-width:var(--max-width,1080px);margin:0 auto;padding:28px var(--space-md,1.5rem) 36px;font:15px/1.6 var(--font-sans,inherit);color:var(--color-text-secondary,#555);border-top:1px solid var(--color-border,#ddd)}
 .pr-nl b{color:var(--color-text,#111);font-weight:600}
-.pr-nl a{color:var(--color-accent-hover,#1B7D8A);font-weight:600;white-space:nowrap;text-decoration:none}
+.pr-nl a{color:var(--color-accent-hover,#176F7B);font-weight:600;white-space:nowrap;text-decoration:none}
 .pr-nl a:hover{text-decoration:underline}

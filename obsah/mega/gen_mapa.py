@@ -151,7 +151,7 @@ def P(x):
 
 
 cr = R + 24
-s = [f'<svg viewBox="0 0 {W} {H}" data-crop="{cx - cr} {cy - cr} {2 * cr} {2 * cr}" role="img" aria-labelledby="mapa-svg-title" class="mapa-svg" font-family="Inter, Arial, sans-serif">',
+s = [f'<svg viewBox="0 0 {W} {H}" data-crop="{cx - cr} {cy - cr} {2 * cr} {2 * cr}" role="group" aria-labelledby="mapa-svg-title" class="mapa-svg" font-family="Inter, Arial, sans-serif">',
      f'<title id="mapa-svg-title">Mapa vazeb mezi {len(F)} silami katalogu Megatrendy a nejistoty</title>']
 for g in groups:
     r = R - 16
