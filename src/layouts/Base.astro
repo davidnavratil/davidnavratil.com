@@ -15,12 +15,12 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
-  /** Obrázek pro náhled při sdílení; výchozí je /og-image.png (1200 × 630). */
+  /** Obrázek pro náhled při sdílení, vždy 1200 × 630; výchozí je /images/og/uvod.jpg. Zdroj obrázků: obsah/og/render.py. */
   image?: string;
 }
 
 const { title, description = 'David Navrátil · ekonom, analytik, autor interaktivních analýz', image } = Astro.props;
-const ogImage = new URL(image ?? '/og-image.png', Astro.site);
+const ogImage = new URL(image ?? '/images/og/uvod.jpg', Astro.site);
 const locale = Astro.currentLocale ?? 'cs';
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // Compute hreflang alternates based on current path
@@ -54,8 +54,10 @@ const ogLocale = locale === 'en' ? 'en_US' : 'cs_CZ';
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:locale" content={ogLocale} />
     <meta property="og:image" content={ogImage} />
-    {!image && <meta property="og:image:width" content="1200" />}
-    {!image && <meta property="og:image:height" content="630" />}
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta property="og:site_name" content="David Navrátil" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />

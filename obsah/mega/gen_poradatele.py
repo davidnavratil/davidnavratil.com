@@ -152,7 +152,7 @@ import NewsletterCTA from '../components/NewsletterCTA.astro';
 import obsah from '../data/pro-poradatele.html?raw';
 ---
 
-<Base title="{title}" description="{desc}" image="/images/pro-poradatele/david-navratil-podium-regiony.jpg">
+<Base title="{title}" description="{desc}" image="/images/og/pro-poradatele.jpg">
   <Fragment set:html={{obsah}} />
   <div class="pr-after"><NewsletterCTA /></div>
 </Base>

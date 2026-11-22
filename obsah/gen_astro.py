@@ -107,7 +107,7 @@ import Base from '../layouts/Base.astro';
 import obsah from '../data/prednasky.html?raw';
 ---
 
-<Base title="{title}" description="{desc}" image="/images/prednasky/foto-regiony.jpg">
+<Base title="{title}" description="{desc}" image="/images/og/prednasky.jpg">
   <Fragment set:html={{obsah}} />
 </Base>
 
