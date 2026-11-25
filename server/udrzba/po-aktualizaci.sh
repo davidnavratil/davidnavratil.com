@@ -9,7 +9,7 @@ OK=1; R=""
 for s in nginx docker fail2ban ufw poptavky poptavky-znovu.timer certbot.timer mozek-backup.timer r2r-mcp; do
   st=$(systemctl is-active "$s"); R="$R$s: $st\n"; [ "$st" = active ] || OK=0
 done
-for c in n8n docker-r2r-1 docker-postgres-1 n8n-api-mcp; do
+for c in n8n docker-r2r-1 docker-postgres-1; do
   st=$(docker inspect -f '{{.State.Status}}' "$c" 2>/dev/null || echo chybi); R="$R kontejner $c: $st\n"; [ "$st" = running ] || OK=0
 done
 for u in https://davidnavratil.com/ https://davidnavratil.com/prednasky/ https://davidnavratil.com/analyses/hormuz/; do
