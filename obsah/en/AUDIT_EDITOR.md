@@ -25,7 +25,7 @@ Zmrazená verze před editací: commit `faebac1` (první překlad). Stav po pass
 
 ## Rozhodnutí (pro Davida)
 
-1. Úvod pro moderátora v angličtině používá vtip o ekonomovi doslovně. Funguje v angličtině, jen „sophisticatedly“ je těžkopádné; varianta: „…will explain, with even more sophistication and perfect precision, where he was wrong and why.“ Zatím ponecháno.
+1. Úvod pro moderátora v angličtině používá vtip o ekonomovi doslovně. Funguje v angličtině, jen „sophisticatedly“ je těžkopádné; varianta: „…will explain, with even more sophistication and perfect precision, where he was wrong and why.“ Opraveno 25. 11. 2026 (vtip přeformulován, bez „sophisticatedly“).
 2. OG obrázky anglických stránek jsou zatím české (stejné jako na /prednasky a /pro-poradatele). Vyrobit anglické?
 
 ## Neověřeno
