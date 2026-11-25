@@ -4,26 +4,21 @@ import { useTranslations } from '../i18n/utils';
 const t = useTranslations(Astro.currentLocale);
 ---
 
-<section class="contact container" id="contact">
-  <div class="contact-card reveal">
+<!-- Stejný jazyk jako poptávka na /prednasky: tmavý pruh přes celou šířku, hranatá pole, bez rámečkových tlačítek. -->
+<section class="contact contact--full" id="contact">
+  <div class="container contact-card reveal">
     <div class="contact-grid">
       <div class="contact-info">
+        <p class="contact-eyebrow">{Astro.currentLocale === 'en' ? 'Contact' : 'Kontakt'}</p>
         <h2 set:html={t('contact.title')} />
         <p>{t('contact.desc')}</p>
-        <div class="contact-links">
-          <a href="mailto:davidxnavratil@gmail.com" class="contact-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            {t('contact.email')}
-          </a>
-          <a href="https://davidnavratil.substack.com" target="_blank" rel="noopener" class="contact-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
-            {t('contact.newsletter')}
-          </a>
-          <a href="https://www.linkedin.com/in/david-navratil/" target="_blank" rel="noopener" class="contact-link">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-            {t('contact.linkedin')}
-          </a>
-        </div>
+        <p class="contact-links">
+          <a href="mailto:davidxnavratil@gmail.com">davidxnavratil@gmail.com</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://davidnavratil.substack.com" target="_blank" rel="noopener">{t('contact.newsletter')}</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.linkedin.com/in/david-navratil/" target="_blank" rel="noopener">{t('contact.linkedin')}</a>
+        </p>
       </div>
       <form
         action="/api/poptavka"
@@ -81,130 +76,122 @@ const t = useTranslations(Astro.currentLocale);
 </section>
 
 <style>
-  .form-privacy { margin: 0; font-size: 0.8rem; line-height: 1.5; color: rgba(255, 255, 255, 0.72); }
-  .form-privacy a { color: inherit; text-decoration: underline; }
   .contact {
-    margin-bottom: var(--space-lg);
-  }
-  .contact-card {
-    position: relative;
-    padding: var(--space-2xl);
-    border-radius: var(--radius-lg);
-    background: var(--gradient-hero);
-    overflow: hidden;
-  }
-  .contact-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, var(--color-accent-glow), transparent 70%);
+    background: #102d47;
+    color: #f5f1e8;
+    padding: var(--space-2xl) 0;
   }
   .contact-grid {
-    position: relative;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-2xl);
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: var(--space-xl);
     align-items: start;
   }
-  .contact-info h2 {
-    color: #F0EDE6;
+  .contact-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #8dd4cb;
     margin-bottom: var(--space-sm);
   }
-  .contact-info > p {
-    color: #B5B1A9;
-    margin-bottom: var(--space-lg);
+  .contact-info h2 {
+    color: #f5f1e8;
+    font-size: clamp(2rem, 3.4vw, 2.9rem);
+    margin-bottom: var(--space-md);
+  }
+  .contact-info > p:not(.contact-eyebrow):not(.contact-links) {
+    color: #c4d0d8;
     line-height: 1.6;
+    max-width: 380px;
   }
   .contact-links {
+    margin-top: var(--space-lg);
+    padding-top: var(--space-sm);
+    border-top: 1px solid #3c5365;
+    font-size: 0.85rem;
+    color: #c4d0d8;
     display: flex;
-    flex-direction: column;
-    gap: var(--space-xs);
-  }
-  .contact-link {
-    display: inline-flex;
-    align-items: center;
+    flex-wrap: wrap;
     gap: 0.5rem;
-    padding: 0.65rem 1.25rem;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #F0EDE6;
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: border-color 0.2s, background 0.2s;
-    width: fit-content;
+  }
+  .contact-links a {
+    color: #f5f1e8;
+    font-weight: 600;
     text-decoration: none;
   }
-  .contact-link:hover {
-    color: #F0EDE6;
-    border-color: var(--color-accent);
-    background: rgba(255,255,255,0.05);
+  .contact-links a:hover {
+    color: #8dd4cb;
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
+  .form-privacy { margin: 0; font-size: 0.75rem; line-height: 1.5; color: #b9cbd7; }
+  .form-privacy a { color: inherit; text-decoration: underline; }
   .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1rem;
   }
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.75rem;
+    gap: 1rem;
   }
   .contact-form label {
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.4rem;
   }
   .contact-form label span {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #B5B1A9;
+    font-size: 0.75rem;
+    color: #f5f1e8;
   }
   .contact-form input,
   .contact-form textarea {
-    padding: 0.6rem 0.85rem;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255,255,255,0.05);
-    color: #F0EDE6;
+    min-height: 48px;
+    padding: 0.7rem;
+    border-radius: 0 !important;
+    border: 1px solid #647c8d;
+    background: #1b3a52;
+    color: #f5f1e8;
     font-size: 0.9rem;
     font-family: inherit;
+    color-scheme: dark;
     transition: border-color 0.2s;
     resize: vertical;
   }
-  .contact-form input:focus,
-  .contact-form textarea:focus {
-    outline: none;
-    border-color: var(--color-accent);
+  .contact-form textarea { min-height: 120px; }
+  .contact-form input:focus-visible,
+  .contact-form textarea:focus-visible {
+    outline: 2px solid #8dd4cb;
+    outline-offset: 1px;
+    border-color: #8dd4cb;
   }
   .contact-form input::placeholder,
   .contact-form textarea::placeholder {
-    color: #5C5850;
+    color: #acbcc7;
   }
   .form-submit {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 10px;
+    gap: 1.2rem;
+    min-height: 50px;
+    padding: 0.8rem 1.3rem;
     border: none;
-    background: var(--gradient-accent);
-    color: white;
+    background: var(--color-accent-bg);
+    color: #fff;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 15px var(--color-accent-glow);
+    transition: background 0.2s;
     width: fit-content;
   }
   .form-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px var(--color-accent-glow);
+    background: #135E69;
   }
   .form-submit[disabled] {
     opacity: 0.6;
     cursor: progress;
-    transform: none;
   }
 
   /* Off-screen spam trap. Not display:none — some bots skip hidden fields. */
@@ -220,7 +207,6 @@ const t = useTranslations(Astro.currentLocale);
   .form-status {
     margin: 0;
     padding: 0.65rem 0.85rem;
-    border-radius: 8px;
     font-size: 0.9rem;
     line-height: 1.5;
     border: 1px solid transparent;
@@ -236,33 +222,25 @@ const t = useTranslations(Astro.currentLocale);
     border-color: rgba(200, 70, 45, 0.45);
   }
   .form-status[data-state='sending'] {
-    color: #B5B1A9;
+    color: #c4d0d8;
   }
 
   @media (max-width: 900px) {
-    .contact-card { padding: var(--space-xl); }
     .contact-grid {
       grid-template-columns: 1fr;
-      gap: var(--space-xl);
+      gap: var(--space-lg);
     }
   }
 
   @media (max-width: 640px) {
-    .contact-card { padding: var(--space-lg) var(--space-sm); }
-    .contact-grid { grid-template-columns: 1fr; }
+    .contact { padding: var(--space-xl) 0; }
     .form-row { grid-template-columns: 1fr; }
     .form-submit {
       width: 100%;
-      min-height: 44px;
       justify-content: center;
-    }
-    .contact-link {
-      min-height: 44px;
-      padding: 0.6rem 1rem;
     }
     .contact-form input,
     .contact-form textarea {
-      padding: 0.75rem 0.85rem;
       font-size: 1rem;
     }
   }

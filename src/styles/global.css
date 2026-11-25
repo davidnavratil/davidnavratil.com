@@ -203,3 +203,9 @@ h3 { font-weight: 500; letter-spacing: -0.015em; }
 .about-photo, .about-photo img, .gallery-item, .gallery-item img, .contact-link,
 .contact-form input, .contact-form textarea, .card-tags span, .card-badge { border-radius: 3px !important; }
 .btn-primary, .newsletter-btn, .form-submit { box-shadow: none !important; }
+
+/* Úvodní stránka končí tmavým pruhem Kontakt: patička na něj navazuje bez mezery a bez linky. */
+body:has(.contact--full) .footer { margin-top: 0 !important; border-top: 0 !important; }
+.band:has(+ .contact--full) { margin-bottom: 0 !important; }
+/* Archiv analýz končí pruhem s newsletterem: patička navazuje bez mezery. */
+body:has(.archive-newsletter) .footer { margin-top: 0 !important; }

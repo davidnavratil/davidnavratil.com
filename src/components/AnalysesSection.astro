@@ -1,6 +1,7 @@
 ---
 import { useTranslations } from '../i18n/utils';
 import { analyses as allAnalyses, getHref } from '../data/analyses';
+import { getObalky, obalkaBg } from '../data/obalky';
 
 const t = useTranslations(Astro.currentLocale);
 const locale = Astro.currentLocale ?? 'cs';
@@ -13,13 +14,8 @@ const analyses = [...allAnalyses]
   .sort((a, b) => (a.live === b.live ? 0 : a.live ? -1 : 1))
   .slice(0, MAX_FEATURED);
 
-/** Obálky karet pro českou verzi: číslo a věta vycházejí z názvu a perexu analýzy, žádný nový údaj. */
-const covers: Record<string, { n: string; t: string; slovo?: boolean }> = locale === 'en' ? {} : {
-  'potravinovy-sok': { n: '6 bran', t: 'mezi cenou močoviny a\u00a0nákupním košíkem' },
-  'rhine-kaub': { n: '8 cm', t: 'nejcitovanější číslo léta 2026 na Rýně' },
-  'opportunity-threat': { n: 'Výzva, nebo ohrožení?', t: 'jak mozek přepíná pod tlakem', slovo: true },
-  'index-regionu': { n: '206 obvodů', t: '49\u00a0ukazatelů kvality života v\u00a0českých městech' },
-};
+/** Obálky karet (číslo a věta z názvu a perexu, žádný nový údaj): src/data/obalky.ts */
+const covers = getObalky(locale);
 ---
 
 <section class="analyses container" id="analyzy">
@@ -37,7 +33,7 @@ const covers: Record<string, { n: string; t: string; slovo?: boolean }> = locale
       >
         {covers[analysis.key] ? (
           /* Obálka v jednom stylu: ztmavený tematický záběr (Mixkit), přes něj jedno číslo a jedna věta. */
-          <div class="card-cover" aria-hidden="true" style={`background-image: linear-gradient(180deg, rgba(13,37,61,.28) 0%, rgba(13,37,61,.5) 42%, rgba(13,37,61,.92) 82%), url(/images/obalky/${analysis.key}.jpg)`}>
+          <div class="card-cover" aria-hidden="true" style={obalkaBg(analysis.key)}>
             <strong class={covers[analysis.key].slovo ? 'cover-num cover-word' : 'cover-num'}>{covers[analysis.key].n}</strong>
             <span class="cover-text">{covers[analysis.key].t}</span>
           </div>

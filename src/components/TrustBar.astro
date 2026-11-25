@@ -33,8 +33,11 @@ const media = [
 </section>
 
 <style>
+  /* Tmavý pruh: na úvodní stránce navazuje na tmavý úvod a film, žádný světlý předěl mezi nimi. */
   .trust-bar {
     padding: var(--space-lg) 0;
+    background: #07121d;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
   }
   .trust-label {
     text-align: center;
@@ -42,7 +45,7 @@ const media = [
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--color-muted);
+    color: #9fb3c4;
     margin-bottom: var(--space-md);
   }
   .trust-logos {
@@ -59,15 +62,15 @@ const media = [
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.01em;
-    color: var(--color-text);
-    opacity: 0.85;
+    color: #e9eef2;
+    opacity: 0.9;
     transition: opacity 0.3s ease;
     padding: 0.25rem 0;
     white-space: nowrap;
     cursor: default;
   }
   .trust-logo:hover {
-    opacity: 0.9;
+    opacity: 1;
   }
   .trust-sep { display: none; }
   .trust-sep-old {
